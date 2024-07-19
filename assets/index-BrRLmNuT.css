@@ -1,0 +1,1 @@
+.App{display:flex;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;background-color:#000;color:#fff;gap:24px}.App img{margin-top:24px}.Game{outline:25px ridge brown;background-color:#000;position:relative}.Mario{background-color:red;position:absolute}body{margin:0;font-family:Courier New,monospace}
