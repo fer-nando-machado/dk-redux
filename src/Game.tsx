@@ -1,27 +1,17 @@
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import "./Game.scss";
-import { useKeyboard } from "./useKeyboard";
+import { useKeyboard } from "./Keyboard";
+import { Boundaries, usePositionState } from "./Position";
+import Mario from "./Mario";
 
 const FPS = 16.67;
 
-type Position = {
-  x: number;
-  y: number;
-};
-
-type MarioProps = Position & {};
-
-const Mario: React.FC<MarioProps> = ({ x, y }) => {
-  return <div className="Mario" style={{ left: x, bottom: y }} />;
-};
-
 const Game = () => {
-  const [mario, setMario] = useState<MarioProps>({ x: 0, y: 0 });
+  const [mario, setMario] = usePositionState({ x: 0, y: 0 });
 
   const isJumping = useRef<any>(null);
   const startsJumping = (speed: number, height: number, down?: boolean) => {
     if (isJumping.current !== null) return;
-
     let remaining = height;
     isJumping.current = setInterval(() => {
       remaining = remaining - speed;
@@ -51,6 +41,8 @@ const Game = () => {
 
   const isClimbing = useRef<any>(null);
   const startsClimbing = (speed: number) => {
+    if (isJumping.current !== null) return;
+    if (isWalking.current !== null) return;
     if (isClimbing.current !== null) return;
     isClimbing.current = setInterval(() => {
       setMario((old) => ({ ...old, y: old.y + speed }));
@@ -89,7 +81,10 @@ const Game = () => {
 
   console.log(mario);
   return (
-    <div className="Game">
+    <div
+      className="Game"
+      style={{ width: Boundaries.max.x, height: Boundaries.max.y }}
+    >
       <Mario {...mario} />
     </div>
   );
