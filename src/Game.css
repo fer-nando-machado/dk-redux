@@ -1,0 +1,15 @@
+.Game {
+  outline: 25px ridge brown;
+  background-color: black;
+  height: 500px;
+  width: 500px;
+  position: relative;
+}
+
+.Mario {
+  background-color: red;
+  border-radius: 25px;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+}
