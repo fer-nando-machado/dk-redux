@@ -1,4 +1,5 @@
-import "./App.css";
+import "./App.scss";
+import GitHub from "/GitHub.svg?url";
 import Game from "./Game";
 
 function App() {
@@ -6,6 +7,9 @@ function App() {
     <div className="App">
       <h1>DK</h1>
       <Game />
+      <a href="https://github.com/fer-nando-machado/react-dk">
+        <img src={GitHub} alt="GitHub" height={24} />
+      </a>
     </div>
   );
 }

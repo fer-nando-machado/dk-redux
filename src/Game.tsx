@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./Game.css";
+import "./Game.scss";
 import { useKeyboard } from "./useKeyboard";
 
 const FPS = 16.67;
