@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Position, usePositionState } from "./Position";
 import { FPS } from "./Game";
 
@@ -19,11 +19,12 @@ const Barrel: React.FC<BarrelProps> = ({ x, y }) => {
       setBarrel((old) => ({ ...old, x: old.x + speed }));
     }, FPS);
   };
+  /*
   const stopsMoving = () => {
     clearInterval(isMoving.current);
     isMoving.current = null;
   };
-
+*/
   startsMoving(-1);
 
   return (
