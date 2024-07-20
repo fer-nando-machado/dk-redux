@@ -7,13 +7,10 @@ type MarioProps = Position & {};
 const Mario: React.FC<MarioProps> = ({ x, y }) => {
   return (
     <div
-      className="Mario"
+      className="Mario Block"
       style={{
         left: x,
         bottom: y,
-        width: MarioSize,
-        height: MarioSize,
-        borderRadius: MarioSize,
       }}
     />
   );

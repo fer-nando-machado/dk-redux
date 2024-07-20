@@ -8,7 +8,7 @@ function App() {
       <h1>DK</h1>
       <Game />
       <a href="https://github.com/fer-nando-machado/react-dk">
-        <img src={GitHub} alt="GitHub" height={24} />
+        <img src={GitHub} alt="GitHub" height={25} />
       </a>
     </div>
   );

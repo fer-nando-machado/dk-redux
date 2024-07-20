@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { MarioSize } from "./Mario";
 
 export type Position = {
   x: number;
@@ -17,13 +16,13 @@ export function usePositionState(
   const [state, setState] = useState<Position>(initial);
 
   const setPositionState: Dispatch<SetStateAction<Position>> = (value) => {
-    setState((old) => {
+    setState((oldValue) => {
       const newValue =
         typeof value === "function"
-          ? (value as (old: Position) => Position)(old)
+          ? (value as (oldValue: Position) => Position)(oldValue)
           : value;
 
-      if (!isWithinBoundaries(newValue)) return old;
+      if (!isWithinBoundaries(newValue)) return oldValue;
       return newValue;
     });
   };
@@ -35,8 +34,8 @@ const isWithinBoundaries = (position: Position): boolean => {
   if (
     position.x < 0 ||
     position.y < 0 ||
-    position.x + MarioSize > Boundaries.max.x ||
-    position.y + MarioSize > Boundaries.max.y
+    position.x + 25 > Boundaries.max.x ||
+    position.y + 25 > Boundaries.max.y
   )
     return false;
 

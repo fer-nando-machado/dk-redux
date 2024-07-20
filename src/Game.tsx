@@ -1,12 +1,41 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./Game.scss";
 import { useKeyboard } from "./Keyboard";
 import { Boundaries, usePositionState } from "./Position";
 import Mario from "./Mario";
+import { BarrelFactory, BarrelFactoryProps, BarrelProps } from "./Barrel";
 
-const FPS = 16.67;
+export const FPS = 16.67;
 
 const Game = () => {
+  const [factory, setFactory] = useState<BarrelFactoryProps>({
+    x: 475,
+    y: 0,
+    barrels: [],
+  });
+  const isRolling = useRef<any>(null);
+  const startRolling = () => {
+    if (isRolling.current !== null) return;
+
+    isRolling.current = setInterval(() => {
+      generateBarrel();
+    }, 2000);
+  };
+
+  const generateBarrel = () => {
+    const newBarrel: BarrelProps = {
+      x: factory.x,
+      y: factory.y,
+    };
+
+    setFactory((old) => ({
+      ...old,
+      barrels: [...old.barrels, newBarrel],
+    }));
+  };
+
+  startRolling();
+
   const [mario, setMario] = usePositionState({ x: 0, y: 0 });
 
   const isJumping = useRef<any>(null);
@@ -30,6 +59,7 @@ const Game = () => {
   const isWalking = useRef<any>(null);
   const startsWalking = (speed: number) => {
     if (isWalking.current !== null) return;
+    if (isClimbing.current !== null) return;
     isWalking.current = setInterval(() => {
       setMario((old) => ({ ...old, x: old.x + speed }));
     }, FPS);
@@ -75,7 +105,7 @@ const Game = () => {
   });
   useKeyboard({
     key: " ",
-    onKeyDown: () => startsJumping(+4, 100),
+    onKeyDown: () => startsJumping(+4, 72),
     onKeyUp: () => {},
   });
 
@@ -86,6 +116,7 @@ const Game = () => {
       style={{ width: Boundaries.max.x, height: Boundaries.max.y }}
     >
       <Mario {...mario} />
+      <BarrelFactory {...factory} />
     </div>
   );
 };

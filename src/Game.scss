@@ -8,3 +8,20 @@
   background-color: red;
   position: absolute;
 }
+
+.Barrel {
+  background-color: orange;
+  outline: 2px outset blue;
+  position: absolute;
+}
+
+.Factory {
+  position: absolute;
+  outline: 2px inset blue;
+}
+
+.Block {
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+}
