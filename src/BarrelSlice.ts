@@ -13,7 +13,6 @@ const slice = createSlice({
   initialState,
   reducers: {
     createBarrel: (state, action: PayloadAction<Barrel>) => {
-      console.log(action.payload);
       state.barrels.push(action.payload);
     },
     moveBarrel: (state, action: PayloadAction<Barrel>) => {
@@ -34,8 +33,8 @@ const slice = createSlice({
         y: update.y,
       };
     },
-    destroyBarrel: (state, action: PayloadAction<Barrel>) => {
-      state.barrels = state.barrels.filter((b) => b.id !== action.payload.id);
+    destroyBarrel: (state, action: PayloadAction<number>) => {
+      state.barrels = state.barrels.filter((b) => b.id !== action.payload);
     },
   },
 });

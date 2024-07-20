@@ -118,7 +118,7 @@ const Jumpman: React.FC = () => {
   });
 
   useEffect(() => {
-    startGravity(-0.25);
+    //startGravity(-0.25);
 
     return () => {
       stopJumping();

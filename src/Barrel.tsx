@@ -3,7 +3,7 @@ import { Position } from "./Position";
 import { FPS } from "./Game";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
-import { createBarrel, moveBarrel } from "./BarrelSlice";
+import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
 
 export type Barrel = Position & { id?: number };
 
@@ -13,7 +13,7 @@ export type BarrelFactory = Position & {
 
 const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
   const dispatch: AppDispatch = useDispatch();
-  const rolling = useRef<any>(null);
+  const rolling = useRef<NodeJS.Timeout | null>(null);
 
   const startRolling = (speed: number) => {
     if (rolling.current !== null) return;
@@ -30,7 +30,7 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
   };
 
   useEffect(() => {
-    startRolling(-1);
+    startRolling(-1 - Math.random());
     return () => {
       stopRolling();
     };
@@ -39,6 +39,7 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
   return (
     <div
       className="Barrel Block"
+      onClick={() => dispatch(destroyBarrel(id || 0))}
       style={{
         left: x,
         bottom: y,
@@ -89,8 +90,8 @@ export const BarrelFactory: React.FC = () => {
         }}
       />
 
-      {barrelFactory.barrels.map((b, index) => (
-        <Barrel {...b} key={index} />
+      {barrelFactory.barrels.map((b) => (
+        <Barrel {...b} key={b.id} />
       ))}
     </>
   );
