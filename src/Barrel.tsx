@@ -1,22 +1,24 @@
-import { useRef } from "react";
-import { Position, usePositionState } from "./Position";
+import { useEffect, useRef } from "react";
+import { Position } from "./Position";
 import { FPS } from "./Game";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "./Store";
+import { createBarrel, moveBarrel } from "./BarrelSlice";
 
-type Barrel = {
-  //id: number;
-  //destroy: () => void;
+export type Barrel = Position & { id?: number };
+
+export type BarrelFactory = Position & {
+  barrels: Barrel[];
 };
 
-export type BarrelProps = Position & Barrel;
-
-const Barrel: React.FC<BarrelProps> = ({ x, y }) => {
-  const [barrel, setBarrel] = usePositionState({ x, y });
+const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
+  const dispatch: AppDispatch = useDispatch();
 
   const isMoving = useRef<any>(null);
   const startsMoving = (speed: number) => {
     if (isMoving.current !== null) return;
     isMoving.current = setInterval(() => {
-      setBarrel((old) => ({ ...old, x: old.x + speed }));
+      dispatch(moveBarrel({ id, x: speed, y: 0 }));
     }, FPS);
   };
   /*
@@ -30,108 +32,54 @@ const Barrel: React.FC<BarrelProps> = ({ x, y }) => {
   return (
     <div
       className="Barrel Block"
-      //  onClick={destroy}
       style={{
-        left: barrel.x,
-        bottom: barrel.y,
+        left: x,
+        bottom: y,
       }}
     ></div>
   );
 };
 
-export type BarrelFactoryProps = Position & {
-  barrels: Position[];
-};
+export const BarrelFactory: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const barrelFactory = useSelector((state: RootState) => state.barrelFactory);
+  const isRolling = useRef<NodeJS.Timeout | null>(null);
 
-export const BarrelFactory: React.FC<BarrelFactoryProps> = ({
-  x,
-  y,
-  barrels,
-}) => {
-  /*
   useEffect(() => {
-    const startInterval = () => {
-      intervalIdRef.current = setInterval(() => {
-        generateBarrel();
-        // Randomize the interval to be between 1 and 3 seconds
-        clearInterval(intervalIdRef.current!);
-        startInterval();
-      }, 1000 + Math.random() * 2000);
+    const startRolling = () => {
+      if (isRolling.current !== null) return;
+      isRolling.current = setInterval(() => {
+        const newBarrel: Barrel = {
+          id: Math.random() * 1000,
+          x: barrelFactory.x,
+          y: barrelFactory.y,
+        };
+        dispatch(createBarrel(newBarrel));
+      }, 2000);
     };
 
-    startInterval();
+    startRolling();
 
     return () => {
-      if (intervalIdRef.current) {
-        clearInterval(intervalIdRef.current);
+      if (isRolling.current !== null) {
+        clearInterval(isRolling.current);
+        isRolling.current = null;
       }
     };
   }, []);
-*/
-
-  /*
-  const [barrels, setBarrels] = useState<BarrelProps[]>([]);
-
-  const isRolling = useRef<any>(null);
-  const startRolling = () => {
-    if (isRolling.current !== null) return;
-
-    isRolling.current = setInterval(() => {
-      generateBarrel();
-    }, 2000);
-  };
-
-  const generateBarrel = () => {
-    const id = Date.now();
-    const newBarrel: BarrelProps = {
-      id,
-      x,
-      y,
-      //destroy: () => removeBarrelById(id),
-    };
-
-    setBarrels((b) => [...b, newBarrel]);
-  };
-
-  const removeBarrelById = (id: number) => {
-    setBarrels((prevBarrels) =>
-      prevBarrels.filter((barrel) => barrel.id !== id)
-    );
-  };
-*/
-
-  /*
-  // Destroy the oldest barrel (FIFO)
-  const destroyOldestBarrel = () => {
-    setBarrels((prevBarrels) => {
-      if (prevBarrels.length === 0) return prevBarrels; // No barrels to remove
-      return prevBarrels.slice(1); // Remove the oldest barrel (first element)
-    });
-  };
-
-  // Destroy the newest barrel (LIFO)
-  const destroyNewestBarrel = () => {
-    setBarrels((prevBarrels) => {
-      if (prevBarrels.length === 0) return prevBarrels; // No barrels to remove
-      return prevBarrels.slice(0, -1); // Remove the newest barrel (last element)
-    });
-  };
-*/
-  //startRolling();
-  console.log(barrels);
 
   return (
     <>
       <div
-        className="Factory Block"
+        className="BarrelFactory Block"
         style={{
-          left: x,
-          bottom: y,
+          left: barrelFactory.x,
+          bottom: barrelFactory.y,
         }}
       />
 
-      {barrels.map((b, index) => (
-        <Barrel x={b.x} y={b.y} key={index} />
+      {barrelFactory.barrels.map((b, index) => (
+        <Barrel {...b} key={index} />
       ))}
     </>
   );
