@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import "./Game.scss";
 import { useKeyboard } from "./Keyboard";
 import { Boundaries, usePositionState } from "./Position";
-import Mario from "./Mario";
+import Jumpman from "./Jumpman";
 import { BarrelFactory, BarrelFactoryProps, BarrelProps } from "./Barrel";
 
 export const FPS = 16.67;
@@ -36,7 +36,7 @@ const Game = () => {
 
   startRolling();
 
-  const [mario, setMario] = usePositionState({ x: 0, y: 0 });
+  const [jumpman, setJumpman] = usePositionState({ x: 0, y: 0 });
 
   const isJumping = useRef<any>(null);
   const startsJumping = (speed: number, height: number, down?: boolean) => {
@@ -44,7 +44,7 @@ const Game = () => {
     let remaining = height;
     isJumping.current = setInterval(() => {
       remaining = remaining - speed;
-      setMario((old) => ({ ...old, y: old.y + (!down ? speed : -speed) }));
+      setJumpman((old) => ({ ...old, y: old.y + (!down ? speed : -speed) }));
       if (remaining <= 0) {
         stopsJumping();
         !down && startsJumping(speed, height, true);
@@ -61,7 +61,7 @@ const Game = () => {
     if (isWalking.current !== null) return;
     if (isClimbing.current !== null) return;
     isWalking.current = setInterval(() => {
-      setMario((old) => ({ ...old, x: old.x + speed }));
+      setJumpman((old) => ({ ...old, x: old.x + speed }));
     }, FPS);
   };
   const stopsWalking = () => {
@@ -75,7 +75,7 @@ const Game = () => {
     if (isWalking.current !== null) return;
     if (isClimbing.current !== null) return;
     isClimbing.current = setInterval(() => {
-      setMario((old) => ({ ...old, y: old.y + speed }));
+      setJumpman((old) => ({ ...old, y: old.y + speed }));
     }, FPS);
   };
   const stopsClimbing = () => {
@@ -109,13 +109,13 @@ const Game = () => {
     onKeyUp: () => {},
   });
 
-  console.log(mario);
+  console.log(jumpman);
   return (
     <div
       className="Game"
       style={{ width: Boundaries.max.x, height: Boundaries.max.y }}
     >
-      <Mario {...mario} />
+      <Jumpman {...jumpman} />
       <BarrelFactory {...factory} />
     </div>
   );
