@@ -13,21 +13,28 @@ export type BarrelFactory = Position & {
 
 const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
   const dispatch: AppDispatch = useDispatch();
+  const rolling = useRef<any>(null);
 
-  const isMoving = useRef<any>(null);
-  const startsMoving = (speed: number) => {
-    if (isMoving.current !== null) return;
-    isMoving.current = setInterval(() => {
+  const startRolling = (speed: number) => {
+    if (rolling.current !== null) return;
+    rolling.current = setInterval(() => {
       dispatch(moveBarrel({ id, x: speed, y: 0 }));
     }, FPS);
   };
-  /*
-  const stopsMoving = () => {
-    clearInterval(isMoving.current);
-    isMoving.current = null;
+
+  const stopRolling = () => {
+    if (rolling.current) {
+      clearInterval(rolling.current);
+      rolling.current = null;
+    }
   };
-*/
-  startsMoving(-1);
+
+  useEffect(() => {
+    startRolling(-1);
+    return () => {
+      stopRolling();
+    };
+  }, []);
 
   return (
     <div
@@ -43,28 +50,32 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
 export const BarrelFactory: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const barrelFactory = useSelector((state: RootState) => state.barrelFactory);
-  const isRolling = useRef<NodeJS.Timeout | null>(null);
+  const rolling = useRef<NodeJS.Timeout | null>(null);
+
+  const startRolling = () => {
+    if (rolling.current !== null) return;
+
+    rolling.current = setInterval(() => {
+      const barrel: Barrel = {
+        id: Date.now(),
+        x: barrelFactory.x,
+        y: barrelFactory.y,
+      };
+      dispatch(createBarrel(barrel));
+    }, 2000);
+  };
+
+  const stopRolling = () => {
+    if (rolling.current) {
+      clearInterval(rolling.current);
+      rolling.current = null;
+    }
+  };
 
   useEffect(() => {
-    const startRolling = () => {
-      if (isRolling.current !== null) return;
-      isRolling.current = setInterval(() => {
-        const newBarrel: Barrel = {
-          id: Math.random() * 1000,
-          x: barrelFactory.x,
-          y: barrelFactory.y,
-        };
-        dispatch(createBarrel(newBarrel));
-      }, 2000);
-    };
-
     startRolling();
-
     return () => {
-      if (isRolling.current !== null) {
-        clearInterval(isRolling.current);
-        isRolling.current = null;
-      }
+      stopRolling();
     };
   }, []);
 

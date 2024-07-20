@@ -1,7 +1,7 @@
 import { Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FPS } from "./Game";
 import { useKeyboard } from "./Keyboard";
 import { moveJumpman } from "./JumpmanSlice";
@@ -12,86 +12,121 @@ const Jumpman: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
 
-  const isJumping = useRef<any>(null);
-  const startsJumping = (speed: number, height: number, down?: boolean) => {
-    if (isJumping.current !== null) return;
+  const jumping = useRef<NodeJS.Timeout | null>(null);
+  const walking = useRef<NodeJS.Timeout | null>(null);
+  const climbing = useRef<NodeJS.Timeout | null>(null);
+  const gravity = useRef<NodeJS.Timeout | null>(null);
+
+  const startJumping = (speed: number, height: number, down?: boolean) => {
+    if (jumping.current !== null) return;
+
     let remaining = height;
-    isJumping.current = setInterval(() => {
+    jumping.current = setInterval(() => {
       remaining = remaining - speed;
       dispatch(moveJumpman({ x: 0, y: !down ? speed : -speed }));
       if (remaining <= 0) {
-        stopsJumping();
-        !down && startsJumping(speed, height, true);
+        stopJumping();
+        if (!down) startJumping(speed, height, true);
       }
     }, FPS);
   };
-  const stopsJumping = () => {
-    clearInterval(isJumping.current);
-    isJumping.current = null;
+
+  const stopJumping = () => {
+    if (jumping.current) {
+      clearInterval(jumping.current);
+      jumping.current = null;
+    }
   };
 
-  const isWalking = useRef<any>(null);
-  const startsWalking = (speed: number) => {
-    if (isWalking.current !== null) return;
-    if (isClimbing.current !== null) return;
-    isWalking.current = setInterval(() => {
+  const startWalking = (speed: number) => {
+    if (walking.current !== null || climbing.current !== null) return;
+
+    walking.current = setInterval(() => {
       dispatch(moveJumpman({ x: speed, y: 0 }));
     }, FPS);
   };
-  const stopsWalking = () => {
-    clearInterval(isWalking.current);
-    isWalking.current = null;
+  const stopWalking = () => {
+    if (walking.current) {
+      clearInterval(walking.current);
+      walking.current = null;
+    }
   };
 
-  const isClimbing = useRef<any>(null);
-  const startsClimbing = (speed: number) => {
-    if (isJumping.current !== null) return;
-    if (isWalking.current !== null) return;
-    if (isClimbing.current !== null) return;
-    isClimbing.current = setInterval(() => {
+  const startClimbing = (speed: number) => {
+    if (
+      jumping.current !== null ||
+      walking.current !== null ||
+      climbing.current !== null
+    )
+      return;
+
+    climbing.current = setInterval(() => {
       dispatch(moveJumpman({ x: 0, y: speed }));
     }, FPS);
   };
-  const stopsClimbing = () => {
-    clearInterval(isClimbing.current);
-    isClimbing.current = null;
+
+  const stopClimbing = () => {
+    if (climbing.current) {
+      clearInterval(climbing.current);
+      climbing.current = null;
+    }
   };
 
-  const isGravity = useRef<any>(null);
-  const startsGravity = (speed: number) => {
-    if (isGravity.current !== null) return;
-    isGravity.current = setInterval(() => {
+  const startGravity = (speed: number) => {
+    if (gravity.current !== null) return;
+
+    gravity.current = setInterval(() => {
       dispatch(moveJumpman({ x: 0, y: speed }));
     }, FPS);
+  };
+
+  const stopGravity = () => {
+    if (gravity.current) {
+      clearInterval(gravity.current);
+      gravity.current = null;
+    }
   };
 
   useKeyboard({
     key: "ArrowUp",
-    onKeyDown: () => startsClimbing(+1),
-    onKeyUp: () => stopsClimbing(),
+    onKeyDown: () => startClimbing(+1),
+    onKeyUp: () => stopClimbing(),
   });
+
   useKeyboard({
     key: "ArrowDown",
-    onKeyDown: () => startsClimbing(-1),
-    onKeyUp: () => stopsClimbing(),
+    onKeyDown: () => startClimbing(-1),
+    onKeyUp: () => stopClimbing(),
   });
+
   useKeyboard({
     key: "ArrowLeft",
-    onKeyDown: () => startsWalking(-2),
-    onKeyUp: () => stopsWalking(),
+    onKeyDown: () => startWalking(-2),
+    onKeyUp: () => stopWalking(),
   });
+
   useKeyboard({
     key: "ArrowRight",
-    onKeyDown: () => startsWalking(+2),
-    onKeyUp: () => stopsWalking(),
+    onKeyDown: () => startWalking(+2),
+    onKeyUp: () => stopWalking(),
   });
+
   useKeyboard({
     key: " ",
-    onKeyDown: () => startsJumping(+4, 72),
+    onKeyDown: () => startJumping(+4, 72),
     onKeyUp: () => {},
   });
-  startsGravity(-0.25);
 
+  useEffect(() => {
+    startGravity(-0.25);
+
+    return () => {
+      stopJumping();
+      stopWalking();
+      stopClimbing();
+      stopGravity();
+    };
+  }, []);
   return (
     <div
       className="Jumpman Block"
