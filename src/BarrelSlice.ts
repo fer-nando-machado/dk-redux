@@ -3,7 +3,7 @@ import { Barrel, BarrelFactory } from "./Barrel";
 import { assertWithinBoundaries } from "./Position";
 
 const initialState: BarrelFactory = {
-  x: 475,
+  x: 470,
   y: 0,
   barrels: [],
 };

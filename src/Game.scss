@@ -11,6 +11,8 @@
 .Game::after {
   content: "";
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   animation-duration: 0.1s;
@@ -21,32 +23,44 @@
 
 .Jumpman {
   background-color: red;
+  border: 2px outset black;
   position: absolute;
 }
 
 .Barrel {
   background-color: orange;
-  outline: 2px outset blue;
+  border: 2px outset blue;
   position: absolute;
 }
 
 .BarrelFactory {
   position: absolute;
-  outline: 2px inset blue;
+  border: 2px outset blue;
 }
 
 .Pause {
   position: absolute;
-  top: 50%;
+  top: 0;
   width: 100%;
+  height: 100%;
   text-align: center;
+  background-color: black;
+  opacity: 0.75;
+}
+
+.Pause::after {
+  content: "PAUSE";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
 }
 
 .Block {
   width: 25px;
   height: 25px;
   border-radius: 25px;
-  opacity: 0.95;
+  opacity: 0.999;
 }
 
 @keyframes game-flicker {
@@ -69,6 +83,6 @@
   }
   to {
     background-color: #ea36af;
-    opacity: 0.05;
+    opacity: 0.075;
   }
 }

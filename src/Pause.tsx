@@ -34,7 +34,7 @@ const Pause: React.FC = () => {
     };
   }, []);
 
-  return <div className="Pause">{paused ? "PAUSE" : ""}</div>;
+  return paused ? <div className="Pause" /> : <></>;
 };
 
 export default Pause;
