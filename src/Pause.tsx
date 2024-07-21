@@ -11,9 +11,11 @@ const Pause: React.FC = () => {
   const onKeyDown = () => {
     dispatch(togglePaused());
   };
-
   const onBlur = () => {
     dispatch(setPaused(true));
+  };
+  const onFocus = () => {
+    dispatch(setPaused(false));
   };
 
   useKeyboard({
@@ -24,8 +26,11 @@ const Pause: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener("blur", onBlur);
+    window.addEventListener("focus", onFocus);
+
     return () => {
       window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
     };
   }, []);
 

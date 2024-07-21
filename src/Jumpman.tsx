@@ -30,7 +30,6 @@ const Jumpman: React.FC = () => {
       }
     }, FPS);
   };
-
   const stopJumping = () => {
     if (jumping.current) {
       clearInterval(jumping.current);
@@ -64,7 +63,6 @@ const Jumpman: React.FC = () => {
       dispatch(moveJumpman({ x: 0, y: speed }));
     }, FPS);
   };
-
   const stopClimbing = () => {
     if (climbing.current) {
       clearInterval(climbing.current);
