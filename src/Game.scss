@@ -1,7 +1,8 @@
 .Game {
   font-family: "Press Start 2P", "Courier New", monospace;
   position: relative;
-  outline: 5px ridge brown;
+  outline: 10px ridge black;
+  border-radius: 5px;
   color: white;
   background-color: black;
   animation: game-flicker 0.1s alternate infinite;
@@ -109,24 +110,25 @@
 @keyframes game-flicker {
   from {
     text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
-    box-shadow: 0 0 10px #75fa69;
+    box-shadow: 0 0 50px #75fa69;
     opacity: 1;
   }
   to {
     text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
-    box-shadow: 0 0 20px #ea36af;
+    box-shadow: 0 0 75px #ea36af;
     opacity: 0.9;
   }
 }
 
 @keyframes overlay-flicker {
   from {
-    background-color: #75fa69;
-    opacity: 0.025;
+    // TODO add grain
+    // background-color: #75fa69;
+    // opacity: 0.025;
   }
   to {
-    background-color: #ea36af;
-    opacity: 0.075;
+    //  background-color: #ea36af;
+    //  opacity: 0.075;
   }
 }
 

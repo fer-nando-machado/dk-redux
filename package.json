@@ -1,6 +1,6 @@
 {
   "name": "dk-redux",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "homepage": "http://fer-nando-machado.github.io/dk-redux",
   "author": "Fernando Machado",
@@ -12,6 +12,8 @@
   "private": false,
   "keywords": [
     "react",
+    "redux",
+    "redux-toolkit",
     "game",
     "donkey kong"
   ],

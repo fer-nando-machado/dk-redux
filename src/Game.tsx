@@ -1,4 +1,5 @@
 import "./Game.scss";
+import { name, version } from "../package.json";
 import { Boundaries } from "./Position";
 import { BarrelFactory } from "./Barrel";
 import { Provider } from "react-redux";
@@ -6,6 +7,7 @@ import { Store } from "./Store";
 import Jumpman from "./Jumpman";
 import Pause from "./Pause";
 
+// make it default in useInterval
 export const FPS = 1000 / 60;
 
 export type Game = {
@@ -19,6 +21,9 @@ const Game = () => {
         className="Game"
         style={{ width: Boundaries.max.x, height: Boundaries.max.y }}
       >
+        {name} v{version}
+        <br />
+        <br />
         use directional keys to Walk and press SPACE to Jump
         <Jumpman />
         <BarrelFactory />

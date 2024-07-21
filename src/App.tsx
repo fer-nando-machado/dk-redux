@@ -5,7 +5,7 @@ import Game from "./Game";
 function App() {
   return (
     <div className="App">
-      <b>DK:REDUX</b>
+      <b>DK Redux</b>
       <Game />
       <a href="https://github.com/fer-nando-machado/dk-redux">
         <img src={GitHub} alt="GitHub" height={25} />
