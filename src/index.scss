@@ -1,8 +1,8 @@
-html {
-  background-color: black;
-}
-
+html,
 body {
+  color: white;
+  background-color: black;
+  font-family: "Press Start 2P", system-ui, "Courier New", monospace;
   margin: 0;
-  font-family: "Courier New", monospace;
+  overflow: hidden;
 }
