@@ -5,7 +5,7 @@ export interface Position {
 
 export const Boundaries: { min: Position; max: Position } = {
   min: { x: 0, y: 0 },
-  max: { x: 500, y: 500 },
+  max: { x: 500, y: 750 },
 };
 
 export const assertWithinBoundaries = (position: Position): Position => {
