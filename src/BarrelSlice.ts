@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Barrel, BarrelFactory } from "./Barrel";
-import { isWithinBoundaries } from "./Position";
+import { assertWithinBoundaries } from "./Position";
 
 const initialState: BarrelFactory = {
   x: 475,
@@ -21,15 +21,12 @@ const slice = createSlice({
       const index = state.barrels.findIndex((b) => b.id === id);
       if (index === -1) return;
 
-      const update: Barrel = {
-        id: state.barrels[index].id,
+      const update = assertWithinBoundaries({
         x: state.barrels[index].x + x,
         y: state.barrels[index].y + y,
-      };
-      if (!isWithinBoundaries(update)) return;
-
+      });
       state.barrels[index] = {
-        id: update.id,
+        id: id,
         x: update.x,
         y: update.y,
       };
