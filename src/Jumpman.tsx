@@ -23,7 +23,7 @@ const Jumpman: React.FC = () => {
     let remaining = height;
     jumping.current = setInterval(() => {
       remaining = remaining - speed;
-      dispatch(moveJumpman({ x: 0, y: !down ? speed : -speed }));
+      dispatch(moveJumpman({ x: 0, y: !down ? speed : -speed / 2 }));
       if (remaining <= 0) {
         stopJumping();
         if (!down) startJumping(speed, height, true);
@@ -118,7 +118,7 @@ const Jumpman: React.FC = () => {
   });
 
   useEffect(() => {
-    //startGravity(-0.25);
+    startGravity(-1);
 
     return () => {
       stopJumping();
@@ -127,6 +127,7 @@ const Jumpman: React.FC = () => {
       stopGravity();
     };
   }, []);
+
   return (
     <div
       className="Jumpman Block"

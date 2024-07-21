@@ -5,4 +5,8 @@ body {
   font-family: "Press Start 2P", "Courier New", monospace;
   margin: 0;
   overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

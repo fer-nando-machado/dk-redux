@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import gameReducer from "./GameSlice";
 import jumpmanReducer from "./JumpmanSlice";
 import barrelReducer from "./BarrelSlice";
 
 export const Store = configureStore({
   reducer: {
+    game: gameReducer,
     jumpman: jumpmanReducer,
     barrelFactory: barrelReducer,
   },

@@ -22,13 +22,14 @@ const slice = createSlice({
       if (index === -1) return;
 
       const update: Barrel = {
+        id: state.barrels[index].id,
         x: state.barrels[index].x + x,
         y: state.barrels[index].y + y,
       };
       if (!isWithinBoundaries(update)) return;
 
       state.barrels[index] = {
-        id: state.barrels[index].id,
+        id: update.id,
         x: update.x,
         y: update.y,
       };
