@@ -1,13 +1,13 @@
 {
-  "name": "react-dk",
+  "name": "dk-redux",
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://fer-nando-machado.github.io/react-dk",
+  "homepage": "http://fer-nando-machado.github.io/dk-redux",
   "author": "Fernando Machado",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fer-nando-machado/react-dk.git"
+    "url": "git+https://github.com/fer-nando-machado/dk-redux.git"
   },
   "private": false,
   "keywords": [

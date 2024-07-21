@@ -1,4 +1,4 @@
-# react-dk
+# dk-redux
 
 ## Commands
 
