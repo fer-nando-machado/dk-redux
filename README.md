@@ -1,5 +1,7 @@
 # dk-redux
 
+A reduxed version of Donkey Kong - the original arcade game from 1981 - built using React, Redux Toolkit and SCSS.
+
 ## Commands
 
 In the project directory, you can run:
