@@ -2,10 +2,7 @@
   outline: 5px ridge brown;
   background-color: black;
   position: relative;
-  animation-duration: 0.1s;
-  animation-name: game-flicker;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation: game-flicker 0.1s alternate infinite;
 }
 
 .Game::after {
@@ -16,10 +13,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  animation-duration: 0.1s;
-  animation-name: overlay-flicker;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation: overlay-flicker 0.1s alternate infinite;
 }
 
 .Jumpman {
@@ -30,13 +24,15 @@
 
 .Barrel {
   background-color: orange;
-  border: 2px outset blue;
+  border: 2px dashed blue;
   position: absolute;
+  animation: spin 3s linear infinite;
+  animation-direction: reverse;
 }
 
 .BarrelFactory {
   position: absolute;
-  border: 2px outset blue;
+  border: 2px dashed blue;
 }
 
 .Pause {
@@ -61,10 +57,15 @@
   width: 25px;
   height: 25px;
   border-radius: 25px;
-  animation-duration: 0.1s;
-  animation-name: block-flicker;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes game-flicker {
@@ -77,15 +78,6 @@
     text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
     box-shadow: 0 0 20px #ea36af;
     opacity: 0.9;
-  }
-}
-
-@keyframes block-flicker {
-  from {
-    box-shadow: -1px 0 1px 1px #75fa6950;
-  }
-  to {
-    box-shadow: 1px 0 1px 1px #ea36af50;
   }
 }
 
