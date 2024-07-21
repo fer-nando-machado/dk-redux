@@ -6,19 +6,20 @@ type KeyHandler = {
   onKeyUp: () => void;
 };
 
-export function useKeyboard({ key, onKeyDown, onKeyUp }: KeyHandler) {
-  function onKeyDownOverride(event: KeyboardEvent) {
+const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
+  const onKeyDownOverride = (event: KeyboardEvent) => {
     if (event.key === key) {
       event.preventDefault();
       onKeyDown();
     }
-  }
-  function onKeyUpOverride(event: KeyboardEvent) {
+  };
+  const onKeyUpOverride = (event: KeyboardEvent) => {
     if (event.key === key) {
       event.preventDefault();
       onKeyUp();
     }
-  }
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", onKeyDownOverride);
     window.addEventListener("keyup", onKeyUpOverride);
@@ -27,4 +28,6 @@ export function useKeyboard({ key, onKeyDown, onKeyUp }: KeyHandler) {
       window.removeEventListener("keyup", onKeyUpOverride);
     };
   }, []);
-}
+};
+
+export default useKeyboard;

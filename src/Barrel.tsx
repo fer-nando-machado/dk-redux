@@ -3,7 +3,7 @@ import { FPS } from "./Game";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
-import useInterval from "./Interval";
+import useInterval from "./useInterval";
 
 export type Barrel = Position & { id: number };
 

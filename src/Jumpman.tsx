@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
 import { useEffect, useRef } from "react";
 import { FPS } from "./Game";
-import { useKeyboard } from "./Keyboard";
 import { moveJumpman } from "./JumpmanSlice";
+import useKeyboard from "./useKeyboard";
+import useInterval from "./useInterval";
 
 export type Jumpman = Position & {};
 
@@ -15,7 +16,6 @@ const Jumpman: React.FC = () => {
   const jumping = useRef<NodeJS.Timeout | null>(null);
   const walking = useRef<NodeJS.Timeout | null>(null);
   const climbing = useRef<NodeJS.Timeout | null>(null);
-  const gravity = useRef<NodeJS.Timeout | null>(null);
 
   const startJumping = (speed: number, height: number, down?: boolean) => {
     if (jumping.current !== null) return;
@@ -72,20 +72,10 @@ const Jumpman: React.FC = () => {
     }
   };
 
-  const startGravity = (speed: number) => {
-    if (gravity.current !== null) return;
-
-    gravity.current = setInterval(() => {
-      dispatch(moveJumpman({ x: 0, y: speed }));
-    }, FPS);
-  };
-
-  const stopGravity = () => {
-    if (gravity.current) {
-      clearInterval(gravity.current);
-      gravity.current = null;
-    }
-  };
+  const gravity = -0.25;
+  useInterval(() => {
+    dispatch(moveJumpman({ x: 0, y: gravity }));
+  }, FPS);
 
   useKeyboard({
     key: "ArrowUp",
@@ -118,13 +108,10 @@ const Jumpman: React.FC = () => {
   });
 
   useEffect(() => {
-    startGravity(-1);
-
     return () => {
       stopJumping();
       stopWalking();
       stopClimbing();
-      stopGravity();
     };
   }, []);
 

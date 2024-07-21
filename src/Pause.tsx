@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
-import { useKeyboard } from "./Keyboard";
 import { setPaused, togglePaused } from "./GameSlice";
+import useKeyboard from "./useKeyboard";
 
 const Pause: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
