@@ -21,7 +21,7 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
 
   return (
     <div
-      className="Barrel Block"
+      className="Barrel Block Round"
       onClick={() => dispatch(destroyBarrel(id))}
       style={{
         left: x,
@@ -47,7 +47,7 @@ export const BarrelFactory: React.FC = () => {
   return (
     <>
       <div
-        className="BarrelFactory Block"
+        className="BarrelFactory Block Round"
         style={{
           left: barrelFactory.x,
           bottom: barrelFactory.y,
