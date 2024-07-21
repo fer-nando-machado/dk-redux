@@ -1,7 +1,9 @@
 .Game {
-  outline: 5px ridge brown;
-  background-color: black;
+  font-family: "Press Start 2P", "Courier New", monospace;
   position: relative;
+  outline: 5px ridge brown;
+  color: white;
+  background-color: black;
   animation: game-flicker 0.1s alternate infinite;
 }
 
