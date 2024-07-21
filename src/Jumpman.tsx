@@ -1,7 +1,7 @@
 import { Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { FPS } from "./Game";
 import { moveJumpman } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
@@ -9,68 +9,66 @@ import useInterval from "./useInterval";
 
 export type Jumpman = Position & {};
 
+type Jump = {
+  speed: number;
+  height: number;
+  remaining: number;
+  down: boolean;
+};
+
 const Jumpman: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
+  // const paused = useSelector((state: RootState) => state.game.paused);
 
-  const jumping = useRef<NodeJS.Timeout | null>(null);
-  const walking = useRef<NodeJS.Timeout | null>(null);
-  const climbing = useRef<NodeJS.Timeout | null>(null);
+  const jumping = useRef<Jump | null>(null);
+  useInterval(() => {
+    if (!jumping.current) return;
 
-  const startJumping = (speed: number, height: number, down?: boolean) => {
-    if (jumping.current !== null) return;
+    const { speed, height, down } = jumping.current;
+    dispatch(moveJumpman({ x: 0, y: !down ? speed : -speed }));
 
-    let remaining = height;
-    jumping.current = setInterval(() => {
-      remaining = remaining - speed;
-      dispatch(moveJumpman({ x: 0, y: !down ? speed : -speed / 2 }));
-      if (remaining <= 0) {
-        stopJumping();
-        if (!down) startJumping(speed, height, true);
-      }
-    }, FPS);
+    jumping.current.remaining -= speed;
+    if (jumping.current.remaining > 0) return;
+
+    stopJumping();
+    if (!down) startJumping(speed, height, true);
+  }, FPS);
+  const startJumping = (speed: number, height: number, down: boolean) => {
+    if (jumping.current) return;
+    jumping.current = { speed, height, remaining: height, down };
   };
   const stopJumping = () => {
-    if (jumping.current) {
-      clearInterval(jumping.current);
-      jumping.current = null;
-    }
+    jumping.current = null;
   };
 
+  const walking = useRef<number | null>(null);
+  useInterval(() => {
+    if (!walking.current || climbing.current) return;
+    dispatch(moveJumpman({ x: walking.current, y: 0 }));
+  }, FPS);
   const startWalking = (speed: number) => {
-    if (walking.current !== null || climbing.current !== null) return;
-
-    walking.current = setInterval(() => {
-      dispatch(moveJumpman({ x: speed, y: 0 }));
-    }, FPS);
+    if (walking.current) return;
+    walking.current = speed;
   };
   const stopWalking = () => {
-    if (walking.current) {
-      clearInterval(walking.current);
-      walking.current = null;
-    }
+    walking.current = null;
   };
 
+  const climbing = useRef<number | null>(null);
+  useInterval(() => {
+    if (!climbing.current || walking.current || jumping.current) return;
+    dispatch(moveJumpman({ x: 0, y: climbing.current }));
+  }, FPS);
   const startClimbing = (speed: number) => {
-    if (
-      jumping.current !== null ||
-      walking.current !== null ||
-      climbing.current !== null
-    )
-      return;
-
-    climbing.current = setInterval(() => {
-      dispatch(moveJumpman({ x: 0, y: speed }));
-    }, FPS);
+    if (climbing.current) return;
+    climbing.current = speed;
   };
   const stopClimbing = () => {
-    if (climbing.current) {
-      clearInterval(climbing.current);
-      climbing.current = null;
-    }
+    climbing.current = null;
   };
 
-  const gravity = -0.25;
+  const gravity = 0;
   useInterval(() => {
     dispatch(moveJumpman({ x: 0, y: gravity }));
   }, FPS);
@@ -101,17 +99,9 @@ const Jumpman: React.FC = () => {
 
   useKeyboard({
     key: " ",
-    onKeyDown: () => startJumping(+4, 72),
+    onKeyDown: () => startJumping(+4, 72, false),
     onKeyUp: () => {},
   });
-
-  useEffect(() => {
-    return () => {
-      stopJumping();
-      stopWalking();
-      stopClimbing();
-    };
-  }, []);
 
   return (
     <div
