@@ -2,6 +2,10 @@
   outline: 5px ridge brown;
   background-color: black;
   position: relative;
+  animation-duration: 0.1s;
+  animation-name: flicker;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 .Jumpman {
@@ -31,4 +35,17 @@
   width: 25px;
   height: 25px;
   border-radius: 25px;
+}
+
+@keyframes flicker {
+  from {
+    text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
+    box-shadow: 0 0 15px #75fa69;
+    opacity: 1;
+  }
+  to {
+    text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
+    box-shadow: 0 0 30px #ea36af;
+    opacity: 0.9;
+  }
 }
