@@ -42,7 +42,7 @@ export const BarrelFactory: React.FC = () => {
       y: barrelFactory.y,
     };
     dispatch(createBarrel(barrel));
-  }, 2000);
+  }, 3000);
 
   return (
     <>
