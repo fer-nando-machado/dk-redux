@@ -22,19 +22,17 @@ const Jumpman: React.FC = () => {
   const jumping = useRef<Jump | null>(null);
   useInterval(() => {
     if (!jumping.current) return;
-
     dispatch(moveJumpman({ x: 0, y: jumping.current.speed }));
-
     jumping.current.remaining -= jumping.current.speed;
     if (jumping.current.remaining > 0) return;
     stopJumping();
   }, FPS);
   const startJumping = (speed: number, height: number) => {
     if (jumping.current) return;
-    // TODO dont jump while not on floor
     jumping.current = { speed, height, remaining: height };
   };
   const stopJumping = () => {
+    if (!jumping.current) return;
     jumping.current = null;
   };
 
@@ -48,6 +46,7 @@ const Jumpman: React.FC = () => {
     walking.current = speed;
   };
   const stopWalking = () => {
+    if (!walking.current) return;
     walking.current = null;
   };
 
@@ -61,6 +60,7 @@ const Jumpman: React.FC = () => {
     climbing.current = speed;
   };
   const stopClimbing = () => {
+    if (!climbing.current) return;
     climbing.current = null;
   };
 
