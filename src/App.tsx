@@ -1,5 +1,5 @@
 import "./App.scss";
-import { name, homepage } from "../package.json";
+import { name, repository } from "../package.json";
 import GitHub from "/GitHub.svg?url";
 import Game from "./Game";
 
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <b>DK Redux</b>
       <Game />
-      <a href={homepage}>
+      <a href={repository.url}>
         <img
           src={GitHub}
           alt={`${name} @ GitHub`}
