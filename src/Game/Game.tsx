@@ -1,21 +1,19 @@
-import { version } from "../../package.json";
 import { Provider } from "react-redux";
 import { Store } from "./Store";
-import Pause from "./Pause";
+import Options from "./Options";
 import "./Game.scss";
 import Level from "./Level";
 
-export type Game = {
-  paused: boolean;
-};
-
 const Game = () => {
+  const then = "JUL 09 1981";
+  const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
+
   return (
     <Provider store={Store}>
       <div className="Game">
-        {version}
+        {then} <br /> {now}
         <Level />
-        <Pause />
+        <Options />
       </div>
     </Provider>
   );

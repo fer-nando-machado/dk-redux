@@ -5,7 +5,7 @@ import { RootState } from "./Store";
 const REFRESH_RATE = 1000 / 60;
 
 const useInterval = (callback: () => void, ms: number = REFRESH_RATE) => {
-  const paused = useSelector((state: RootState) => state.game.paused);
+  const paused = useSelector((state: RootState) => state.options.paused);
   const interval = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {

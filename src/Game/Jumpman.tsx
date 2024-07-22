@@ -1,4 +1,4 @@
-import { GRAVITY, Position } from "./Position";
+import { Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "./Store";
 import { useRef } from "react";
@@ -18,6 +18,7 @@ type Jump = {
 const Jumpman: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
+  const gravity = useSelector((state: RootState) => state.options.gravity);
 
   const jumping = useRef<Jump | null>(null);
   useInterval(() => {
@@ -65,7 +66,7 @@ const Jumpman: React.FC = () => {
   };
 
   useInterval(() => {
-    dispatch(moveJumpman({ x: 0, y: GRAVITY }));
+    dispatch(moveJumpman({ x: 0, y: gravity ? -2 : 0 }));
   });
 
   useKeyboard({

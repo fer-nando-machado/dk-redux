@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Game } from "./Game";
+import { Options } from "./Options";
 
-const initialState: Game = {
+const initialState: Options = {
   paused: false,
+  gravity: true,
 };
 
 const slice = createSlice({
-  name: "GameSlice",
+  name: "OptionsSlice",
   initialState,
   reducers: {
     setPaused: (state, action: PayloadAction<boolean>) => {
@@ -15,8 +16,11 @@ const slice = createSlice({
     togglePaused: (state) => {
       state.paused = !state.paused;
     },
+    toggleGravity: (state) => {
+      state.gravity = !state.gravity;
+    },
   },
 });
 
-export const { setPaused, togglePaused } = slice.actions;
+export const { setPaused, togglePaused, toggleGravity } = slice.actions;
 export default slice.reducer;

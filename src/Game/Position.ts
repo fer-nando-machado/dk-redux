@@ -1,7 +1,5 @@
 import { Platform } from "./Platform";
 
-export const GRAVITY = -3;
-
 export type Position = {
   x: number;
   y: number;
@@ -17,6 +15,15 @@ export const checkBoundaries = (position: Position): Position => {
     x: Math.max(boundaries.min.x, Math.min(position.x, boundaries.max.x)),
     y: Math.max(boundaries.min.y, Math.min(position.y, boundaries.max.y)),
   };
+};
+
+export const isOnPlatforms = (position: Position, platforms: Platform[]) => {
+  for (const platform of platforms) {
+    if (isOnPlatform(position, platform)) {
+      return true;
+    }
+  }
+  return false;
 };
 
 const isOnPlatform = (position: Position, platform: Platform): boolean => {
@@ -40,13 +47,4 @@ const isOnPlatform = (position: Position, platform: Platform): boolean => {
   return (
     rotatedX >= minX && rotatedX <= maxX && rotatedY >= minY && rotatedY <= maxY
   );
-};
-
-export const isOnPlatforms = (position: Position, platforms: Platform[]) => {
-  for (const platform of platforms) {
-    if (isOnPlatform(position, platform)) {
-      return true;
-    }
-  }
-  return false;
 };

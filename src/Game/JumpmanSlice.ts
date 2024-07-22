@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Jumpman } from "./Jumpman";
-import { checkBoundaries as assertBoundaries, isOnPlatforms } from "./Position";
+import { checkBoundaries, isOnPlatforms } from "./Position";
 import { Dispatch, RootState } from "./Store";
 
 const initialState: Jumpman = {
@@ -35,7 +35,7 @@ export const moveJumpman = createAsyncThunk<
     const platforms = state.platformFactory.platforms;
 
     const { x, y } = payload;
-    const update = assertBoundaries({
+    const update = checkBoundaries({
       x: jumpman.x + x,
       y: jumpman.y + y,
     });
@@ -45,7 +45,11 @@ export const moveJumpman = createAsyncThunk<
     const isOnPlatform = isOnPlatforms(update, platforms);
 
     if (y !== -3) {
-      console.log(x, y, isOnPlatform, isVertical, isHorizontal);
+      //console.log(update, isOnPlatform, isVertical, isHorizontal);
+
+      if (isOnPlatform) {
+        console.log("TRUE");
+      }
     }
 
     if (isHorizontal) {

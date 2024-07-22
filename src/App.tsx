@@ -15,6 +15,8 @@ function App() {
           Jump: SPACE
           <br /> <br />
           Pause: ENTER
+          <br /> 
+          ?????: SHIFT
         </div>
         <Game />
         <div className="Manual">
