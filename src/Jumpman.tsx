@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { moveJumpman } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
 import useInterval from "./useInterval";
+import "./Jumpman.scss";
 
 export type Jumpman = Position & {};
 

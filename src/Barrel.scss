@@ -1,0 +1,26 @@
+.Barrel {
+  background-color: orange;
+  border: 2px ridge yellow;
+
+  &::before {
+    content: ".";
+    position: absolute;
+    font-size: larger;
+    font-weight: bold;
+    top: 0;
+    left: 0;
+    color: blue;
+  }
+
+  &::after {
+    content: "\\";
+    position: absolute;
+    top: 1px;
+    left: 9px;
+    color: blue;
+  }
+}
+
+.BarrelFactory {
+  border: 2px dashed yellow;
+}

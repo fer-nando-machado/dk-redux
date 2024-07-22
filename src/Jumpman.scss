@@ -1,0 +1,21 @@
+.Jumpman {
+  background-color: red;
+  border: 2px outset blue;
+
+  &::before {
+    content: "^";
+    position: absolute;
+    font-size: larger;
+    font-weight: bold;
+    top: -5px;
+    left: 4.5px;
+    color: red;
+  }
+
+  &::after {
+    content: "..";
+    position: absolute;
+    top: -3px;
+    color: black;
+  }
+}
