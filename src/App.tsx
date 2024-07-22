@@ -15,8 +15,10 @@ function App() {
           Jump: SPACE
           <br /> <br />
           Pause: ENTER
-          <br /> 
+          <br />
           ?????: SHIFT
+          <br /> <br />
+          Full Screen: F11
         </div>
         <Game />
         <div className="Manual">
