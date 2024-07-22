@@ -7,9 +7,6 @@ import { Store } from "./Store";
 import Jumpman from "./Jumpman";
 import Pause from "./Pause";
 
-// make it default in useInterval
-export const FPS = 1000 / 60;
-
 export type Game = {
   paused: boolean;
 };

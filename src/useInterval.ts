@@ -2,7 +2,9 @@ import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "./Store";
 
-const useInterval = (callback: () => void, ms: number) => {
+const REFRESH_RATE = 1000 / 60;
+
+const useInterval = (callback: () => void, ms: number = REFRESH_RATE) => {
   const paused = useSelector((state: RootState) => state.game.paused);
   const interval = useRef<NodeJS.Timeout | null>(null);
 

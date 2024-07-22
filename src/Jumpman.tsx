@@ -2,7 +2,6 @@ import { Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
 import { useRef } from "react";
-import { FPS } from "./Game";
 import { moveJumpman } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
 import useInterval from "./useInterval";
@@ -26,7 +25,7 @@ const Jumpman: React.FC = () => {
     jumping.current.remaining -= jumping.current.speed;
     if (jumping.current.remaining > 0) return;
     stopJumping();
-  }, FPS);
+  });
   const startJumping = (speed: number, height: number) => {
     if (jumping.current) return;
     jumping.current = { speed, height, remaining: height };
@@ -40,7 +39,7 @@ const Jumpman: React.FC = () => {
   useInterval(() => {
     if (!walking.current || climbing.current) return;
     dispatch(moveJumpman({ x: walking.current, y: 0 }));
-  }, FPS);
+  });
   const startWalking = (speed: number) => {
     if (walking.current) return;
     walking.current = speed;
@@ -54,7 +53,7 @@ const Jumpman: React.FC = () => {
   useInterval(() => {
     if (!climbing.current || walking.current || jumping.current) return;
     dispatch(moveJumpman({ x: 0, y: climbing.current }));
-  }, FPS);
+  });
   const startClimbing = (speed: number) => {
     if (climbing.current) return;
     climbing.current = speed;
@@ -67,7 +66,7 @@ const Jumpman: React.FC = () => {
   const gravity = -3;
   useInterval(() => {
     dispatch(moveJumpman({ x: 0, y: gravity }));
-  }, FPS);
+  });
 
   useKeyboard({
     key: "ArrowUp",

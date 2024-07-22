@@ -1,5 +1,4 @@
 import { Position } from "./Position";
-import { FPS } from "./Game";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
@@ -17,7 +16,7 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
   const speed = -1 - Math.random();
   useInterval(() => {
     dispatch(moveBarrel({ id, x: speed, y: 0 }));
-  }, FPS);
+  });
 
   return (
     <div
