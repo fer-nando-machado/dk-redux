@@ -7,7 +7,9 @@ import useKeyboard from "./useKeyboard";
 import useInterval from "./useInterval";
 import "./Jumpman.scss";
 
-export type Jumpman = Position & {};
+export type Jumpman = Position & {
+  isJumping?: boolean;
+};
 
 type Jump = {
   speed: number;
@@ -66,7 +68,7 @@ const Jumpman: React.FC = () => {
   };
 
   useInterval(() => {
-    dispatch(moveJumpman({ x: 0, y: gravity ? -4 : 0 }));
+    dispatch(moveJumpman({ x: 0, y: gravity && jumpman.isJumping ? -4 : 0 }));
   });
 
   useKeyboard({
@@ -91,7 +93,7 @@ const Jumpman: React.FC = () => {
   });
   useKeyboard({
     key: " ",
-    onKeyDown: () => startJumping(+10, 100),
+    onKeyDown: () => startJumping(+10, 150),
     onKeyUp: () => stopJumping(),
   });
 

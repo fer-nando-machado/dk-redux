@@ -12,10 +12,8 @@ const slice = createSlice({
   name: "BarrelSlice",
   initialState,
   reducers: {
-    setBarrelFactory: (state, action: PayloadAction<BarrelFactory>) => {
-      const { x, y } = action.payload;
-      state.x = x;
-      state.y = y;
+    setBarrelFactory: (_, action: PayloadAction<BarrelFactory>) => {
+      return action.payload;
     },
     createBarrel: (state, action: PayloadAction<Barrel>) => {
       if (state.barrels.length == MAX_BARRELS) {

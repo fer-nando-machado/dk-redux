@@ -1,5 +1,6 @@
 import { Platform } from "./Platform";
 
+// might refactor to class
 export type Position = {
   x: number;
   y: number;
@@ -17,7 +18,7 @@ export const checkBoundaries = (position: Position): Position => {
   };
 };
 
-export const isOnPlatforms = (position: Position, platforms: Platform[]) => {
+export const checkPlatforms = (position: Position, platforms: Platform[]) => {
   for (const platform of platforms) {
     if (isOnPlatform(position, platform)) {
       return true;
@@ -27,24 +28,25 @@ export const isOnPlatforms = (position: Position, platforms: Platform[]) => {
 };
 
 const isOnPlatform = (position: Position, platform: Platform): boolean => {
-  const { x, y, length, angle = 0 } = platform;
+  const { x, y, length } = platform;
   if (!length) return false;
 
   const characterX = position.x - x;
   const characterY = position.y - y;
-  const radianAngle = -angle * (Math.PI / 180);
-  const rotatedX =
-    characterX * Math.cos(radianAngle) - characterY * Math.sin(radianAngle);
-  const rotatedY =
-    characterX * Math.sin(radianAngle) + characterY * Math.cos(radianAngle);
 
-  const thickness = 25;
-  const minX = 0 - thickness;
-  const maxX = length;
-  const minY = 0 - thickness;
-  const maxY = thickness;
+  const thickness = 25 / 2;
 
-  return (
-    rotatedX >= minX && rotatedX <= maxX && rotatedY >= minY && rotatedY <= maxY
-  );
+  const isOnHorizontalPlatform =
+    characterX >= 0 &&
+    characterX <= length &&
+    characterY >= -thickness &&
+    characterY <= thickness;
+
+  const isOnVerticalPlatform =
+    characterY >= 0 &&
+    characterY <= length &&
+    characterX >= -thickness &&
+    characterX <= thickness;
+
+  return isOnHorizontalPlatform || isOnVerticalPlatform;
 };
