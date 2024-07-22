@@ -7,6 +7,8 @@ const initialState: BarrelFactory = {
   y: 0,
   barrels: [],
 };
+const MAX_BARRELS = 3;
+
 const slice = createSlice({
   name: "BarrelSlice",
   initialState,
@@ -17,6 +19,9 @@ const slice = createSlice({
       state.y = y;
     },
     createBarrel: (state, action: PayloadAction<Barrel>) => {
+      if (state.barrels.length == MAX_BARRELS) {
+        state.barrels.shift();
+      }
       state.barrels.push(action.payload);
     },
     moveBarrel: (state, action: PayloadAction<Barrel>) => {
