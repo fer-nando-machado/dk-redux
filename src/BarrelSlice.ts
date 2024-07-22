@@ -3,14 +3,19 @@ import { Barrel, BarrelFactory } from "./Barrel";
 import { assertWithinBoundaries } from "./Position";
 
 const initialState: BarrelFactory = {
-  x: 470,
+  x: 0,
   y: 0,
   barrels: [],
 };
 const slice = createSlice({
-  name: "barrelFactory",
+  name: "BarrelSlice",
   initialState,
   reducers: {
+    setBarrelFactory: (state, action: PayloadAction<BarrelFactory>) => {
+      const { x, y } = action.payload;
+      state.x = x;
+      state.y = y;
+    },
     createBarrel: (state, action: PayloadAction<Barrel>) => {
       state.barrels.push(action.payload);
     },
@@ -25,7 +30,7 @@ const slice = createSlice({
         y: state.barrels[index].y + y,
       });
       state.barrels[index] = {
-        id: id,
+        ...state.barrels[index],
         x: update.x,
         y: update.y,
       };
@@ -35,5 +40,6 @@ const slice = createSlice({
     },
   },
 });
-export const { createBarrel, moveBarrel, destroyBarrel } = slice.actions;
+export const { setBarrelFactory, createBarrel, moveBarrel, destroyBarrel } =
+  slice.actions;
 export default slice.reducer;

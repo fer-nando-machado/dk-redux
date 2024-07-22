@@ -1,9 +1,15 @@
 import { Position } from "./Position";
+import { useSelector } from "react-redux";
+import { RootState } from "./Store";
 import "./Platform.scss";
 
 export type Platform = Position & {
   length?: number;
   angle?: number;
+};
+
+export type PlatformFactory = {
+  platforms: Platform[];
 };
 
 const Platform: React.FC<Platform> = ({ x, y, length, angle = 0 }) => {
@@ -30,4 +36,16 @@ const Platform: React.FC<Platform> = ({ x, y, length, angle = 0 }) => {
   );
 };
 
-export default Platform;
+export const PlatformFactory: React.FC = () => {
+  const platformFactory = useSelector(
+    (state: RootState) => state.platformFactory
+  );
+
+  return (
+    <>
+      {platformFactory.platforms.map((p, index) => (
+        <Platform {...p} key={index} />
+      ))}
+    </>
+  );
+};

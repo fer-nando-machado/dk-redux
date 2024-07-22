@@ -5,7 +5,7 @@ const initialState: Game = {
   paused: false,
 };
 const slice = createSlice({
-  name: "game",
+  name: "GameSlice",
   initialState,
   reducers: {
     setPaused: (state, action: PayloadAction<boolean>) => {

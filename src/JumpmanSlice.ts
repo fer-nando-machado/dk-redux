@@ -7,7 +7,7 @@ const initialState: Jumpman = {
   y: 0,
 };
 const slice = createSlice({
-  name: "jumpman",
+  name: "JumpmanSlice",
   initialState,
   reducers: {
     moveJumpman: (state, action: PayloadAction<Jumpman>) => {
