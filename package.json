@@ -1,5 +1,6 @@
 {
   "name": "dk-redux",
+  "description": "A reduxed-remixed-remake of Donkey Kong, the original arcade game from 1981, built with React, Redux Toolkit and SCSS.",
   "version": "0.0.1",
   "type": "module",
   "homepage": "http://fer-nando-machado.github.io/dk-redux",
@@ -14,6 +15,7 @@
     "react",
     "redux",
     "redux-toolkit",
+    "scss",
     "game",
     "donkey kong"
   ],
