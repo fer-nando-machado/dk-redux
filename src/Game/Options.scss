@@ -7,9 +7,12 @@
   text-align: justify;
   background-color: black;
   opacity: 0.9;
+  cursor: pointer;
 
   &::before {
     content: "PAUSE";
+    font-size: larger;
+    font-weight: bold;
     text-align: center;
     position: absolute;
     top: 50%;
