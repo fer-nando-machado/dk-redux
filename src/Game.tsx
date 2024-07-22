@@ -1,5 +1,5 @@
 import "./Game.scss";
-import { name, version } from "../package.json";
+import { version } from "../package.json";
 import { Boundaries } from "./Position";
 import { BarrelFactory } from "./Barrel";
 import { Provider } from "react-redux";
@@ -21,9 +21,7 @@ const Game = () => {
         className="Game"
         style={{ width: Boundaries.max.x, height: Boundaries.max.y }}
       >
-        {name} v{version}
-        <br />
-        <br />
+        v{version} <br /> <br />
         use directional keys to Walk and press SPACE to Jump
         <Jumpman />
         <BarrelFactory />
