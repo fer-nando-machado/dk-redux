@@ -7,7 +7,6 @@ const initialState: BarrelFactory = {
   y: 0,
   barrels: [],
 };
-
 const slice = createSlice({
   name: "barrelFactory",
   initialState,

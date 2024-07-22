@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Game } from "./Game";
 
+const initialState: Game = {
+  paused: false,
+};
 const slice = createSlice({
   name: "game",
-  initialState: {
-    paused: false,
-  } as Game,
+  initialState,
   reducers: {
     setPaused: (state, action: PayloadAction<boolean>) => {
       state.paused = action.payload;

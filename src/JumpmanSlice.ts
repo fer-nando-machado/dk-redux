@@ -6,7 +6,6 @@ const initialState: Jumpman = {
   x: 0,
   y: 0,
 };
-
 const slice = createSlice({
   name: "jumpman",
   initialState,
