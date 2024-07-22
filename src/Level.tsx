@@ -22,14 +22,14 @@ const platforms = [
 
 const Level: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  dispatch(setBarrelFactory(barrelFactory));
   dispatch(setPlatforms(platforms));
+  dispatch(setBarrelFactory(barrelFactory));
   dispatch(setJumpman(jumpman));
 
   return (
     <>
-      <BarrelFactory />
       <PlatformFactory />
+      <BarrelFactory />
       <Jumpman />
     </>
   );
