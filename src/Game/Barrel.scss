@@ -1,26 +1,27 @@
 .Barrel {
   background-color: orange;
-  border: 2px ridge yellow;
+  outline: 2px ridge yellow;
 
   &::before {
     content: ".";
     position: absolute;
     font-size: larger;
     font-weight: bold;
-    top: 0;
-    left: 0;
-    color: blue;
+    top: 2px;
+    left: 1px;
+    color: darkblue;
   }
 
   &::after {
     content: "\\";
     position: absolute;
-    top: 1px;
+    font-weight: bold;
+    top: 2px;
     left: 9px;
-    color: blue;
+    color: darkblue;
   }
 }
 
 .BarrelFactory {
-  border: 2px dashed yellow;
+  outline: 2px dashed rgba($color: yellow, $alpha: 0.25);
 }

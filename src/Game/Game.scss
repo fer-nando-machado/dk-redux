@@ -1,5 +1,7 @@
 .Game {
   font-family: "Press Start 2P", "Courier New", monospace;
+  height: 750px;
+  width: 500px;
   position: relative;
   padding: 2.5px;
   outline: 10px ridge black;
@@ -45,6 +47,7 @@
     position: absolute;
     width: 25px;
     height: 25px;
+    //disable these for bugmode X
 
     &.Round {
       border-radius: 25px;

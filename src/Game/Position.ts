@@ -1,37 +1,52 @@
 import { Platform } from "./Platform";
 
+export const GRAVITY = -3;
+
 export type Position = {
   x: number;
   y: number;
 };
 
-export const Boundaries: { min: Position; max: Position } = {
-  min: { x: 0, y: 0 },
-  max: { x: 500, y: 750 },
+const boundaries: { min: Position; max: Position } = {
+  min: { x: -2, y: -2 },
+  max: { x: 500 - 20, y: 750 - 15 },
 };
 
-export const assertWithinBoundaries = (position: Position): Position => {
+export const checkBoundaries = (position: Position): Position => {
   return {
-    x: Math.max(0, Math.min(position.x, Boundaries.max.x - 25)),
-    y: Math.max(0, Math.min(position.y, Boundaries.max.y - 25)),
+    x: Math.max(boundaries.min.x, Math.min(position.x, boundaries.max.x)),
+    y: Math.max(boundaries.min.y, Math.min(position.y, boundaries.max.y)),
   };
 };
 
-export const isOnPlatform = (
-  position: Position,
-  platform: Platform
-): boolean => {
+const isOnPlatform = (position: Position, platform: Platform): boolean => {
   const { x, y, length, angle = 0 } = platform;
   if (!length) return false;
 
   const characterX = position.x - x;
   const characterY = position.y - y;
-
   const radianAngle = -angle * (Math.PI / 180);
   const rotatedX =
     characterX * Math.cos(radianAngle) - characterY * Math.sin(radianAngle);
   const rotatedY =
     characterX * Math.sin(radianAngle) + characterY * Math.cos(radianAngle);
 
-  return rotatedX >= 0 && rotatedX <= length && rotatedY >= 0 && rotatedY <= 2;
+  const thickness = 25;
+  const minX = 0 - thickness;
+  const maxX = length;
+  const minY = 0 - thickness;
+  const maxY = thickness;
+
+  return (
+    rotatedX >= minX && rotatedX <= maxX && rotatedY >= minY && rotatedY <= maxY
+  );
+};
+
+export const isOnPlatforms = (position: Position, platforms: Platform[]) => {
+  for (const platform of platforms) {
+    if (isOnPlatform(position, platform)) {
+      return true;
+    }
+  }
+  return false;
 };

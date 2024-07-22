@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Jumpman } from "./Jumpman";
-import { assertWithinBoundaries } from "./Position";
+import { checkBoundaries as assertBoundaries, isOnPlatforms } from "./Position";
+import { Dispatch, RootState } from "./Store";
 
 const initialState: Jumpman = {
   x: 0,
@@ -16,17 +17,44 @@ const slice = createSlice({
       state.x = x;
       state.y = y;
     },
-    moveJumpman: (state, action: PayloadAction<Jumpman>) => {
-      const { x, y } = action.payload;
-      const update = assertWithinBoundaries({
-        x: state.x + x,
-        y: state.y + y,
-      });
-      state.x = update.x;
-      state.y = update.y;
-    },
   },
 });
 
-export const { setJumpman, moveJumpman } = slice.actions;
+export const moveJumpman = createAsyncThunk<
+  void,
+  Jumpman,
+  {
+    state: RootState;
+    dispatch: Dispatch;
+  }
+>(
+  "JumpmanSlice/moveJumpman",
+  async (payload: Jumpman, { getState, dispatch }) => {
+    const state: RootState = getState();
+    const jumpman = state.jumpman;
+    const platforms = state.platformFactory.platforms;
+
+    const { x, y } = payload;
+    const update = assertBoundaries({
+      x: jumpman.x + x,
+      y: jumpman.y + y,
+    });
+
+    const isVertical = x === 0 ? true : false;
+    const isHorizontal = y === 0 ? true : false;
+    const isOnPlatform = isOnPlatforms(update, platforms);
+
+    if (y !== -3) {
+      console.log(x, y, isOnPlatform, isVertical, isHorizontal);
+    }
+
+    if (isHorizontal) {
+      dispatch(setJumpman(update));
+    } else if (isVertical && !isOnPlatform) {
+      dispatch(setJumpman(update));
+    }
+  }
+);
+
+export const { setJumpman } = slice.actions;
 export default slice.reducer;

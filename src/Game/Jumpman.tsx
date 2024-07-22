@@ -1,4 +1,4 @@
-import { Position } from "./Position";
+import { GRAVITY, Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "./Store";
 import { useRef } from "react";
@@ -64,19 +64,18 @@ const Jumpman: React.FC = () => {
     climbing.current = null;
   };
 
-  const gravity = -3;
   useInterval(() => {
-    dispatch(moveJumpman({ x: 0, y: gravity }));
+    dispatch(moveJumpman({ x: 0, y: GRAVITY }));
   });
 
   useKeyboard({
     key: "ArrowUp",
-    onKeyDown: () => startClimbing(+1),
+    onKeyDown: () => startClimbing(+2),
     onKeyUp: () => stopClimbing(),
   });
   useKeyboard({
     key: "ArrowDown",
-    onKeyDown: () => startClimbing(-1),
+    onKeyDown: () => startClimbing(-2),
     onKeyUp: () => stopClimbing(),
   });
   useKeyboard({

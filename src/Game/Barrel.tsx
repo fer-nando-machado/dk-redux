@@ -1,4 +1,4 @@
-import { Position } from "./Position";
+import { Position, GRAVITY } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
@@ -16,7 +16,7 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
 
   const speed = -1 - Math.random();
   useInterval(() => {
-    dispatch(moveBarrel({ id, x: speed, y: 0 }));
+    dispatch(moveBarrel({ id, x: speed, y: GRAVITY }));
   });
 
   return (
@@ -53,7 +53,6 @@ export const BarrelFactory: React.FC = () => {
           bottom: barrelFactory.y,
         }}
       />
-
       {barrelFactory.barrels.map((b) => (
         <Barrel {...b} key={b.id} />
       ))}

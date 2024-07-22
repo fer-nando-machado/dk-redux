@@ -1,6 +1,6 @@
 .Jumpman {
   background-color: red;
-  border: 2px outset blue;
+  outline: 2px outset blue;
 
   &::before {
     content: "^";
@@ -17,5 +17,6 @@
     position: absolute;
     top: -3px;
     color: black;
+    font-weight: bold;
   }
 }
