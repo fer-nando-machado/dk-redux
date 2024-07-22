@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "./Store";
+import { Dispatch, RootState } from "./Store";
 import { setPaused, togglePaused } from "./GameSlice";
 import useKeyboard from "./useKeyboard";
 import "./Pause.scss";
 
 const Pause: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
   const paused = useSelector((state: RootState) => state.game.paused);
 
   const onKeyDown = () => {

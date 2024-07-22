@@ -1,7 +1,7 @@
 import "./App.scss";
 import { name, repository } from "../package.json";
 import GitHub from "/GitHub.svg?url";
-import Game from "./Game";
+import Game from "./Game/Game";
 
 function App() {
   return (

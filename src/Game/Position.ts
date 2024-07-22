@@ -1,4 +1,3 @@
-import { Jumpman } from "./Jumpman";
 import { Platform } from "./Platform";
 
 export type Position = {
@@ -18,12 +17,15 @@ export const assertWithinBoundaries = (position: Position): Position => {
   };
 };
 
-const isOnPlatform = (jumpman: Jumpman, platform: Platform): boolean => {
+export const isOnPlatform = (
+  position: Position,
+  platform: Platform
+): boolean => {
   const { x, y, length, angle = 0 } = platform;
   if (!length) return false;
 
-  const characterX = jumpman.x - x;
-  const characterY = jumpman.y - y;
+  const characterX = position.x - x;
+  const characterY = position.y - y;
 
   const radianAngle = -angle * (Math.PI / 180);
   const rotatedX =
@@ -33,5 +35,3 @@ const isOnPlatform = (jumpman: Jumpman, platform: Platform): boolean => {
 
   return rotatedX >= 0 && rotatedX <= length && rotatedY >= 0 && rotatedY <= 2;
 };
-
-isOnPlatform({ x: 0, y: 0 }, { x: 0, y: 0, length: 0 });

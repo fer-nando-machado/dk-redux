@@ -1,6 +1,6 @@
 import { Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "./Store";
+import { Dispatch, RootState } from "./Store";
 import { useRef } from "react";
 import { moveJumpman } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
@@ -16,7 +16,7 @@ type Jump = {
 };
 
 const Jumpman: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
 
   const jumping = useRef<Jump | null>(null);
