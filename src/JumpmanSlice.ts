@@ -6,10 +6,16 @@ const initialState: Jumpman = {
   x: 0,
   y: 0,
 };
+
 const slice = createSlice({
   name: "JumpmanSlice",
   initialState,
   reducers: {
+    setJumpman: (state, action: PayloadAction<Jumpman>) => {
+      const { x, y } = action.payload;
+      state.x = x;
+      state.y = y;
+    },
     moveJumpman: (state, action: PayloadAction<Jumpman>) => {
       const { x, y } = action.payload;
       const update = assertWithinBoundaries({
@@ -21,5 +27,6 @@ const slice = createSlice({
     },
   },
 });
-export const { moveJumpman } = slice.actions;
+
+export const { setJumpman, moveJumpman } = slice.actions;
 export default slice.reducer;

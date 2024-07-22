@@ -4,6 +4,10 @@ import { PlatformFactory } from "./Platform";
 import { AppDispatch } from "./Store";
 import { setPlatforms } from "./PlatformSlice";
 import { setBarrelFactory } from "./BarrelSlice";
+import { setJumpman } from "./JumpmanSlice";
+import Jumpman from "./Jumpman";
+
+const jumpman = { x: 250, y: 750 };
 
 const barrelFactory = { x: 475, y: 0, barrels: [] };
 
@@ -20,11 +24,13 @@ const Level: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   dispatch(setBarrelFactory(barrelFactory));
   dispatch(setPlatforms(platforms));
+  dispatch(setJumpman(jumpman));
 
   return (
     <>
       <BarrelFactory />
       <PlatformFactory />
+      <Jumpman />
     </>
   );
 };

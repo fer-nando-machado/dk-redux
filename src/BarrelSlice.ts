@@ -45,6 +45,7 @@ const slice = createSlice({
     },
   },
 });
+
 export const { setBarrelFactory, createBarrel, moveBarrel, destroyBarrel } =
   slice.actions;
 export default slice.reducer;

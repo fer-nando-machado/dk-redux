@@ -4,6 +4,7 @@ import { Game } from "./Game";
 const initialState: Game = {
   paused: false,
 };
+
 const slice = createSlice({
   name: "GameSlice",
   initialState,

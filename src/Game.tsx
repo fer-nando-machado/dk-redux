@@ -2,7 +2,6 @@ import { version } from "../package.json";
 import { Provider } from "react-redux";
 import { Store } from "./Store";
 import { Boundaries } from "./Position";
-import Jumpman from "./Jumpman";
 import Pause from "./Pause";
 import "./Game.scss";
 import Level from "./Level";
@@ -19,7 +18,6 @@ const Game = () => {
         style={{ width: Boundaries.max.x, height: Boundaries.max.y }}
       >
         {version}
-        <Jumpman />
         <Level />
         <Pause />
       </div>
