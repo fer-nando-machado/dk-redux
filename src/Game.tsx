@@ -21,8 +21,7 @@ const Game = () => {
         className="Game"
         style={{ width: Boundaries.max.x, height: Boundaries.max.y }}
       >
-        v{version} <br /> <br />
-        use directional keys to Walk and press SPACE to Jump
+        {version}
         <Jumpman />
         <BarrelFactory />
         <Pause />

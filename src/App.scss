@@ -5,4 +5,34 @@
   align-items: center;
   justify-content: center;
   gap: 18px;
+
+  .Content {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+
+    .Manual {
+      font-size: smaller;
+      padding: 10px;
+      border-radius: 15px;
+      outline: 10px ridge brown;
+      background-color: brown;
+      width: 300px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .Game {
+    zoom: 1.1;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .Game {
+    zoom: 0.75;
+  }
+  .Manual {
+    display: none;
+  }
 }
