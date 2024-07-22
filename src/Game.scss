@@ -11,13 +11,11 @@
   @keyframes game-flicker {
     from {
       text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
-      box-shadow: 0 0 50px #75fa69;
-      opacity: 1;
+      box-shadow: 0 0 50px #75fa6950;
     }
     to {
       text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
-      box-shadow: 0 0 75px #ea36af;
-      opacity: 0.9;
+      box-shadow: 0 0 75px #ea36af50;
     }
   }
 
