@@ -67,11 +67,20 @@
   }
 }
 
+@media only screen and (min-width: 1800px) {
+  .Manual {
+    zoom: 1.5;
+  }
+}
+
+@media only screen and (min-width: 2000px) {
+  .Manual {
+    zoom: 1.75;
+  }
+}
+
 @media only screen and (min-height: 1000px) {
   .Game {
     zoom: 1.25;
-  }
-  .Manual {
-    zoom: 1.5;
   }
 }

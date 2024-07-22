@@ -33,7 +33,7 @@ function App() {
           src={GitHub}
           alt={`${name} @ GitHub`}
           title={`${name} @ GitHub`}
-          height={25}
+          height={24}
         />
       </a>
     </div>
