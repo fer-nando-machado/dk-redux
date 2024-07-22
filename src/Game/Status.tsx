@@ -15,6 +15,11 @@ const Status = () => {
     document.dispatchEvent(event);
   };
 
+  const pressF5 = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    window.location.reload();
+  };
+
   return (
     <div className="Status">
       <div>
@@ -24,7 +29,9 @@ const Status = () => {
         <a href="#" onClick={pressEnter}>
           PAUSE
         </a>{" "}
-        <a href="/">RESET</a>
+        <a href="#" onClick={pressF5}>
+          RESET
+        </a>
       </div>
     </div>
   );
