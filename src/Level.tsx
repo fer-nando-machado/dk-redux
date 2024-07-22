@@ -30,16 +30,3 @@ const Level: React.FC = () => {
 };
 
 export default Level;
-
-/**
- * 
- * 
-<Platform x={25} y={35} length={450} />
-<Platform x={25} y={155} length={450} angle={10} />
-<Platform x={25} y={200} length={300} angle={-10} />
-<Platform x={25} y={300} length={200} angle={-5} />
-<Platform x={225} y={317} length={200} angle={5} />
-<Platform x={100} y={400} length={400} angle={-45} />
-
- * 
- */
