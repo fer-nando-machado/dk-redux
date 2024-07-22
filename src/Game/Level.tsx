@@ -7,7 +7,7 @@ import { setBarrelFactory } from "./BarrelSlice";
 import { setJumpman } from "./JumpmanSlice";
 import Jumpman from "./Jumpman";
 
-const jumpman = { x: 50, y: 100 };
+const jumpman = { x: 70, y: 750 };
 
 const barrelFactory = { x: 475, y: 300, barrels: [] };
 

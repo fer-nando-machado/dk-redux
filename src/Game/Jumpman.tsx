@@ -66,7 +66,7 @@ const Jumpman: React.FC = () => {
   };
 
   useInterval(() => {
-    dispatch(moveJumpman({ x: 0, y: gravity ? -2 : 0 }));
+    dispatch(moveJumpman({ x: 0, y: gravity ? -4 : 0 }));
   });
 
   useKeyboard({
@@ -91,7 +91,7 @@ const Jumpman: React.FC = () => {
   });
   useKeyboard({
     key: " ",
-    onKeyDown: () => startJumping(+7, 77),
+    onKeyDown: () => startJumping(+10, 100),
     onKeyUp: () => stopJumping(),
   });
 

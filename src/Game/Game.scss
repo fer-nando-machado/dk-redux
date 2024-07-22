@@ -45,9 +45,8 @@
 
   .Block {
     position: absolute;
-    width: 25px;
+    width: 25px; //disable this for bugmode
     height: 25px;
-    //disable these for bugmode X
 
     &.Round {
       border-radius: 25px;

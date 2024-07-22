@@ -15,13 +15,6 @@ const Options: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
   const { paused, gravity } = useSelector((state: RootState) => state.options);
 
-  const onBlur = () => {
-    dispatch(setPaused(true));
-  };
-  const onFocus = () => {
-    dispatch(setPaused(false));
-  };
-
   useKeyboard({
     key: "Shift",
     onKeyDown: () => dispatch(toggleGravity()),
@@ -34,6 +27,9 @@ const Options: React.FC = () => {
     onKeyUp: () => {},
   });
 
+  const onBlur = () => dispatch(setPaused(true));
+  const onFocus = () => dispatch(setPaused(false));
+
   useEffect(() => {
     window.addEventListener("blur", onBlur);
     window.addEventListener("focus", onFocus);
@@ -45,7 +41,7 @@ const Options: React.FC = () => {
   }, []);
 
   return paused ? (
-    <div className="Options">
+    <div className="Options" onClick={onFocus}>
       <u>{name}</u> <small>v{version}</small>
       <br /> <br />
       {description}
