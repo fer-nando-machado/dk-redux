@@ -18,6 +18,11 @@
       outline: 10px ridge brown;
       background-color: brown;
       width: 300px;
+
+      p {
+        margin: 0 0 9px 0;
+        text-decoration: underline;
+      }
     }
   }
 }

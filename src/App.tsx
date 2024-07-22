@@ -7,21 +7,16 @@ function App() {
   return (
     <div className="App">
       <b>DK Redux</b>
-
       <div className="Content">
         <div className="Manual">
-          <u>HOW TO PLAY</u>
-          <br />
-          <br />
+          <p>HOW TO PLAY</p>
           Walk: ARROW KEYS
           <br />
           Jump: SPACE
         </div>
         <Game />
         <div className="Manual">
-          <u>SECRETS</u>
-          <br />
-          <br />
+          <p>SECRETS</p>
           ...
         </div>
       </div>
