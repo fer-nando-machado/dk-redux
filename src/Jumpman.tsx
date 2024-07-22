@@ -74,25 +74,21 @@ const Jumpman: React.FC = () => {
     onKeyDown: () => startClimbing(+1),
     onKeyUp: () => stopClimbing(),
   });
-
   useKeyboard({
     key: "ArrowDown",
     onKeyDown: () => startClimbing(-1),
     onKeyUp: () => stopClimbing(),
   });
-
   useKeyboard({
     key: "ArrowLeft",
     onKeyDown: () => startWalking(-2),
     onKeyUp: () => stopWalking(),
   });
-
   useKeyboard({
     key: "ArrowRight",
     onKeyDown: () => startWalking(+2),
     onKeyUp: () => stopWalking(),
   });
-
   useKeyboard({
     key: " ",
     onKeyDown: () => startJumping(+7, 77),
