@@ -11,6 +11,8 @@ export type BarrelFactory = Position & {
   barrels: Barrel[];
 };
 
+export const MAX_BARRELS = 5;
+
 const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
   const dispatch: Dispatch = useDispatch();
 
@@ -29,7 +31,7 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
         left: x,
         bottom: y,
       }}
-    ></div>
+    />
   );
 };
 
@@ -44,7 +46,7 @@ export const BarrelFactory: React.FC = () => {
       y: barrelFactory.y,
     };
     dispatch(createBarrel(barrel));
-  }, 3000);
+  }, 1500);
 
   return (
     <>

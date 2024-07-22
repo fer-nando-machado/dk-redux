@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Barrel, BarrelFactory } from "./Barrel";
+import { Barrel, BarrelFactory, MAX_BARRELS } from "./Barrel";
 import { checkBoundaries } from "./Position";
 
 const initialState: BarrelFactory = {
@@ -7,7 +7,6 @@ const initialState: BarrelFactory = {
   y: 0,
   barrels: [],
 };
-const MAX_BARRELS = 3;
 
 const slice = createSlice({
   name: "BarrelSlice",

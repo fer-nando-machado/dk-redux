@@ -48,7 +48,7 @@ export const moveJumpman = createAsyncThunk<
       //console.log(update, isOnPlatform, isVertical, isHorizontal);
 
       if (isOnPlatform) {
-        console.log("TRUE");
+        //console.log("TRUE");
       }
     }
 
