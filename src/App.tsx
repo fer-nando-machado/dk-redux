@@ -13,6 +13,8 @@ function App() {
           Walk: ARROW KEYS
           <br />
           Jump: SPACE
+          <br /> <br />
+          Pause: ENTER
         </div>
         <Game />
         <div className="Manual">
