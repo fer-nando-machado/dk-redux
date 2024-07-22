@@ -18,8 +18,10 @@ function App() {
         </div>
         <Game />
         <div className="Manual">
-          <p>SECRETS</p>
-          ...
+          <p>PLAYER SELECT</p>
+          <ul>
+            <li>M</li>
+          </ul>
         </div>
       </div>
       <a href={repository.url}>
