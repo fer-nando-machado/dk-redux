@@ -32,7 +32,6 @@ const Game = () => {
         <Platform x={225} y={317} length={200} angle={5} />
 
         <Platform x={100} y={400} length={400} angle={-45} />
-        <Platform x={0} y={700} length={81} />
 
         <Pause />
       </div>
