@@ -2,11 +2,13 @@ import { Position } from "./Position";
 import "./Platform.scss";
 
 export type Platform = Position & {
-  length: number;
+  length?: number;
   angle?: number;
 };
 
 const Platform: React.FC<Platform> = ({ x, y, length, angle = 0 }) => {
+  if (!length) return <></>;
+
   const rotate =
     angle !== 0
       ? {
