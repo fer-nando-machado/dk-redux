@@ -9,12 +9,14 @@ type KeyHandler = {
 const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
   const onKeyDownOverride = (event: KeyboardEvent) => {
     if (event.key === key || event.key === key.toLowerCase()) {
+      event.preventDefault();
       onKeyDown();
     }
   };
   const onKeyUpOverride = (event: KeyboardEvent) => {
     if (event.key === key || event.key === key.toLowerCase()) {
-       onKeyUp();
+      event.preventDefault();
+      onKeyUp();
     }
   };
 

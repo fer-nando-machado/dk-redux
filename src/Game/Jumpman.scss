@@ -2,10 +2,6 @@
   background-color: red;
   outline: 2px outset blue;
 
-  > * {
-    display: none;
-  }
-
   &::before {
     content: "^";
     position: absolute;
