@@ -8,8 +8,12 @@ import useInterval from "./useInterval";
 import DeutschBox from "./Player/DeutschBox";
 import "./Jumpman.scss";
 
+// TODO Extract type Block:  Position & direction & isJumping
+// Barrel and Platform should extend that
+// Duck too
+
 export type Jumpman = Position & {
-  direction: "left" | "right";
+  direction?: "left" | "right"; //TODO remove optional
   isJumping?: boolean;
   player?: string;
 };

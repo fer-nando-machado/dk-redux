@@ -1,6 +1,6 @@
+import { Jumpman } from "./Jumpman";
 import { Platform } from "./Platform";
 
-// might refactor to class
 export type Position = {
   x: number;
   y: number;
@@ -18,13 +18,25 @@ export const checkBoundaries = (position: Position): Position => {
   };
 };
 
-export const checkPlatforms = (position: Position, platforms: Platform[]) => {
+export const checkPlatforms = (
+  position: Jumpman,
+  platforms: Platform[]
+): Jumpman => {
   for (const platform of platforms) {
     if (isOnPlatform(position, platform)) {
-      return true;
+      const updated: Jumpman = {
+        ...position,
+        y: platform.y + thickness.y,
+        isJumping: false,
+      };
+      return updated;
     }
   }
-  return false;
+
+  return {
+    ...position,
+    isJumping: true,
+  };
 };
 
 const isOnPlatform = (position: Position, platform: Platform): boolean => {
@@ -32,16 +44,16 @@ const isOnPlatform = (position: Position, platform: Platform): boolean => {
 
   const currentX = position.x - platform.x;
   const currentY = position.y - platform.y;
-  const isOnPlatform =
+
+  return (
     currentX >= -thickness.x &&
     currentX <= platform.length &&
     currentY >= -thickness.y &&
-    currentY <= thickness.y;
-
-  return isOnPlatform;
+    currentY <= thickness.y
+  );
 };
 
 const thickness: Position = {
   x: 25,
-  y: 25 / 2,
+  y: 12.5,
 };

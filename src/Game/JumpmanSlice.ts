@@ -40,20 +40,19 @@ export const moveJumpman = createAsyncThunk<
     const jumpman = state.jumpman;
     const platforms = state.platformFactory.platforms;
 
-    const { x, y } = payload;
-    const boundaries = checkBoundaries({
+    let { x, y } = payload;
+    const moved = {
       x: jumpman.x + x,
       y: jumpman.y + y,
-    });
-    const touchedPlatform = checkPlatforms(boundaries, platforms);
+    };
+    const bounded = checkBoundaries(moved);
+    const plataformed = checkPlatforms(bounded, platforms);
     const direction = x < 0 ? "left" : x > 0 ? "right" : undefined;
     const update: Jumpman = {
       ...jumpman,
-      ...boundaries,
-      isJumping: !touchedPlatform,
+      ...plataformed,
       ...(direction ? { direction } : {}),
     };
-
     dispatch(setJumpman(update));
   }
 );
