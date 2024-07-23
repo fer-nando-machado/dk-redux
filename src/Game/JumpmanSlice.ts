@@ -14,11 +14,8 @@ const slice = createSlice({
   name: "JumpmanSlice",
   initialState,
   reducers: {
-    setJumpman: (state, action: PayloadAction<Jumpman>) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
+    setJumpman: (_, action: PayloadAction<Jumpman>) => {
+      return action.payload;
     },
     setPlayer: (state, action: PayloadAction<string>) => {
       state.player = action.payload;

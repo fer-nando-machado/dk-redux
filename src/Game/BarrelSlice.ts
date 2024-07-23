@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Barrel, BarrelFactory, MAX_BARRELS } from "./Barrel";
 import { checkBoundaries, checkPlatforms } from "./Position";
-import { Block } from "./Block";
-import { Jumpman } from "./Jumpman";
-import { setJumpman } from "./JumpmanSlice";
 import { RootState, StoreDispatch } from "./Store";
 
 const initialState: BarrelFactory = {
@@ -27,14 +24,9 @@ const slice = createSlice({
     },
     setBarrel: (state, action: PayloadAction<Barrel>) => {
       const barrel = action.payload;
-
       const index = state.barrels.findIndex((b) => b.id === barrel.id);
       if (index === -1) return;
-
-      state.barrels[index] = {
-        ...state.barrels[index],
-        ...barrel,
-      };
+      state.barrels[index] = barrel;
     },
     destroyBarrel: (state, action: PayloadAction<number>) => {
       state.barrels = state.barrels.filter((b) => b.id !== action.payload);
