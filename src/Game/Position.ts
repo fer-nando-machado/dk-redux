@@ -7,7 +7,7 @@ export type Position = {
 };
 
 const boundaries: { min: Position; max: Position } = {
-  min: { x: -2, y: -2 },
+  min: { x: -5, y: -5 },
   max: { x: 500 - 20, y: 750 - 15 },
 };
 
@@ -28,25 +28,20 @@ export const checkPlatforms = (position: Position, platforms: Platform[]) => {
 };
 
 const isOnPlatform = (position: Position, platform: Platform): boolean => {
-  const { x, y, length } = platform;
-  if (!length) return false;
+  if (!platform.length) return false;
 
-  const characterX = position.x - x;
-  const characterY = position.y - y;
+  const currentX = position.x - platform.x;
+  const currentY = position.y - platform.y;
+  const isOnPlatform =
+    currentX >= -thickness.x &&
+    currentX <= platform.length &&
+    currentY >= -thickness.y &&
+    currentY <= thickness.y;
 
-  const thickness = 25 / 2;
+  return isOnPlatform;
+};
 
-  const isOnHorizontalPlatform =
-    characterX >= 0 &&
-    characterX <= length &&
-    characterY >= -thickness &&
-    characterY <= thickness;
-
-  const isOnVerticalPlatform =
-    characterY >= 0 &&
-    characterY <= length &&
-    characterX >= -thickness &&
-    characterX <= thickness;
-
-  return isOnHorizontalPlatform || isOnVerticalPlatform;
+const thickness: Position = {
+  x: 25,
+  y: 25 / 2,
 };
