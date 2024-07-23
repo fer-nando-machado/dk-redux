@@ -1,6 +1,7 @@
 .Barrel {
   background-color: orange;
   outline: 2px ridge yellow;
+  cursor: crosshair;
 
   &::before {
     content: ".";

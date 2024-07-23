@@ -11,25 +11,31 @@ export type BarrelFactory = Block & {
   barrels: Barrel[];
 };
 
-export const MAX_BARRELS = 5;
+export const MAX_BARRELS = 4;
 
-const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
+const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
 
   const gravity = useSelector((state: RootState) => state.options.gravity);
-  const speed = -1 - Math.random();
+  const speed = barrel.direction === "left" ? -1.25 : 1.25;
 
   useInterval(() => {
-    dispatch(moveBarrel({ id, x: speed, y: gravity ? -5 : 0 }));
+    dispatch(
+      moveBarrel({
+        ...barrel,
+        x: speed,
+        y: gravity ? -5 : 0,
+      })
+    );
   });
 
   return (
     <div
       className="Barrel Block Round"
-      onClick={() => dispatch(destroyBarrel(id))}
+      onClick={() => dispatch(destroyBarrel(barrel.id))}
       style={{
-        left: x,
-        bottom: y,
+        left: barrel.x,
+        bottom: barrel.y,
       }}
     />
   );
@@ -42,11 +48,10 @@ export const BarrelFactory: React.FC = () => {
   useInterval(() => {
     const barrel: Barrel = {
       id: Date.now(),
-      x: barrelFactory.x,
-      y: barrelFactory.y,
+      ...barrelFactory,
     };
     dispatch(createBarrel(barrel));
-  }, 1500);
+  }, 2500);
 
   return (
     <>

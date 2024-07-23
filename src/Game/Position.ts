@@ -11,8 +11,9 @@ const boundaries: { min: Position; max: Position } = {
   max: { x: 500 - 20, y: 750 - 15 },
 };
 
-export const checkBoundaries = (position: Position): Position => {
+export const checkBoundaries = (position: Block): Block => {
   return {
+    ...position,
     x: Math.max(boundaries.min.x, Math.min(position.x, boundaries.max.x)),
     y: Math.max(boundaries.min.y, Math.min(position.y, boundaries.max.y)),
   };

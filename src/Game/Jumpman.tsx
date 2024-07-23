@@ -27,7 +27,7 @@ export const Jumpman: React.FC = () => {
   const jumping = useRef<Jump | null>(null);
   useInterval(() => {
     if (!jumping.current) return;
-    dispatch(moveJumpman({ x: 0, y: jumping.current.speed }));
+    dispatch(moveJumpman({ ...jumpman, x: 0, y: jumping.current.speed }));
     jumping.current.remaining -= jumping.current.speed;
     if (jumping.current.remaining > 0) return;
     stopJumping();
@@ -45,7 +45,7 @@ export const Jumpman: React.FC = () => {
   const walking = useRef<number | null>(null);
   useInterval(() => {
     if (!walking.current || climbing.current) return;
-    dispatch(moveJumpman({ x: walking.current, y: 0 }));
+    dispatch(moveJumpman({ ...jumpman, x: walking.current, y: 0 }));
   });
   const startWalking = (speed: number) => {
     if (walking.current) return;
@@ -59,7 +59,7 @@ export const Jumpman: React.FC = () => {
   const climbing = useRef<number | null>(null);
   useInterval(() => {
     if (!climbing.current || walking.current || jumping.current) return;
-    dispatch(moveJumpman({ x: 0, y: climbing.current }));
+    dispatch(moveJumpman({ ...jumpman, x: 0, y: climbing.current }));
   });
   const startClimbing = (speed: number) => {
     if (climbing.current) return;
@@ -71,7 +71,13 @@ export const Jumpman: React.FC = () => {
   };
 
   useInterval(() => {
-    dispatch(moveJumpman({ x: 0, y: gravity && jumpman.isJumping ? -4 : 0 }));
+    dispatch(
+      moveJumpman({
+        ...jumpman,
+        x: 0,
+        y: gravity && jumpman.isJumping ? -4 : 0,
+      })
+    );
   });
 
   useKeyboard({

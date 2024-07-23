@@ -39,6 +39,7 @@ export const moveJumpman = createAsyncThunk<
 
     let { x, y } = payload;
     const moved = {
+      ...jumpman,
       x: jumpman.x + x,
       y: jumpman.y + y,
     };

@@ -7,6 +7,7 @@ const initialState: BarrelFactory = {
   x: 0,
   y: 0,
   barrels: [],
+  direction: "left",
 };
 
 const slice = createSlice({
@@ -52,16 +53,17 @@ export const moveBarrel = createAsyncThunk<
 
   let { x, y } = payload;
   const moved = {
+    ...barrel,
     x: barrel.x + x,
     y: barrel.y + y,
   };
   const bounded = checkBoundaries(moved);
   const plataformed = checkPlatforms(bounded, platforms);
-  const direction = x < 0 ? "left" : x > 0 ? "right" : undefined;
+  //const direction = (barrel.isJumping === plataformed.isJumping) ? plataformed.direction :
   const update: Barrel = {
     ...barrel,
     ...plataformed,
-    ...(direction ? { direction } : {}),
+    // ...(direction ? { direction } : {}),
   };
   dispatch(setBarrel(update));
 });
