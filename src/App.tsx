@@ -19,7 +19,9 @@ function App() {
           <br />
           ?????: SHIFT
           <br /> <br />
-          Full Screen: F11
+          Zoom: F11
+          <br />
+          Reset: F5
         </div>
         <Game />
         <div className="Manual">
