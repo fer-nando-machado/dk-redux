@@ -8,15 +8,13 @@ type KeyHandler = {
 
 const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
   const onKeyDownOverride = (event: KeyboardEvent) => {
-    if (event.key === key) {
-      event.preventDefault();
+    if (event.key === key || event.key === key.toLowerCase()) {
       onKeyDown();
     }
   };
   const onKeyUpOverride = (event: KeyboardEvent) => {
-    if (event.key === key) {
-      event.preventDefault();
-      onKeyUp();
+    if (event.key === key || event.key === key.toLowerCase()) {
+       onKeyUp();
     }
   };
 

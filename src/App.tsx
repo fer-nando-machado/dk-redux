@@ -9,7 +9,8 @@ function App() {
       <b>DK Redux</b>
       <div className="Content">
         <div className="Manual">
-          <p>HOW TO PLAY</p>
+          <u>HOW TO PLAY</u>
+          <br /> <br />
           Walk: ARROW KEYS
           <br />
           Jump: SPACE
@@ -22,9 +23,16 @@ function App() {
         </div>
         <Game />
         <div className="Manual">
-          <p>PLAYER SELECT</p>
+          <u>PLAYER SELECT</u>
+          <br /> <br />
           <ul>
-            <li>M</li>
+            <li>M Jumpman</li>
+            <li>
+              {"D "}
+              <a href="https://fer-nando-machado.github.io/react-deutschbox/">
+                {"<DeutschBox/>"}
+              </a>
+            </li>
           </ul>
         </div>
       </div>

@@ -4,15 +4,16 @@ const Status = () => {
   const then = "JUL 09 1981";
   const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
 
-  const pressEnter = () => {
-    const event = new KeyboardEvent("keydown", {
+  const pressEnter = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    const enter = new KeyboardEvent("keydown", {
       key: "Enter",
       code: "Enter",
       keyCode: 13,
       which: 13,
       bubbles: true,
     });
-    document.dispatchEvent(event);
+    document.dispatchEvent(enter);
   };
 
   const pressF5 = (event: React.MouseEvent<HTMLAnchorElement>) => {

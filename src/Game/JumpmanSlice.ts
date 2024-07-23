@@ -7,6 +7,7 @@ const initialState: Jumpman = {
   x: 0,
   y: 0,
   isJumping: false,
+  skin: "M",
 };
 
 const slice = createSlice({
@@ -15,6 +16,9 @@ const slice = createSlice({
   reducers: {
     setJumpman: (_, action: PayloadAction<Jumpman>) => {
       return action.payload;
+    },
+    setSkin: (state, action: PayloadAction<string>) => {
+      state.skin = action.payload;
     },
   },
 });
@@ -40,13 +44,13 @@ export const moveJumpman = createAsyncThunk<
     });
     const touchedPlatform = checkPlatforms(boundaries, platforms);
     const update: Jumpman = {
-      x: boundaries.x,
-      y: boundaries.y,
+      ...jumpman,
+      ...boundaries,
       isJumping: !touchedPlatform,
     };
     dispatch(setJumpman(update));
   }
 );
 
-export const { setJumpman } = slice.actions;
+export const { setJumpman, setSkin } = slice.actions;
 export default slice.reducer;

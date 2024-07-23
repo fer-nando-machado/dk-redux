@@ -1,0 +1,22 @@
+.Jumpman.D {
+  outline: 2px outset #fc0;
+
+  &::before {
+    color: #d00;
+  }
+
+  .deutschbox {
+    display: block;
+    top: -8px;
+    left: -8px;
+    z-index: 0;
+
+    button:focus {
+      outline: none;
+    }
+
+    .bubble-label {
+      top: 0;
+    }
+  }
+}

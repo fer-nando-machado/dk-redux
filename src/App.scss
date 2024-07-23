@@ -19,9 +19,13 @@
       background-color: brown;
       width: 250px;
 
-      p {
-        margin: 0 0 18px 0;
-        text-decoration: underline;
+      a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
 
       ul {

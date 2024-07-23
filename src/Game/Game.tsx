@@ -9,8 +9,8 @@ const Game = () => {
   return (
     <Provider store={Store}>
       <div className="Game">
-        <Status />
         <Level />
+        <Status />
         <Options />
       </div>
     </Provider>

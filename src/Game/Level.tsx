@@ -7,7 +7,7 @@ import { setPlatforms } from "./PlatformSlice";
 import { setBarrelFactory } from "./BarrelSlice";
 import { setJumpman } from "./JumpmanSlice";
 
-const jumpman: JumpmanProps = { x: 70, y: 750, isJumping: true };
+const jumpman: JumpmanProps = { x: 70, y: 750 };
 
 const barrelFactory = { x: 475, y: 300, barrels: [] };
 
