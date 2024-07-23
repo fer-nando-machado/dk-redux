@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import "./Status.scss";
 import { StoreDispatch } from "./Store";
 import { setPaused } from "./OptionsSlice";
+import "./Status.scss";
 
 const Status = () => {
   const dispatch: StoreDispatch = useDispatch();
@@ -21,12 +21,12 @@ const Status = () => {
 
   return (
     <div className="Status">
-      <div>
-        {then} <br /> {now}
-      </div>
       <a href="#" onClick={clickPause}>
         PAUSE
       </a>
+      <div>
+        {then} <br /> {now}
+      </div>
       <a href="#" onClick={clickRefresh}>
         RESET
       </a>
