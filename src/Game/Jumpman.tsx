@@ -1,4 +1,4 @@
-import { Position } from "./Position";
+import { Block } from "./Block";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { useRef } from "react";
@@ -8,13 +8,7 @@ import useInterval from "./useInterval";
 import DeutschBox from "./Player/DeutschBox";
 import "./Jumpman.scss";
 
-// TODO Extract type Block:  Position & direction & isJumping
-// Barrel and Platform should extend that
-// Duck too
-
-export type Jumpman = Position & {
-  direction?: "left" | "right"; //TODO remove optional
-  isJumping?: boolean;
+export type Jumpman = Block & {
   player?: string;
 };
 

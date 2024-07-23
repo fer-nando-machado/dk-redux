@@ -42,24 +42,4 @@
       }
     }
   }
-
-  .Block {
-    position: absolute;
-    width: 25px; //disable this for bugmode
-    height: 25px;
-
-    &.Round {
-      border-radius: 25px;
-      animation: spin 3s infinite linear;
-      animation-direction: reverse;
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-    }
-  }
 }

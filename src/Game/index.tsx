@@ -3,6 +3,7 @@ import { Store } from "./Store";
 import Level from "./Level";
 import Status from "./Status";
 import Options from "./Options";
+import "./Block.scss";
 import "./index.scss";
 
 const Game = () => {

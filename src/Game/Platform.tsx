@@ -1,9 +1,9 @@
-import { Position } from "./Position";
 import { useSelector } from "react-redux";
 import { RootState } from "./Store";
+import { Block } from "./Block";
 import "./Platform.scss";
 
-export type Platform = Position & {
+export type Platform = Block & {
   length?: number;
   angle?: number;
 };

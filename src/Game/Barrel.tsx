@@ -1,13 +1,13 @@
-import { Position } from "./Position";
+import { Block } from "./Block";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
 import useInterval from "./useInterval";
 import "./Barrel.scss";
 
-export type Barrel = Position & { id: number };
+export type Barrel = Block & { id: number };
 
-export type BarrelFactory = Position & {
+export type BarrelFactory = Block & {
   barrels: Barrel[];
 };
 
