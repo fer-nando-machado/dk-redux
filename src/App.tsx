@@ -1,6 +1,6 @@
 import { name, repository } from "../package.json";
 import GitHub from "/GitHub.svg?url";
-import Game from "./Game/Game";
+import Game from "./Game";
 import "./App.scss";
 
 function App() {
@@ -11,15 +11,15 @@ function App() {
         <div className="Manual">
           <u>HOW TO PLAY</u>
           <br /> <br />
-          Walk: ARROW KEYS
+          &nbsp;Walk: ARROW KEYS
           <br />
-          Jump: SPACE
+          &nbsp;Jump: SPACE
           <br /> <br />
           Pause: ENTER
           <br />
-          ?????: SHIFT
-          <br /> <br />
-          Zoom: F11
+          &nbsp;&nbsp;???: SHIFT
+          <br />
+          &nbsp;Zoom: F11
           <br />
           Reset: F5
         </div>
