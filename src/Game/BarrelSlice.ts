@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Barrel, BarrelFactory, MAX_BARRELS } from "./Barrel";
 import { checkBoundaries, checkPlatforms } from "./Position";
 import { RootState, StoreDispatch } from "./Store";
+import { flipDirection } from "./Block";
 
 const initialState: BarrelFactory = {
   x: 0,
@@ -59,11 +60,16 @@ export const moveBarrel = createAsyncThunk<
   };
   const bounded = checkBoundaries(moved);
   const plataformed = checkPlatforms(bounded, platforms);
-  //const direction = (barrel.isJumping === plataformed.isJumping) ? plataformed.direction :
+
+  ///console.log(barrel.isJumping === plataformed.isJumping);
+  const direction = plataformed.direction;
+  //   barrel.isJumping === plataformed.isJumping
+  //    ? plataformed.direction
+  //     : flipDirection(plataformed.direction);
   const update: Barrel = {
     ...barrel,
     ...plataformed,
-    // ...(direction ? { direction } : {}),
+    direction,
   };
   dispatch(setBarrel(update));
 });
