@@ -15,7 +15,6 @@ const DeutschBox: React.FC = () => {
   const clickDeutschBox = () => {
     if (!ref.current) return;
     const button = ref.current.nextElementSibling as HTMLButtonElement;
-    button.focus();
     button.click();
   };
 
