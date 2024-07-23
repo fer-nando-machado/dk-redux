@@ -24,14 +24,12 @@ const Status = () => {
       <div>
         {then} <br /> {now}
       </div>
-      <div>
-        <a href="#" onClick={clickPause}>
-          PAUSE
-        </a>{" "}
-        <a href="#" onClick={clickRefresh}>
-          RESET
-        </a>
-      </div>
+      <a href="#" onClick={clickPause}>
+        PAUSE
+      </a>
+      <a href="#" onClick={clickRefresh}>
+        RESET
+      </a>
     </div>
   );
 };
