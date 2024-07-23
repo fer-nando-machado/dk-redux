@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Jumpman } from "./Jumpman";
 import { checkBoundaries, checkPlatforms } from "./Position";
-import { Dispatch, RootState } from "./Store";
+import { StoreDispatch, RootState } from "./Store";
 
 const initialState: Jumpman = {
   x: 0,
@@ -28,7 +28,7 @@ export const moveJumpman = createAsyncThunk<
   Jumpman,
   {
     state: RootState;
-    dispatch: Dispatch;
+    dispatch: StoreDispatch;
   }
 >(
   "JumpmanSlice/moveJumpman",

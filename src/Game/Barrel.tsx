@@ -1,6 +1,6 @@
 import { Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "./Store";
+import { StoreDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
 import useInterval from "./useInterval";
 import "./Barrel.scss";
@@ -14,7 +14,7 @@ export type BarrelFactory = Position & {
 export const MAX_BARRELS = 5;
 
 const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
-  const dispatch: Dispatch = useDispatch();
+  const dispatch: StoreDispatch = useDispatch();
 
   const gravity = useSelector((state: RootState) => state.options.gravity);
   const speed = -1 - Math.random();
@@ -36,7 +36,7 @@ const Barrel: React.FC<Barrel> = ({ id, x, y }) => {
 };
 
 export const BarrelFactory: React.FC = () => {
-  const dispatch: Dispatch = useDispatch();
+  const dispatch: StoreDispatch = useDispatch();
   const barrelFactory = useSelector((state: RootState) => state.barrelFactory);
 
   useInterval(() => {

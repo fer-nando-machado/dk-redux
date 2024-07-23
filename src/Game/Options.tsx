@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch, RootState } from "./Store";
+import { StoreDispatch, RootState } from "./Store";
 import { setPaused, toggleGravity, togglePaused } from "./OptionsSlice";
 import useKeyboard from "./useKeyboard";
 import { name, version, description } from "../../package.json";
@@ -12,7 +12,7 @@ export type Options = {
 };
 
 const Options: React.FC = () => {
-  const dispatch: Dispatch = useDispatch();
+  const dispatch: StoreDispatch = useDispatch();
   const { paused, gravity } = useSelector((state: RootState) => state.options);
 
   useKeyboard({

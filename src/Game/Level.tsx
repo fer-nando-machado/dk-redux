@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { BarrelFactory } from "./Barrel";
 import { PlatformFactory } from "./Platform";
 import Jumpman, { Jumpman as JumpmanProps } from "./Jumpman";
-import { Dispatch } from "./Store";
+import { StoreDispatch } from "./Store";
 import { setPlatforms } from "./PlatformSlice";
 import { setBarrelFactory } from "./BarrelSlice";
 import { setJumpman } from "./JumpmanSlice";
@@ -21,7 +21,7 @@ const platforms = [
 ];
 
 const Level: React.FC = () => {
-  const dispatch: Dispatch = useDispatch();
+  const dispatch: StoreDispatch = useDispatch();
   dispatch(setPlatforms(platforms));
   dispatch(setBarrelFactory(barrelFactory));
   dispatch(setJumpman(jumpman));
