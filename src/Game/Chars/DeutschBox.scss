@@ -17,6 +17,9 @@
 
     .bubble-label {
       top: 0;
+      &.left {
+        right: 100%;
+      }
     }
   }
 }

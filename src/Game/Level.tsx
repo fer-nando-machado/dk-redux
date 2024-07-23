@@ -7,14 +7,14 @@ import { setJumpman } from "./JumpmanSlice";
 import { BarrelFactory } from "./Barrel";
 import { setBarrelFactory } from "./BarrelSlice";
 
-import { PlatformFactory } from "./Platform";
+import { PlatformFactory, Platform } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
 
-const jumpman = { x: 70, y: 750 };
+const jumpman: Jumpman = { x: 70, y: 750, direction: "right" };
 
-const barrelFactory = { x: 475, y: 300, barrels: [] };
+const barrelFactory: BarrelFactory = { x: 475, y: 300, barrels: [] };
 
-const platforms = [
+const platforms: Platform[] = [
   { x: 25, y: 35, length: 450, angle: 0 },
   { x: 150, y: 100, length: 200, angle: 0 },
   { x: 25, y: 175, length: 300, angle: 0 },

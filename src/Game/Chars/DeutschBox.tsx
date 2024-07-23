@@ -9,7 +9,7 @@ import "./DeutschBox.scss";
 const CODE = "D";
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { skin } = useSelector((state: RootState) => state.jumpman);
+  const { direction, skin } = useSelector((state: RootState) => state.jumpman);
 
   const ref = useRef<HTMLInputElement>(null);
   const clickDeutschBox = () => {
@@ -34,7 +34,12 @@ const DeutschBox: React.FC = () => {
   });
 
   return skin === CODE ? (
-    <ReactDeutschBox name="DeutschBox" feedback="right" size={27.5} ref={ref} />
+    <ReactDeutschBox
+      name="DeutschBox"
+      feedback={direction}
+      size={27.5}
+      ref={ref}
+    />
   ) : (
     <></>
   );

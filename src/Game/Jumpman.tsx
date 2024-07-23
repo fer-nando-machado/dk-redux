@@ -9,6 +9,7 @@ import DeutschBox from "./Chars/DeutschBox";
 import "./Jumpman.scss";
 
 export type Jumpman = Position & {
+  direction: "left" | "right";
   isJumping?: boolean;
   skin?: string;
 };
@@ -34,6 +35,7 @@ export const Jumpman: React.FC = () => {
     stopJumping();
   });
   const startJumping = (speed: number, height: number) => {
+    if (jumpman.isJumping) return;
     if (jumping.current) return;
     jumping.current = { speed, height, remaining: height };
   };
@@ -107,7 +109,7 @@ export const Jumpman: React.FC = () => {
 
   return (
     <div
-      className={`Jumpman Block ${jumpman.skin}`}
+      className={`Jumpman Block ${jumpman.skin} ${jumpman.direction}`}
       style={{
         left: jumpman.x,
         bottom: jumpman.y,
