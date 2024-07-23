@@ -8,9 +8,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fer-nando-machado/dk-redux.git"
+    "url": "git+https://github.com/fer-nando-machado/dk-redux.git",
+    "link": "https://github.com/fer-nando-machado/dk-redux"
   },
-  "repositoryWeb": "https://github.com/fer-nando-machado/dk-redux",
   "private": false,
   "keywords": [
     "react",

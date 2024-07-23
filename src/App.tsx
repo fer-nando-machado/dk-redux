@@ -1,4 +1,4 @@
-import { name, repositoryWeb } from "../package.json";
+import { name, repository } from "../package.json";
 import GitHub from "/GitHub.svg?url";
 import Game from "./Game/Game";
 import "./App.scss";
@@ -38,7 +38,7 @@ function App() {
           </ul>
         </div>
       </div>
-      <a href={repositoryWeb}>
+      <a href={repository.link}>
         <img
           src={GitHub}
           alt={`${name} @ GitHub`}
