@@ -6,7 +6,6 @@ import { StoreDispatch, RootState } from "./Store";
 const initialState: Jumpman = {
   x: 0,
   y: 0,
-  isJumping: false,
   skin: "M",
 };
 
@@ -14,8 +13,11 @@ const slice = createSlice({
   name: "JumpmanSlice",
   initialState,
   reducers: {
-    setJumpman: (_, action: PayloadAction<Jumpman>) => {
-      return action.payload;
+    setJumpman: (state, action: PayloadAction<Jumpman>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
     setSkin: (state, action: PayloadAction<string>) => {
       state.skin = action.payload;

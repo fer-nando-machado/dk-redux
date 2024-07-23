@@ -20,7 +20,7 @@ type Jump = {
 };
 
 const CODE = "M";
-const Jumpman: React.FC = () => {
+export const Jumpman: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
   const gravity = useSelector((state: RootState) => state.options.gravity);
@@ -117,5 +117,3 @@ const Jumpman: React.FC = () => {
     </div>
   );
 };
-
-export default Jumpman;

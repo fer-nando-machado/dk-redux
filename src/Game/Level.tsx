@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux";
-import { BarrelFactory } from "./Barrel";
-import { PlatformFactory } from "./Platform";
-import Jumpman, { Jumpman as JumpmanProps } from "./Jumpman";
 import { StoreDispatch } from "./Store";
-import { setPlatforms } from "./PlatformSlice";
-import { setBarrelFactory } from "./BarrelSlice";
+
+import { Jumpman } from "./Jumpman";
 import { setJumpman } from "./JumpmanSlice";
 
-const jumpman: JumpmanProps = { x: 70, y: 750 };
+import { BarrelFactory } from "./Barrel";
+import { setBarrelFactory } from "./BarrelSlice";
+
+import { PlatformFactory } from "./Platform";
+import { setPlatforms } from "./PlatformSlice";
+
+const jumpman = { x: 70, y: 750 };
 
 const barrelFactory = { x: 475, y: 300, barrels: [] };
 
