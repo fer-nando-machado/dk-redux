@@ -1,4 +1,4 @@
-import { Jumpman } from "./Jumpman";
+import { Block } from "./Block";
 import { Platform } from "./Platform";
 
 export type Position = {
@@ -19,12 +19,12 @@ export const checkBoundaries = (position: Position): Position => {
 };
 
 export const checkPlatforms = (
-  position: Jumpman,
+  position: Block,
   platforms: Platform[]
-): Jumpman => {
+): Block => {
   for (const platform of platforms) {
     if (isOnPlatform(position, platform)) {
-      const updated: Jumpman = {
+      const updated: Block = {
         ...position,
         y: platform.y + thickness.y,
         isJumping: false,

@@ -1,6 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Barrel, BarrelFactory, MAX_BARRELS } from "./Barrel";
-import { checkBoundaries } from "./Position";
+import { checkBoundaries, checkPlatforms } from "./Position";
+import { Block } from "./Block";
+import { Jumpman } from "./Jumpman";
+import { setJumpman } from "./JumpmanSlice";
+import { RootState, StoreDispatch } from "./Store";
 
 const initialState: BarrelFactory = {
   x: 0,
@@ -21,20 +25,15 @@ const slice = createSlice({
       }
       state.barrels.push(action.payload);
     },
-    moveBarrel: (state, action: PayloadAction<Barrel>) => {
-      const { id, x, y } = action.payload;
+    setBarrel: (state, action: PayloadAction<Barrel>) => {
+      const barrel = action.payload;
 
-      const index = state.barrels.findIndex((b) => b.id === id);
+      const index = state.barrels.findIndex((b) => b.id === barrel.id);
       if (index === -1) return;
 
-      const update = checkBoundaries({
-        x: state.barrels[index].x + x,
-        y: state.barrels[index].y + y,
-      });
       state.barrels[index] = {
         ...state.barrels[index],
-        x: update.x,
-        y: update.y,
+        ...barrel,
       };
     },
     destroyBarrel: (state, action: PayloadAction<number>) => {
@@ -43,6 +42,38 @@ const slice = createSlice({
   },
 });
 
-export const { setBarrelFactory, createBarrel, moveBarrel, destroyBarrel } =
+export const moveBarrel = createAsyncThunk<
+  void,
+  Barrel,
+  {
+    state: RootState;
+    dispatch: StoreDispatch;
+  }
+>("BarrelSlice/moveBarrel", async (payload: Barrel, { getState, dispatch }) => {
+  const state: RootState = getState();
+  const platforms = state.platformFactory.platforms;
+  const barrels = state.barrelFactory.barrels;
+
+  const index = barrels.findIndex((b) => b.id === payload.id);
+  if (index === -1) return;
+  const barrel = barrels[index];
+
+  let { x, y } = payload;
+  const moved = {
+    x: barrel.x + x,
+    y: barrel.y + y,
+  };
+  const bounded = checkBoundaries(moved);
+  const plataformed = checkPlatforms(bounded, platforms);
+  const direction = x < 0 ? "left" : x > 0 ? "right" : undefined;
+  const update: Barrel = {
+    ...barrel,
+    ...plataformed,
+    ...(direction ? { direction } : {}),
+  };
+  dispatch(setBarrel(update));
+});
+
+export const { setBarrelFactory, createBarrel, setBarrel, destroyBarrel } =
   slice.actions;
 export default slice.reducer;
