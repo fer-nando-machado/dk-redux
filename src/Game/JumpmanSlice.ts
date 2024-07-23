@@ -7,7 +7,7 @@ const initialState: Jumpman = {
   x: 0,
   y: 0,
   direction: "left",
-  skin: "M",
+  player: "M",
 };
 
 const slice = createSlice({
@@ -20,8 +20,8 @@ const slice = createSlice({
         ...action.payload,
       };
     },
-    setSkin: (state, action: PayloadAction<string>) => {
-      state.skin = action.payload;
+    setPlayer: (state, action: PayloadAction<string>) => {
+      state.player = action.payload;
     },
   },
 });
@@ -58,5 +58,5 @@ export const moveJumpman = createAsyncThunk<
   }
 );
 
-export const { setJumpman, setSkin } = slice.actions;
+export const { setJumpman, setPlayer } = slice.actions;
 export default slice.reducer;

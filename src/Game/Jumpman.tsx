@@ -2,16 +2,16 @@ import { Position } from "./Position";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { useRef } from "react";
-import { moveJumpman, setSkin } from "./JumpmanSlice";
+import { moveJumpman, setPlayer } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
 import useInterval from "./useInterval";
-import DeutschBox from "./Chars/DeutschBox";
+import DeutschBox from "./Player/DeutschBox";
 import "./Jumpman.scss";
 
 export type Jumpman = Position & {
   direction: "left" | "right";
   isJumping?: boolean;
-  skin?: string;
+  player?: string;
 };
 
 type Jump = {
@@ -104,12 +104,12 @@ export const Jumpman: React.FC = () => {
   useKeyboard({
     key: CODE,
     onKeyDown: () => {},
-    onKeyUp: () => dispatch(setSkin(CODE)),
+    onKeyUp: () => dispatch(setPlayer(CODE)),
   });
 
   return (
     <div
-      className={`Jumpman Block ${jumpman.skin} ${jumpman.direction}`}
+      className={`Jumpman Block ${jumpman.player} ${jumpman.direction}`}
       style={{
         left: jumpman.x,
         bottom: jumpman.y,

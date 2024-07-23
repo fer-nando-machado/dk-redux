@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../Store";
 import { useEffect, useRef } from "react";
 import useKeyboard from "../useKeyboard";
-import { setSkin } from "../JumpmanSlice";
+import { setPlayer } from "../JumpmanSlice";
 import "./DeutschBox.scss";
 
 const CODE = "D";
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { direction, skin } = useSelector((state: RootState) => state.jumpman);
+  const { direction, player: player } = useSelector(
+    (state: RootState) => state.jumpman
+  );
 
   const ref = useRef<HTMLInputElement>(null);
   const clickDeutschBox = () => {
@@ -20,12 +22,12 @@ const DeutschBox: React.FC = () => {
 
   useEffect(() => {
     clickDeutschBox();
-  }, [skin]);
+  }, [player]);
 
   useKeyboard({
     key: CODE,
     onKeyDown: () => {},
-    onKeyUp: () => dispatch(setSkin(CODE)),
+    onKeyUp: () => dispatch(setPlayer(CODE)),
   });
   useKeyboard({
     key: " ",
@@ -33,7 +35,7 @@ const DeutschBox: React.FC = () => {
     onKeyUp: clickDeutschBox,
   });
 
-  return skin === CODE ? (
+  return player === CODE ? (
     <ReactDeutschBox
       name="DeutschBox"
       feedback={direction}

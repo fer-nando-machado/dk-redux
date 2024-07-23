@@ -14,7 +14,7 @@ export type Options = {
 const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { paused, gravity } = useSelector((state: RootState) => state.options);
-  const { skin } = useSelector((state: RootState) => state.jumpman);
+  const { player } = useSelector((state: RootState) => state.jumpman);
 
   useKeyboard({
     key: "Shift",
@@ -51,7 +51,7 @@ const Options: React.FC = () => {
       <br /> <br />
       PLAYER:{" "}
       <b>
-        <i>"{skin}"</i>
+        <i>"{player}"</i>
       </b>
       <br />
       GRAVITY:{" "}
