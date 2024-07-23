@@ -20,4 +20,11 @@
     font-weight: bold;
     pointer-events: none;
   }
+  &.left::after {
+    right: -2px;
+  }
+
+  &.right::after {
+    left: 2px;
+  }
 }
