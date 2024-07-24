@@ -16,25 +16,27 @@ function App() {
           </p>
           <p>
             Pause: ENTER <br />
+            Reset: F5 <br />
             &nbsp;Zoom: F11 <br />
-            <span className="Gravity">9.81...?</span>
-            &nbsp;&nbsp;???: F9 <br />
-            &nbsp;&nbsp;VFX: F8
+            &nbsp;Mode: F8 <br />
+            /////: F_
+            <span className="Gravity">
+              = _.80665 m/s<sup>2</sup>
+            </span>
           </p>
-          Reset: F5
         </div>
         <Game />
         <div className="Manual">
           <u>PLAYER SELECT</u>
           <ul>
-            <li>M Jumpman</li>
+            <li>M: Jumpman</li>
             <li>
-              D{" "}
+              D:{" "}
               <a href="https://fer-nando-machado.github.io/react-deutschbox/">
                 {"<DeutschBox/>"}
               </a>
             </li>
-            <li>? Duck Hunter</li>
+            <li>*: Duck Hunt</li>
           </ul>
         </div>
       </div>

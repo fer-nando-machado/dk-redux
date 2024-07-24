@@ -76,8 +76,16 @@ const Options: React.FC = () => {
           <p>
             <u>OPTIONS</u>
           </p>
-          <Option name="GRAVITY" value={options.gravity} onClick={dispatchToggleGravity} />
-          <Option name="FILTERS" value={options.filters} onClick={dispatchToggleFilters} />
+          <Option
+            name="GRAVITY"
+            value={options.gravity}
+            onClick={dispatchToggleGravity}
+          />
+          <Option
+            name="FILTERS"
+            value={options.filters}
+            onClick={dispatchToggleFilters}
+          />
           <div className="Pause" onClick={dispatchUnpause}>
             PAUSE
           </div>

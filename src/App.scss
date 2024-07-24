@@ -22,12 +22,10 @@
 
       .Gravity {
         position: absolute;
-        font-family: cursive;
-        left: 50%;
-        margin: 9px;
-        transform: rotate(30deg);
+        font-family: "Segoe Script", "Lucida Handwriting", cursive;
+        right: 1%;
+        transform: rotate(9.81deg);
         color: darkblue;
-        opacity: 0.5;
       }
 
       a {
