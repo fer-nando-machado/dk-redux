@@ -1,6 +1,6 @@
 # dk-redux
 
-A reduxed-remixed-remake of Donkey Kong, the original arcade game from 1981, built with React, Redux Toolkit and SCSS.
+A reduxed-remixed-remake of Donkey Kong, the original arcade game from 1981, built with React and Redux Toolkit, written in TypeScript, styled with SCSS and compiled by Vite.
 
 ## Commands
 

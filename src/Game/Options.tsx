@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { setPaused, toggleGravity, togglePaused } from "./OptionsSlice";
 import useKeyboard from "./useKeyboard";
-import { name, version, description } from "../../package.json";
+import { name, version, author, description } from "../../package.json";
 import "./Options.scss";
 
 export type Options = {
@@ -14,7 +14,6 @@ export type Options = {
 const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { paused, gravity } = useSelector((state: RootState) => state.options);
-  const { player } = useSelector((state: RootState) => state.jumpman);
 
   useKeyboard({
     key: "Shift",
@@ -47,13 +46,10 @@ const Options: React.FC = () => {
       <br /> <br />
       {description}
       <br /> <br />
+      Made with ❤️ by {author}
+      <br /> <br />
       <u>OPTIONS</u>
       <br /> <br />
-      PLAYER:{" "}
-      <b>
-        <i>"{player}"</i>
-      </b>
-      <br />
       GRAVITY:{" "}
       <b>
         <i>{gravity ? "ON" : "OFF"}</i>
