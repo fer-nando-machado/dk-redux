@@ -4,6 +4,7 @@ import { StoreDispatch, RootState } from "./Store";
 import { setPaused, toggleGravity, togglePaused } from "./OptionsSlice";
 import useKeyboard from "./useKeyboard";
 import { name, version, author, description } from "../../package.json";
+import { DEBUG } from ".";
 import "./Options.scss";
 
 export type Options = {
@@ -31,6 +32,7 @@ const Options: React.FC = () => {
   const onFocus = () => dispatch(setPaused(false));
 
   useEffect(() => {
+    if (DEBUG) return;
     window.addEventListener("blur", onBlur);
     window.addEventListener("focus", onFocus);
 

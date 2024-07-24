@@ -9,13 +9,16 @@ import { setBarrelFactory } from "./BarrelSlice";
 
 import { PlatformFactory, Platform } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
-import { RIGHT, LEFT } from "./Block";
+
+import { LEFT, RIGHT } from "./Block";
+import { DEBUG } from ".";
 
 const jumpman: Jumpman = {
   x: 70,
   y: 750,
   isJumping: false,
   direction: RIGHT,
+  player: "M",
 };
 
 const barrelFactory: BarrelFactory = {
@@ -39,13 +42,13 @@ const platforms: Platform[] = [
 const Level: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   dispatch(setPlatforms(platforms));
-  dispatch(setBarrelFactory(barrelFactory));
+  !DEBUG && dispatch(setBarrelFactory(barrelFactory));
   dispatch(setJumpman(jumpman));
 
   return (
     <>
       <PlatformFactory />
-      <BarrelFactory />
+      {!DEBUG && <BarrelFactory />}
       <Jumpman />
     </>
   );

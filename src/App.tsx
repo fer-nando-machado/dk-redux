@@ -35,6 +35,7 @@ function App() {
                 {"<DeutschBox/>"}
               </a>
             </li>
+            <li>? Duck Hunter</li>
           </ul>
         </div>
       </div>

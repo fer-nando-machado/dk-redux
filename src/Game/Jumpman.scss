@@ -1,7 +1,6 @@
 .Jumpman {
   background-color: red;
   outline: 2px outset blue;
-  //cursor: grab;
 
   &::before {
     content: "^";
@@ -11,6 +10,7 @@
     top: -5px;
     left: 4.5px;
     color: red;
+    pointer-events: none;
   }
 
   &::after {
@@ -22,7 +22,7 @@
     pointer-events: none;
   }
   &.left::after {
-    right: -2px;
+    right: -3px;
   }
 
   &.right::after {

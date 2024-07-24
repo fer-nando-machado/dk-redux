@@ -51,7 +51,7 @@ export const moveJumpman = createAsyncThunk<
     const update: Jumpman = {
       ...jumpman,
       ...plataformed,
-      direction,
+      ...(direction ? { direction } : {}),
     };
     dispatch(setJumpman(update));
   }

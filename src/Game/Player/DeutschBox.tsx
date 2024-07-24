@@ -9,7 +9,7 @@ import "./DeutschBox.scss";
 const CODE = "D";
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { direction, player: player } = useSelector(
+  const { direction, player } = useSelector(
     (state: RootState) => state.jumpman
   );
 

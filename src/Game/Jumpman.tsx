@@ -6,6 +6,7 @@ import { moveJumpman, setPlayer } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
 import useInterval from "./useInterval";
 import DeutschBox from "./Player/DeutschBox";
+import Dog from "./Player/Dog";
 import "./Jumpman.scss";
 
 export type Jumpman = Block & {
@@ -120,6 +121,7 @@ export const Jumpman: React.FC = () => {
       }}
     >
       <DeutschBox />
+      <Dog />
     </div>
   );
 };

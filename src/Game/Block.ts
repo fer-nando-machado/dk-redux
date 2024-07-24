@@ -13,8 +13,12 @@ export const isDirectionLeft = (direction: Direction): boolean => {
   return direction === LEFT;
 };
 
-export const getDirection = (x: number): Direction => {
-  return x < 0 ? LEFT : RIGHT;
+export const isDirectionRight = (direction: Direction): boolean => {
+  return direction === RIGHT;
+};
+
+export const getDirection = (x: number): Direction | undefined => {
+  return x < 0 ? LEFT : x > 0 ? RIGHT : undefined;
 };
 
 export const flipDirection = (direction: Direction): Direction => {

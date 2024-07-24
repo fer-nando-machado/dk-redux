@@ -6,6 +6,8 @@ import Options from "./Options";
 import "./Block.scss";
 import "./index.scss";
 
+export const DEBUG = true;
+
 const Game = () => {
   return (
     <Provider store={Store}>
