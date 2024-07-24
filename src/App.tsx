@@ -10,30 +10,26 @@ function App() {
       <div className="Content">
         <div className="Manual">
           <u>HOW TO PLAY</u>
-          <br /> <br />
-          &nbsp;Walk: ARROW KEYS
-          <br />
-          &nbsp;Jump: SPACE
-          <br /> <br />
-          Pause: ENTER
-          <br />
-          &nbsp;Zoom: F11
-          <br />
-          &nbsp;&nbsp;???: F9
-          <br />
-          &nbsp;&nbsp;VFX: F8
-          <br />
-          <br />
+          <p>
+            &nbsp;Walk: ARROW KEYS <br />
+            &nbsp;Jump: SPACE
+          </p>
+          <p>
+            Pause: ENTER <br />
+            &nbsp;Zoom: F11 <br />
+            <span className="Gravity">9.81...?</span>
+            &nbsp;&nbsp;???: F9 <br />
+            &nbsp;&nbsp;VFX: F8
+          </p>
           Reset: F5
         </div>
         <Game />
         <div className="Manual">
           <u>PLAYER SELECT</u>
-          <br /> <br />
           <ul>
             <li>M Jumpman</li>
             <li>
-              {"D "}
+              D{" "}
               <a href="https://fer-nando-machado.github.io/react-deutschbox/">
                 {"<DeutschBox/>"}
               </a>
@@ -42,6 +38,7 @@ function App() {
           </ul>
         </div>
       </div>
+
       <a href={repository.link}>
         <img
           src={GitHub}

@@ -17,6 +17,7 @@ export const MAX_BARRELS = 5;
 const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
 
+  // maybe player should be an option (not a jumpman prop)
   const { player } = useSelector((state: RootState) => state.jumpman);
   const isClickable = player === DH_CODE;
 

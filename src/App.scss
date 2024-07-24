@@ -12,12 +12,23 @@
     gap: 100px;
 
     .Manual {
+      position: relative;
       font-size: smaller;
       padding: 10px;
       border-radius: 15px;
       outline: 10px ridge brown;
       background-color: brown;
       width: 250px;
+
+      .Gravity {
+        position: absolute;
+        font-family: cursive;
+        left: 50%;
+        margin: 9px;
+        transform: rotate(30deg);
+        color: darkblue;
+        opacity: 0.5;
+      }
 
       a {
         color: white;
@@ -30,11 +41,10 @@
 
       ul {
         list-style: none;
-        margin: 0;
+        margin-bottom: 0;
         padding-left: 5px;
 
         li {
-          list-style: none;
           padding-left: 15px;
           height: 20px;
           position: relative;
