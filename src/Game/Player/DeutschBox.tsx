@@ -39,7 +39,7 @@ const DeutschBox: React.FC = () => {
     <ReactDeutschBox
       name="DeutschBox"
       feedback={direction}
-      size={27.5}
+      size={26}
       ref={ref}
     />
   ) : (
