@@ -26,12 +26,10 @@ const DeutschBox: React.FC = () => {
 
   useKeyboard({
     key: CODE,
-    onKeyDown: () => {},
     onKeyUp: () => dispatch(setPlayer(CODE)),
   });
   useKeyboard({
     key: " ",
-    onKeyDown: () => {},
     onKeyUp: clickDeutschBox,
   });
 

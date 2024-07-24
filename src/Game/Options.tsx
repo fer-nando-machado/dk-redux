@@ -44,19 +44,16 @@ const Options: React.FC = () => {
 
   useKeyboard({
     key: "F8",
-    onKeyDown: () => {},
     onKeyUp: dispatchToggleFilters,
   });
 
   useKeyboard({
     key: "F9",
-    onKeyDown: () => {},
     onKeyUp: dispatchToggleGravity,
   });
 
   useKeyboard({
     key: "Enter",
-    onKeyDown: () => {},
     onKeyUp: dispatchTogglePaused,
   });
 

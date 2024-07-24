@@ -1,33 +1,49 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 
 type KeyHandler = {
   key: string;
-  onKeyDown: () => void;
-  onKeyUp: () => void;
+  onKeyDown?: () => void;
+  onKeyUp?: () => void;
 };
 
 const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
-  const onKeyDownOverride = (event: KeyboardEvent) => {
-    if (event.key === key || event.key === key.toLowerCase()) {
-      event.preventDefault();
-      onKeyDown();
-    }
-  };
-  const onKeyUpOverride = (event: KeyboardEvent) => {
-    if (event.key === key || event.key === key.toLowerCase()) {
-      event.preventDefault();
-      onKeyUp();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (onKeyDown && (event.key === key || event.key === key.toLowerCase())) {
+        event.preventDefault();
+        onKeyDown();
+      }
+    },
+    [key, onKeyDown]
+  );
+
+  const handleKeyUp = useCallback(
+    (event: KeyboardEvent) => {
+      if (onKeyUp && (event.key === key || event.key === key.toLowerCase())) {
+        event.preventDefault();
+        onKeyUp();
+      }
+    },
+    [key, onKeyUp]
+  );
 
   useEffect(() => {
-    window.addEventListener("keydown", onKeyDownOverride);
-    window.addEventListener("keyup", onKeyUpOverride);
+    if (onKeyDown) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    if (onKeyUp) {
+      window.addEventListener("keyup", handleKeyUp);
+    }
+
     return () => {
-      window.removeEventListener("keydown", onKeyDownOverride);
-      window.removeEventListener("keyup", onKeyUpOverride);
+      if (onKeyDown) {
+        window.removeEventListener("keydown", handleKeyDown);
+      }
+      if (onKeyUp) {
+        window.removeEventListener("keyup", handleKeyUp);
+      }
     };
-  }, []);
+  }, [handleKeyDown, handleKeyUp, onKeyDown, onKeyUp]);
 };
 
 export default useKeyboard;
