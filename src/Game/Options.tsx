@@ -36,38 +36,35 @@ const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options);
 
-  const onFilters = () => dispatch(toggleFilters());
-  const onGravity = () => dispatch(toggleGravity());
-  const onPaused = () => dispatch(togglePaused());
+  const dispatchToggleFilters = () => dispatch(toggleFilters());
+  const dispatchToggleGravity = () => dispatch(toggleGravity());
+  const dispatchTogglePaused = () => dispatch(togglePaused());
+  const dispatchPause = () => dispatch(setPaused(true));
+  const dispatchUnpause = () => dispatch(setPaused(false));
 
   useKeyboard({
     key: "F8",
     onKeyDown: () => {},
-    onKeyUp: onFilters,
+    onKeyUp: dispatchToggleFilters,
   });
 
   useKeyboard({
     key: "F9",
     onKeyDown: () => {},
-    onKeyUp: onGravity,
+    onKeyUp: dispatchToggleGravity,
   });
 
   useKeyboard({
     key: "Enter",
     onKeyDown: () => {},
-    onKeyUp: onPaused,
+    onKeyUp: dispatchTogglePaused,
   });
-
-  const onBlur = () => dispatch(setPaused(true));
-  const onFocus = () => dispatch(setPaused(false));
 
   useEffect(() => {
     if (DEBUG) return;
-    window.addEventListener("blur", onBlur);
-    window.addEventListener("focus", onFocus);
+    window.addEventListener("blur", dispatchPause);
     return () => {
-      window.removeEventListener("blur", onBlur);
-      window.removeEventListener("focus", onFocus);
+      window.removeEventListener("blur", dispatchPause);
     };
   }, []);
 
@@ -82,9 +79,9 @@ const Options: React.FC = () => {
           <p>
             <u>OPTIONS</u>
           </p>
-          <Option name="GRAVITY" value={options.gravity} onClick={onGravity} />
-          <Option name="FILTERS" value={options.filters} onClick={onFilters} />
-          <div className="Pause" onClick={onFocus}>
+          <Option name="GRAVITY" value={options.gravity} onClick={dispatchToggleGravity} />
+          <Option name="FILTERS" value={options.filters} onClick={dispatchToggleFilters} />
+          <div className="Pause" onClick={dispatchUnpause}>
             PAUSE
           </div>
         </div>
