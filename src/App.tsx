@@ -17,13 +17,14 @@ function App() {
           <br /> <br />
           Pause: ENTER
           <br />
-          &nbsp;&nbsp;???: SHIFT
-          <br />
           &nbsp;Zoom: F11
           <br />
-          Reset: F5
+          &nbsp;&nbsp;???: F9
           <br />
-          Clear: F4
+          &nbsp;&nbsp;VFX: F8
+          <br />
+          <br />
+          Reset: F5
         </div>
         <Game />
         <div className="Manual">

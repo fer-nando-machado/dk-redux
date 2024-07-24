@@ -18,26 +18,44 @@ export type Options = {
   filters: boolean;
 };
 
+type Option = {
+  name: string;
+  value: boolean;
+  onClick?: () => void;
+};
+
+const Option: React.FC<Option> = ({ name, value, onClick }) => {
+  return (
+    <div className="Option">
+      {name}: <span onClick={onClick}>{value ? "ON" : "OFF"}</span>
+    </div>
+  );
+};
+
 const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options);
 
+  const onFilters = () => dispatch(toggleFilters());
+  const onGravity = () => dispatch(toggleGravity());
+  const onPaused = () => dispatch(togglePaused());
+
   useKeyboard({
-    key: "F4",
+    key: "F8",
     onKeyDown: () => {},
-    onKeyUp: () => dispatch(toggleFilters()),
+    onKeyUp: onFilters,
   });
 
   useKeyboard({
-    key: "Shift",
+    key: "F9",
     onKeyDown: () => {},
-    onKeyUp: () => dispatch(toggleGravity()),
+    onKeyUp: onGravity,
   });
 
   useKeyboard({
     key: "Enter",
     onKeyDown: () => {},
-    onKeyUp: () => dispatch(togglePaused()),
+    onKeyUp: onPaused,
   });
 
   const onBlur = () => dispatch(setPaused(true));
@@ -47,35 +65,31 @@ const Options: React.FC = () => {
     if (DEBUG) return;
     window.addEventListener("blur", onBlur);
     window.addEventListener("focus", onFocus);
-
     return () => {
       window.removeEventListener("blur", onBlur);
       window.removeEventListener("focus", onFocus);
     };
   }, []);
 
-  return options.paused ? (
-    <div className="Options" onClick={onFocus}>
-      <u>{name}</u> <small>v{version}</small>
-      <br /> <br />
-      {description}
-      <br /> <br />
-      Made with ❤️ by {author}
-      <br /> <br />
-      <u>OPTIONS</u>
-      <br /> <br />
-      GRAVITY:{" "}
-      <b>
-        <i>{options.gravity ? "ON" : "OFF"}</i>
-      </b>
-      <br />
-      FILTERS:{" "}
-      <b>
-        <i>{options.filters ? "ON" : "OFF"}</i>
-      </b>
-    </div>
-  ) : (
-    <></>
+  return (
+    <>
+      {options.filters && <div className="Filters" />}
+      {options.paused && (
+        <div className="Options">
+          <u>{name}</u> <small>v{version}</small>
+          <p>{description}</p>
+          <p>Made with ❤️ by {author}</p>
+          <p>
+            <u>OPTIONS</u>
+          </p>
+          <Option name="GRAVITY" value={options.gravity} onClick={onGravity} />
+          <Option name="FILTERS" value={options.filters} onClick={onFilters} />
+          <div className="Pause" onClick={onFocus}>
+            PAUSE
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
