@@ -4,7 +4,7 @@ import { Position } from "./Position";
 import "./Platform.scss";
 
 export type Platform = Position & {
-  length?: number;
+  length: number;
   angle?: number;
 };
 

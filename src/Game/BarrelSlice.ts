@@ -7,8 +7,9 @@ import { flipDirection } from "./Block";
 const initialState: BarrelFactory = {
   x: 0,
   y: 0,
-  barrels: [],
+  isJumping: false,
   direction: "left",
+  barrels: [],
 };
 
 const slice = createSlice({
@@ -60,12 +61,10 @@ export const moveBarrel = createAsyncThunk<
   };
   const bounded = checkBoundaries(moved);
   const plataformed = checkPlatforms(bounded, platforms);
-
-  ///console.log(barrel.isJumping === plataformed.isJumping);
-  const direction = plataformed.direction;
-  //   barrel.isJumping === plataformed.isJumping
-  //    ? plataformed.direction
-  //     : flipDirection(plataformed.direction);
+  const dropped = barrel.isJumping && !plataformed.isJumping;
+  const direction = dropped
+    ? flipDirection(barrel.direction)
+    : barrel.direction;
   const update: Barrel = {
     ...barrel,
     ...plataformed,

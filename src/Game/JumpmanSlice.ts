@@ -6,6 +6,7 @@ import { StoreDispatch, RootState } from "./Store";
 const initialState: Jumpman = {
   x: 0,
   y: 0,
+  isJumping: false,
   direction: "left",
   player: "M",
 };

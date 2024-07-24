@@ -11,12 +11,13 @@ export type BarrelFactory = Block & {
   barrels: Barrel[];
 };
 
-export const MAX_BARRELS = 4;
+export const MAX_BARRELS = 5;
 
 const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
 
   const gravity = useSelector((state: RootState) => state.options.gravity);
+  const gravitySpeed = gravity ? -7 : 0;
   const speed = barrel.direction === "left" ? -1.25 : 1.25;
 
   useInterval(() => {
@@ -24,14 +25,14 @@ const Barrel: React.FC<Barrel> = (barrel) => {
       moveBarrel({
         ...barrel,
         x: speed,
-        y: gravity ? -5 : 0,
+        y: gravitySpeed,
       })
     );
   });
 
   return (
     <div
-      className="Barrel Block Round"
+      className={`Barrel Block Round ${barrel.direction}`}
       onClick={() => dispatch(destroyBarrel(barrel.id))}
       style={{
         left: barrel.x,

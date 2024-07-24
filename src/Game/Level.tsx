@@ -10,22 +10,29 @@ import { setBarrelFactory } from "./BarrelSlice";
 import { PlatformFactory, Platform } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
 
-const jumpman: Jumpman = { x: 70, y: 750, direction: "right" };
+const jumpman: Jumpman = {
+  x: 70,
+  y: 750,
+  isJumping: false,
+  direction: "right",
+};
 
 const barrelFactory: BarrelFactory = {
-  x: 400,
-  y: 280,
+  x: 450,
+  y: 425,
+  isJumping: false,
   barrels: [],
   direction: "left",
 };
 
 const platforms: Platform[] = [
-  { x: 25, y: 25, length: 450, angle: 0 },
-  { x: 150, y: 100, length: 200, angle: 0 },
-  { x: 300, y: 175, length: 180, angle: 0 },
-  { x: 25, y: 300, length: 100, angle: 0 },
-  { x: 225, y: 317, length: 50, angle: 0 },
-  { x: 50, y: 500, length: 50, angle: 0 },
+  { x: 50, y: 625, length: 50 },
+  { x: 175, y: 525, length: 175 },
+  { x: 400, y: 425, length: 75 },
+  { x: 0, y: 325, length: 425 },
+  { x: 325, y: 225, length: 150 },
+  { x: 125, y: 125, length: 200 },
+  { x: 25, y: 25, length: 450 },
 ];
 
 const Level: React.FC = () => {

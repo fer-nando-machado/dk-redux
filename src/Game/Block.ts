@@ -4,7 +4,7 @@ type Direction = "left" | "right";
 
 export type Block = Position & {
   direction: Direction;
-  isJumping?: boolean;
+  isJumping: boolean;
 };
 
 export const flipDirection = (direction: Direction): Direction => {
