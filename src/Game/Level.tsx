@@ -14,7 +14,7 @@ import { LEFT, RIGHT } from "./Block";
 import { DEBUG } from ".";
 
 const jumpman: Jumpman = {
-  x: 70,
+  x: 25,
   y: 750,
   isJumping: false,
   direction: RIGHT,
@@ -30,8 +30,11 @@ const barrelFactory: BarrelFactory = {
 };
 
 const platforms: Platform[] = [
-  { x: 50, y: 625, length: 50 },
-  { x: 175, y: 525, length: 175 },
+  { x: 0, y: 700, length: 20 },
+  { x: 55, y: 700, length: 500 },
+
+  { x: 25, y: 625, length: 25 },
+  { x: 100, y: 525, length: 175 },
   { x: 400, y: 425, length: 75 },
   { x: 0, y: 325, length: 425 },
   { x: 325, y: 225, length: 150 },
