@@ -1,6 +1,7 @@
 .Jumpman {
   background-color: red;
   outline: 2px outset blue;
+  //cursor: grab;
 
   &::before {
     content: "^";
