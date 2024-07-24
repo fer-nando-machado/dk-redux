@@ -7,6 +7,14 @@ export type Block = Position & {
   isJumping: boolean;
 };
 
+export const isDirectionLeft = (direction: Direction): boolean => {
+  return direction === "left";
+};
+
 export const flipDirection = (direction: Direction): Direction => {
   return direction === "left" ? "right" : "left";
+};
+
+export const getDirection = (x: number): Direction => {
+  return x < 0 ? "left" : "right";
 };

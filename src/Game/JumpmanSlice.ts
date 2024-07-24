@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Jumpman } from "./Jumpman";
 import { checkBoundaries, checkPlatforms } from "./Position";
 import { StoreDispatch, RootState } from "./Store";
+import { getDirection } from "./Block";
 
 const initialState: Jumpman = {
   x: 0,
@@ -46,11 +47,11 @@ export const moveJumpman = createAsyncThunk<
     };
     const bounded = checkBoundaries(moved);
     const plataformed = checkPlatforms(bounded, platforms);
-    const direction = x < 0 ? "left" : x > 0 ? "right" : undefined;
+    const direction = getDirection(x);
     const update: Jumpman = {
       ...jumpman,
       ...plataformed,
-      ...(direction ? { direction } : {}),
+      direction,
     };
     dispatch(setJumpman(update));
   }

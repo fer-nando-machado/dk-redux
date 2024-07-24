@@ -1,4 +1,4 @@
-import { Block } from "./Block";
+import { Block, isDirectionLeft } from "./Block";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
@@ -18,7 +18,7 @@ const Barrel: React.FC<Barrel> = (barrel) => {
 
   const gravity = useSelector((state: RootState) => state.options.gravity);
   const gravitySpeed = gravity ? -7 : 0;
-  const speed = barrel.direction === "left" ? -1.25 : 1.25;
+  const speed = isDirectionLeft(barrel.direction) ? -1.25 : 1.25;
 
   useInterval(() => {
     dispatch(
@@ -57,7 +57,7 @@ export const BarrelFactory: React.FC = () => {
   return (
     <>
       <div
-        className="BarrelFactory Block Round"
+        className={`BarrelFactory Block Round ${barrelFactory.direction}`}
         style={{
           left: barrelFactory.x,
           bottom: barrelFactory.y,
