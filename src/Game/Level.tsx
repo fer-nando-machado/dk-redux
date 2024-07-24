@@ -9,12 +9,13 @@ import { setBarrelFactory } from "./BarrelSlice";
 
 import { PlatformFactory, Platform } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
+import { RIGHT, LEFT } from "./Block";
 
 const jumpman: Jumpman = {
   x: 70,
   y: 750,
   isJumping: false,
-  direction: "right",
+  direction: RIGHT,
 };
 
 const barrelFactory: BarrelFactory = {
@@ -22,7 +23,7 @@ const barrelFactory: BarrelFactory = {
   y: 425,
   isJumping: false,
   barrels: [],
-  direction: "left",
+  direction: LEFT,
 };
 
 const platforms: Platform[] = [

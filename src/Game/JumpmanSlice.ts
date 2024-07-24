@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Jumpman } from "./Jumpman";
 import { checkBoundaries, checkPlatforms } from "./Position";
 import { StoreDispatch, RootState } from "./Store";
-import { getDirection } from "./Block";
+import { getDirection, LEFT } from "./Block";
 
 const initialState: Jumpman = {
   x: 0,
   y: 0,
   isJumping: false,
-  direction: "left",
+  direction: LEFT,
   player: "M",
 };
 

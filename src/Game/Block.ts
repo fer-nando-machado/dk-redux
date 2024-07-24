@@ -1,5 +1,7 @@
 import { Position } from "./Position";
 
+export const LEFT = "left";
+export const RIGHT = "right";
 type Direction = "left" | "right";
 
 export type Block = Position & {
@@ -8,13 +10,13 @@ export type Block = Position & {
 };
 
 export const isDirectionLeft = (direction: Direction): boolean => {
-  return direction === "left";
-};
-
-export const flipDirection = (direction: Direction): Direction => {
-  return direction === "left" ? "right" : "left";
+  return direction === LEFT;
 };
 
 export const getDirection = (x: number): Direction => {
-  return x < 0 ? "left" : "right";
+  return x < 0 ? LEFT : RIGHT;
+};
+
+export const flipDirection = (direction: Direction): Direction => {
+  return direction === LEFT ? RIGHT : LEFT;
 };

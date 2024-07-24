@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Barrel, BarrelFactory, MAX_BARRELS } from "./Barrel";
 import { checkBoundaries, checkPlatforms } from "./Position";
 import { RootState, StoreDispatch } from "./Store";
-import { flipDirection } from "./Block";
+import { flipDirection, LEFT } from "./Block";
 
 const initialState: BarrelFactory = {
   x: 0,
   y: 0,
   isJumping: false,
-  direction: "left",
+  direction: LEFT,
   barrels: [],
 };
 
