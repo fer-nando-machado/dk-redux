@@ -22,6 +22,8 @@ function App() {
           &nbsp;Zoom: F11
           <br />
           Reset: F5
+          <br />
+          Clear: F4
         </div>
         <Game />
         <div className="Manual">

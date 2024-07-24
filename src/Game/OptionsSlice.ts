@@ -4,6 +4,7 @@ import { Options } from "./Options";
 const initialState: Options = {
   paused: false,
   gravity: true,
+  filters: true,
 };
 
 const slice = createSlice({
@@ -16,11 +17,15 @@ const slice = createSlice({
     togglePaused: (state) => {
       state.paused = !state.paused;
     },
+    toggleFilters: (state) => {
+      state.filters = !state.filters;
+    },
     toggleGravity: (state) => {
       state.gravity = !state.gravity;
     },
   },
 });
 
-export const { setPaused, togglePaused, toggleGravity } = slice.actions;
+export const { setPaused, togglePaused, toggleFilters, toggleGravity } =
+  slice.actions;
 export default slice.reducer;

@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
-import { setPaused, toggleGravity, togglePaused } from "./OptionsSlice";
+import {
+  setPaused,
+  toggleFilters,
+  toggleGravity,
+  togglePaused,
+} from "./OptionsSlice";
 import useKeyboard from "./useKeyboard";
 import { name, version, author, description } from "../../package.json";
 import { DEBUG } from ".";
@@ -10,22 +15,29 @@ import "./Options.scss";
 export type Options = {
   paused: boolean;
   gravity: boolean;
+  filters: boolean;
 };
 
 const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { paused, gravity } = useSelector((state: RootState) => state.options);
+  const options = useSelector((state: RootState) => state.options);
+
+  useKeyboard({
+    key: "F4",
+    onKeyDown: () => {},
+    onKeyUp: () => dispatch(toggleFilters()),
+  });
 
   useKeyboard({
     key: "Shift",
-    onKeyDown: () => dispatch(toggleGravity()),
-    onKeyUp: () => {},
+    onKeyDown: () => {},
+    onKeyUp: () => dispatch(toggleGravity()),
   });
 
   useKeyboard({
     key: "Enter",
-    onKeyDown: () => dispatch(togglePaused()),
-    onKeyUp: () => {},
+    onKeyDown: () => {},
+    onKeyUp: () => dispatch(togglePaused()),
   });
 
   const onBlur = () => dispatch(setPaused(true));
@@ -42,7 +54,7 @@ const Options: React.FC = () => {
     };
   }, []);
 
-  return paused ? (
+  return options.paused ? (
     <div className="Options" onClick={onFocus}>
       <u>{name}</u> <small>v{version}</small>
       <br /> <br />
@@ -54,9 +66,13 @@ const Options: React.FC = () => {
       <br /> <br />
       GRAVITY:{" "}
       <b>
-        <i>{gravity ? "ON" : "OFF"}</i>
+        <i>{options.gravity ? "ON" : "OFF"}</i>
       </b>
       <br />
+      FILTERS:{" "}
+      <b>
+        <i>{options.filters ? "ON" : "OFF"}</i>
+      </b>
     </div>
   ) : (
     <></>
