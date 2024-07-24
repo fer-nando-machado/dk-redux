@@ -4,6 +4,7 @@ import { StoreDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
 import useInterval from "./useInterval";
 import "./Barrel.scss";
+import { DH_CODE } from "./Player/Dog";
 
 export type Barrel = Block & { id: number };
 
@@ -16,8 +17,12 @@ export const MAX_BARRELS = 5;
 const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
 
+  const { player } = useSelector((state: RootState) => state.jumpman);
+  const isClickable = player === DH_CODE;
+
   const gravity = useSelector((state: RootState) => state.options.gravity);
   const gravitySpeed = gravity ? -7 : 0;
+
   const speed = isDirectionLeft(barrel.direction) ? -1.25 : 1.25;
 
   useInterval(() => {
@@ -30,10 +35,16 @@ const Barrel: React.FC<Barrel> = (barrel) => {
     );
   });
 
+  const onClick = () => {
+    if (!isClickable) return;
+    dispatch(destroyBarrel(barrel.id));
+  };
+
+  const target = isClickable ? "Target" : "";
   return (
     <div
-      className={`Barrel Block Round ${barrel.direction}`}
-      onClick={() => dispatch(destroyBarrel(barrel.id))}
+      className={`Barrel Block Round ${barrel.direction} ${target}`}
+      onClick={() => onClick()}
       style={{
         left: barrel.x,
         bottom: barrel.y,
