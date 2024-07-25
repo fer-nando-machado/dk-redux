@@ -30,7 +30,7 @@ const DeutschBox: React.FC = () => {
   });
   useKeyboard({
     key: " ",
-    onKeyUp: clickDeutschBox,
+    onKeyDown: clickDeutschBox,
   });
 
   return player === CODE ? (
