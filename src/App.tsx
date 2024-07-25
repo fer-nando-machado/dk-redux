@@ -40,7 +40,7 @@ const App = () => {
               </a>
             </li>
             <li>
-              *: Duck Hunt<span className="Hint">TOUCH!</span>
+              *: Duck Hunt<span className="Touch Hint">TOUCH!</span>
             </li>
           </ul>
         </div>

@@ -25,15 +25,17 @@
         font-family: "Nanum Pen Script", cursive;
         font-size: 20px;
         color: darkblue;
-
         &.Gravity {
           transform: rotate(9.8deg);
           margin-left: 9.8px;
         }
-
         &.Debug {
           left: 50%;
           transform: rotate(-7deg);
+        }
+        &.Touch {
+          transform: rotate(12deg);
+          margin-left: 6px;
         }
       }
 
