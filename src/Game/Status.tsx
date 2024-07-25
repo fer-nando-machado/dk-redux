@@ -24,8 +24,9 @@ const Status = () => {
       <a href="#" onClick={clickPause}>
         PAUSE
       </a>
-      <div>
-        {then} <br /> {now}
+      <div className="Date">
+        <span>{then}</span>
+        <span>{now}</span>
       </div>
       <a href="#" onClick={clickRefresh}>
         RESET
