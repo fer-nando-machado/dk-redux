@@ -1,8 +1,15 @@
 .Duck {
-  background-color: darkgreen;
-  outline: 2px double darkgreen;
   color: white;
-  animation: none;
+
+  &.left {
+    background-color: navy;
+    outline: 4px double purple;
+  }
+
+  &.right {
+    background-color: darkgreen;
+    outline: 4px double darkgreen;
+  }
 
   &::before {
     content: "( )";
@@ -12,8 +19,13 @@
     top: 6px;
     left: -15px;
     width: 100px;
-    color: black;
     pointer-events: none;
+  }
+  &.left::before {
+    color: purple;
+  }
+  &.right::before {
+    color: black;
   }
 
   &::after {
@@ -21,9 +33,9 @@
     position: absolute;
     bottom: -3px;
     left: 10px;
-    color: orange;
     font-weight: bold;
     pointer-events: none;
+    color: orange;
   }
   &.left::after {
     content: "<";
