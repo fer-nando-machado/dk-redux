@@ -9,7 +9,7 @@
   .Content {
     display: flex;
     align-items: center;
-    gap: 100px;
+    gap: 80px;
 
     .Manual {
       position: relative;
@@ -20,12 +20,21 @@
       background-color: brown;
       width: 250px;
 
-      .Gravity {
+      .Hint {
         position: absolute;
         font-family: "Segoe Script", "Playwrite AU TAS", cursive;
-        right: 2.5%;
-        transform: rotate(7deg);
         color: darkblue;
+        opacity: 0.5;
+
+        &.Gravity {
+          margin: 5px;
+          transform: rotate(9.8deg);
+        }
+
+        &.Debug {
+          left: 50%;
+          transform: rotate(-9.8deg);
+        }
       }
 
       a {

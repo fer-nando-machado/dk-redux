@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../Store";
-import { setPlayer } from "../JumpmanSlice";
+import { setPlayer } from "../OptionsSlice";
 import "./Dog.scss";
 
 export const DH_CODE = "DH";
 const Dog: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { player } = useSelector((state: RootState) => state.jumpman);
+  const { player } = useSelector((state: RootState) => state.options);
 
   const onClick = () => dispatch(setPlayer(DH_CODE));
 

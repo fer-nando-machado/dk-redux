@@ -13,6 +13,7 @@ import { DEBUG } from ".";
 import "./Options.scss";
 
 export type Options = {
+  player: string;
   paused: boolean;
   gravity: boolean;
   filters: boolean;
@@ -20,14 +21,18 @@ export type Options = {
 
 type Option = {
   name: string;
-  value: boolean;
+  value: boolean | string;
   onClick?: () => void;
 };
 
 const Option: React.FC<Option> = ({ name, value, onClick }) => {
+  const display = typeof value === "boolean" ? (value ? "ON" : "OFF") : value;
   return (
     <div className="Option">
-      {name}: <span onClick={onClick}>{value ? "ON" : "OFF"}</span>
+      {name}:
+      <span className={onClick ? "clickable" : ""} onClick={onClick}>
+        {display}
+      </span>
     </div>
   );
 };
@@ -75,6 +80,7 @@ const Options: React.FC = () => {
           <p>
             <u>OPTIONS</u>
           </p>
+          <Option name="&nbsp;PLAYER" value={options.player} />
           <Option
             name="FILTERS"
             value={options.filters}

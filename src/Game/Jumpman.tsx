@@ -2,16 +2,15 @@ import { Block } from "./Block";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { useRef } from "react";
-import { moveJumpman, setPlayer } from "./JumpmanSlice";
+import { setPlayer } from "./OptionsSlice";
+import { moveJumpman } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
 import useInterval from "./useInterval";
 import DeutschBox from "./Player/DeutschBox";
 import Dog from "./Player/Dog";
 import "./Jumpman.scss";
 
-export type Jumpman = Block & {
-  player?: string;
-};
+export type Jumpman = Block & {};
 
 type Jump = {
   speed: number;
@@ -23,7 +22,7 @@ const CODE = "M";
 export const Jumpman: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
-  const gravity = useSelector((state: RootState) => state.options.gravity);
+  const { player, gravity } = useSelector((state: RootState) => state.options);
 
   const jumping = useRef<Jump | null>(null);
   useInterval(() => {
@@ -113,7 +112,7 @@ export const Jumpman: React.FC = () => {
 
   return (
     <div
-      className={`Jumpman Block ${jumpman.player} ${jumpman.direction}`}
+      className={`Jumpman Block ${player} ${jumpman.direction}`}
       style={{
         left: jumpman.x,
         bottom: jumpman.y,

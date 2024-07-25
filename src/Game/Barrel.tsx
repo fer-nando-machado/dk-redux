@@ -17,13 +17,9 @@ export const MAX_BARRELS = 5;
 const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
 
-  // maybe player should be an option (not a jumpman prop)
-  const { player } = useSelector((state: RootState) => state.jumpman);
+  const { player, gravity } = useSelector((state: RootState) => state.options);
   const isClickable = player === DH_CODE;
-
-  const gravity = useSelector((state: RootState) => state.options.gravity);
   const gravitySpeed = gravity ? -7 : 0;
-
   const speed = isDirectionLeft(barrel.direction) ? -1.25 : 1.25;
 
   useInterval(() => {

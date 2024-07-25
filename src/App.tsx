@@ -6,7 +6,7 @@ import "./App.scss";
 const App = () => {
   return (
     <div className="App">
-      <b>{"< DK-Redux />"}</b>
+      <b>DK Redux</b>
       <div className="Content">
         <div className="Manual">
           <u>HOW TO PLAY</u>
@@ -14,15 +14,19 @@ const App = () => {
             &nbsp;Walk: ARROW KEYS <br />
             &nbsp;Jump: SPACE
           </p>
-          Pause: ENTER <br />
-          Reset: F5 <br />
-          &nbsp;Zoom: F11 <br />
-          &nbsp;////: ///
-          <span className="Gravity">
-            x.80665... m/s <sup>2</sup>
-          </span>
-          <br />
-          &nbsp;Mode: F8 <br />
+          <p>
+            Pause: ENTER <br />
+            Reset: F5 <br />
+            &nbsp;Zoom: F11 <br />
+            &nbsp;////: ///
+            <span className="Gravity Hint">
+              x.80665... m/s <sup>2</sup>
+            </span>
+            <br />
+            &nbsp;Mode: F8
+          </p>
+          Debug: F12
+          <span className="Debug Hint">{"<HTML/>  CSS {...}"}</span>
         </div>
         <Game />
         <div className="Manual">

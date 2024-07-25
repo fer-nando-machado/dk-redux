@@ -2,16 +2,15 @@ import ReactDeutschBox from "react-deutschbox";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../Store";
 import { useEffect, useRef } from "react";
+import { setPlayer } from "../OptionsSlice";
 import useKeyboard from "../useKeyboard";
-import { setPlayer } from "../JumpmanSlice";
 import "./DeutschBox.scss";
 
 const CODE = "D";
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { direction, player } = useSelector(
-    (state: RootState) => state.jumpman
-  );
+  const { player } = useSelector((state: RootState) => state.options);
+  const { direction } = useSelector((state: RootState) => state.jumpman);
 
   const ref = useRef<HTMLInputElement>(null);
   const clickDeutschBox = () => {

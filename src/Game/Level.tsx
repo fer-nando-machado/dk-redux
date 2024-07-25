@@ -18,7 +18,6 @@ const jumpman: Jumpman = {
   y: 750,
   isJumping: false,
   direction: RIGHT,
-  player: "M",
 };
 
 const barrelFactory: BarrelFactory = {
