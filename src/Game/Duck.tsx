@@ -52,6 +52,7 @@ const Duck: React.FC<Duck> = (duck) => {
         bottom: duck.y,
       }}
     >
+      {"oo"}
       <div className={`Target ${hasAim ? "Aim" : ""}`}></div>
     </div>
   );
