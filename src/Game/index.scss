@@ -1,7 +1,9 @@
 .Game {
   font-family: "Press Start 2P", "Courier New", monospace;
   height: 750px;
+  min-height: 750px;
   width: 500px;
+  min-width: 500px;
   position: relative;
   padding: 2.5px;
   outline: 10px ridge black;

@@ -10,23 +10,25 @@ const App = () => {
       <div className="Content">
         <div className="Manual">
           <u>HOW TO PLAY</u>
-          <p>
-            &nbsp;Walk: ARROW KEYS <br />
-            &nbsp;Jump: SPACE
-          </p>
-          <p>
-            Pause: ENTER <br />
-            Reset: F5 <br />
-            &nbsp;Zoom: F11 <br />
-            &nbsp;////: //
-            <span className="Gravity Hint">
-              x.80665... m/s <sup>2</sup>
-            </span>
-            <br />
-            &nbsp;Mode: F8
-          </p>
-          Debug: F12
-          <span className="Debug Hint">{"<HTML/>  CSS {.dk}"}</span>
+          <div>
+            <p>
+              &nbsp;Walk: ARROW KEYS <br />
+              &nbsp;Jump: SPACE
+            </p>
+            <p>
+              Pause: ENTER <br />
+              Reset: F5 <br />
+              &nbsp;Zoom: F11 <br />
+              &nbsp;////: //
+              <span className="Gravity Hint">
+                x.80665... m/s <sup>2</sup>
+              </span>
+              <br />
+              &nbsp;Mode: F8
+            </p>
+            Debug: F12
+            <span className="Debug Hint">{"<HTML/>  CSS{.dk}"}</span>
+          </div>
         </div>
         <Game />
         <div className="Manual">

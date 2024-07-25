@@ -9,33 +9,49 @@
   .Content {
     display: flex;
     align-items: center;
-    gap: 80px;
+    justify-content: center;
+    gap: 81px;
 
     .Manual {
-      position: relative;
-      font-size: smaller;
-      padding: 15px;
-      border-radius: 15px;
-      outline: 10px ridge brown;
-      background-color: brown;
-      width: 250px;
+      display: none;
+
+      @media only screen and (min-width: 1280px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 18px 0;
+        background-color: brown;
+        outline: 10px ridge brown;
+        border-radius: 5px;
+        width: 22vw;
+        font-size: smaller;
+      }
+
+      @media only screen and (min-width: 1440px) {
+        font-size: inherit;
+      }
+
+      @media only screen and (min-width: 1600px) {
+        font-size: larger;
+      }
 
       .Hint {
         position: absolute;
         font-family: "Nanum Pen Script", cursive;
-        font-size: 20px;
+        font-size: 1.5vw;
         color: darkblue;
+
         &.Gravity {
           transform: rotate(9.8deg);
           margin-left: 9.8px;
         }
         &.Debug {
-          left: 50%;
-          transform: rotate(-7deg);
+          margin: -4px;
+          transform: rotate(-9.8deg);
         }
         &.Touch {
-          transform: rotate(12deg);
-          margin-left: 6px;
+          margin: -5px 10px;
         }
       }
 
@@ -88,50 +104,10 @@
 
 .Game {
   zoom: 0.75;
-}
-.Manual {
-  display: none;
-}
-
-@media only screen and (min-width: 630px) {
-  .Game {
+  @media only screen and (min-width: 630px) {
     zoom: 1;
   }
-}
-
-@media only screen and (min-width: 1200px) {
-  .Manual {
-    display: block;
-    zoom: 0.8;
-  }
-}
-
-@media only screen and (min-width: 1300px) {
-  .Manual {
-    zoom: 1;
-  }
-}
-
-@media only screen and (min-width: 1500px) {
-  .Manual {
-    zoom: 1.25;
-  }
-}
-
-@media only screen and (min-width: 1800px) {
-  .Manual {
-    zoom: 1.5;
-  }
-}
-
-@media only screen and (min-width: 2000px) {
-  .Manual {
-    zoom: 1.75;
-  }
-}
-
-@media only screen and (min-height: 1000px) {
-  .Game {
+  @media only screen and (min-height: 1000px) {
     zoom: 1.25;
   }
 }
