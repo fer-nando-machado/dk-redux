@@ -16,18 +16,11 @@ const Status = () => {
     window.location.reload();
   };
 
-  const then = "JUL 09 1981";
-  const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
-
   return (
     <div className="Status">
       <a href="#" onClick={clickPause}>
         PAUSE
       </a>
-      <div className="Date">
-        <span>{then}</span>
-        <span>{now}</span>
-      </div>
       <a href="#" onClick={clickRefresh}>
         RESET
       </a>

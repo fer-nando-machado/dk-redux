@@ -70,11 +70,18 @@ const Options: React.FC = () => {
     };
   }, []);
 
+  const then = "JUL 09 1981";
+  const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
+
   return (
     <>
       {options.filters && <div className="Filters" />}
       {options.paused && (
         <div className="Options">
+          <div className="Date">
+            <span>{then}</span>
+            <span>{now}</span>
+          </div>
           <u>{name}</u> <small>v{version}</small>
           <p>{description}</p>
           <p>
