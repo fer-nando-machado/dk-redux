@@ -1,12 +1,12 @@
-import { name, repository } from "../package.json";
+import { name, repository, donate } from "../package.json";
 import GitHub from "/GitHub.svg?url";
 import Game from "./Game";
 import "./App.scss";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <b>DK Redux</b>
+      <b>{"< DK-Redux />"}</b>
       <div className="Content">
         <div className="Manual">
           <u>HOW TO PLAY</u>
@@ -14,16 +14,15 @@ function App() {
             &nbsp;Walk: ARROW KEYS <br />
             &nbsp;Jump: SPACE
           </p>
-          <p>
-            Pause: ENTER <br />
-            Reset: F5 <br />
-            &nbsp;Zoom: F11 <br />
-            &nbsp;Mode: F8 <br />
-            /////: F_
-            <span className="Gravity">
-              = _.80665 m/s<sup>2</sup>
-            </span>
-          </p>
+          Pause: ENTER <br />
+          Reset: F5 <br />
+          &nbsp;Zoom: F11 <br />
+          &nbsp;////: ///
+          <span className="Gravity">
+            x.80665... m/s <sup>2</sup>
+          </span>
+          <br />
+          &nbsp;Mode: F8 <br />
         </div>
         <Game />
         <div className="Manual">
@@ -40,17 +39,21 @@ function App() {
           </ul>
         </div>
       </div>
-
-      <a href={repository.link}>
-        <img
-          src={GitHub}
-          alt={`${name} @ GitHub`}
-          title={`${name} @ GitHub`}
-          height={24}
-        />
-      </a>
+      <div className="Footer">
+        <a href={repository.link}>
+          <img
+            src={GitHub}
+            alt={`${name} @ GitHub`}
+            title={`${name} @ GitHub`}
+            height={24}
+          />
+        </a>
+        <a href={donate} className="Donate">
+          Donate
+        </a>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

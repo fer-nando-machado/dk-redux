@@ -14,7 +14,7 @@
     .Manual {
       position: relative;
       font-size: smaller;
-      padding: 10px;
+      padding: 15px;
       border-radius: 15px;
       outline: 10px ridge brown;
       background-color: brown;
@@ -22,16 +22,15 @@
 
       .Gravity {
         position: absolute;
-        font-family: "Segoe Script", "Lucida Handwriting", cursive;
-        right: 1%;
-        transform: rotate(9.81deg);
+        font-family: "Segoe Script", "Playwrite AU TAS", cursive;
+        right: 2.5%;
+        transform: rotate(7deg);
         color: darkblue;
       }
 
       a {
         color: white;
         text-decoration: none;
-
         &:hover {
           text-decoration: underline;
         }
@@ -40,20 +39,38 @@
       ul {
         list-style: none;
         margin-bottom: 0;
-        padding-left: 5px;
+        padding-left: 0;
 
         li {
           padding-left: 15px;
-          height: 20px;
           position: relative;
           &::before {
-            content: "■";
+            content: ".";
             position: absolute;
             top: -4px;
-            left: -5px;
+            left: 0;
           }
         }
       }
+    }
+  }
+
+  .Footer {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    a:hover {
+      opacity: 0.75;
+    }
+
+    .Donate {
+      border-radius: 20px;
+      font-size: smaller;
+      padding: 5px 10px;
+      text-decoration: none;
+      background-color: white;
+      color: black;
     }
   }
 }

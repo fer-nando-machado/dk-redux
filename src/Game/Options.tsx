@@ -72,23 +72,25 @@ const Options: React.FC = () => {
         <div className="Options">
           <u>{name}</u> <small>v{version}</small>
           <p>{description}</p>
-          <p>Made with ❤️ by {author}</p>
           <p>
             <u>OPTIONS</u>
           </p>
-          <Option
-            name="GRAVITY"
-            value={options.gravity}
-            onClick={dispatchToggleGravity}
-          />
           <Option
             name="FILTERS"
             value={options.filters}
             onClick={dispatchToggleFilters}
           />
+          {!options.gravity && (
+            <Option
+              name="GRAVITY"
+              value={options.gravity}
+              onClick={dispatchToggleGravity}
+            />
+          )}
           <div className="Pause" onClick={dispatchUnpause}>
             PAUSE
           </div>
+          <span className="Credits">Made with ❤️ by {author}</span>
         </div>
       )}
     </>

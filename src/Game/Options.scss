@@ -6,7 +6,7 @@
   height: 100%;
   text-align: justify;
   background-color: black;
-  opacity: 0.85;
+  opacity: 0.9;
 
   .Pause {
     cursor: pointer;
@@ -26,6 +26,11 @@
       font-weight: bold;
       font-style: italic;
     }
+  }
+
+  .Credits {
+    position: absolute;
+    bottom: 0;
   }
 }
 
