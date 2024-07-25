@@ -9,13 +9,14 @@
   opacity: 0.9;
 
   .Pause {
-    cursor: pointer;
+    position: absolute;
     font-size: larger;
     font-weight: bold;
-    position: absolute;
+    text-align: center;
+    cursor: pointer;
     top: calc(50% - 50px);
-    left: calc(50% - 100px);
-    padding: 50px;
+    padding: 50px 0;
+    width: 100%;
   }
 
   .Option {
