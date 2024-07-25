@@ -18,7 +18,7 @@ const App = () => {
             Pause: ENTER <br />
             Reset: F5 <br />
             &nbsp;Zoom: F11 <br />
-            &nbsp;////: ///
+            &nbsp;////: //
             <span className="Gravity Hint">
               x.80665... m/s <sup>2</sup>
             </span>
@@ -26,7 +26,7 @@ const App = () => {
             &nbsp;Mode: F8
           </p>
           Debug: F12
-          <span className="Debug Hint">{"<HTML/>  CSS {...}"}</span>
+          <span className="Debug Hint">{"<HTML/>  CSS {.dk}"}</span>
         </div>
         <Game />
         <div className="Manual">
@@ -39,7 +39,9 @@ const App = () => {
                 {"<DeutschBox/>"}
               </a>
             </li>
-            <li>*: Duck Hunt</li>
+            <li>
+              *: Duck Hunt<span className="Hint">TOUCH!</span>
+            </li>
           </ul>
         </div>
       </div>

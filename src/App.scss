@@ -22,18 +22,18 @@
 
       .Hint {
         position: absolute;
-        font-family: "Segoe Script", "Playwrite AU TAS", cursive;
+        font-family: "Nanum Pen Script", cursive;
+        font-size: 20px;
         color: darkblue;
-        opacity: 0.5;
 
         &.Gravity {
-          margin: 5px;
           transform: rotate(9.8deg);
+          margin-left: 9.8px;
         }
 
         &.Debug {
           left: 50%;
-          transform: rotate(-9.8deg);
+          transform: rotate(-7deg);
         }
       }
 
