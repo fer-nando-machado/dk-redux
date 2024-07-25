@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import optionsReducer from "./OptionsSlice";
 import jumpmanReducer from "./JumpmanSlice";
 import barrelReducer from "./BarrelSlice";
+import duckReducer from "./DuckSlice";
 import platformReducer from "./PlatformSlice";
 
 export const Store = configureStore({
@@ -10,6 +11,7 @@ export const Store = configureStore({
     jumpman: jumpmanReducer,
     barrelFactory: barrelReducer,
     platformFactory: platformReducer,
+    duckFactory: duckReducer,
   },
 });
 

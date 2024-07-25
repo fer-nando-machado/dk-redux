@@ -11,7 +11,7 @@
     "url": "git+https://github.com/fer-nando-machado/dk-redux.git",
     "link": "https://github.com/fer-nando-machado/dk-redux"
   },
-  "donate": "https://www.paypal.com/donate/?business=7U4ZUBPA57S62&no_recurring=0&item_name=Thank+you+for+supporting+the+development+of+DK-Redux!",
+  "donate": "https://www.paypal.com/donate/?business=7U4ZUBPA57S62&no_recurring=0&item_name=Thank+you+for+supporting+the+development+of+DK-Redux!&currency_code=EUR",
   "private": false,
   "keywords": [
     "react",

@@ -1,20 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, StoreDispatch } from "../Store";
-import { setPlayer } from "../OptionsSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../Store";
 import "./Dog.scss";
 
-export const DH_CODE = "DH";
+const CODE = "DH";
 const Dog: React.FC = () => {
-  const dispatch: StoreDispatch = useDispatch();
   const { player } = useSelector((state: RootState) => state.options);
+  return player === CODE ? <span>oo</span> : <></>;
+};
 
-  const onClick = () => dispatch(setPlayer(DH_CODE));
-
-  return player === DH_CODE ? (
-    <span>oo</span>
-  ) : (
-    <aside className="Block" onClick={onClick}></aside>
-  );
+export const isDuckHunting = () => {
+  const { player } = useSelector((state: RootState) => state.options);
+  return player === CODE;
 };
 
 export default Dog;

@@ -10,8 +10,11 @@ import { setBarrelFactory } from "./BarrelSlice";
 import { PlatformFactory, Platform } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
 
+import { DuckFactory } from "./Duck";
+import { setDuckFactory } from "./DuckSlice";
+
 import { LEFT, RIGHT } from "./Block";
-import { DEBUG } from ".";
+import { setPlayer } from "./OptionsSlice";
 
 const jumpman: Jumpman = {
   x: 25,
@@ -25,6 +28,14 @@ const barrelFactory: BarrelFactory = {
   y: 425,
   isJumping: false,
   barrels: [],
+  direction: LEFT,
+};
+
+const duckFactory: DuckFactory = {
+  x: 250,
+  y: -25,
+  isJumping: false,
+  ducks: [],
   direction: LEFT,
 };
 
@@ -44,13 +55,16 @@ const platforms: Platform[] = [
 const Level: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   dispatch(setPlatforms(platforms));
-  !DEBUG && dispatch(setBarrelFactory(barrelFactory));
+  dispatch(setDuckFactory(duckFactory));
+  dispatch(setBarrelFactory(barrelFactory));
   dispatch(setJumpman(jumpman));
+  dispatch(setPlayer("D"));
 
   return (
     <>
       <PlatformFactory />
-      {!DEBUG && <BarrelFactory />}
+      <BarrelFactory />
+      <DuckFactory />
       <Jumpman />
     </>
   );

@@ -2,10 +2,6 @@
   background-color: orange;
   outline: 2px ridge yellow;
 
-  &.Target {
-    cursor: crosshair;
-  }
-
   &::before {
     content: ".";
     position: absolute;
