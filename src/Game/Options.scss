@@ -8,7 +8,7 @@
   background-color: black;
   opacity: 0.9;
 
-  .Pause {
+  .Paused {
     position: absolute;
     font-size: larger;
     font-weight: bold;
@@ -69,4 +69,8 @@
       }
     }
   }
+}
+
+.Game:has(.Paused) > .Block {
+  animation-play-state: paused;
 }

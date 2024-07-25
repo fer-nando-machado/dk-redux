@@ -87,7 +87,7 @@ const Options: React.FC = () => {
               onClick={dispatchToggleGravity}
             />
           )}
-          <div className="Pause" onClick={dispatchUnpause}>
+          <div className="Paused" onClick={dispatchUnpause}>
             PAUSE
           </div>
           <span className="Credits">Made with ❤️ by {author}</span>
