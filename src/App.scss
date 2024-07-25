@@ -10,11 +10,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 81px;
+    gap: 7vw;
 
     .Manual {
       display: none;
-
       @media only screen and (min-width: 1280px) {
         display: flex;
         justify-content: center;
@@ -25,15 +24,7 @@
         outline: 10px ridge brown;
         border-radius: 5px;
         width: 22vw;
-        font-size: smaller;
-      }
-
-      @media only screen and (min-width: 1440px) {
-        font-size: inherit;
-      }
-
-      @media only screen and (min-width: 1600px) {
-        font-size: larger;
+        font-size: 1vw;
       }
 
       .Hint {
@@ -59,7 +50,7 @@
         color: white;
         text-decoration: none;
         &:hover {
-          text-decoration: underline;
+          opacity: 0.75;
         }
       }
 
