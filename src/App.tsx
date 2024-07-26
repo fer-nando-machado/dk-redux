@@ -1,4 +1,4 @@
-import { name, repository, donate } from "../package.json";
+import { name, repository, contact, support } from "../package.json";
 import GitHub from "/GitHub.svg?url";
 import Game from "./Game";
 import "./App.scss";
@@ -57,6 +57,9 @@ const App: React.FC = () => {
         </div>
       </div>
       <div className="Footer">
+        <a href={`mailto:${contact}`} className="Button">
+          Contact
+        </a>
         <a href={repository.link}>
           <img
             src={GitHub}
@@ -65,8 +68,8 @@ const App: React.FC = () => {
             height={24}
           />
         </a>
-        <a href={donate} className="Donate">
-          Donate
+        <a href={support} className="Button">
+          Support
         </a>
       </div>
     </div>

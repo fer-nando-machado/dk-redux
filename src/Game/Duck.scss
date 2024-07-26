@@ -1,5 +1,6 @@
 .Duck {
   color: white;
+  cursor: crosshair;
 
   animation: flap 0.5s infinite linear;
   @keyframes flap {
