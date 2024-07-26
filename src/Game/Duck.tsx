@@ -12,6 +12,7 @@ import "./Duck.scss";
 import { setPlayer } from "./OptionsSlice";
 import { isDuckHunting } from "./Player/Dog";
 import { getRandomX } from "./Position";
+import Target from "./Target";
 
 export type Duck = Block & { id: number };
 
@@ -37,23 +38,21 @@ const Duck: React.FC<Duck> = (duck) => {
     );
   });
 
-  const onClick = () => {
+  const onClickDuck = () => {
     dispatch(setPlayer("DH"));
     dispatch(destroyDuck(duck.id));
   };
 
-  const hasAim = isDuckHunting();
   return (
     <div
       className={`Duck Block Round ${duck.direction}`}
-      onClick={() => onClick()}
       style={{
         left: duck.x,
         bottom: duck.y,
       }}
     >
       {"oo"}
-      <div className={`Target ${hasAim ? "Aim" : ""}`}></div>
+      <Target always points={250} callback={onClickDuck} />
     </div>
   );
 };
@@ -63,7 +62,7 @@ export const DuckFactory: React.FC = () => {
   const duckFactory = useSelector((state: RootState) => state.duckFactory);
 
   const hasAim = isDuckHunting();
-  const interval = hasAim ? 2000 : 5000;
+  const interval = hasAim ? 2500 : 7000;
 
   useInterval(() => {
     const direction = getRandomDirection();

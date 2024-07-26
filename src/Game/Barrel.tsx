@@ -2,9 +2,9 @@ import { Block, isDirectionLeft } from "./Block";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
+import Target from "./Target";
 import useInterval from "./useInterval";
 import "./Barrel.scss";
-import { isDuckHunting } from "./Player/Dog";
 
 export type Barrel = Block & { id: number };
 
@@ -31,22 +31,19 @@ const Barrel: React.FC<Barrel> = (barrel) => {
     );
   });
 
-  const hasAim = isDuckHunting();
-  const onClick = () => {
-    if (!hasAim) return;
+  const onClickBarrel = () => {
     dispatch(destroyBarrel(barrel.id));
   };
 
   return (
     <div
       className={`Barrel Block Round ${barrel.direction}`}
-      onClick={() => onClick()}
       style={{
         left: barrel.x,
         bottom: barrel.y,
       }}
     >
-      <div className={`Target ${hasAim ? "Aim" : ""}`}></div>
+      <Target points={100} callback={onClickBarrel} />
     </div>
   );
 };
