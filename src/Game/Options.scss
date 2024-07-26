@@ -106,8 +106,10 @@
 }
 
 .Game:has(.Paused) {
-  > .Block {
-    animation-play-state: paused;
+  > .Block,
+  > .Block::before,
+  > .Block::after {
+     animation-play-state: paused;
   }
 }
 
