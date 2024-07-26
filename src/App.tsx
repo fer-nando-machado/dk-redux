@@ -52,7 +52,7 @@ const App: React.FC = () => {
               <br />
               +: Duck Hunt<span className="Player Hint">Touch!</span>
             </p>
-            ?: /////////<span className="Player Hint">DK is real?!</span>
+            ?: /////////<span className="Player Hint">DK is real</span>
           </div>
         </div>
       </div>
