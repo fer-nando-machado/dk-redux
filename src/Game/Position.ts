@@ -7,7 +7,7 @@ export type Position = {
 };
 
 const boundaries: { min: Position; max: Position } = {
-  min: { x: -5, y: -5 },
+  min: { x: -5, y: -50 },
   max: { x: 500 - 20, y: 750 - 15 },
 };
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import {
   setPaused,
+  setPlayer,
   toggleDebug,
   toggleFilters,
   toggleGravity,
@@ -44,10 +45,14 @@ const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options);
 
+  const then = "JUL 09 1981";
+  const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
+
   const dispatchToggleFilters = () => dispatch(toggleFilters());
   const dispatchToggleGravity = () => dispatch(toggleGravity());
   const dispatchTogglePaused = () => dispatch(togglePaused());
   const dispatchToggleDebug = () => dispatch(toggleDebug());
+  const dispatchSetPlayer = () => dispatch(setPlayer(""));
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchUnpause = () => dispatch(setPaused(false));
 
@@ -71,6 +76,11 @@ const Options: React.FC = () => {
     onKeyDown: dispatchTogglePaused,
   });
 
+  useKeyboard({
+    key: then.slice(-4),
+    onKeyDown: dispatchSetPlayer,
+  });
+
   useEffect(() => {
     dispatchKeyDown(hash);
   }, [hash]);
@@ -83,17 +93,10 @@ const Options: React.FC = () => {
     };
   }, []);
 
-  const then = "JUL 09 1981";
-  const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
-
   return (
     <>
       {options.paused && (
         <div className="Options">
-          <div className="Date">
-            <span>{then}</span>
-            <span>{now}</span>
-          </div>
           <u>{name}</u> <small>v{version}</small>
           <p>{description}</p>
           <p>
@@ -118,6 +121,10 @@ const Options: React.FC = () => {
               onClick={dispatchToggleDebug}
             />
           )}
+          <div className="Date">
+            <span>{then}</span>
+            <span>{now}</span>
+          </div>
           <div className="Paused" onClick={dispatchUnpause}>
             PAUSE
           </div>

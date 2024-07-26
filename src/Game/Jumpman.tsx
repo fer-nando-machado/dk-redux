@@ -107,7 +107,7 @@ export const Jumpman: React.FC = () => {
   });
   useKeyboard({
     key: CODE,
-    onKeyUp: () => dispatch(setPlayer(CODE)),
+    onKeyDown: () => dispatch(setPlayer(CODE)),
   });
 
   return (

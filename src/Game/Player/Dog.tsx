@@ -1,10 +1,19 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../Store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, StoreDispatch } from "../Store";
+import { setPlayer } from "../OptionsSlice";
+import useKeyboard from "../useKeyboard";
 import "./Dog.scss";
 
 const CODE = "DH";
 const Dog: React.FC = () => {
+  const dispatch: StoreDispatch = useDispatch();
   const { player } = useSelector((state: RootState) => state.options);
+
+  useKeyboard({
+    key: CODE,
+    onKeyDown: () => dispatch(setPlayer(CODE)),
+  });
+
   return player === CODE ? <span>oo</span> : <></>;
 };
 

@@ -27,6 +27,7 @@ const DeutschBox: React.FC = () => {
     key: CODE,
     onKeyUp: () => dispatch(setPlayer(CODE)),
   });
+  
   useKeyboard({
     key: " ",
     onKeyDown: clickDeutschBox,
