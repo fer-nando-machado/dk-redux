@@ -26,8 +26,11 @@ const App = () => {
               <br />
               &nbsp;Mode: F8
             </p>
-            Debug: F12
-            <span className="Debug Hint">{"<HTML/>  CSS{.dk}"}</span>
+            &nbsp;Code: F12
+            <span className="Debug Hint">
+              {"<HTML/>  CSS{.dk}?"}
+              <div className="dk" />
+            </span>
           </div>
         </div>
         <Game />
