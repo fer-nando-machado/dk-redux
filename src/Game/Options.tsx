@@ -52,7 +52,7 @@ const Options: React.FC = () => {
   const dispatchToggleGravity = () => dispatch(toggleGravity());
   const dispatchTogglePaused = () => dispatch(togglePaused());
   const dispatchToggleDebug = () => dispatch(toggleDebug());
-  const dispatchSetPlayer = () => dispatch(setPlayer(""));
+  const dispatchSetPlayer = () => dispatch(setPlayer("​"));
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchUnpause = () => dispatch(setPaused(false));
 

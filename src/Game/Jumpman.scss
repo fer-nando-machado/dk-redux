@@ -1,6 +1,11 @@
 .Jumpman {
-  background-color: red;
-  outline: 2px outset blue;
+  outline: 2px outset brown;
+  background: brown;
+
+  &.M {
+    background-color: red;
+    outline-color: blue;
+  }
 
   &::before {
     content: "^";
@@ -26,5 +31,20 @@
   }
   &.right::after {
     left: 2px;
+  }
+
+  &.​ {
+    outline-width: 7.5px;
+    &::before {
+      content: "!";
+      transform: rotate(180deg);
+      bottom: -10px;
+    }
+    &.left::before {
+      left: -3px;
+    }
+    &.right::before {
+      left: 3px;
+    }
   }
 }
