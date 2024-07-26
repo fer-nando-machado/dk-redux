@@ -22,24 +22,6 @@ export type Options = {
   debug: boolean;
 };
 
-type Option = {
-  name: string;
-  value: boolean | string;
-  onClick?: () => void;
-};
-
-const Option: React.FC<Option> = ({ name, value, onClick }) => {
-  const display = typeof value === "boolean" ? (value ? "ON" : "OFF") : value;
-  return (
-    <div className="Option">
-      {name}:
-      <span className={onClick ? "clickable" : ""} onClick={onClick}>
-        {display}
-      </span>
-    </div>
-  );
-};
-
 const Options: React.FC = () => {
   const hash = useHash();
   const dispatch: StoreDispatch = useDispatch();
@@ -134,6 +116,24 @@ const Options: React.FC = () => {
       {options.filters && <div className="Filters" />}
       {options.debug && <div className="Debug" />}
     </>
+  );
+};
+
+type Option = {
+  name: string;
+  value: boolean | string;
+  onClick?: () => void;
+};
+
+const Option: React.FC<Option> = ({ name, value, onClick }) => {
+  const display = typeof value === "boolean" ? (value ? "ON" : "OFF") : value;
+  return (
+    <div className="Option">
+      {name}:
+      <span className={onClick ? "clickable" : ""} onClick={onClick}>
+        {display}
+      </span>
+    </div>
   );
 };
 

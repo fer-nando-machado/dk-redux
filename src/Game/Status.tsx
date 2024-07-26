@@ -1,10 +1,15 @@
-import { useDispatch } from "react-redux";
-import { StoreDispatch } from "./Store";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, StoreDispatch } from "./Store";
 import { setPaused } from "./OptionsSlice";
 import "./Status.scss";
 
-const Status = () => {
+export type Status = {
+  score: number;
+};
+
+const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
+  const { score } = useSelector((state: RootState) => state.status);
 
   const clickPause = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -21,6 +26,7 @@ const Status = () => {
       <a href="#" onClick={clickPause}>
         PAUSE
       </a>
+      {score}
       <a href="#" onClick={clickRefresh}>
         RESET
       </a>
