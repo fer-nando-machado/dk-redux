@@ -1,7 +1,7 @@
 .Jumpman.DH {
   background-color: #c64a09;
   outline-color: #ce8147;
-  cursor: grab;
+  //cursor: grab;
 
   &::before {
     content: "{.}";
@@ -17,7 +17,6 @@
   }
 }
 
-.Game aside.Block {
-  top: -25px;
-  cursor: crosshair;
+.Game:has(.DH) {
+  background-color: lightblue;
 }

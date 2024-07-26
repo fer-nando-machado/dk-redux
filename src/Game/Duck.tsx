@@ -11,6 +11,7 @@ import useInterval from "./useInterval";
 import "./Duck.scss";
 import { setPlayer } from "./OptionsSlice";
 import { isDuckHunting } from "./Player/Dog";
+import { getRandomX } from "./Position";
 
 export type Duck = Block & { id: number };
 
@@ -62,6 +63,9 @@ export const DuckFactory: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const duckFactory = useSelector((state: RootState) => state.duckFactory);
 
+  const hasAim = isDuckHunting();
+  const interval = hasAim ? 2000 : 5000;
+
   useInterval(() => {
     const direction = getRandomDirection();
     const duck: Duck = {
@@ -71,9 +75,9 @@ export const DuckFactory: React.FC = () => {
     };
     dispatch(createDuck(duck));
 
-    const update = isDirectionLeft(direction) ? -100 : 100;
-    dispatch(moveDuckFactory(update * Math.random()));
-  }, 5000);
+    const x = getRandomX();
+    dispatch(moveDuckFactory(x));
+  }, interval);
 
   return (
     <>
@@ -87,6 +91,14 @@ export const DuckFactory: React.FC = () => {
       {duckFactory.ducks.map((b) => (
         <Duck {...b} key={b.id} />
       ))}
+      {hasAim && (
+        <div
+          className={"Grass"}
+          style={{
+            bottom: duckFactory.y + 25,
+          }}
+        />
+      )}
     </>
   );
 };

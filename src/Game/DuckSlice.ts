@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Duck, DuckFactory, MAX_DUCKS } from "./Duck";
 import { RootState, StoreDispatch } from "./Store";
-import { getDirection, LEFT } from "./Block";
+import { LEFT } from "./Block";
 
 const initialState: DuckFactory = {
   x: 0,
@@ -17,8 +17,7 @@ const slice = createSlice({
   reducers: {
     moveDuckFactory: (state, action: PayloadAction<number>) => {
       const x = action.payload;
-      state.x += x; //TODO checkBoundaries
-      state.direction = getDirection(x) || state.direction;
+      state.x = x;
     },
     setDuckFactory: (_, action: PayloadAction<DuckFactory>) => {
       return action.payload;

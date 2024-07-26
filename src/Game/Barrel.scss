@@ -1,6 +1,20 @@
 .Barrel {
   background-color: orange;
   outline: 2px ridge yellow;
+  color: darkblue;
+
+  animation: spin 2s infinite linear;
+  &.left {
+    animation-direction: reverse;
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
   &::before {
     content: ".";
@@ -9,7 +23,6 @@
     font-weight: bold;
     top: 2px;
     left: 1px;
-    color: darkblue;
   }
 
   &::after {
@@ -18,7 +31,6 @@
     font-weight: bold;
     top: 2px;
     left: 9px;
-    color: darkblue;
   }
 }
 

@@ -11,6 +11,13 @@ const boundaries: { min: Position; max: Position } = {
   max: { x: 500 - 20, y: 750 - 15 },
 };
 
+export const getRandomX = (): number => {
+  return (
+    Math.floor(Math.random() * (boundaries.max.x - boundaries.min.x + 1)) +
+    boundaries.min.x
+  );
+};
+
 export const checkBoundaries = (position: Block): Block => {
   return {
     ...position,

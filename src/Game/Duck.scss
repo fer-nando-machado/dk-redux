@@ -1,14 +1,26 @@
 .Duck {
   color: white;
 
+  animation: flap 0.5s infinite linear;
+  @keyframes flap {
+    0% {
+      transform: scaleX(1);
+    }
+    50% {
+      transform: scaleX(1.1);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+
   &.left {
     background-color: navy;
     outline: 4px double purple;
   }
-
   &.right {
     background-color: darkgreen;
-    outline: 4px double darkgreen;
+    outline: 4px double forestgreen;
   }
 
   &::before {
@@ -19,7 +31,6 @@
     top: 6px;
     left: -15px;
     width: 100px;
-    pointer-events: none;
   }
   &.left::before {
     color: purple;
@@ -38,15 +49,27 @@
     color: orange;
   }
   &.left::after {
-    content: "<";
-    left: 4px;
+    content: ">";
+    bottom: -3px;
+    left: 3px;
   }
   &.right::after {
-    content: ">";
+    content: "<";
     left: 10px;
   }
 }
 
 .DuckFactory {
-  background-color: lightgreen;
+  outline: 2px dashed lightgreen;
+  height: 25px;
+}
+
+.Grass {
+  position: absolute;
+  left: 0;
+  width: 525px;
+  height: 20px;
+  opacity: 0.84;
+  background-color: lawngreen;
+  outline: 4px dashed greenyellow;
 }
