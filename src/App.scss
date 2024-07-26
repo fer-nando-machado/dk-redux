@@ -37,11 +37,11 @@
           transform: rotate(9.8deg);
           margin-left: 9.8px;
         }
-        &.Debug {
-          margin: -4px;
+        &.Code {
+          margin: -5px;
           transform: rotate(-9.8deg);
         }
-        &.Touch {
+        &.Player {
           margin: -5px 10px;
         }
       }
@@ -51,23 +51,6 @@
         text-decoration: none;
         &:hover {
           opacity: 0.75;
-        }
-      }
-
-      ul {
-        list-style: none;
-        margin-bottom: 0;
-        padding-left: 0;
-
-        li {
-          padding-left: 15px;
-          position: relative;
-          &::before {
-            content: ".";
-            position: absolute;
-            top: -4px;
-            left: 0;
-          }
         }
       }
 

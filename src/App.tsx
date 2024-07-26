@@ -27,7 +27,7 @@ const App = () => {
               &nbsp;Mode: F8
             </p>
             &nbsp;Code: F12
-            <span className="Debug Hint">
+            <span className="Code Hint">
               {"<HTML/>  CSS{.dk}?"}
               <div className="dk" />
             </span>
@@ -36,18 +36,19 @@ const App = () => {
         <Game />
         <div className="Manual">
           <u>PLAYER SELECT</u>
-          <ul>
-            <li>M: Jumpman</li>
-            <li>
-              D:{" "}
+          <div>
+            <p>
+              M: Jumpman
+              <br />
+              D:
               <a href="https://fer-nando-machado.github.io/react-deutschbox/">
                 {"<DeutschBox/>"}
               </a>
-            </li>
-            <li>
-              *: Duck Hunt<span className="Touch Hint">TOUCH!</span>
-            </li>
-          </ul>
+              <br />
+              +: Duck Hunt<span className="Player Hint">Touch!</span>
+            </p>
+            ?: #____<span className="Player Hint">DK is real...?!</span>
+          </div>
         </div>
       </div>
       <div className="Footer">
