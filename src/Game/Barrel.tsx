@@ -43,7 +43,10 @@ const Barrel: React.FC<Barrel> = (barrel) => {
         bottom: barrel.y,
       }}
     >
-      <Target points={100} callback={onClickBarrel} />
+      <Target
+        points={{ value: 100, position: barrel }}
+        callback={onClickBarrel}
+      />
     </div>
   );
 };

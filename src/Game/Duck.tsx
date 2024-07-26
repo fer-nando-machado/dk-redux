@@ -52,7 +52,11 @@ const Duck: React.FC<Duck> = (duck) => {
       }}
     >
       {"oo"}
-      <Target always points={250} callback={onClickDuck} />
+      <Target
+        points={{ value: 250, position: duck }}
+        callback={onClickDuck}
+        always
+      />
     </div>
   );
 };

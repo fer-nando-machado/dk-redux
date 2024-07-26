@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Status } from "./Status";
+import { Points, Status } from "./Status";
 
 const initialState: Status = {
   score: 0,
@@ -9,11 +9,12 @@ const slice = createSlice({
   name: "StatusSlice",
   initialState,
   reducers: {
-    addScore: (state, action: PayloadAction<number>) => {
-      state.score += action.payload;
+    addPoints: (state, action: PayloadAction<Points>) => {
+      state.points = action.payload;
+      state.score += action.payload.value;
     },
   },
 });
 
-export const { addScore } = slice.actions;
+export const { addPoints } = slice.actions;
 export default slice.reducer;

@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
 import { StoreDispatch } from "./Store";
-import { addScore } from "./StatusSlice";
+import { addPoints } from "./StatusSlice";
 import { isDuckHunting } from "./Player/Dog";
+import { Points } from "./Status";
 
 type Target = {
-  points: number;
+  points: Points;
   callback: () => void;
   always?: boolean;
 };
@@ -17,8 +18,8 @@ const Target: React.FC<Target> = ({ points, callback, always }) => {
 
   const onClickTarget = () => {
     if (!isClickable) return;
+    dispatch(addPoints(points));
     callback();
-    dispatch(addScore(points));
   };
 
   return (
