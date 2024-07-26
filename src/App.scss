@@ -6,6 +6,17 @@
   justify-content: center;
   gap: 18px;
 
+  h1 {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    span {
+      font-size: 16px;
+    }
+  }
+
   .Content {
     display: flex;
     align-items: center;
@@ -82,9 +93,9 @@
     }
 
     .Button {
-      border-radius: 20px;
-      font-size: smaller;
-      padding: 5px 10px;
+      border-radius: 24px;
+      font-size: 12px;
+      padding: 6px 12px;
       text-decoration: none;
       background-color: white;
       color: black;

@@ -6,7 +6,9 @@ import "./App.scss";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <b>DK Redux</b>
+      <h1>
+        DK<span>{"<Redux/>"}</span>
+      </h1>
       <div className="Content">
         <div className="Manual">
           <u>HOW TO PLAY</u>
