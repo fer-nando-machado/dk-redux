@@ -6,6 +6,7 @@ const initialState: Options = {
   paused: false,
   gravity: true,
   filters: true,
+  debug: false,
 };
 
 const slice = createSlice({
@@ -27,6 +28,9 @@ const slice = createSlice({
     toggleGravity: (state) => {
       state.gravity = !state.gravity;
     },
+    toggleDebug: (state) => {
+      state.debug = !state.debug;
+    },
   },
 });
 
@@ -36,5 +40,6 @@ export const {
   togglePaused,
   toggleFilters,
   toggleGravity,
+  toggleDebug,
 } = slice.actions;
 export default slice.reducer;

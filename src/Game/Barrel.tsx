@@ -66,7 +66,7 @@ export const BarrelFactory: React.FC = () => {
   return (
     <>
       <div
-        className={`BarrelFactory Block Round ${barrelFactory.direction}`}
+        className={`BarrelFactory Block Factory Round ${barrelFactory.direction}`}
         style={{
           left: barrelFactory.x,
           bottom: barrelFactory.y,

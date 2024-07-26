@@ -2,9 +2,11 @@
   position: absolute;
   width: 25px;
   height: 25px;
-
   &.Round {
     border-radius: 25px;
+  }
+  &.Factory {
+    display: none;
   }
 }
 

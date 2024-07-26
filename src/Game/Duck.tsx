@@ -26,7 +26,6 @@ const Duck: React.FC<Duck> = (duck) => {
 
   const x = (isDirectionLeft(duck.direction) ? -1 : 1) * Math.random();
   const y = 4 + Math.random() * 3;
-  //console.log(x, y);
 
   useInterval(() => {
     dispatch(
@@ -82,7 +81,7 @@ export const DuckFactory: React.FC = () => {
   return (
     <>
       <div
-        className={`DuckFactory Block`}
+        className={`DuckFactory Block Factory`}
         style={{
           left: duckFactory.x,
           bottom: duckFactory.y,

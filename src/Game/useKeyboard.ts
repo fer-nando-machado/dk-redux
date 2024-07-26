@@ -46,4 +46,13 @@ const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
   }, [handleKeyDown, handleKeyUp, onKeyDown, onKeyUp]);
 };
 
+export const dispatchKeyDown = (key: string) => {
+  const event = new KeyboardEvent("keydown", {
+    key: key,
+    code: key,
+    bubbles: true,
+  });
+  window.dispatchEvent(event);
+};
+
 export default useKeyboard;

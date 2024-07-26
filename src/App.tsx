@@ -3,7 +3,7 @@ import GitHub from "/GitHub.svg?url";
 import Game from "./Game";
 import "./App.scss";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <b>DK Redux</b>
@@ -12,19 +12,24 @@ const App = () => {
           <u>HOW TO PLAY</u>
           <div>
             <p>
-              &nbsp;Walk: ARROW KEYS <br />
+              &nbsp;Move: ARROW KEYS <br />
               &nbsp;Jump: SPACE
             </p>
             <p>
               Pause: ENTER <br />
-              Reset: F5 <br />
+              Reset: F5
+            </p>
+            <p>
               &nbsp;Zoom: F11 <br />
-              &nbsp;////: //
+              &nbsp;Mode: F8
+            </p>
+            <p>
+              /////: //
               <span className="Gravity Hint">
                 x.80665... m/s <sup>2</sup>
               </span>
               <br />
-              &nbsp;Mode: F8
+              Debug: F13 <span className="Hash Hint">/#</span>
             </p>
             &nbsp;Code: F12
             <span className="Code Hint">
@@ -47,7 +52,7 @@ const App = () => {
               <br />
               +: Duck Hunt<span className="Player Hint">Touch!</span>
             </p>
-            ?: #____<span className="Player Hint">DK is real...?!</span>
+            ?: /////////<span className="Player Hint">DK is real?!</span>
           </div>
         </div>
       </div>

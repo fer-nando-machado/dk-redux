@@ -6,9 +6,7 @@ import Options from "./Options";
 import "./Block.scss";
 import "./index.scss";
 
-export const DEBUG = false;
-
-const Game = () => {
+const Game: React.FC = () => {
   return (
     <Provider store={Store}>
       <div className="Game">

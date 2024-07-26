@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import {
   setPaused,
+  toggleDebug,
   toggleFilters,
   toggleGravity,
   togglePaused,
 } from "./OptionsSlice";
-import useKeyboard from "./useKeyboard";
+import useHash from "./useHash";
+import useKeyboard, { dispatchKeyDown } from "./useKeyboard";
 import { name, version, author, description } from "../../package.json";
-import { DEBUG } from ".";
 import "./Options.scss";
 
 export type Options = {
@@ -17,6 +18,7 @@ export type Options = {
   paused: boolean;
   gravity: boolean;
   filters: boolean;
+  debug: boolean;
 };
 
 type Option = {
@@ -38,32 +40,43 @@ const Option: React.FC<Option> = ({ name, value, onClick }) => {
 };
 
 const Options: React.FC = () => {
+  const hash = useHash();
   const dispatch: StoreDispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options);
 
   const dispatchToggleFilters = () => dispatch(toggleFilters());
   const dispatchToggleGravity = () => dispatch(toggleGravity());
   const dispatchTogglePaused = () => dispatch(togglePaused());
+  const dispatchToggleDebug = () => dispatch(toggleDebug());
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchUnpause = () => dispatch(setPaused(false));
 
   useKeyboard({
     key: "F8",
-    onKeyUp: dispatchToggleFilters,
+    onKeyDown: dispatchToggleFilters,
   });
 
   useKeyboard({
     key: "F9",
-    onKeyUp: dispatchToggleGravity,
+    onKeyDown: dispatchToggleGravity,
+  });
+
+  useKeyboard({
+    key: "F13",
+    onKeyDown: dispatchToggleDebug,
   });
 
   useKeyboard({
     key: "Enter",
-    onKeyUp: dispatchTogglePaused,
+    onKeyDown: dispatchTogglePaused,
   });
 
   useEffect(() => {
-    if (DEBUG) return;
+    dispatchKeyDown(hash);
+  }, [hash]);
+
+  useEffect(() => {
+    if (options.debug) return;
     window.addEventListener("blur", dispatchPause);
     return () => {
       window.removeEventListener("blur", dispatchPause);
@@ -75,7 +88,6 @@ const Options: React.FC = () => {
 
   return (
     <>
-      {options.filters && <div className="Filters" />}
       {options.paused && (
         <div className="Options">
           <div className="Date">
@@ -87,7 +99,6 @@ const Options: React.FC = () => {
           <p>
             <u>OPTIONS</u>
           </p>
-          <Option name="&nbsp;PLAYER" value={options.player} />
           <Option
             name="FILTERS"
             value={options.filters}
@@ -100,12 +111,21 @@ const Options: React.FC = () => {
               onClick={dispatchToggleGravity}
             />
           )}
+          {options.debug && (
+            <Option
+              name="DEBUG"
+              value={options.debug}
+              onClick={dispatchToggleDebug}
+            />
+          )}
           <div className="Paused" onClick={dispatchUnpause}>
             PAUSE
           </div>
           <span className="Credits">Made with ❤️ by {author}</span>
         </div>
       )}
+      {options.filters && <div className="Filters" />}
+      {options.debug && <div className="Debug" />}
     </>
   );
 };

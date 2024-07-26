@@ -6,10 +6,7 @@
   height: 100%;
   text-align: justify;
   background-color: black;
-  opacity: 0.9;
-
-  // TODO trigger this pause as debug mode
-  //display: none;
+  opacity: 0.81;
 
   .Date {
     position: absolute;
@@ -106,6 +103,17 @@
   }
 }
 
-.Game:has(.Paused) > .Block {
-  animation-play-state: paused;
+.Game:has(.Paused) {
+  > .Block {
+    animation-play-state: paused;
+  }
+}
+
+.Game:has(.Debug) {
+  > .Options {
+    display: none;
+  }
+  > .Factory {
+    display: block;
+  }
 }
