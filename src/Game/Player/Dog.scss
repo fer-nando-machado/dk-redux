@@ -1,9 +1,9 @@
 .Jumpman.DH {
+  color: white;
   background-color: #c64a09;
   outline-color: #ce8147;
   font-weight: bold;
   //cursor: grab;
-
   &::before {
     content: "{.}";
     color: black;

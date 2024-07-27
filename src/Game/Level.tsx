@@ -63,9 +63,9 @@ const Level: React.FC = () => {
   return (
     <>
       <PlatformFactory />
+      <Jumpman />
       <BarrelFactory />
       <DuckFactory />
-      <Jumpman />
     </>
   );
 };

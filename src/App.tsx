@@ -2,12 +2,13 @@ import { name, repository, contact, support } from "../package.json";
 import GitHub from "/GitHub.svg?url";
 import Game from "./Game";
 import "./App.scss";
+import Icon from "./Icon";
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <h1>
-        DK<span>{"<Redux/>"}</span>
+        <Icon /> DK<span>{"<Redux/>"} </span>
       </h1>
       <div className="Content">
         <div className="Manual">
@@ -34,10 +35,7 @@ const App: React.FC = () => {
               Debug: F13 <span className="Hash Hint">/#</span>
             </p>
             &nbsp;Code: F12
-            <span className="Code Hint">
-              {"<HTML/>  CSS{.dk}?"}
-              <div className="dk" />
-            </span>
+            <span className="Code Hint">{"<HTML/>  CSS{.dk}?"}</span>
           </div>
         </div>
         <Game />
@@ -47,14 +45,15 @@ const App: React.FC = () => {
             <p>
               M: Jumpman
               <br />
-              D:
+              D:&nbsp;
               <a href="https://fer-nando-machado.github.io/react-deutschbox/">
-                {"<DeutschBox/>"}
+                DeutschBox
               </a>
               <br />
-              +: Duck Hunt<span className="Player Hint">Touch!</span>
+              +: DK Hunt<span className="Player Hint">Touch</span>
             </p>
-            ?: /////////<span className="Player Hint">DK is real</span>
+            ?: ///////
+            <span className="Player Hint">is real 2024</span>
           </div>
         </div>
       </div>
