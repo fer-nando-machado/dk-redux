@@ -58,6 +58,7 @@ const Level: React.FC = () => {
   dispatch(setDuckFactory(duckFactory));
   dispatch(setBarrelFactory(barrelFactory));
   dispatch(setJumpman(jumpman));
+  dispatch(setPlayer("M"));
   dispatch(setPlayer("D"));
 
   return (
