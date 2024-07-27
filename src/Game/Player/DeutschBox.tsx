@@ -21,19 +21,19 @@ const DeutschBox: React.FC = () => {
 
   useEffect(() => {
     clickDeutschBox();
-  }, [player]);
+  }, [player.code]);
 
   useKeyboard({
     key: CODE,
     onKeyUp: () => dispatch(setPlayer(CODE)),
   });
-  
+
   useKeyboard({
     key: " ",
     onKeyDown: clickDeutschBox,
   });
 
-  return player === CODE ? (
+  return player.code === CODE ? (
     <ReactDeutschBox
       name="DeutschBox"
       feedback={direction}

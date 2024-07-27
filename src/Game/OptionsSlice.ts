@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Options } from "./Options";
 
 const initialState: Options = {
-  player: "M",
+  player: { code: "M" },
+  players: {},
   paused: false,
   gravity: true,
   filters: true,
@@ -14,7 +15,10 @@ const slice = createSlice({
   initialState,
   reducers: {
     setPlayer: (state, action: PayloadAction<string>) => {
-      state.player = action.payload;
+      const code = action.payload;
+      state.player = { code };
+      if (state.players[code]) return;
+      state.players[code] = { code };
     },
     setPaused: (state, action: PayloadAction<boolean>) => {
       state.paused = action.payload;

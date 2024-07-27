@@ -112,7 +112,7 @@ export const Jumpman: React.FC = () => {
 
   return (
     <div
-      className={`Jumpman Block ${player} ${jumpman.direction}`}
+      className={`Player Jumpman Block ${player.code} ${jumpman.direction}`}
       style={{
         left: jumpman.x,
         bottom: jumpman.y,

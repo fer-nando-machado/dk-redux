@@ -14,12 +14,12 @@ const Dog: React.FC = () => {
     onKeyDown: () => dispatch(setPlayer(CODE)),
   });
 
-  return player === CODE ? <span>oo</span> : <></>;
+  return player.code === CODE ? <span>oo</span> : <></>;
 };
 
 export const isDuckHunting = () => {
   const { player } = useSelector((state: RootState) => state.options);
-  return player === CODE;
+  return player.code === CODE;
 };
 
 export default Dog;

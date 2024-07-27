@@ -14,12 +14,46 @@ import useKeyboard, { dispatchKeyDown } from "./useKeyboard";
 import { name, version, author, description } from "../../package.json";
 import "./Options.scss";
 
+const MAX_PLAYERS = 4;
+
+export type Player = {
+  code: string;
+  highScore?: number;
+  speedyRun?: number;
+};
+
+export type PlayerSelect = {
+  [code: string]: Player;
+};
+
 export type Options = {
-  player: string;
+  player: Player;
+  players: PlayerSelect;
   paused: boolean;
   gravity: boolean;
   filters: boolean;
   debug: boolean;
+};
+
+type Option = {
+  name: string;
+  value: boolean | string;
+  onClick?: () => void;
+};
+
+const Option: React.FC<Option> = ({ name, value, onClick }) => {
+  const display = typeof value === "boolean" ? (value ? "ON" : "OFF") : value;
+  return (
+    <div className="Option">
+      {name}:
+      <span
+        className={`${onClick ? "clickable" : ""} LargerBoldItalic`}
+        onClick={onClick}
+      >
+        {display}
+      </span>
+    </div>
+  );
 };
 
 const Options: React.FC = () => {
@@ -27,14 +61,11 @@ const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options);
 
-  const then = "JUL 09 1981";
-  const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
-
+  const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
   const dispatchToggleFilters = () => dispatch(toggleFilters());
   const dispatchToggleGravity = () => dispatch(toggleGravity());
   const dispatchTogglePaused = () => dispatch(togglePaused());
   const dispatchToggleDebug = () => dispatch(toggleDebug());
-  const dispatchSetPlayer = () => dispatch(setPlayer("​"));
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchUnpause = () => dispatch(setPaused(false));
 
@@ -60,7 +91,7 @@ const Options: React.FC = () => {
 
   useKeyboard({
     key: then.slice(-4),
-    onKeyDown: dispatchSetPlayer,
+    onKeyDown: () => dispatchSetPlayer("​"),
   });
 
   useEffect(() => {
@@ -74,6 +105,9 @@ const Options: React.FC = () => {
       window.removeEventListener("blur", dispatchPause);
     };
   }, []);
+
+  const unlockedPlayers = Object.values(options.players);
+  const missingPlayers = MAX_PLAYERS - unlockedPlayers.length;
 
   return (
     <>
@@ -103,14 +137,45 @@ const Options: React.FC = () => {
               onClick={dispatchToggleDebug}
             />
           )}
+          <div className="Paused" onClick={dispatchUnpause}>
+            PAUSE
+          </div>
+          {/** extract to component */}
+          <div className="PlayerSelect">
+            <u>PLAYER SELECT</u>
+            <div className="Players">
+              {unlockedPlayers.map(({ code }) => {
+                const selected = code === options.player.code ? "selected" : "";
+                return (
+                  <div
+                    key={code}
+                    className={`Select ${selected}`}
+                    onClick={() => dispatchSetPlayer(code)}
+                  >
+                    <div className={`Jumpman Block right ${code}`} />
+                  </div>
+                );
+              })}
+            </div>
+            {missingPlayers > 0 ? (
+              <>
+                MISSING: {missingPlayers} PLAYER{missingPlayers > 1 ? "S" : ""}
+              </>
+            ) : (
+              <div className="LargerBoldItalic">
+                <span className="emoji">⭐</span>
+                YOU ARE A SUPER PLAYER!
+                <span className="emoji">⭐</span>
+              </div>
+            )}
+          </div>
           <div className="Date">
             <span>{then}</span>
             <span>{now}</span>
           </div>
-          <div className="Paused" onClick={dispatchUnpause}>
-            PAUSE
-          </div>
-          <span className="Credits">Made with ❤️ by {author}</span>
+          <span className="Credits">
+            Made with <span className="emoji">❤️</span> by {author}
+          </span>
         </div>
       )}
       {options.filters && <div className="Filters" />}
@@ -119,22 +184,7 @@ const Options: React.FC = () => {
   );
 };
 
-type Option = {
-  name: string;
-  value: boolean | string;
-  onClick?: () => void;
-};
-
-const Option: React.FC<Option> = ({ name, value, onClick }) => {
-  const display = typeof value === "boolean" ? (value ? "ON" : "OFF") : value;
-  return (
-    <div className="Option">
-      {name}:
-      <span className={onClick ? "clickable" : ""} onClick={onClick}>
-        {display}
-      </span>
-    </div>
-  );
-};
+export const then = "JUL 09 1981";
+const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
 
 export default Options;

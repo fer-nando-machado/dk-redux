@@ -3,6 +3,7 @@ import { StoreDispatch } from "./Store";
 import { addPoints } from "./StatusSlice";
 import { isDuckHunting } from "./Player/Dog";
 import { Points } from "./Status";
+import "./Target.scss";
 
 type Target = {
   points: Points;

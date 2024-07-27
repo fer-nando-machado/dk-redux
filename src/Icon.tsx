@@ -1,28 +1,21 @@
 import { useState, useEffect } from "react";
+import { then } from "./Game/Options";
 
 const Icon: React.FC = () => {
-  const [content, setContent] = useState("");
+  const [icon, setIcon] = useState("");
   useEffect(() => {
-    fetch(icon.svg)
+    fetch("icon.svg")
       .then((response) => response.text())
-      .then((data) => {
-        setContent(data);
-      });
+      .then(setIcon);
   }, []);
-  1;
+
   return (
     <div
-      dangerouslySetInnerHTML={{ __html: content }}
-      className={icon.game}
-      id={icon.year}
+      className="dk"
+      dangerouslySetInnerHTML={{ __html: icon }}
+      id={then.slice(-4)}
     />
   );
-};
-
-const icon = {
-  svg: "icon.svg",
-  year: "1981",
-  game: "dk",
 };
 
 export default Icon;

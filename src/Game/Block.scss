@@ -9,24 +9,3 @@
     display: none;
   }
 }
-
-.Target {
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: -25px;
-    bottom: -25px;
-    left: -25px;
-    right: -25px;
-    border-radius: 50px;
-  }
-
-  &.Aim {
-    cursor: crosshair;
-    &::after {
-      outline: 4px solid cyan;
-      opacity: 0.84;
-    }
-  }
-}

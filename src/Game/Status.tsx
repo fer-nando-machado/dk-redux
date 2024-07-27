@@ -19,6 +19,14 @@ const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { score, points } = useSelector((state: RootState) => state.status);
 
+  const [opacity, setOpacity] = useState(1);
+  useEffect(() => {
+    if (!points) return;
+    setOpacity(1);
+    const timeout = setTimeout(() => setOpacity(0), 1000);
+    return () => clearTimeout(timeout);
+  }, [points]);
+
   const clickPause = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     dispatch(setPaused(true));
@@ -28,14 +36,6 @@ const Status: React.FC = () => {
     event.preventDefault();
     window.location.reload();
   };
-
-  const [opacity, setOpacity] = useState(1);
-  useEffect(() => {
-    if (!points) return;
-    setOpacity(1);
-    const timeout = setTimeout(() => setOpacity(0), 1000);
-    return () => clearTimeout(timeout);
-  }, [points]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 .Jumpman {
-  outline: 2px outset brown;
-  background: brown;
+  background: white;
+  outline: 2px outset white;
 
   &.M {
     background-color: red;
@@ -34,6 +34,8 @@
   }
 
   &.​ {
+    outline: 2px outset brown;
+    background: brown;
     outline-width: 7.5px;
     &::before {
       content: "!";
@@ -49,6 +51,6 @@
   }
 }
 
-.Game:has(.Jumpman.​) {
+.Game:has(.Player.Jumpman.​) {
   color: red;
 }
