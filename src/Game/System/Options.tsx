@@ -12,6 +12,7 @@ import {
   toggleFilters,
   toggleGravity,
   togglePaused,
+  winPlayer,
 } from "./OptionsSlice";
 import "./Options.scss";
 
@@ -58,6 +59,12 @@ const Options: React.FC = () => {
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchUnpause = () => dispatch(setPaused(false));
 
+  const dispatchWinPlayer = () => dispatch(winPlayer());
+  useKeyboard({
+    key: "W",
+    onKeyDown: dispatchWinPlayer,
+  });
+
   useKeyboard({
     key: "F8",
     onKeyDown: dispatchToggleFilters,
@@ -102,9 +109,7 @@ const Options: React.FC = () => {
           <div>
             <u>{name}</u> <small>v{version}</small>
             <p>{description}</p>
-            <p>
-              <u>OPTIONS</u>
-            </p>
+            <u>OPTIONS</u>
             <Option
               name="FILTERS"
               value={options.filters}
