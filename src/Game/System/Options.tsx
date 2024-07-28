@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../Store";
+import useHash from "../Hooks/useHash";
+import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
+import { name, version, author, description } from "../../../package.json";
+import PlayerSelect, { Player, PlayerSelectMap } from "./PlayerSelect";
 import {
   setPaused,
   setPlayer,
@@ -9,26 +13,11 @@ import {
   toggleGravity,
   togglePaused,
 } from "./OptionsSlice";
-import useHash from "../Hooks/useHash";
-import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
-import { name, version, author, description } from "../../../package.json";
 import "./Options.scss";
-
-const MAX_PLAYERS = 4;
-
-export type Player = {
-  code: string;
-  highScore?: number;
-  speedyRun?: number;
-};
-
-export type PlayerSelect = {
-  [code: string]: Player;
-};
 
 export type Options = {
   player: Player;
-  playerSelect: PlayerSelect;
+  playerSelect: PlayerSelectMap;
   paused: boolean;
   gravity: boolean;
   filters: boolean;
@@ -106,13 +95,6 @@ const Options: React.FC = () => {
     };
   }, []);
 
-  const unlockedPlayers = Object.values(options.playerSelect);
-  const missingPlayers = MAX_PLAYERS - unlockedPlayers.length;
-  const missingMessage = `${missingPlayers} PLAYER${
-    missingPlayers > 1 ? "S" : ""
-  }`;
-  const completionRate = (unlockedPlayers.length * 100) / MAX_PLAYERS;
-
   return (
     <>
       {options.paused && (
@@ -147,36 +129,7 @@ const Options: React.FC = () => {
             PAUSE
           </div>
           <div>
-            {/** extract to component */}
-            <div className="PlayerSelect">
-              <u>PLAYER SELECT</u>
-              <div className="CompletionRate LargerBoldItalic">
-                {completionRate === 100 && <span className="emoji">⭐</span>}
-                {completionRate}%
-              </div>
-              <div className="Players">
-                {unlockedPlayers.map(({ code }) => {
-                  const isActive = code === options.player.code ? "Active" : "";
-                  return (
-                    <div
-                      key={code}
-                      className={`Select ${isActive}`}
-                      onClick={() => dispatchSetPlayer(code)}
-                    >
-                      <div className={`Jumpman Block right ${code}`}>
-                        {/** TODO generalize optional decoration acessory */}
-                        {code == "DH" ? "oo" : ""}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              {missingPlayers > 0 ? (
-                <Option name="MISSING" value={missingMessage} />
-              ) : (
-                <div className="LargerBoldItalic">EVERYBODY IS HERE!</div>
-              )}
-            </div>
+            <PlayerSelect />
             <div className="Credits">
               <div className="Date">
                 <span>{then}</span>

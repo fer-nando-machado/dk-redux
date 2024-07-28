@@ -1,16 +1,23 @@
 .Game {
+  position: relative;
   font-family: "Press Start 2P", "Courier New", monospace;
   height: 750px;
   min-height: 750px;
   width: 500px;
   min-width: 500px;
-  position: relative;
   padding: 2.5px;
   outline: 10px ridge black;
   border-radius: 5px;
   color: white;
   background-color: black;
   overflow: hidden;
+  font-size: 16px;
+
+  .LargerBoldItalic {
+    font-size: larger;
+    font-weight: bold;
+    font-style: italic;
+  }
 
   .emoji {
     vertical-align: bottom;

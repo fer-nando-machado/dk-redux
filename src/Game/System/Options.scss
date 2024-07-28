@@ -22,13 +22,6 @@
     }
   }
 
-  .LargerBoldItalic {
-    font-size: larger;
-    font-weight: bold;
-    font-style: italic;
-    text-align: center;
-  }
-
   .Paused {
     display: flex;
     justify-content: center;
@@ -36,36 +29,6 @@
     flex: 1;
     font-size: larger;
     cursor: pointer;
-  }
-
-  .PlayerSelect {
-    position: relative;
-    margin-bottom: 25px;
-
-    .CompletionRate {
-      position: absolute;
-      right: 5px;
-      top: -5px;
-    }
-
-    .Players {
-      display: flex;
-      justify-content: space-evenly;
-      margin: 25px 0;
-      .Select {
-        padding: 15px;
-        cursor: pointer;
-        &.Active {
-          border-radius: 50px;
-          background: #ffffff50;
-        }
-      }
-
-      .Block {
-        position: relative;
-        transform: scale(75%);
-      }
-    }
   }
 
   .Credits {
