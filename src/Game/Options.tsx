@@ -108,6 +108,9 @@ const Options: React.FC = () => {
 
   const unlockedPlayers = Object.values(options.playerSelect);
   const missingPlayers = MAX_PLAYERS - unlockedPlayers.length;
+  const missingMessage = `${missingPlayers} PLAYER${
+    missingPlayers > 1 ? "S" : ""
+  }`;
   const completionRate = (unlockedPlayers.length * 100) / MAX_PLAYERS;
 
   return (
@@ -169,11 +172,7 @@ const Options: React.FC = () => {
                 })}
               </div>
               {missingPlayers > 0 ? (
-                <Option
-                  name="MISSING"
-                  value={`${missingPlayers} PLAYER
-                  ${missingPlayers > 1 ? "S" : ""}`}
-                />
+                <Option name="MISSING" value={missingMessage} />
               ) : (
                 <div className="LargerBoldItalic">EVERYBODY IS HERE!</div>
               )}
