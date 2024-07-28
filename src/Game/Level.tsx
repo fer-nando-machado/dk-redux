@@ -1,19 +1,14 @@
 import { useDispatch } from "react-redux";
 import { StoreDispatch } from "./Store";
-
+import { LEFT, RIGHT } from "./Block";
 import { Jumpman } from "./Jumpman";
 import { setJumpman } from "./JumpmanSlice";
-
 import { BarrelFactory } from "./Barrel";
 import { setBarrelFactory } from "./BarrelSlice";
-
+import { DuckFactory } from "./Player/Hunt/Duck";
+import { setDuckFactory } from "./Player/Hunt/DuckSlice";
 import { PlatformFactory, Platform } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
-
-import { DuckFactory } from "./Duck";
-import { setDuckFactory } from "./DuckSlice";
-
-import { LEFT, RIGHT } from "./Block";
 import { setPlayer } from "./System/OptionsSlice";
 
 const jumpman: Jumpman = {
@@ -58,8 +53,8 @@ const Level: React.FC = () => {
   dispatch(setDuckFactory(duckFactory));
   dispatch(setBarrelFactory(barrelFactory));
   dispatch(setJumpman(jumpman));
-  dispatch(setPlayer("M"));
   dispatch(setPlayer("D"));
+  dispatch(setPlayer("M"));
 
   return (
     <>

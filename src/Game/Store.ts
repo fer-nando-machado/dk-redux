@@ -3,8 +3,8 @@ import optionsReducer from "./System/OptionsSlice";
 import statusReducer from "./System/StatusSlice";
 import jumpmanReducer from "./JumpmanSlice";
 import barrelReducer from "./BarrelSlice";
-import duckReducer from "./DuckSlice";
 import platformReducer from "./PlatformSlice";
+import duckReducer from "./Player/Hunt/DuckSlice";
 
 export const Store = configureStore({
   reducer: {

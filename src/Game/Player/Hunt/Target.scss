@@ -10,7 +10,7 @@
     border-radius: 50px;
   }
 
-  &.Aim {
+  &.Crosshair {
     cursor: crosshair;
     &::after {
       outline: 4px solid rgba($color: cyan, $alpha: 0.84);

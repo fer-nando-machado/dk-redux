@@ -7,7 +7,7 @@ import { moveJumpman } from "./JumpmanSlice";
 import useKeyboard from "./Hooks/useKeyboard";
 import useInterval from "./Hooks/useInterval";
 import DeutschBox from "./Player/DeutschBox";
-import Dog from "./Player/Dog";
+import Dog from "./Player/Hunt/Dog";
 import "./Jumpman.scss";
 
 export type Jumpman = Block & {};
