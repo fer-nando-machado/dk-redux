@@ -3,7 +3,7 @@ import { Options } from "./Options";
 
 const initialState: Options = {
   player: { code: "M" },
-  players: {},
+  playerSelect: {},
   paused: false,
   gravity: true,
   filters: true,
@@ -17,8 +17,8 @@ const slice = createSlice({
     setPlayer: (state, action: PayloadAction<string>) => {
       const code = action.payload;
       state.player = { code };
-      if (state.players[code]) return;
-      state.players[code] = { code };
+      if (state.playerSelect[code]) return;
+      state.playerSelect[code] = { code };
     },
     setPaused: (state, action: PayloadAction<boolean>) => {
       state.paused = action.payload;

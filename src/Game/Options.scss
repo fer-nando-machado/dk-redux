@@ -1,4 +1,7 @@
 .Options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
   top: 0;
   left: 0;
@@ -8,23 +11,13 @@
   background: black;
   opacity: 0.81;
 
-  .Paused {
-    position: absolute;
-    font-size: larger;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    top: calc(50% - 50px);
-    padding: 50px 0;
-    width: 100%;
-  }
-
   .Option {
     margin: 25px 0;
     span {
       padding: 12.5px;
       &.clickable {
         cursor: pointer;
+        text-decoration: underline;
       }
     }
   }
@@ -36,20 +29,33 @@
     text-align: center;
   }
 
+  .Paused {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    font-size: larger;
+    cursor: pointer;
+  }
+
   .PlayerSelect {
-    position: absolute;
-    width: 100%;
-    height: 170px;
-    bottom: 100px;
+    position: relative;
+    margin-bottom: 25px;
+
+    .CompletionRate {
+      position: absolute;
+      right: 5px;
+      top: -5px;
+    }
 
     .Players {
       display: flex;
       justify-content: space-evenly;
       margin: 25px 0;
       .Select {
-        padding: 25px;
+        padding: 15px;
         cursor: pointer;
-        &.selected {
+        &.Active {
           border-radius: 50px;
           background: #ffffff50;
         }
@@ -57,43 +63,36 @@
 
       .Block {
         position: relative;
-      }
-    }
-  }
-
-  .Date {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 25px;
-    bottom: 25px;
-
-    span {
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      &:nth-child(1) {
-        animation: transition 2s infinite;
-      }
-      &:nth-child(2) {
-        animation: transition 2s infinite 1s;
-      }
-      @keyframes transition {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
+        transform: scale(75%);
       }
     }
   }
 
   .Credits {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    .Date {
+      position: relative;
+      height: 30px;
+      span {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        &:nth-child(1) {
+          animation: date-flicker 2s infinite;
+        }
+        &:nth-child(2) {
+          animation: date-flicker 2s infinite 1s;
+        }
+        @keyframes date-flicker {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+        }
+      }
+    }
   }
 }
 

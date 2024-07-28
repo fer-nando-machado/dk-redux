@@ -32,10 +32,10 @@ const App: React.FC = () => {
                 x.80665... m/s <sup>2</sup>
               </span>
               <br />
-              Debug: F13 <span className="Hash Hint">/#</span>
+              Debug: F13
             </p>
             &nbsp;Code: F12
-            <span className="Code Hint">{"<HTML/>  CSS{.dk}?"}</span>
+            <span className="Code Hint">{"<HTML/> CSS{.dk}?"}</span>
           </div>
         </div>
         <Game />

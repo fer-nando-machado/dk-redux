@@ -28,7 +28,7 @@ export type PlayerSelect = {
 
 export type Options = {
   player: Player;
-  players: PlayerSelect;
+  playerSelect: PlayerSelect;
   paused: boolean;
   gravity: boolean;
   filters: boolean;
@@ -106,76 +106,86 @@ const Options: React.FC = () => {
     };
   }, []);
 
-  const unlockedPlayers = Object.values(options.players);
+  const unlockedPlayers = Object.values(options.playerSelect);
   const missingPlayers = MAX_PLAYERS - unlockedPlayers.length;
+  const completionRate = (unlockedPlayers.length * 100) / MAX_PLAYERS;
 
   return (
     <>
       {options.paused && (
         <div className="Options">
-          <u>{name}</u> <small>v{version}</small>
-          <p>{description}</p>
-          <p>
-            <u>OPTIONS</u>
-          </p>
-          <Option
-            name="FILTERS"
-            value={options.filters}
-            onClick={dispatchToggleFilters}
-          />
-          {!options.gravity && (
+          <div>
+            <u>{name}</u> <small>v{version}</small>
+            <p>{description}</p>
+            <p>
+              <u>OPTIONS</u>
+            </p>
             <Option
-              name="GRAVITY"
-              value={options.gravity}
-              onClick={dispatchToggleGravity}
+              name="FILTERS"
+              value={options.filters}
+              onClick={dispatchToggleFilters}
             />
-          )}
-          {options.debug && (
-            <Option
-              name="DEBUG"
-              value={options.debug}
-              onClick={dispatchToggleDebug}
-            />
-          )}
+            {!options.gravity && (
+              <Option
+                name="GRAVITY"
+                value={options.gravity}
+                onClick={dispatchToggleGravity}
+              />
+            )}
+            {options.debug && (
+              <Option
+                name="DEBUG"
+                value={options.debug}
+                onClick={dispatchToggleDebug}
+              />
+            )}
+          </div>
           <div className="Paused" onClick={dispatchUnpause}>
             PAUSE
           </div>
-          {/** extract to component */}
-          <div className="PlayerSelect">
-            <u>PLAYER SELECT</u>
-            <div className="Players">
-              {unlockedPlayers.map(({ code }) => {
-                const selected = code === options.player.code ? "selected" : "";
-                return (
-                  <div
-                    key={code}
-                    className={`Select ${selected}`}
-                    onClick={() => dispatchSetPlayer(code)}
-                  >
-                    <div className={`Jumpman Block right ${code}`} />
-                  </div>
-                );
-              })}
-            </div>
-            {missingPlayers > 0 ? (
-              <>
-                MISSING: {missingPlayers} PLAYER{missingPlayers > 1 ? "S" : ""}
-              </>
-            ) : (
-              <div className="LargerBoldItalic">
-                <span className="emoji">⭐</span>
-                YOU ARE A SUPER PLAYER!
-                <span className="emoji">⭐</span>
+          <div>
+            {/** extract to component */}
+            <div className="PlayerSelect">
+              <u>PLAYER SELECT</u>
+              <div className="CompletionRate LargerBoldItalic">
+                {completionRate === 100 && <span className="emoji">⭐</span>}
+                {completionRate}%
               </div>
-            )}
+              <div className="Players">
+                {unlockedPlayers.map(({ code }) => {
+                  const isActive = code === options.player.code ? "Active" : "";
+                  return (
+                    <div
+                      key={code}
+                      className={`Select ${isActive}`}
+                      onClick={() => dispatchSetPlayer(code)}
+                    >
+                      <div className={`Jumpman Block right ${code}`}>
+                        {/** TODO generalize optional decoration acessory */}
+                        {code == "DH" ? "oo" : ""}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              {missingPlayers > 0 ? (
+                <Option
+                  name="MISSING"
+                  value={`${missingPlayers} PLAYER
+                  ${missingPlayers > 1 ? "S" : ""}`}
+                />
+              ) : (
+                <div className="LargerBoldItalic">EVERYBODY IS HERE!</div>
+              )}
+            </div>
+            <div className="Credits">
+              <div className="Date">
+                <span>{then}</span>
+                <span>{now}</span>
+              </div>
+              Made with <span className="emoji">❤️</span> by {author}
+            </div>
           </div>
-          <div className="Date">
-            <span>{then}</span>
-            <span>{now}</span>
-          </div>
-          <span className="Credits">
-            Made with <span className="emoji">❤️</span> by {author}
-          </span>
         </div>
       )}
       {options.filters && <div className="Filters" />}

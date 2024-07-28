@@ -8,6 +8,8 @@ import "./Status.scss";
 export type Points = {
   position: Position;
   value: number;
+  // convert to string and turn Points into Alert or something.
+  // allow to styles (basic for Points, custom for important msg)
 };
 
 export type Status = {
