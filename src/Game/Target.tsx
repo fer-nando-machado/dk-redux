@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { StoreDispatch } from "./Store";
-import { addPoints } from "./StatusSlice";
+import { Points } from "./System/Status";
+import { addPoints } from "./System/StatusSlice";
 import { isDuckHunting } from "./Player/Dog";
-import { Points } from "./Status";
 import "./Target.scss";
 
 type Target = {

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import optionsReducer from "./OptionsSlice";
-import statusReducer from "./StatusSlice";
+import optionsReducer from "./System/OptionsSlice";
+import statusReducer from "./System/StatusSlice";
 import jumpmanReducer from "./JumpmanSlice";
 import barrelReducer from "./BarrelSlice";
 import duckReducer from "./DuckSlice";

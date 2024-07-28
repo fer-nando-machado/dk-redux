@@ -1,8 +1,8 @@
 import { Provider } from "react-redux";
 import { Store } from "./Store";
 import Level from "./Level";
-import Status from "./Status";
-import Options from "./Options";
+import Status from "./System/Status";
+import Options from "./System/Options";
 import "./Block.scss";
 import "./index.scss";
 

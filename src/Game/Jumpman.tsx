@@ -2,7 +2,7 @@ import { Block } from "./Block";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { useRef } from "react";
-import { setPlayer } from "./OptionsSlice";
+import { setPlayer } from "./System/OptionsSlice";
 import { moveJumpman } from "./JumpmanSlice";
 import useKeyboard from "./useKeyboard";
 import useInterval from "./useInterval";

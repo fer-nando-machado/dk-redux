@@ -2,7 +2,7 @@ import ReactDeutschBox from "react-deutschbox";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../Store";
 import { useEffect, useRef } from "react";
-import { setPlayer } from "../OptionsSlice";
+import { setPlayer } from "../System/OptionsSlice";
 import useKeyboard from "../useKeyboard";
 import "./DeutschBox.scss";
 

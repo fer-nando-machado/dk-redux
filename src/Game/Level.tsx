@@ -14,7 +14,7 @@ import { DuckFactory } from "./Duck";
 import { setDuckFactory } from "./DuckSlice";
 
 import { LEFT, RIGHT } from "./Block";
-import { setPlayer } from "./OptionsSlice";
+import { setPlayer } from "./System/OptionsSlice";
 
 const jumpman: Jumpman = {
   x: 25,

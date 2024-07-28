@@ -9,7 +9,7 @@ import {
 } from "./DuckSlice";
 import useInterval from "./useInterval";
 import "./Duck.scss";
-import { setPlayer } from "./OptionsSlice";
+import { setPlayer } from "./System/OptionsSlice";
 import { isDuckHunting } from "./Player/Dog";
 import { getRandomX } from "./Position";
 import Target from "./Target";

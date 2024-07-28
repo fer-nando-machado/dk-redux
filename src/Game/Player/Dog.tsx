@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../Store";
-import { setPlayer } from "../OptionsSlice";
+import { setPlayer } from "../System/OptionsSlice";
 import useKeyboard from "../useKeyboard";
 import "./Dog.scss";
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreDispatch, RootState } from "./Store";
+import { StoreDispatch, RootState } from "../Store";
 import {
   setPaused,
   setPlayer,
@@ -9,9 +9,9 @@ import {
   toggleGravity,
   togglePaused,
 } from "./OptionsSlice";
-import useHash from "./useHash";
-import useKeyboard, { dispatchKeyDown } from "./useKeyboard";
-import { name, version, author, description } from "../../package.json";
+import useHash from "../useHash";
+import useKeyboard, { dispatchKeyDown } from "../useKeyboard";
+import { name, version, author, description } from "../../../package.json";
 import "./Options.scss";
 
 const MAX_PLAYERS = 4;
