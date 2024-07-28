@@ -9,8 +9,8 @@ import {
   toggleGravity,
   togglePaused,
 } from "./OptionsSlice";
-import useHash from "../useHash";
-import useKeyboard, { dispatchKeyDown } from "../useKeyboard";
+import useHash from "../Hooks/useHash";
+import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
 import { name, version, author, description } from "../../../package.json";
 import "./Options.scss";
 

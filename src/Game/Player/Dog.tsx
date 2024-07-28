@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../Store";
 import { setPlayer } from "../System/OptionsSlice";
-import useKeyboard from "../useKeyboard";
+import useKeyboard from "../Hooks/useKeyboard";
 import "./Dog.scss";
 
 const CODE = "DH";

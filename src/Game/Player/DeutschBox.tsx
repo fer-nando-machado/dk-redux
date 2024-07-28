@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../Store";
 import { useEffect, useRef } from "react";
 import { setPlayer } from "../System/OptionsSlice";
-import useKeyboard from "../useKeyboard";
+import useKeyboard from "../Hooks/useKeyboard";
 import "./DeutschBox.scss";
 
 const CODE = "D";

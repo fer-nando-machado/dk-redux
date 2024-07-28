@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "./Store";
 import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
 import Target from "./Target";
-import useInterval from "./useInterval";
+import useInterval from "./Hooks/useInterval";
 import "./Barrel.scss";
 
 export type Barrel = Block & { id: number };

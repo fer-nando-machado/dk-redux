@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "./Store";
+import { RootState } from "../Store";
 
 const REFRESH_RATE = 1000 / 60;
 

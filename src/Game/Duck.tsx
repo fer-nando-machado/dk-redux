@@ -7,7 +7,7 @@ import {
   destroyDuck,
   moveDuckFactory,
 } from "./DuckSlice";
-import useInterval from "./useInterval";
+import useInterval from "./Hooks/useInterval";
 import "./Duck.scss";
 import { setPlayer } from "./System/OptionsSlice";
 import { isDuckHunting } from "./Player/Dog";
