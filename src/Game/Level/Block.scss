@@ -2,6 +2,13 @@
   position: absolute;
   width: 25px;
   height: 25px;
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    pointer-events: none;
+  }
+
   &.Round {
     border-radius: 25px;
   }

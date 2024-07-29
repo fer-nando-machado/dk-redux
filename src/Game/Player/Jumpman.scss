@@ -15,7 +15,6 @@
     top: -5px;
     left: 4.5px;
     color: red;
-    pointer-events: none;
   }
 
   &::after {
@@ -24,7 +23,6 @@
     top: -3px;
     color: black;
     font-weight: bold;
-    pointer-events: none;
   }
   &.left::after {
     right: -3px;

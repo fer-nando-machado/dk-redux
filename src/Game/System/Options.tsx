@@ -122,13 +122,6 @@ const Options: React.FC = () => {
                 onClick={dispatchToggleGravity}
               />
             )}
-            {options.debug && (
-              <Option
-                name="DEBUG"
-                value={options.debug}
-                onClick={dispatchToggleDebug}
-              />
-            )}
           </div>
           <div className="Paused" onClick={dispatchUnpause}>
             PAUSE
@@ -140,13 +133,15 @@ const Options: React.FC = () => {
                 <span>{then}</span>
                 <span>{now}</span>
               </div>
-              Made with <span className="emoji">❤️</span> by {author}
+              Made with<span className="emoji">❤️</span>by {author}
             </div>
           </div>
         </div>
       )}
       {options.filters && <div className="Filters" />}
-      {options.debug && <div className="Debug" />}
+      {options.debug && (
+        <div className="Debug">DEBUG {options.paused && "PAUSE"}</div>
+      )}
     </>
   );
 };

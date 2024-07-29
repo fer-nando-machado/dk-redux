@@ -18,13 +18,10 @@
   &::before {
     content: "( )";
     position: absolute;
-    font-size: 21px;
+    font-size: large;
     font-weight: bold;
-    top: 3px;
-    left: -24px;
-    width: 74px;
-    text-align: center;
-    pointer-events: none;
+    top: 7px;
+    left: -14px;
     animation: flap 1s infinite linear;
     @keyframes flap {
       0%,
@@ -46,8 +43,7 @@
   &::after {
     position: absolute;
     font-weight: bold;
-    color: orange;
-    pointer-events: none;
+    color: goldenrod;
   }
   &.left::after {
     content: ">";
