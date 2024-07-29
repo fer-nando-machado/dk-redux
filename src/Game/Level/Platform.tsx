@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RootState } from "./reduxStore";
+import { RootState } from "../reduxStore";
 import { Position } from "./Position";
 import "./Platform.scss";
 

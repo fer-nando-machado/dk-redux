@@ -1,15 +1,15 @@
 import { useDispatch } from "react-redux";
-import { StoreDispatch } from "./reduxStore";
-import { LEFT, RIGHT } from "./Block";
-import { Jumpman } from "./Jumpman";
-import { setJumpman } from "./JumpmanSlice";
+import { DuckFactory } from "../Player/Hunt/Duck";
+import { setDuckFactory } from "../Player/Hunt/DuckSlice";
+import { Jumpman } from "../Player/Jumpman";
+import { setJumpman } from "../Player/JumpmanSlice";
+import { setPlayer } from "../System/OptionsSlice";
+import { StoreDispatch } from "../reduxStore";
 import { BarrelFactory } from "./Barrel";
 import { setBarrelFactory } from "./BarrelSlice";
-import { DuckFactory } from "./Player/Hunt/Duck";
-import { setDuckFactory } from "./Player/Hunt/DuckSlice";
-import { PlatformFactory, Platform } from "./Platform";
+import { RIGHT, LEFT } from "./Block";
+import { Platform, PlatformFactory } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
-import { setPlayer } from "./System/OptionsSlice";
 
 const jumpman: Jumpman = {
   x: 25,

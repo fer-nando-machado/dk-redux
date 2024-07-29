@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { StoreDispatch, RootState } from "./reduxStore";
-import useInterval from "./Hooks/useInterval";
+import { StoreDispatch, RootState } from "../reduxStore";
 import { Block, isDirectionLeft } from "./Block";
-import { createBarrel, moveBarrel, destroyBarrel } from "./BarrelSlice";
-import Target from "./Player/Hunt/Target";
+import { moveBarrel, destroyBarrel, createBarrel } from "./BarrelSlice";
+import useInterval from "../Hooks/useInterval";
+import Target from "../Player/Hunt/Target";
 import "./Barrel.scss";
 
 export type Barrel = Block & { id: number };

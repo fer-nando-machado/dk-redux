@@ -1,13 +1,13 @@
-import { Block } from "./Block";
-import { useDispatch, useSelector } from "react-redux";
-import { StoreDispatch, RootState } from "./reduxStore";
 import { useRef } from "react";
-import { setPlayer } from "./System/OptionsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { StoreDispatch, RootState } from "../reduxStore";
+import useInterval from "../Hooks/useInterval";
+import useKeyboard from "../Hooks/useKeyboard";
+import { setPlayer } from "../System/OptionsSlice";
+import { Block } from "../Level/Block";
 import { moveJumpman } from "./JumpmanSlice";
-import useKeyboard from "./Hooks/useKeyboard";
-import useInterval from "./Hooks/useInterval";
-import DeutschBox from "./Player/DeutschBox";
-import Dog from "./Player/Hunt/Dog";
+import DeutschBox from "./DeutschBox";
+import Dog from "./Hunt/Dog";
 import "./Jumpman.scss";
 
 export type Jumpman = Block & {};

@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import optionsReducer from "./System/OptionsSlice";
 import statusReducer from "./System/StatusSlice";
-import jumpmanReducer from "./JumpmanSlice";
-import barrelReducer from "./BarrelSlice";
-import platformReducer from "./PlatformSlice";
+import barrelReducer from "./Level/BarrelSlice";
+import platformReducer from "./Level/PlatformSlice";
+import jumpmanReducer from "./Player/JumpmanSlice";
 import duckReducer from "./Player/Hunt/DuckSlice";
 
 export const Store = configureStore({

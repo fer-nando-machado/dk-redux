@@ -1,18 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../../reduxStore";
-
-import useInterval from "../../Hooks/useInterval";
+import { Block, isDirectionLeft, getRandomDirection } from "../../Level/Block";
+import { getRandomX } from "../../Level/Position";
 import { setPlayer } from "../../System/OptionsSlice";
-import { getRandomX } from "../../Position";
-import { Block, getRandomDirection, isDirectionLeft } from "../../Block";
-
+import useInterval from "../../Hooks/useInterval";
 import {
   createDuck,
   moveDuck,
   destroyDuck,
   moveDuckFactory,
 } from "./DuckSlice";
-
 import { isDuckHunting } from "./Dog";
 import Target from "./Target";
 

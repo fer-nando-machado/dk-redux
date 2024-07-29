@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
+import { Position } from "../Level/Position";
 import { setPaused } from "./OptionsSlice";
-import { Position } from "../Position";
 import "./Status.scss";
 
 export type Points = {
