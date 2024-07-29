@@ -81,7 +81,7 @@ const App: React.FC = () => {
             <u>MUSIC SELECT</u>
             <div>
               <iframe
-                src="https://www.youtube.com/embed/d-b8gHsWEJo?si=xhQ9vv8_mnwy85I8"
+                src="https://www.youtube-nocookie.com/embed/d-b8gHsWEJo"
                 title="Music Select"
               />
             </div>

@@ -5,15 +5,15 @@ const Icon: React.FC = () => {
   const [icon, setIcon] = useState("");
   useEffect(() => {
     fetch("icon.svg")
-      .then((response) => response.text())
+      .then((svg) => svg.text())
       .then(setIcon);
   }, []);
 
   return (
     <div
       className="dk"
-      dangerouslySetInnerHTML={{ __html: icon }}
       id={then.slice(-4)}
+      dangerouslySetInnerHTML={{ __html: icon }}
     />
   );
 };
