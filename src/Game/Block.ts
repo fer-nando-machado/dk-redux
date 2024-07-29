@@ -1,10 +1,11 @@
 import { Position } from "./Position";
+import "./Block.scss";
 
 export const LEFT = "left";
 export const RIGHT = "right";
 type Direction = "left" | "right";
 
-// TODO TURN into compoment (render target etc inside)
+// TODO TURN into component (render target etc inside)
 export type Block = Position & {
   direction: Direction;
   isJumping: boolean; // change to onAir

@@ -3,7 +3,6 @@ import { Store } from "./Store";
 import Level from "./Level";
 import Status from "./System/Status";
 import Options from "./System/Options";
-import "./Block.scss";
 import "./index.scss";
 
 const Game: React.FC = () => {

@@ -38,57 +38,80 @@
     justify-content: center;
     gap: 6vw;
 
-    .Manual {
-      display: none;
-      @media only screen and (min-width: 1280px) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 18px 0;
-        background-color: brown;
-        outline: 10px ridge brown;
-        border-radius: 5px;
-        width: 22vw;
-        font-size: 1vw;
-      }
+    aside {
+      display: flex;
+      flex-direction: column;
+      gap: 6vw;
 
-      .Hint {
-        position: absolute;
-        font-family: "Nanum Pen Script", cursive;
-        font-size: 1.5vw;
-        color: darkblue;
+      .Manual {
+        display: none;
+        @media only screen and (min-width: 1280px) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          padding: 18px 0;
+          background-color: brown;
+          outline: 10px ridge brown;
+          border-radius: 5px;
+          width: 22vw;
+          font-size: 1vw;
+        }
 
-        &.Gravity {
-          margin: -9.8px 9.8px;
-          transform: rotate(9.8deg);
-        }
-        &.Code {
-          margin: -12px -6px;
-          transform: rotate(-9.8deg);
-        }
-        &.Player {
-          margin: 2px 8px;
-          line-height: 50%;
-          transform: rotate(-4deg);
-        }
-      }
+        .Hint {
+          position: absolute;
+          font-family: "Nanum Pen Script", cursive;
+          font-size: 1.5vw;
+          color: darkblue;
 
-      a {
-        color: white;
-        text-decoration: none;
-        position: relative;
-        &:hover {
-          opacity: 0.81;
-          &::before {
-            position: absolute;
-            content: "<";
-            left: -25px;
+          &.Gravity {
+            margin: -9.8px 9.8px;
+            transform: rotate(9.8deg);
+          }
+          &.Code {
+            margin: -6px;
+            transform: rotate(-9.8deg);
+          }
+          &.Player {
+            margin: 3px 6px;
+            line-height: 50%;
+            transform: rotate(-4deg);
+          }
+        }
+
+        .Download {
+          position: relative;
+          display: flex;
+          align-items: center;
+          font-size: smaller;
+          gap: 1.25vw;
+          img {
+            border-radius: 12.5px;
           }
           &::after {
+            content: "+";
             position: absolute;
-            content: "/>";
-            right: -50px;
+            top: 0;
+            opacity: 0.81;
+          }
+        }
+
+        a {
+          color: white;
+          text-decoration: none;
+          position: relative;
+          &:hover {
+            opacity: 0.81;
+            &::before {
+              position: absolute;
+              content: "<";
+              left: -1vw;
+            }
+            &::after {
+              position: absolute;
+              content: "/>";
+              right: -2vw;
+            }
           }
         }
       }
