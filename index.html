@@ -11,7 +11,9 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "G-E2NXS5RG7W");
+      gtag("config", "G-E2NXS5RG7W", {
+        cookie_flags: "SameSite=None; Secure",
+      });
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,7 +26,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/dk-redux/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/dk-redux/favicon-16x16.png" />
     <link rel="manifest" href="/dk-redux/manifest.json" />
-    
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="black" />
