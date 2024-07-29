@@ -11,7 +11,7 @@ const App: React.FC = () => {
       <h1>
         <Icon /> DK<span>{"<Redux/>"}</span>
       </h1>
-      <div className="Content">
+      <main>
         <aside>
           <div className="Manual">
             <u>HOW TO PLAY</u>
@@ -78,8 +78,8 @@ const App: React.FC = () => {
             <small>&nbsp;&nbsp;(COMING SOON...)</small>
           </div>
         </aside>
-      </div>
-      <div className="Footer">
+      </main>
+      <footer>
         <a href={`mailto:${contact}`} className="Button">
           Contact
         </a>
@@ -89,7 +89,7 @@ const App: React.FC = () => {
         <a href={support} className="Button">
           Support
         </a>
-      </div>
+      </footer>
     </div>
   );
 };

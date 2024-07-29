@@ -15,24 +15,23 @@
     span {
       font-size: 16px;
     }
-  }
-
-  .dk {
-    position: fixed;
-    display: none;
-    top: 25px;
-    left: 25px;
-    width: 12vw;
-    max-width: 200px;
-    opacity: 0.81;
-    color: black;
-    &:target {
-      color: brown;
-      display: block;
+    .dk {
+      position: fixed;
+      display: none;
+      top: 25px;
+      left: 25px;
+      width: 12vw;
+      max-width: 200px;
+      opacity: 0.81;
+      color: black;
+      &:target {
+        color: brown;
+        display: block;
+      }
     }
   }
 
-  .Content {
+  main {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,7 +117,7 @@
     }
   }
 
-  .Footer {
+  footer {
     display: flex;
     align-items: flex-end;
     gap: 18px;
