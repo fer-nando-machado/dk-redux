@@ -12,7 +12,7 @@
   opacity: 0.81;
 
   .Option {
-    margin: 25px 0;
+    margin-top: 12.5px;
     span {
       padding: 12.5px;
       &.clickable {
@@ -27,6 +27,7 @@
     justify-content: center;
     align-items: center;
     flex: 1;
+    margin: 12.5px 0;
     font-size: larger;
     cursor: pointer;
   }

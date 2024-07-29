@@ -51,45 +51,42 @@ const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options);
 
-  const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
-  const dispatchToggleFilters = () => dispatch(toggleFilters());
-  const dispatchToggleGravity = () => dispatch(toggleGravity());
-  const dispatchTogglePaused = () => dispatch(togglePaused());
-  const dispatchEnableDebug = () => dispatch(enableDebug());
-  const dispatchPause = () => dispatch(setPaused(true));
-  const dispatchUnpause = () => dispatch(setPaused(false));
-
   const dispatchWinPlayer = () => dispatch(winPlayer());
+  const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
+
+  const dispatchToggleFilters = () => dispatch(toggleFilters());
+  const dispatchTogglePaused = () => dispatch(togglePaused());
+  const dispatchUnpause = () => dispatch(setPaused(false));
+  const dispatchPause = () => dispatch(setPaused(true));
+
+  const dispatchToggleGravity = () => dispatch(toggleGravity());
+  const dispatchEnableDebug = () => dispatch(enableDebug());
+
   useKeyboard({
     key: "0",
     onKeyDown: dispatchWinPlayer,
   });
-
+  // F2 F4
   useKeyboard({
     key: "F8",
     onKeyDown: dispatchToggleFilters,
   });
-
   useKeyboard({
     key: "F9",
     onKeyDown: dispatchToggleGravity,
   });
-
   useKeyboard({
     key: "F13",
     onKeyDown: dispatchEnableDebug,
   });
-
   useKeyboard({
     key: "Enter",
     onKeyDown: dispatchTogglePaused,
   });
-
   useKeyboard({
     key: then.slice(-4),
     onKeyDown: () => dispatchSetPlayer("​"),
   });
-
   useEffect(() => {
     dispatchKeyDown(hash);
   }, [hash]);
@@ -115,6 +112,7 @@ const Options: React.FC = () => {
               value={options.filters}
               onClick={dispatchToggleFilters}
             />
+            <Option name="REFRESH" value="60FPS" />
           </div>
           <div className="Paused" onClick={dispatchUnpause}>
             PAUSE

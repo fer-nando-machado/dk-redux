@@ -1,6 +1,6 @@
 .PlayerSelect {
   position: relative;
-  height: 205px;
+  margin-bottom: 5px;
 
   .Completion {
     position: absolute;
@@ -12,8 +12,8 @@
     position: relative;
     display: flex;
     justify-content: space-evenly;
-    margin-top: 25px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 
     .Block {
       position: relative;

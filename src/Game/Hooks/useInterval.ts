@@ -2,9 +2,12 @@ import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../reduxStore";
 
-const REFRESH_RATE = 1000 / 60;
+enum RefreshRate {
+  FPS30 = 1000 / 30,
+  FPS60 = 1000 / 60,
+}
 
-const useInterval = (callback: () => void, ms: number = REFRESH_RATE) => {
+const useInterval = (callback: () => void, ms: number = RefreshRate.FPS60) => {
   const paused = useSelector((state: RootState) => state.options.paused);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const callbackRef = useRef<() => void>(callback);
@@ -13,14 +16,14 @@ const useInterval = (callback: () => void, ms: number = REFRESH_RATE) => {
     callbackRef.current = callback;
   }, [callback]);
 
-  const tick = () => {
+  const loop = () => {
     if (!callbackRef.current) return;
     callbackRef.current();
   };
 
   useEffect(() => {
     if (!paused && ms > 0) {
-      intervalRef.current = setInterval(tick, ms);
+      intervalRef.current = setInterval(loop, ms);
     } else if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
