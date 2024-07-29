@@ -77,6 +77,15 @@ const App: React.FC = () => {
             <p>{"<Game Level={...}/>"}</p>
             <small>&nbsp;&nbsp;(COMING SOON...)</small>
           </div>
+          <div className="Manual">
+            <u>MUSIC SELECT</u>
+            <div>
+              <iframe
+                src="https://www.youtube.com/embed/d-b8gHsWEJo?si=xhQ9vv8_mnwy85I8"
+                title="Music Select"
+              />
+            </div>
+          </div>
         </aside>
       </main>
       <footer>

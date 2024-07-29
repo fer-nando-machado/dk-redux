@@ -57,6 +57,33 @@
           font-size: 1vw;
         }
 
+        a {
+          color: white;
+          text-decoration: none;
+          position: relative;
+          &:hover {
+            opacity: 0.81;
+            &::before {
+              position: absolute;
+              content: "<";
+              left: -1vw;
+            }
+            &::after {
+              position: absolute;
+              content: "/>";
+              right: -2vw;
+            }
+          }
+        }
+
+        iframe {
+          border: 0;
+          outline: 4px double white;
+          height: 160px;
+          width: 280px;
+          margin: 25px 0px 5px 0px;
+        }
+
         .Hint {
           position: absolute;
           font-family: "Nanum Pen Script", cursive;
@@ -92,25 +119,6 @@
             position: absolute;
             top: 0;
             opacity: 0.81;
-          }
-        }
-
-        a {
-          color: white;
-          text-decoration: none;
-          position: relative;
-          &:hover {
-            opacity: 0.81;
-            &::before {
-              position: absolute;
-              content: "<";
-              left: -1vw;
-            }
-            &::after {
-              position: absolute;
-              content: "/>";
-              right: -2vw;
-            }
           }
         }
       }
