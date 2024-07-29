@@ -57,8 +57,8 @@ export const BarrelFactory: React.FC = () => {
 
   useInterval(() => {
     const barrel: Barrel = {
-      id: Date.now(),
       ...barrelFactory,
+      id: Date.now(),
     };
     dispatch(createBarrel(barrel));
   }, 4000);
@@ -66,7 +66,7 @@ export const BarrelFactory: React.FC = () => {
   return (
     <>
       <div
-        className={`BarrelFactory Barrel Block Factory Round ${barrelFactory.direction}`}
+        className={`Barrel Factory Block Round ${barrelFactory.direction}`}
         style={{
           left: barrelFactory.x,
           bottom: barrelFactory.y,

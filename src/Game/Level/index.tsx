@@ -1,15 +1,21 @@
 import { useDispatch } from "react-redux";
-import { DuckFactory } from "../Player/Hunt/Duck";
-import { setDuckFactory } from "../Player/Hunt/DuckSlice";
-import { Jumpman } from "../Player/Jumpman";
-import { setJumpman } from "../Player/JumpmanSlice";
-import { setPlayer } from "../System/OptionsSlice";
 import { StoreDispatch } from "../reduxStore";
-import { BarrelFactory } from "./Barrel";
-import { setBarrelFactory } from "./BarrelSlice";
+
 import { RIGHT, LEFT } from "./Block";
+
 import { Platform, PlatformFactory } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
+
+import { Jumpman } from "../Player/Jumpman";
+import { setJumpman } from "../Player/JumpmanSlice";
+
+import { BarrelFactory } from "./Barrel";
+import { setBarrelFactory } from "./BarrelSlice";
+
+import { DuckFactory } from "../Player/Hunt/Duck";
+import { setDuckFactory } from "../Player/Hunt/DuckSlice";
+
+import { setPlayer } from "../System/OptionsSlice";
 
 const jumpman: Jumpman = {
   x: 25,
@@ -37,7 +43,6 @@ const duckFactory: DuckFactory = {
 const platforms: Platform[] = [
   { x: 0, y: 700, length: 20 },
   { x: 55, y: 700, length: 500 },
-
   { x: 25, y: 625, length: 25 },
   { x: 100, y: 525, length: 175 },
   { x: 400, y: 425, length: 75 },
@@ -49,10 +54,10 @@ const platforms: Platform[] = [
 
 const Level: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  dispatch(setPlatforms(platforms));
-  dispatch(setDuckFactory(duckFactory));
-  dispatch(setBarrelFactory(barrelFactory));
   dispatch(setJumpman(jumpman));
+  dispatch(setPlatforms(platforms));
+  dispatch(setBarrelFactory(barrelFactory));
+  dispatch(setDuckFactory(duckFactory));
   dispatch(setPlayer("D"));
   dispatch(setPlayer("M"));
 

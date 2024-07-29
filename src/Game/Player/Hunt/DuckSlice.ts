@@ -15,10 +15,6 @@ const slice = createSlice({
   name: "DuckSlice",
   initialState,
   reducers: {
-    moveDuckFactory: (state, action: PayloadAction<number>) => {
-      const x = action.payload;
-      state.x = x;
-    },
     setDuckFactory: (_, action: PayloadAction<DuckFactory>) => {
       return action.payload;
     },
@@ -70,7 +66,6 @@ export const moveDuck = createAsyncThunk<
 });
 
 export const {
-  moveDuckFactory,
   setDuckFactory,
   createDuck,
   setDuck,

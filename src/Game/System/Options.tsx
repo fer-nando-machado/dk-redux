@@ -100,7 +100,7 @@ const Options: React.FC = () => {
     return () => {
       window.removeEventListener("blur", dispatchPause);
     };
-  }, []);
+  }, [options.debug]);
 
   return (
     <>

@@ -10,7 +10,7 @@ const Icon: React.FC = () => {
   }, []);
 
   return (
-    <div
+    <object
       className="dk"
       id={then.slice(-4)}
       dangerouslySetInnerHTML={{ __html: icon }}

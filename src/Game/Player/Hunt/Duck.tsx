@@ -4,15 +4,9 @@ import { Block, isDirectionLeft, getRandomDirection } from "../../Level/Block";
 import { getRandomX } from "../../Level/Position";
 import { setPlayer } from "../../System/OptionsSlice";
 import useInterval from "../../Hooks/useInterval";
-import {
-  createDuck,
-  moveDuck,
-  destroyDuck,
-  moveDuckFactory,
-} from "./DuckSlice";
+import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting } from "./Dog";
 import Target from "./Target";
-
 import "./Duck.scss";
 
 export type Duck = Block & { id: number };
@@ -66,35 +60,40 @@ export const DuckFactory: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const duckFactory = useSelector((state: RootState) => state.duckFactory);
 
-  const hasAim = isDuckHunting();
-  const interval = hasAim ? 2500 : 7000;
+  const isHunting = isDuckHunting();
+  const interval = isHunting ? 2500 : 7000;
 
   useInterval(() => {
-    const direction = getRandomDirection();
-    const duck: Duck = {
-      ...duckFactory,
-      id: Date.now(),
-      direction,
-    };
-    dispatch(createDuck(duck));
-
-    const x = getRandomX();
-    dispatch(moveDuckFactory(x));
+    dispatch(
+      setDuckFactory({
+        ...duckFactory,
+        x: getRandomX(),
+        direction: getRandomDirection(),
+      })
+    );
+    dispatch(
+      createDuck({
+        ...duckFactory,
+        id: Date.now(),
+      })
+    );
   }, interval);
 
   return (
     <>
       <div
-        className={`DuckFactory Block Factory`}
+        className={`Duck Factory Block Round ${duckFactory.direction}`}
         style={{
           left: duckFactory.x,
           bottom: duckFactory.y,
         }}
-      />
+      >
+        {"oo"}
+      </div>
       {duckFactory.ducks.map((b) => (
         <Duck {...b} key={b.id} />
       ))}
-      {hasAim && (
+      {isHunting && (
         <div
           className={"Grass"}
           style={{

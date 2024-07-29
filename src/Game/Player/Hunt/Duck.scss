@@ -4,6 +4,10 @@
   cursor: crosshair;
   outline: 4px double transparent;
 
+  &.Factory {
+    margin-bottom: 50px;
+  }
+
   &.left {
     background-color: navy;
     outline-color: purple;
@@ -55,10 +59,6 @@
     bottom: 0px;
     left: 18px;
   }
-}
-
-.DuckFactory {
-  outline: 2px dashed lightgreen;
 }
 
 .Grass {
