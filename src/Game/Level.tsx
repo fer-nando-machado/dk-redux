@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { StoreDispatch } from "./Store";
+import { StoreDispatch } from "./reduxStore";
 import { LEFT, RIGHT } from "./Block";
 import { Jumpman } from "./Jumpman";
 import { setJumpman } from "./JumpmanSlice";

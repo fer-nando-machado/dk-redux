@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Jumpman } from "./Jumpman";
 import { checkBoundaries, checkPlatforms } from "./Position";
-import { StoreDispatch, RootState } from "./Store";
+import { StoreDispatch, RootState } from "./reduxStore";
 import { getDirection, LEFT } from "./Block";
 
 const initialState: Jumpman = {

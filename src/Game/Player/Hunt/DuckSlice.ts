@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Duck, DuckFactory, MAX_DUCKS } from "./Duck";
-import { RootState, StoreDispatch } from "../../Store";
+import { RootState, StoreDispatch } from "../../reduxStore";
 import { LEFT } from "../../Block";
 
 const initialState: DuckFactory = {

@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import { Store } from "./Store";
+import { Store } from "./reduxStore";
 import Level from "./Level";
 import Status from "./System/Status";
 import Options from "./System/Options";

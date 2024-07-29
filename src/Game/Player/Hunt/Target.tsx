@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { StoreDispatch } from "../../Store";
+import { StoreDispatch } from "../../reduxStore";
 import { Points } from "../../System/Status";
 import { addPoints } from "../../System/StatusSlice";
 import { isDuckHunting } from "./Dog";

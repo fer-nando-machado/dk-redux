@@ -1,6 +1,6 @@
 import { Block } from "./Block";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreDispatch, RootState } from "./Store";
+import { StoreDispatch, RootState } from "./reduxStore";
 import { useRef } from "react";
 import { setPlayer } from "./System/OptionsSlice";
 import { moveJumpman } from "./JumpmanSlice";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, StoreDispatch } from "../Store";
+import { RootState, StoreDispatch } from "../reduxStore";
 import { setPaused } from "./OptionsSlice";
 import { Position } from "../Position";
 import "./Status.scss";

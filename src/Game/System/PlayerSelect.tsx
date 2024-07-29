@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { StoreDispatch, RootState } from "../Store";
+import { StoreDispatch, RootState } from "../reduxStore";
 import { setPlayer } from "./OptionsSlice";
 import "./PlayerSelect.scss";
 

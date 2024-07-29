@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { StoreDispatch, RootState } from "../../Store";
+import { StoreDispatch, RootState } from "../../reduxStore";
 
 import useInterval from "../../Hooks/useInterval";
 import { setPlayer } from "../../System/OptionsSlice";
