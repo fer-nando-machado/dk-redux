@@ -1,17 +1,17 @@
+import { name, version, author, description } from "../../../package.json";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useHash from "../Hooks/useHash";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
-import { name, version, author, description } from "../../../package.json";
 import PlayerSelect, { Player, PlayerSelectMap } from "./PlayerSelect";
 import {
   setPaused,
   setPlayer,
-  toggleDebug,
   toggleFilters,
-  toggleGravity,
   togglePaused,
+  toggleGravity,
+  enableDebug,
   winPlayer,
 } from "./OptionsSlice";
 import "./Options.scss";
@@ -55,13 +55,13 @@ const Options: React.FC = () => {
   const dispatchToggleFilters = () => dispatch(toggleFilters());
   const dispatchToggleGravity = () => dispatch(toggleGravity());
   const dispatchTogglePaused = () => dispatch(togglePaused());
-  const dispatchToggleDebug = () => dispatch(toggleDebug());
+  const dispatchEnableDebug = () => dispatch(enableDebug());
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchUnpause = () => dispatch(setPaused(false));
 
   const dispatchWinPlayer = () => dispatch(winPlayer());
   useKeyboard({
-    key: "W",
+    key: "0",
     onKeyDown: dispatchWinPlayer,
   });
 
@@ -77,7 +77,7 @@ const Options: React.FC = () => {
 
   useKeyboard({
     key: "F13",
-    onKeyDown: dispatchToggleDebug,
+    onKeyDown: dispatchEnableDebug,
   });
 
   useKeyboard({
@@ -115,13 +115,6 @@ const Options: React.FC = () => {
               value={options.filters}
               onClick={dispatchToggleFilters}
             />
-            {!options.gravity && (
-              <Option
-                name="GRAVITY"
-                value={options.gravity}
-                onClick={dispatchToggleGravity}
-              />
-            )}
           </div>
           <div className="Paused" onClick={dispatchUnpause}>
             PAUSE
@@ -140,7 +133,11 @@ const Options: React.FC = () => {
       )}
       {options.filters && <div className="Filters" />}
       {options.debug && (
-        <div className="Debug">DEBUG {options.paused && "PAUSE"}</div>
+        <div className="Debug">
+          DEBUG
+          {!options.gravity && <span onClick={dispatchToggleGravity}>/G</span>}
+          {options.paused && <span onClick={dispatchTogglePaused}>/P</span>}
+        </div>
       )}
     </>
   );

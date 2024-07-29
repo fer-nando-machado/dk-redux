@@ -122,4 +122,8 @@
 .Debug {
   position: absolute;
   bottom: 0;
+  span:hover {
+    opacity: 0.81;
+    cursor: pointer;
+  }
 }

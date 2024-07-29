@@ -7,14 +7,6 @@
   &.left {
     animation-direction: reverse;
   }
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 
   &::before {
     content: ".";
@@ -35,5 +27,14 @@
 }
 
 .BarrelFactory {
-  outline: 2px dashed rgba($color: yellow, $alpha: 0.25);
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

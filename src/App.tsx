@@ -31,7 +31,7 @@ const App: React.FC = () => {
               <p>
                 /////: //
                 <span className="Gravity Hint">
-                  x.80665... m/s <sup>2</sup>
+                  FX.80665... m/s<sup>2</sup>
                 </span>
                 <br />
                 Debug: F13
