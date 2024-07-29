@@ -19,7 +19,7 @@ const useInterval = (callback: () => void, ms: number = REFRESH_RATE) => {
   };
 
   useEffect(() => {
-    if (!paused) {
+    if (!paused && ms > 0) {
       intervalRef.current = setInterval(tick, ms);
     } else if (intervalRef.current) {
       clearInterval(intervalRef.current);

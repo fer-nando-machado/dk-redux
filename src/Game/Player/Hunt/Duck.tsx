@@ -5,7 +5,7 @@ import { getRandomX } from "../../Level/Position";
 import { setPlayer } from "../../System/OptionsSlice";
 import useInterval from "../../Hooks/useInterval";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
-import { isDuckHunting } from "./Dog";
+import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";
 import Target from "./Target";
 import "./Duck.scss";
 
@@ -60,8 +60,9 @@ export const DuckFactory: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const duckFactory = useSelector((state: RootState) => state.duckFactory);
 
+  const isUnlocked = hasUnlockedDuckHunting();
   const isHunting = isDuckHunting();
-  const interval = isHunting ? 2500 : 7000;
+  const interval = isHunting ? 2500 : !isUnlocked ? 7000 : 0;
 
   useInterval(() => {
     dispatch(

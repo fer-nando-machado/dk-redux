@@ -22,4 +22,9 @@ export const isDuckHunting = () => {
   return player.code === CODE;
 };
 
+export const hasUnlockedDuckHunting = () => {
+  const { playerSelect } = useSelector((state: RootState) => state.options);
+  return Boolean(playerSelect[CODE]);
+};
+
 export default Dog;
