@@ -16,3 +16,32 @@
     display: none;
   }
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes walk {
+  0%,
+  100% {
+    transform: translateY(1.5px);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(1.5px);
+  }
+  50% {
+    transform: translateX(-1.5px);
+  }
+}

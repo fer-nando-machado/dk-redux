@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StoreDispatch, RootState } from "../reduxStore";
-import { checkBoundaries, checkPlatforms } from "../Level/Position";
+import { checkBoundaries, checkPlatforms, Position } from "../Level/Position";
 import { getDirection, LEFT } from "../Level/Block";
 import { Jumpman } from "./Jumpman";
 
@@ -23,14 +23,14 @@ const slice = createSlice({
 
 export const moveJumpman = createAsyncThunk<
   void,
-  Jumpman,
+  Position,
   {
     state: RootState;
     dispatch: StoreDispatch;
   }
 >(
   "JumpmanSlice/moveJumpman",
-  async (payload: Jumpman, { getState, dispatch }) => {
+  async (payload: Position, { getState, dispatch }) => {
     const state: RootState = getState();
     const platforms = state.platformFactory.platforms;
     const jumpman = state.jumpman;

@@ -1,6 +1,18 @@
 .Jumpman.D {
   outline-color: #fc0;
 
+  &:has(.deutschbox .checked) {
+    animation: walk 0.5s infinite linear;
+  }
+
+  &:has(.deutschbox .dechecked) {
+    animation: shake 0.1s infinite linear;
+  }
+
+  &:has(.deutschbox .rechecked) {
+    animation: spin 0.1s infinite linear;
+  }
+
   &::before {
     color: #d00;
   }
@@ -21,6 +33,20 @@
         right: 100%;
       }
     }
+  }
+}
+
+.DeutschBox {
+  &::after {
+    content: "";
+    position: absolute;
+    top: -50px;
+    bottom: -50px;
+    left: -50px;
+    right: -50px;
+    border-radius: 100px;
+    cursor: pointer;
+    //outline: 1px solid red;
   }
 }
 

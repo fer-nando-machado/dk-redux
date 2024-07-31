@@ -26,7 +26,7 @@ export type CustomLevel = {
 
 const JUMPMAN: Jumpman = {
   x: 25,
-  y: 75,
+  y: 400,
   isJumping: false,
   direction: RIGHT,
 };
