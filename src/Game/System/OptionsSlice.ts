@@ -46,11 +46,13 @@ const slice = createSlice({
       state.gravity = !state.gravity;
       state.debug = true;
     },
-    setMaker: (state, action: PayloadAction<boolean>) => {
+    setMaker: (_, action: PayloadAction<boolean>) => {
       const isMaker = action.payload;
-      state.maker = isMaker;
-      state.debug = isMaker;
-      state.paused = false;
+      return {
+        ...initialState,
+        debug: isMaker,
+        maker: isMaker,
+      }
     },
     enableDebug: (state) => {
       state.debug = true;
