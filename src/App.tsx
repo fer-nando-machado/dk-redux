@@ -7,7 +7,7 @@ import AppIcon from "/favicon.ico";
 import GitHub from "/GitHub.svg?url";
 import "./App.scss";
 
-const exampleLevel = `{
+const demoLevel = `{
   "platforms": [
     { "x": 0, "y": 700, "length": 505 },
     { "x": 25, "y": 625, "length": 25 },
@@ -30,52 +30,69 @@ const exampleLevel = `{
 `;
 
 const App: React.FC = () => {
-  const [json, setJSON] = useState<string>(exampleLevel);
-  const [level, setLevel] = useState<CustomLevel>();
-  const [error, setError] = useState<string>();
-  const [isMaker, setMaker] = useState(false);
-
-  const handleEnter = () => {
-    if (isMaker) return;
-    setMaker(true);
-    setLevel(JSON.parse(json));
-  };
-  const handleExit = () => {
-    setMaker(false);
-    setLevel(undefined);
-  };
-
-  const stopPropagation = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    event.stopPropagation();
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setJSON(e.target.value);
-    try {
-      const parsedLevel: CustomLevel = JSON.parse(e.target.value);
-      if (!parsedLevel.platforms) parsedLevel.platforms = [];
-      setLevel(parsedLevel);
-      setError(undefined);
-    } catch (e: any) {
-      setError(e.toString());
-    }
-  };
-
-  const handleReset = () => {
-    setJSON(exampleLevel);
-    setLevel(JSON.parse(exampleLevel));
-    setError(undefined);
-  };
-
   return (
     <div className="App">
       <h1>
         <Icon />
         DK<span>{"<Redux/>"}</span>
       </h1>
-      <main>
-        <aside>
-          <div className={`Manual ${isMaker ? "Hidden" : ""}`}>
+      <GameWithManual />
+      <footer>
+        <a href={`mailto:${contact}`} className="Button">
+          Contact
+        </a>
+        <a href={repository.link}>
+          <img src={GitHub} alt={`${name} @ GitHub`} height={24} />
+        </a>
+        <a href={support} className="Button">
+          Support
+        </a>
+      </footer>
+    </div>
+  );
+};
+
+const GameWithManual: React.FC = () => {
+  const [input, setInput] = useState<string>(demoLevel);
+  const [error, setError] = useState<string>();
+  const [level, setLevel] = useState<CustomLevel>();
+  const [isMaker, setMaker] = useState(false);
+
+  const handleEnter = () => {
+    if (isMaker) return;
+    setMaker(true);
+    setLevel(JSON.parse(input));
+  };
+  const handleExit = () => {
+    setMaker(false);
+    setLevel(undefined);
+  };
+  const handleReset = () => {
+    setInput(demoLevel);
+    setLevel(JSON.parse(demoLevel));
+    setError(undefined);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+    try {
+      const customLevel: CustomLevel = JSON.parse(e.target.value);
+      if (!customLevel.platforms) customLevel.platforms = [];
+      setLevel(customLevel);
+      setError(undefined);
+    } catch (e: any) {
+      setError(e.toString());
+    }
+  };
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    event.stopPropagation();
+  };
+
+  return (
+    <main>
+      <aside>
+        {!isMaker && (
+          <div className="Manual">
             <u>HOW TO PLAY</u>
             <div>
               <p>
@@ -102,14 +119,18 @@ const App: React.FC = () => {
               <span className="Code Hint">{"<HTML/> CSS{.dk}?"}</span>
             </div>
           </div>
-          <div className={`Manual ${isMaker ? "Hidden" : ""}`}>
+        )}
+        {!isMaker && (
+          <div className="Manual">
             <u>DOWNLOAD</u>
             <span className="Download">
               <img src={AppIcon} alt="DK-Redux App Icon" />
               Add to Home Screen
             </span>
           </div>
-          <div className={`Manual ${isMaker ? "Maker" : "Hidden"}`}>
+        )}
+        {isMaker && (
+          <div className="Manual Maker">
             <u>HOW TO MAKE</u>
             <div>
               <p>
@@ -127,36 +148,38 @@ const App: React.FC = () => {
             </div>
             {"{ x, y, … }"}
           </div>
-        </aside>
-        <Game level={level} />
-        <aside>
-          <div className={`Manual ${isMaker ? "Maker" : ""}`}>
-            <u>LEVEL MAKER</u>
-            {isMaker && (
-              <div className={`Control ${error ? "Error" : ""}`}>
-                <button onClick={handleReset}>RESET</button>
-                <button onClick={handleExit}>EXIT</button>
-              </div>
-            )}
-            <textarea
-              value={json}
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              className={error ? "Error" : ""}
-              onChange={handleChange}
-              onFocus={handleEnter}
-              onKeyDown={stopPropagation}
-              onKeyUp={stopPropagation}
-            />
-            {isMaker && (
-              <div className="Console" title={error}>
-                {error}
-              </div>
-            )}
-          </div>
-          <div className={`Manual ${isMaker ? "Hidden" : ""}`}>
+        )}
+      </aside>
+      <Game level={level} />
+      <aside>
+        <div className={`Manual ${isMaker ? "Maker" : ""}`}>
+          <u>LEVEL MAKER</u>
+          {isMaker && (
+            <div className={`Control ${error ? "Error" : ""}`}>
+              <button onClick={handleReset}>RESET</button>
+              <button onClick={handleExit}>EXIT</button>
+            </div>
+          )}
+          <textarea
+            value={input}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            onFocus={handleEnter}
+            onChange={handleChange}
+            onKeyDown={handleKeyPress}
+            onKeyUp={handleKeyPress}
+            className={error ? "Error" : ""}
+          />
+          {isMaker && (
+            <div className="Console" title={error}>
+              {error}
+            </div>
+          )}
+        </div>
+        {!isMaker && (
+          <div className="Manual">
             <u>PLAYER SELECT</u>
             <div>
               <p>
@@ -175,29 +198,17 @@ const App: React.FC = () => {
               </span>
             </div>
           </div>
-          <div className={`Manual ${isMaker ? "Hidden" : ""}`}>
+        )}
+        {!isMaker && (
+          <div className="Manual">
             <u>MUSIC SELECT</u>
-            <div>
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/d-b8gHsWEJo"
-                title="Music Select"
-              />
-            </div>
+            <p>
+              <small>coming soon</small>
+            </p>
           </div>
-        </aside>
-      </main>
-      <footer>
-        <a href={`mailto:${contact}`} className="Button">
-          Contact
-        </a>
-        <a href={repository.link}>
-          <img src={GitHub} alt={`${name} @ GitHub`} height={24} />
-        </a>
-        <a href={support} className="Button">
-          Support
-        </a>
-      </footer>
-    </div>
+        )}
+      </aside>
+    </main>
   );
 };
 

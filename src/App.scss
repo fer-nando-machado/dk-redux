@@ -45,8 +45,7 @@
       flex-direction: column;
       gap: 4vw;
 
-      .Manual,
-      .Maker {
+      .Manual {
         display: none;
 
         @media only screen and (min-width: 1280px) {
@@ -83,27 +82,18 @@
           }
         }
 
-        textarea,
-        iframe {
+        textarea {
           outline: 4px double white;
           border: 0;
           margin: 25px 0px 5px 0px;
-        }
-
-        textarea {
-          padding: 5px;
+          padding: 0.75vw 1vw;
           resize: none;
           overflow: hidden;
           white-space: nowrap;
           font-size: 0.75vw;
           line-height: 1.25;
-          min-height: 70px;
+          min-height: 60px;
           width: 20vw;
-        }
-
-        iframe {
-          height: 160px;
-          width: 280px;
         }
 
         .Hint {
@@ -144,116 +134,110 @@
             opacity: 0.81;
           }
         }
-      }
 
-      .Maker {
-        background: green;
-        outline-color: green;
+        &.Maker {
+          background: green;
+          outline-color: green;
 
-        .Control,
-        .Console {
-          display: flex;
-          justify-content: space-between;
-          position: absolute;
-        }
-
-        .Control,
-        .Console,
-        .Control *,
-        .Console * {
-          font-family: "Courier New", monospace;
-          font-size: smaller;
-        }
-
-        .Control {
-          top: 0;
-          left: 0;
-          width: 100%;
-
-          button {
-            background: white;
-            border-color: black;
-            border-radius: 5px;
-            border-width: 4px;
-            padding: 4px 8px;
-            cursor: pointer;
+          p {
+            font-size: smaller;
+            span {
+              margin-left: -35px;
+              margin-top: -5px;
+            }
+            .Block {
+              scale: (50%);
+              animation: none;
+            }
           }
 
-          &::before {
-            content: "";
-            position: absolute;
-            top: 34px;
-            left: -6vw;
-            border-radius: 5px;
+          textarea {
+            outline: 0;
+            background: black;
+            height: 100vh;
+            max-height: 600px;
+            overflow: auto;
             color: lime;
-            outline: 2px dotted green;
-            padding: 2px;
-            background: green;
-            animation: run 1s infinite;
-            opacity: 0.95;
-          }
-          &.Error::before {
-            content: "|||| Error";
-            left: -2vw;
-            color: white;
-            animation: none;
-          }
-
-          @keyframes run {
-            0%,
-            100% {
-              content: "//////////// RUN()";
-              outline-width: 1px;
+            &.Error {
+              color: white;
             }
-            50% {
-              content: "|||||||||||| RUN()";
-              outline-width: 3px;
+
+            &:focus {
+              opacity: 0.81;
             }
           }
-        }
 
-        .Console {
-          margin: 50px;
-          bottom: 0;
-          color: white;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          opacity: 0.5;
-          cursor: help;
-        }
-
-        p {
-          font-size: smaller;
-
-          span {
-            margin-left: -35px;
-            margin-top: -5px;
+          .Control,
+          .Console {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
           }
-          .Block {
-            scale: (50%);
-            animation: none;
-          }
-        }
 
-        textarea {
-          outline-color: black;
-          background: black;
-          height: 100vh;
-          max-height: 600px;
-          overflow: auto;
-          color: lime;
-          &.Error {
+          .Control,
+          .Console,
+          .Control *,
+          .Console * {
+            font-family: "Courier New", monospace;
+            font-size: smaller;
+          }
+
+          .Control {
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            button {
+              background: white;
+              border-color: black;
+              border-radius: 5px;
+              border-width: 4px;
+              padding: 4px 8px;
+              cursor: pointer;
+            }
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 34px;
+              left: -6vw;
+              border-radius: 5px;
+              color: lime;
+              outline: 2px dotted green;
+              padding: 4px;
+              background: green;
+              animation: run 1s infinite;
+            }
+            &.Error::before {
+              content: "|||| Error";
+              left: -2vw;
+              color: white;
+              animation: none;
+            }
+
+            @keyframes run {
+              0%,
+              100% {
+                content: "//////////// RUN()";
+                outline-width: 1px;
+              }
+              50% {
+                content: "|||||||||||| RUN()";
+                outline-width: 3px;
+              }
+            }
+          }
+
+          .Console {
+            margin: 3vw;
+            bottom: 0;
             color: white;
-          }
-
-          &:focus {
-            opacity: 0.81;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0.5;
+            cursor: help;
           }
         }
-      }
-
-      .Hidden {
-        display: none;
       }
     }
   }
@@ -264,7 +248,7 @@
     gap: 18px;
 
     a:hover {
-      opacity: 0.75;
+      opacity: 0.81;
     }
 
     .Button {
