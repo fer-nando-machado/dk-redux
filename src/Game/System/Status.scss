@@ -9,8 +9,15 @@
     text-decoration: none;
     font-size: larger;
   }
-}
 
-.Points {
-  font-size: smaller;
+  .Points {
+    font-size: smaller;
+  }
+
+  .Message {
+    width: 100%;
+    bottom: 75px;
+    font-size: smaller;
+    font-style: italic;
+  }
 }

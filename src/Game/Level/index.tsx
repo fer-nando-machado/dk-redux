@@ -26,7 +26,7 @@ export type CustomLevel = {
 
 const JUMPMAN: Jumpman = {
   x: 25,
-  y: 750,
+  y: 75,
   isJumping: false,
   direction: RIGHT,
 };
@@ -79,8 +79,8 @@ const Level: React.FC<CustomLevel> = ({
     dispatch(setBarrelFactory({ ...BARREL_FACTORY, ...barrelFactory }));
     dispatch(setDuckFactory(DUCK_FACTORY));
 
-    dispatch(setPlayer("D"));
     dispatch(setPlayer("M"));
+    dispatch(setPlayer("D"));
   }, [jumpman, platforms, barrelFactory]);
 
   return (

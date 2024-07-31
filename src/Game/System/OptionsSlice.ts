@@ -1,8 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Options } from "./Options";
 import { Player } from "./PlayerSelect";
+import { RootState, StoreDispatch } from "../reduxStore";
+import { showMessage } from "./StatusSlice";
 
 const initialState: Options = {
+  //TODO move Player to own slice
   player: { code: "M" },
   playerSelect: {},
   paused: false,
@@ -52,7 +55,7 @@ const slice = createSlice({
         ...initialState,
         debug: isMaker,
         maker: isMaker,
-      }
+      };
     },
     enableDebug: (state) => {
       state.debug = true;
@@ -60,8 +63,25 @@ const slice = createSlice({
   },
 });
 
+export const setPlayer = createAsyncThunk<
+  void,
+  String,
+  {
+    state: RootState;
+    dispatch: StoreDispatch;
+  }
+>("OptionsSlice/setPlayer", async (payload: String, { getState, dispatch }) => {
+  const { options }: RootState = getState();
+
+  const code = payload.toString();
+
+  if (!options.playerSelect[code]) {
+    dispatch(showMessage("PLAYER UNLOCKED: " + code));
+  }
+  dispatch(slice.actions.setPlayer(code));
+});
+
 export const {
-  setPlayer,
   setPaused,
   winPlayer,
   togglePaused,

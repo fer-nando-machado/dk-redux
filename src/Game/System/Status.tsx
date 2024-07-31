@@ -15,19 +15,30 @@ export type Points = {
 export type Status = {
   score: number;
   points?: Points;
+  message?: string;
 };
 
 const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { score, points } = useSelector((state: RootState) => state.status);
+  const { score, points, message } = useSelector(
+    (state: RootState) => state.status
+  );
 
-  const [opacity, setOpacity] = useState(1);
+  const [showPoints, setPoints] = useState(1);
   useEffect(() => {
     if (!points) return;
-    setOpacity(1);
-    const timeout = setTimeout(() => setOpacity(0), 1000);
+    setPoints(1);
+    const timeout = setTimeout(() => setPoints(0), 1000);
     return () => clearTimeout(timeout);
   }, [points]);
+
+  const [showMessage, setMessage] = useState(1);
+  useEffect(() => {
+    if (!message) return;
+    setMessage(1);
+    const timeout = setTimeout(() => setMessage(0), 5000);
+    return () => clearTimeout(timeout);
+  }, [message]);
 
   const clickPause = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -49,19 +60,24 @@ const Status: React.FC = () => {
         <a href="#" onClick={clickRefresh}>
           RESET
         </a>
+        {points && (
+          <div
+            className="Block Points"
+            style={{
+              left: points.position.x,
+              bottom: points.position.y,
+              opacity: showPoints,
+            }}
+          >
+            {points.value}
+          </div>
+        )}
+        {message && (
+          <div className="Block Message" style={{ opacity: showMessage }}>
+            {message}
+          </div>
+        )}
       </div>
-      {points && (
-        <div
-          className="Block Points"
-          style={{
-            left: points.position.x,
-            bottom: points.position.y,
-            opacity: opacity,
-          }}
-        >
-          {points.value}
-        </div>
-      )}
     </>
   );
 };
