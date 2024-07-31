@@ -48,8 +48,7 @@ const DUCK_FACTORY: DuckFactory = {
 };
 
 const PLATFORMS: Platform[] = [
-  { x: 0, y: 700, length: 20 },
-  { x: 55, y: 700, length: 500 },
+  { x: 0, y: 700, length: 505 },
   { x: 25, y: 625, length: 25 },
   { x: 100, y: 525, length: 175 },
   { x: 400, y: 425, length: 75 },

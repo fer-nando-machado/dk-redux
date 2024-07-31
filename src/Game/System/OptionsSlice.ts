@@ -72,7 +72,6 @@ export const setPlayer = createAsyncThunk<
   }
 >("OptionsSlice/setPlayer", async (payload: String, { getState, dispatch }) => {
   const { options }: RootState = getState();
-
   const code = payload.toString();
 
   if (!options.playerSelect[code]) {

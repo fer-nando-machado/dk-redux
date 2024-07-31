@@ -36,7 +36,7 @@ const Status: React.FC = () => {
   useEffect(() => {
     if (!message) return;
     setMessage(1);
-    const timeout = setTimeout(() => setMessage(0), 5000);
+    const timeout = setTimeout(() => setMessage(0), 3000);
     return () => clearTimeout(timeout);
   }, [message]);
 
