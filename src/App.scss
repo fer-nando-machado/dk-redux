@@ -20,16 +20,19 @@
     }
     .dk {
       position: fixed;
-      display: none;
       top: 25px;
       left: 25px;
       width: 12vw;
       max-width: 200px;
       opacity: 0.81;
-      color: black;
+      display: none;
+      color: transparent;
       &:target {
-        color: brown;
         display: block;
+        color: brown;
+        rect {
+          fill: transparent;
+        }
       }
     }
   }
