@@ -13,11 +13,18 @@ const slice = createSlice({
       state.points = action.payload;
       state.score += action.payload.value;
     },
+    clearPoints: (state) => {
+      state.points = undefined;
+    },
     showMessage: (state, action: PayloadAction<string>) => {
       state.message = action.payload;
+    },
+    clearMessage: (state) => {
+      state.message = undefined;
     },
   },
 });
 
-export const { addPoints, showMessage } = slice.actions;
+export const { addPoints, clearPoints, showMessage, clearMessage } =
+  slice.actions;
 export default slice.reducer;

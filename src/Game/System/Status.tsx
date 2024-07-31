@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
+import useInterval from "../Hooks/useInterval";
 import { Position } from "../Level/Position";
 import { setPaused } from "./OptionsSlice";
+import { clearMessage, clearPoints } from "./StatusSlice";
 import "./Status.scss";
 
 export type Points = {
   position: Position;
   value: number;
-  // convert to string and turn Points into Alert or something.
-  // allow to styles (basic for Points, custom for important msg)
 };
 
 export type Status = {
@@ -20,25 +19,7 @@ export type Status = {
 
 const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { score, points, message } = useSelector(
-    (state: RootState) => state.status
-  );
-
-  const [showPoints, setPoints] = useState(1);
-  useEffect(() => {
-    if (!points) return;
-    setPoints(1);
-    const timeout = setTimeout(() => setPoints(0), 1000);
-    return () => clearTimeout(timeout);
-  }, [points]);
-
-  const [showMessage, setMessage] = useState(1);
-  useEffect(() => {
-    if (!message) return;
-    setMessage(1);
-    const timeout = setTimeout(() => setMessage(0), 3000);
-    return () => clearTimeout(timeout);
-  }, [message]);
+  const { score } = useSelector((state: RootState) => state.status);
 
   const clickPause = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -51,35 +32,48 @@ const Status: React.FC = () => {
   };
 
   return (
-    <>
-      <div className="Status">
-        <a href="#" onClick={clickPause}>
-          PAUSE
-        </a>
-        {score}
-        <a href="#" onClick={clickRefresh}>
-          RESET
-        </a>
-        {points && (
-          <div
-            className="Block Points"
-            style={{
-              left: points.position.x,
-              bottom: points.position.y,
-              opacity: showPoints,
-            }}
-          >
-            {points.value}
-          </div>
-        )}
-        {message && (
-          <div className="Block Message" style={{ opacity: showMessage }}>
-            {message}
-          </div>
-        )}
-      </div>
-    </>
+    <div className="Status">
+      <a href="#" onClick={clickPause}>
+        PAUSE
+      </a>
+      {score}
+      <a href="#" onClick={clickRefresh}>
+        RESET
+      </a>
+      <PointsDisplay />
+      <MessageDisplay />
+    </div>
   );
+};
+
+const PointsDisplay: React.FC = () => {
+  const dispatch: StoreDispatch = useDispatch();
+  const { points } = useSelector((state: RootState) => state.status);
+
+  useInterval(() => dispatch(clearPoints()), 777 + Math.random());
+
+  if (!points) return null;
+  return (
+    <div
+      className="Block Points"
+      style={{
+        left: points.position.x,
+        bottom: points.position.y,
+      }}
+    >
+      {points.value}
+    </div>
+  );
+};
+
+const MessageDisplay: React.FC = () => {
+  const dispatch: StoreDispatch = useDispatch();
+  const { message } = useSelector((state: RootState) => state.status);
+
+  useInterval(() => dispatch(clearMessage()), 2500 + Math.random());
+
+  if (!message) return null;
+  return <div className="Block Message">{message}</div>;
 };
 
 export default Status;
