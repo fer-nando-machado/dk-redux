@@ -62,7 +62,7 @@ export const DuckFactory: React.FC = () => {
 
   const isUnlocked = hasUnlockedDuckHunting();
   const isHunting = isDuckHunting();
-  const interval = isHunting ? 2500 : !isUnlocked ? 7000 : 0;
+  const interval = isHunting ? 2500 : !isUnlocked ? 7777 : 0;
 
   useInterval(() => {
     dispatch(
@@ -80,6 +80,7 @@ export const DuckFactory: React.FC = () => {
     );
   }, interval);
 
+  if (interval === 0) return <></>;
   return (
     <>
       <div
