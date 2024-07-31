@@ -22,6 +22,7 @@ export type Options = {
   paused: boolean;
   gravity: boolean;
   filters: boolean;
+  maker: boolean;
   debug: boolean;
 };
 
@@ -133,8 +134,11 @@ const Options: React.FC = () => {
       {options.debug && (
         <div className="Debug">
           DEBUG
-          {!options.gravity && <span onClick={dispatchToggleGravity}>/G</span>}
-          {options.paused && <span onClick={dispatchTogglePaused}>/P</span>}
+          {options.maker && <>/MAKER</>}
+          {!options.gravity && (
+            <span onClick={dispatchToggleGravity}>/NO_GRAVITY</span>
+          )}
+          {options.paused && <span onClick={dispatchTogglePaused}>/PAUSE</span>}
         </div>
       )}
     </>

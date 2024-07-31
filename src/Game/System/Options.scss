@@ -112,6 +112,9 @@
 }
 
 .Game:has(.Debug) {
+  > .Status {
+    display: none;
+  }
   > .Options {
     display: none;
   }
@@ -123,7 +126,7 @@
 
 .Debug {
   position: absolute;
-  bottom: 0;
+  top: 0;
   opacity: 0.5;
   span:hover {
     cursor: pointer;

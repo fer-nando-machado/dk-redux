@@ -5,6 +5,9 @@
   align-items: center;
   justify-content: center;
   gap: 18px;
+  &:has(.Maker) {
+    background: #001300;
+  }
 
   h1 {
     padding: 0;
@@ -42,10 +45,12 @@
       flex-direction: column;
       gap: 4vw;
 
-      .Manual {
+      .Manual,
+      .Maker {
         display: none;
 
         @media only screen and (min-width: 1280px) {
+          position: relative;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -78,12 +83,27 @@
           }
         }
 
+        textarea,
         iframe {
+          outline: 4px double white;
           border: 0;
-          outline: 4px inset white;
+          margin: 25px 0px 5px 0px;
+        }
+
+        textarea {
+          padding: 5px;
+          resize: none;
+          overflow: hidden;
+          white-space: nowrap;
+          font-size: 0.75vw;
+          line-height: 1.25;
+          min-height: 70px;
+          width: 20vw;
+        }
+
+        iframe {
           height: 160px;
           width: 280px;
-          margin: 25px 0px 5px 0px;
         }
 
         .Hint {
@@ -113,6 +133,7 @@
           align-items: center;
           font-size: smaller;
           gap: 1.25vw;
+          margin-top: 12.5px;
           img {
             border-radius: 12.5px;
           }
@@ -123,6 +144,116 @@
             opacity: 0.81;
           }
         }
+      }
+
+      .Maker {
+        background: green;
+        outline-color: green;
+
+        .Control,
+        .Console {
+          display: flex;
+          justify-content: space-between;
+          position: absolute;
+        }
+
+        .Control,
+        .Console,
+        .Control *,
+        .Console * {
+          font-family: "Courier New", monospace;
+          font-size: smaller;
+        }
+
+        .Control {
+          top: 0;
+          left: 0;
+          width: 100%;
+
+          button {
+            background: white;
+            border-color: black;
+            border-radius: 5px;
+            border-width: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+          }
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 34px;
+            left: -6vw;
+            border-radius: 5px;
+            color: lime;
+            outline: 2px dotted green;
+            padding: 2px;
+            background: green;
+            animation: run 1s infinite;
+            opacity: 0.95;
+          }
+          &.Error::before {
+            content: "|||| Error";
+            left: -2vw;
+            color: white;
+            animation: none;
+          }
+
+          @keyframes run {
+            0%,
+            100% {
+              content: "//////////// RUN()";
+              outline-width: 1px;
+            }
+            50% {
+              content: "|||||||||||| RUN()";
+              outline-width: 3px;
+            }
+          }
+        }
+
+        .Console {
+          margin: 50px;
+          bottom: 0;
+          color: white;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          opacity: 0.5;
+          cursor: help;
+        }
+
+        p {
+          font-size: smaller;
+
+          span {
+            margin-left: -35px;
+            margin-top: -5px;
+          }
+          .Block {
+            scale: (50%);
+            animation: none;
+          }
+        }
+
+        textarea {
+          outline-color: black;
+          background: black;
+          height: 100vh;
+          max-height: 600px;
+          overflow: auto;
+          color: lime;
+          &.Error {
+            color: white;
+          }
+
+          &:focus {
+            opacity: 0.81;
+          }
+        }
+      }
+
+      .Hidden {
+        display: none;
       }
     }
   }

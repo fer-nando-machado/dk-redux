@@ -15,9 +15,39 @@ import { setBarrelFactory } from "./BarrelSlice";
 import { DuckFactory } from "../Player/Hunt/Duck";
 import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
-import { setPlayer } from "../System/OptionsSlice";
+import { setMaker, setPlayer } from "../System/OptionsSlice";
+import { useEffect } from "react";
 
-const platforms: Platform[] = [
+export type CustomLevel = {
+  jumpman?: Jumpman;
+  platforms?: Platform[];
+  barrelFactory?: BarrelFactory;
+};
+
+const JUMPMAN: Jumpman = {
+  x: 25,
+  y: 750,
+  isJumping: false,
+  direction: RIGHT,
+};
+
+const BARREL_FACTORY: BarrelFactory = {
+  x: 450,
+  y: 425,
+  isJumping: false,
+  direction: LEFT,
+  barrels: [],
+};
+
+const DUCK_FACTORY: DuckFactory = {
+  x: 250,
+  y: -25,
+  isJumping: false,
+  direction: LEFT,
+  ducks: [],
+};
+
+const PLATFORMS: Platform[] = [
   { x: 0, y: 700, length: 20 },
   { x: 55, y: 700, length: 500 },
   { x: 25, y: 625, length: 25 },
@@ -29,37 +59,29 @@ const platforms: Platform[] = [
   { x: 25, y: 25, length: 450 },
 ];
 
-const jumpman: Jumpman = {
-  x: 25,
-  y: 750,
-  isJumping: false,
-  direction: RIGHT,
-};
-
-const barrelFactory: BarrelFactory = {
-  x: 450,
-  y: 425,
-  isJumping: false,
-  barrels: [],
-  direction: LEFT,
-};
-
-const duckFactory: DuckFactory = {
-  x: 250,
-  y: -25,
-  isJumping: false,
-  ducks: [],
-  direction: LEFT,
-};
-
-const Level: React.FC = () => {
+const Level: React.FC<CustomLevel> = ({
+  jumpman = JUMPMAN,
+  platforms = PLATFORMS,
+  barrelFactory = BARREL_FACTORY,
+}) => {
   const dispatch: StoreDispatch = useDispatch();
-  dispatch(setJumpman(jumpman));
-  dispatch(setPlatforms(platforms));
-  dispatch(setBarrelFactory(barrelFactory));
-  dispatch(setDuckFactory(duckFactory));
-  dispatch(setPlayer("D"));
-  dispatch(setPlayer("M"));
+
+  useEffect(() => {
+    const isMaker =
+      jumpman !== JUMPMAN ||
+      platforms !== PLATFORMS ||
+      barrelFactory !== BARREL_FACTORY;
+    dispatch(setMaker(isMaker));
+
+    dispatch(setJumpman({ ...JUMPMAN, ...jumpman }));
+    dispatch(setPlatforms(platforms));
+
+    dispatch(setBarrelFactory({ ...BARREL_FACTORY, ...barrelFactory }));
+    dispatch(setDuckFactory(DUCK_FACTORY));
+
+    dispatch(setPlayer("D"));
+    dispatch(setPlayer("M"));
+  }, [jumpman, platforms, barrelFactory]);
 
   return (
     <>

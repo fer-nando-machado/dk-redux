@@ -8,6 +8,7 @@ const initialState: Options = {
   paused: false,
   filters: true,
   gravity: true,
+  maker: false,
   debug: false,
 };
 
@@ -45,6 +46,12 @@ const slice = createSlice({
       state.gravity = !state.gravity;
       state.debug = true;
     },
+    setMaker: (state, action: PayloadAction<boolean>) => {
+      const isMaker = action.payload;
+      state.maker = isMaker;
+      state.debug = isMaker;
+      state.paused = false;
+    },
     enableDebug: (state) => {
       state.debug = true;
     },
@@ -58,6 +65,7 @@ export const {
   togglePaused,
   toggleFilters,
   toggleGravity,
+  setMaker,
   enableDebug,
 } = slice.actions;
 export default slice.reducer;

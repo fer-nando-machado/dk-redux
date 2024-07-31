@@ -10,7 +10,6 @@ const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (onKeyDown && (event.key === key || event.key === key.toLowerCase())) {
-        event.preventDefault();
         onKeyDown();
       }
     },
@@ -20,7 +19,6 @@ const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
   const handleKeyUp = useCallback(
     (event: KeyboardEvent) => {
       if (onKeyUp && (event.key === key || event.key === key.toLowerCase())) {
-        event.preventDefault();
         onKeyUp();
       }
     },
