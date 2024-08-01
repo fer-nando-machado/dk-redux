@@ -26,7 +26,7 @@ const Duck: React.FC<Duck> = (duck) => {
   const [state, setState] = useState(0);
   const isDead = state === 1 ? "Dead" : "";
 
-  let x = (isDirectionLeft(duck.direction) ? -1 : 1) * 3;
+  let x = (isDirectionLeft(duck.direction) ? -1 : 1) * 7;
   let y = 4;
   if (isDead) {
     x = 0;
