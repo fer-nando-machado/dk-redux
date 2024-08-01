@@ -46,6 +46,7 @@ export const moveBarrel = createAsyncThunk<
   }
 >("BarrelSlice/moveBarrel", async (payload: Barrel, { getState, dispatch }) => {
   const state: RootState = getState();
+  const fps = state.options.lowFPS ? 2 : 1;
   const platforms = state.platformFactory.platforms;
   const barrels = state.barrelFactory.barrels;
 
@@ -56,8 +57,8 @@ export const moveBarrel = createAsyncThunk<
   let { x, y } = payload;
   const moved = {
     ...barrel,
-    x: barrel.x + x,
-    y: barrel.y + y,
+    x: barrel.x + x * fps,
+    y: barrel.y + y * fps,
   };
   const bounded = checkBoundaries(moved);
   const plataformed = checkPlatforms(bounded, platforms);

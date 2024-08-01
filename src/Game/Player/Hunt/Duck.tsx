@@ -4,7 +4,7 @@ import { StoreDispatch, RootState } from "../../reduxStore";
 import { Block, isDirectionLeft, getRandomDirection } from "../../Level/Block";
 import { getRandomX } from "../../Level/Position";
 import { setPlayer } from "../../System/OptionsSlice";
-import useInterval from "../../Hooks/useInterval";
+import { useIntervalTimed, useIntervalFPS } from "../../Hooks/useInterval";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";
 import Target from "./Target";
@@ -33,7 +33,7 @@ const Duck: React.FC<Duck> = (duck) => {
     y = -10;
   }
 
-  useInterval(() => {
+  useIntervalFPS(() => {
     dispatch(
       moveDuck({
         ...duck,
@@ -43,7 +43,7 @@ const Duck: React.FC<Duck> = (duck) => {
     );
   });
 
-  useInterval(
+  useIntervalTimed(
     () => {
       dispatch(destroyDuck(duck.id));
     },
@@ -89,7 +89,7 @@ export const DuckFactory: React.FC = () => {
   const isHunting = isDuckHunting();
   const interval = isHunting ? 2000 : !isUnlocked ? 7777 : 0;
 
-  useInterval(() => {
+  useIntervalTimed(() => {
     dispatch(
       setDuckFactory({
         ...duckFactory,

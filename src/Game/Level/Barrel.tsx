@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import { Block, isDirectionLeft } from "./Block";
 import { moveBarrel, destroyBarrel, createBarrel } from "./BarrelSlice";
-import useInterval from "../Hooks/useInterval";
+import { useIntervalFPS, useIntervalTimed } from "../Hooks/useInterval";
 import Target from "../Player/Hunt/Target";
 import "./Barrel.scss";
 
@@ -21,7 +21,7 @@ const Barrel: React.FC<Barrel> = (barrel) => {
   const gravitySpeed = gravity ? -7 : 0;
   const speed = isDirectionLeft(barrel.direction) ? -1.25 : 1.25;
 
-  useInterval(() => {
+  useIntervalFPS(() => {
     dispatch(
       moveBarrel({
         ...barrel,
@@ -55,7 +55,7 @@ export const BarrelFactory: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const barrelFactory = useSelector((state: RootState) => state.barrelFactory);
 
-  useInterval(() => {
+  useIntervalTimed(() => {
     const barrel: Barrel = {
       ...barrelFactory,
       id: Date.now(),

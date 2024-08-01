@@ -7,8 +7,18 @@ enum RefreshRate {
   FPS60 = 1000 / 60,
 }
 
-const useInterval = (callback: () => void, ms: number = RefreshRate.FPS60) => {
-  const paused = useSelector((state: RootState) => state.options.paused);
+export const useIntervalFPS = (callback: () => void) => {
+  const { paused, lowFPS } = useSelector((state: RootState) => state.options);
+  const ms = lowFPS ? RefreshRate.FPS30 : RefreshRate.FPS60;
+  return useInterval(callback, ms, paused);
+};
+
+export const useIntervalTimed = (callback: () => void, ms: number) => {
+  const { paused } = useSelector((state: RootState) => state.options);
+  return useInterval(callback, ms, paused);
+};
+
+const useInterval = (callback: () => void, ms: number, paused: boolean) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const callbackRef = useRef<() => void>(callback);
 
@@ -39,5 +49,3 @@ const useInterval = (callback: () => void, ms: number = RefreshRate.FPS60) => {
 
   return intervalRef.current;
 };
-
-export default useInterval;

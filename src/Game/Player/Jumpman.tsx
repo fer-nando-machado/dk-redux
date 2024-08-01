@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
-import useInterval from "../Hooks/useInterval";
 import useKeyboard from "../Hooks/useKeyboard";
+import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/OptionsSlice";
 import { Block } from "../Level/Block";
 import { moveJumpman } from "./JumpmanSlice";
@@ -25,7 +25,7 @@ export const Jumpman: React.FC = () => {
   const { player, gravity } = useSelector((state: RootState) => state.options);
 
   const jumping = useRef<Jump | null>(null);
-  useInterval(() => {
+  useIntervalFPS(() => {
     if (!jumping.current) return;
     dispatch(moveJumpman({ x: 0, y: jumping.current.speed }));
     jumping.current.remaining -= jumping.current.speed;
@@ -43,7 +43,7 @@ export const Jumpman: React.FC = () => {
   };
 
   const walking = useRef<number | null>(null);
-  useInterval(() => {
+  useIntervalFPS(() => {
     if (!walking.current || climbing.current) return;
     dispatch(moveJumpman({ x: walking.current, y: 0 }));
   });
@@ -57,7 +57,7 @@ export const Jumpman: React.FC = () => {
   };
 
   const climbing = useRef<number | null>(null);
-  useInterval(() => {
+  useIntervalFPS(() => {
     if (!climbing.current || walking.current || jumping.current) return;
     dispatch(moveJumpman({ x: 0, y: climbing.current }));
   });
@@ -70,7 +70,7 @@ export const Jumpman: React.FC = () => {
     climbing.current = null;
   };
 
-  useInterval(() => {
+  useIntervalFPS(() => {
     dispatch(
       moveJumpman({
         x: 0,

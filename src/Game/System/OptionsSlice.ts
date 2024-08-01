@@ -9,6 +9,7 @@ const initialState: Options = {
   player: { code: "M" },
   playerSelect: {},
   paused: false,
+  lowFPS: false,
   filters: true,
   gravity: true,
   maker: false,
@@ -41,6 +42,9 @@ const slice = createSlice({
     },
     togglePaused: (state) => {
       state.paused = !state.paused;
+    },
+    toggleLowFPS: (state) => {
+      state.lowFPS = !state.lowFPS;
     },
     toggleFilters: (state) => {
       state.filters = !state.filters;
@@ -84,6 +88,7 @@ export const {
   setPaused,
   winPlayer,
   togglePaused,
+  toggleLowFPS,
   toggleFilters,
   toggleGravity,
   setMaker,

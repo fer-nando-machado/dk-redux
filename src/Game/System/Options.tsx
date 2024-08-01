@@ -13,6 +13,7 @@ import {
   toggleGravity,
   enableDebug,
   winPlayer,
+  toggleLowFPS,
 } from "./OptionsSlice";
 import "./Options.scss";
 
@@ -20,6 +21,7 @@ export type Options = {
   player: Player;
   playerSelect: PlayerSelectMap;
   paused: boolean;
+  lowFPS: boolean;
   gravity: boolean;
   filters: boolean;
   maker: boolean;
@@ -55,6 +57,7 @@ const Options: React.FC = () => {
   const dispatchWinPlayer = () => dispatch(winPlayer());
   const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
 
+  const dispatchToggleLowFPS = () => dispatch(toggleLowFPS());
   const dispatchToggleFilters = () => dispatch(toggleFilters());
   const dispatchTogglePaused = () => dispatch(togglePaused());
   const dispatchUnpause = () => dispatch(setPaused(false));
@@ -67,7 +70,11 @@ const Options: React.FC = () => {
     key: "0",
     onKeyDown: dispatchWinPlayer,
   });
-  // F2 F4
+  // F4
+  useKeyboard({
+    key: "F2",
+    onKeyDown: dispatchToggleLowFPS,
+  });
   useKeyboard({
     key: "F8",
     onKeyDown: dispatchToggleFilters,
@@ -113,7 +120,11 @@ const Options: React.FC = () => {
               value={options.filters}
               onClick={dispatchToggleFilters}
             />
-            <Option name="REFRESH" value="60FPS" />
+            <Option
+              name="REFRESH"
+              value={options.lowFPS ? "30FPS" : "60FPS"}
+              onClick={dispatchToggleLowFPS}
+            />
           </div>
           <div className="Paused" onClick={dispatchUnpause}>
             PAUSE
@@ -135,6 +146,9 @@ const Options: React.FC = () => {
         <div className="Debug">
           DEBUG
           {options.maker && <>/MAKER</>}
+          <span onClick={dispatchToggleLowFPS}>
+            /{options.lowFPS ? "30" : "60"}FPS
+          </span>
           {!options.gravity && (
             <span onClick={dispatchToggleGravity}>/NO_GRAVITY</span>
           )}

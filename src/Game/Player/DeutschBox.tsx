@@ -4,7 +4,7 @@ import { RootState, StoreDispatch } from "../reduxStore";
 import { useEffect, useRef, useState } from "react";
 import { setPlayer } from "../System/OptionsSlice";
 import useKeyboard from "../Hooks/useKeyboard";
-import useInterval from "../Hooks/useInterval";
+import { useIntervalFPS } from "../Hooks/useInterval";
 import { moveJumpmanAuto } from "./JumpmanSlice";
 import { isDirectionLeft } from "../Level/Block";
 import "./DeutschBox.scss";
@@ -32,12 +32,10 @@ const DeutschBox: React.FC = () => {
     setState(0);
   }, [player.code]);
 
-  useInterval(
-    () => {
-      dispatch(moveJumpmanAuto({ x: speed, y: 0 }));
-    },
-    isDeutschBox ? undefined : 0
-  );
+  useIntervalFPS(() => {
+    if (!isDeutschBox) return;
+    dispatch(moveJumpmanAuto({ x: speed, y: 0 }));
+  });
 
   useKeyboard({
     key: "Shift",

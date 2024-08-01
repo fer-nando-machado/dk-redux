@@ -105,9 +105,8 @@ const GameWithManual: React.FC = () => {
               </p>
               <p>
                 &nbsp;Zoom: F11 <br />
-                &nbsp;Mode: F8
-              </p>
-              <p>
+                &nbsp;Mode: F8 <br />
+                &nbsp;&nbsp;FPS: F2 <br />
                 /////: //
                 <span className="Gravity Hint">
                   FX.80665... m/s<sup>2</sup>

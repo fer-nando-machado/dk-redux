@@ -47,6 +47,7 @@ export const moveDuck = createAsyncThunk<
 >("DuckSlice/moveDuck", async (payload: Duck, { getState, dispatch }) => {
   const state: RootState = getState();
   const ducks = state.duckFactory.ducks;
+  const fps = state.options.lowFPS ? 2 : 1;
 
   const index = ducks.findIndex((b) => b.id === payload.id);
   if (index === -1) return;
@@ -55,17 +56,17 @@ export const moveDuck = createAsyncThunk<
   let { x, y } = payload;
   const moved = {
     ...duck,
-    x: duck.x + x,
-    y: duck.y + y,
+    x: duck.x + x * fps,
+    y: duck.y + y * fps,
   };
   const bounded = checkBoundaries(moved);
-  const directioned =
+  const direction =
     moved.x !== bounded.x ? flipDirection(duck.direction) : duck.direction;
 
   const update: Duck = {
     ...duck,
     ...moved,
-    ...(directioned ? { direction: directioned } : {}),
+    ...(direction ? { direction } : {}),
   };
   dispatch(setDuck(update));
 });

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
-import useInterval from "../Hooks/useInterval";
+import { useIntervalTimed } from "../Hooks/useInterval";
 import { Position } from "../Level/Position";
 import { setPaused } from "./OptionsSlice";
 import { clearMessage, clearPoints } from "./StatusSlice";
@@ -50,7 +50,7 @@ const PointsDisplay: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { points } = useSelector((state: RootState) => state.status);
 
-  useInterval(() => dispatch(clearPoints()), 777 + Math.random());
+  useIntervalTimed(() => dispatch(clearPoints()), 777 + Math.random());
 
   if (!points) return null;
   return (
@@ -70,7 +70,7 @@ const MessageDisplay: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { message } = useSelector((state: RootState) => state.status);
 
-  useInterval(() => dispatch(clearMessage()), 2500 + Math.random());
+  useIntervalTimed(() => dispatch(clearMessage()), 2500 + Math.random());
 
   if (!message) return null;
   return <div className="Block Message">{message}</div>;
