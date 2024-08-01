@@ -52,7 +52,7 @@ const Duck: React.FC<Duck> = (duck) => {
 
   const onClickDuck = () => {
     const chaseSpeed = duck.x === jumpman.x ? 0 : duck.x < jumpman.x ? -1 : 1;
-    dispatch(moveJumpman({ x: chaseSpeed, y: 10 }));
+    dispatch(moveJumpman({ x: chaseSpeed, y: 7 }));
     dispatch(setPlayer("DH"));
     setState(1);
   };
