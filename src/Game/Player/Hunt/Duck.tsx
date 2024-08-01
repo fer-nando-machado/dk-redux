@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../../reduxStore";
 import { Block, isDirectionLeft, getRandomDirection } from "../../Level/Block";
@@ -7,6 +8,7 @@ import useInterval from "../../Hooks/useInterval";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";
 import Target from "./Target";
+import { moveJumpman } from "../JumpmanSlice";
 import "./Duck.scss";
 
 export type Duck = Block & { id: number };
@@ -15,13 +17,21 @@ export type DuckFactory = Block & {
   ducks: Duck[];
 };
 
-export const MAX_DUCKS = 2;
+export const MAX_DUCKS = 3;
 
 const Duck: React.FC<Duck> = (duck) => {
   const dispatch: StoreDispatch = useDispatch();
+  const jumpman = useSelector((state: RootState) => state.jumpman);
 
-  const x = (isDirectionLeft(duck.direction) ? -1 : 1) * Math.random();
-  const y = 4 + Math.random() * 3;
+  const [state, setState] = useState(0);
+  const isDead = state === 1 ? "Dead" : "";
+
+  let x = (isDirectionLeft(duck.direction) ? -1 : 1) * 3;
+  let y = 4;
+  if (isDead) {
+    x = 0;
+    y = -10;
+  }
 
   useInterval(() => {
     dispatch(
@@ -33,14 +43,27 @@ const Duck: React.FC<Duck> = (duck) => {
     );
   });
 
+  useInterval(
+    () => {
+      dispatch(destroyDuck(duck.id));
+    },
+    isDead ? 2000 : 0
+  );
+
   const onClickDuck = () => {
+    setState(1);
+    const chaseSpeed = duck.x === jumpman.x ? 0 : duck.x < jumpman.x ? -1 : 1;
+    dispatch(moveJumpman({ x: chaseSpeed, y: 10 }));
     dispatch(setPlayer("DH"));
-    dispatch(destroyDuck(duck.id));
   };
+
+  const color = useMemo(() => {
+    return isDirectionLeft(duck.direction) ? "Purple" : "Green";
+  }, []);
 
   return (
     <div
-      className={`Duck Block Round ${duck.direction}`}
+      className={`Duck Block Round ${duck.direction} ${color} ${isDead}`}
       style={{
         left: duck.x,
         bottom: duck.y,
@@ -48,7 +71,7 @@ const Duck: React.FC<Duck> = (duck) => {
     >
       {"oo"}
       <Target
-        points={{ value: 250, position: duck }}
+        points={{ value: 25, position: duck }}
         callback={onClickDuck}
         always
       />
@@ -62,7 +85,7 @@ export const DuckFactory: React.FC = () => {
 
   const isUnlocked = hasUnlockedDuckHunting();
   const isHunting = isDuckHunting();
-  const interval = isHunting ? 2500 : !isUnlocked ? 7777 : 0;
+  const interval = isHunting ? 2000 : !isUnlocked ? 7777 : 0;
 
   useInterval(() => {
     dispatch(

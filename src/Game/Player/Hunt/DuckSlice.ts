@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Duck, DuckFactory, MAX_DUCKS } from "./Duck";
 import { RootState, StoreDispatch } from "../../reduxStore";
-import { LEFT } from "../../Level/Block";
+import { flipDirection, LEFT } from "../../Level/Block";
+import { checkBoundaries } from "../../Level/Position";
 
 const initialState: DuckFactory = {
   x: 0,
@@ -57,18 +58,18 @@ export const moveDuck = createAsyncThunk<
     x: duck.x + x,
     y: duck.y + y,
   };
-  //TODO checkBoundaries... might not need thunk
+  const bounded = checkBoundaries(moved);
+  const directioned =
+    moved.x !== bounded.x ? flipDirection(duck.direction) : duck.direction;
+
   const update: Duck = {
     ...duck,
     ...moved,
+    ...(directioned ? { direction: directioned } : {}),
   };
   dispatch(setDuck(update));
 });
 
-export const {
-  setDuckFactory,
-  createDuck,
-  setDuck,
-  destroyDuck,
-} = slice.actions;
+export const { setDuckFactory, createDuck, setDuck, destroyDuck } =
+  slice.actions;
 export default slice.reducer;

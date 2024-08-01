@@ -8,14 +8,26 @@
     margin-bottom: 50px;
   }
 
-  &.left {
+  &.Purple {
     background-color: navy;
     outline-color: purple;
+    &::before {
+      color: purple;
+    }
+  }
+
+  &.Green {
+    background-color: darkgreen;
+    outline-color: forestgreen;
+    &::before {
+      color: black;
+    }
+  }
+
+  &.left {
     transform: rotate(-5deg);
   }
   &.right {
-    background-color: darkgreen;
-    outline-color: forestgreen;
     transform: rotate(5deg);
   }
 
@@ -27,21 +39,6 @@
     top: 7px;
     left: -14px;
     animation: flap 1s infinite linear;
-    @keyframes flap {
-      0%,
-      100% {
-        transform: rotateX(360deg);
-      }
-      50% {
-        transform: rotateX(0deg);
-      }
-    }
-  }
-  &.left::before {
-    color: purple;
-  }
-  &.right::before {
-    color: black;
   }
 
   &::after {
@@ -59,6 +56,11 @@
     bottom: 0px;
     left: 18px;
   }
+
+  &.Dead {
+    transform: rotateX(180deg);
+    animation: spin 0.2s linear infinite;
+  }
 }
 
 .Grass {
@@ -68,4 +70,14 @@
   height: 20px;
   background-color: lawngreen;
   outline: 4px dashed greenyellow;
+}
+
+@keyframes flap {
+  0%,
+  100% {
+    transform: rotateX(360deg);
+  }
+  50% {
+    transform: rotateX(0deg);
+  }
 }

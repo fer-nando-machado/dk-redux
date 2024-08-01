@@ -1,13 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../../reduxStore";
-import { setPlayer } from "../../System/OptionsSlice";
 import useKeyboard from "../../Hooks/useKeyboard";
+import useInterval from "../../Hooks/useInterval";
+import { setPlayer } from "../../System/OptionsSlice";
+import { moveJumpman } from "../JumpmanSlice";
+import { isDirectionLeft } from "../../Level/Block";
 import "./Dog.scss";
 
 const CODE = "DH";
 const Dog: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { player } = useSelector((state: RootState) => state.options);
+  const { direction } = useSelector((state: RootState) => state.jumpman);
+
+  const isDog = player.code === CODE;
+  const speed = isDirectionLeft(direction) ? -1 : 1;
+
+  useInterval(
+    () => {
+      dispatch(moveJumpman({ x: speed, y: 0 }));
+    },
+    isDog ? undefined : 0
+  );
 
   useKeyboard({
     key: CODE,
