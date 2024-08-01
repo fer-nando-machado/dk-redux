@@ -51,10 +51,10 @@ const Duck: React.FC<Duck> = (duck) => {
   );
 
   const onClickDuck = () => {
-    setState(1);
     const chaseSpeed = duck.x === jumpman.x ? 0 : duck.x < jumpman.x ? -1 : 1;
     dispatch(moveJumpman({ x: chaseSpeed, y: 10 }));
     dispatch(setPlayer("DH"));
+    setState(1);
   };
 
   const color = useMemo(() => {
@@ -70,11 +70,13 @@ const Duck: React.FC<Duck> = (duck) => {
       }}
     >
       {"oo"}
-      <Target
-        points={{ value: 25, position: duck }}
-        callback={onClickDuck}
-        always
-      />
+      {!isDead && (
+        <Target
+          points={{ value: 25, position: duck }}
+          callback={onClickDuck}
+          always
+        />
+      )}
     </div>
   );
 };

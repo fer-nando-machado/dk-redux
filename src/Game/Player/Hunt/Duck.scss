@@ -58,7 +58,6 @@
   }
 
   &.Dead {
-    transform: rotateX(180deg);
     animation: spin 0.2s linear infinite;
   }
 }
