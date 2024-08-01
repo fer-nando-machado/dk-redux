@@ -17,19 +17,19 @@ const DeutschBox: React.FC = () => {
 
   const isDeutschBox = player.code === CODE;
 
-  const [checked, setChecked] = useState(0);
-  const multiplier = checked == 3 ? 3 : checked == 1 ? 1 : 0;
+  const [state, setState] = useState(0);
+  const multiplier = state == 3 ? 3 : state == 1 ? 1 : 0;
   const speed = multiplier * (isDirectionLeft(direction) ? -2 : 2);
 
   const ref = useRef<HTMLInputElement>(null);
-  const handleClick = () => {
+  const onClickDeutschBox = () => {
     if (!ref.current) return;
     const button = ref.current.nextElementSibling as HTMLButtonElement;
     button.click();
   };
 
   useEffect(() => {
-    setChecked(0);
+    setState(0);
   }, [player.code]);
 
   useInterval(
@@ -41,7 +41,7 @@ const DeutschBox: React.FC = () => {
 
   useKeyboard({
     key: "Shift",
-    onKeyDown: handleClick,
+    onKeyDown: onClickDeutschBox,
   });
 
   useKeyboard({
@@ -50,13 +50,13 @@ const DeutschBox: React.FC = () => {
   });
 
   return isDeutschBox ? (
-    <div className="DeutschBox" onClick={handleClick}>
+    <div className="DeutschBox" onClick={onClickDeutschBox}>
       <ReactDeutschBox
         name="DeutschBox"
         feedback={direction}
         size={26}
         ref={ref}
-        onChange={() => setChecked((c) => (c + 1) % 4)}
+        onChange={() => setState((c) => (c + 1) % 4)}
       />
     </div>
   ) : null;
