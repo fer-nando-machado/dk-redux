@@ -12,7 +12,7 @@ export type BarrelFactory = Block & {
   barrels: Barrel[];
 };
 
-export const MAX_BARRELS = 3;
+export const MAX_BARRELS = 7;
 
 const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
