@@ -14,29 +14,27 @@
   }
 
   h1 {
-    padding: 1.5vh 0 0 0;
+    padding: 1.25vh;
     margin: 0;
     display: flex;
-    font-size: 20px;
+    font-size: 24px;
     align-items: center;
     span {
       font-size: 16px;
     }
     .dk {
       position: fixed;
-      top: 25px;
-      left: 25px;
-      width: 12vw;
-      max-width: 200px;
+      top: 0;
+      left: 0;
+      width: 13vw;
+      max-width: 222px;
       opacity: 0.81;
-      display: none;
       color: transparent;
       &:target {
-        display: block;
         color: brown;
-        rect {
-          fill: transparent;
-        }
+      }
+      rect {
+        fill: transparent;
       }
     }
   }
