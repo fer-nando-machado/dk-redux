@@ -80,7 +80,7 @@ export const moveJumpmanAuto = createAsyncThunk<
     let direction = getDirection(x);
     if (direction !== undefined) {
       const platformedAhead = checkPlatforms(
-        { ...platformed, x: platformed.x + x },
+        { ...platformed, x: platformed.x + x * fps },
         platforms
       );
       if (platformedAhead.isJumping) {
