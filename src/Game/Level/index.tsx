@@ -52,7 +52,7 @@ const PLATFORMS: Platform[] = [
   { x: 25, y: 625, length: 25 },
   { x: 100, y: 525, length: 175 },
   { x: 400, y: 425, length: 75 },
-  { x: 0, y: 325, length: 425 },
+  { x: 25, y: 325, length: 350 },
   { x: 325, y: 225, length: 150 },
   { x: 125, y: 125, length: 200 },
   { x: 25, y: 25, length: 450 },
@@ -78,15 +78,15 @@ const Level: React.FC<CustomLevel> = ({
     dispatch(setBarrelFactory({ ...BARREL_FACTORY, ...barrelFactory }));
     dispatch(setDuckFactory(DUCK_FACTORY));
 
-    dispatch(setPlayer("M"));
+    //dispatch(setPlayer("M"));
     dispatch(setPlayer("D"));
   }, [jumpman, platforms, barrelFactory]);
 
   return (
     <>
       <PlatformFactory />
-      <Jumpman />
       <BarrelFactory />
+      <Jumpman />
       <DuckFactory />
     </>
   );

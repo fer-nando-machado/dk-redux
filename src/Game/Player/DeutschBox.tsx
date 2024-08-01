@@ -1,13 +1,13 @@
 import ReactDeutschBox from "react-deutschbox";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { setPlayer } from "../System/OptionsSlice";
 import useKeyboard from "../Hooks/useKeyboard";
-import "./DeutschBox.scss";
 import useInterval from "../Hooks/useInterval";
-import { moveJumpman } from "./JumpmanSlice";
+import { moveJumpmanAuto } from "./JumpmanSlice";
 import { isDirectionLeft } from "../Level/Block";
+import "./DeutschBox.scss";
 
 const CODE = "D";
 const DeutschBox: React.FC = () => {
@@ -15,25 +15,33 @@ const DeutschBox: React.FC = () => {
   const { player } = useSelector((state: RootState) => state.options);
   const { direction } = useSelector((state: RootState) => state.jumpman);
 
-  const speed = isDirectionLeft(direction) ? -2 : 2;
-  const [multiplier, setMultiplier] = useState<number>(0);
-
   const isDeutschBox = player.code === CODE;
 
+  const [checked, setChecked] = useState(0);
+  const multiplier = checked == 3 ? 3 : checked == 1 ? 1 : 0;
+  const speed = multiplier * (isDirectionLeft(direction) ? -2 : 2);
+
   const ref = useRef<HTMLInputElement>(null);
-  const clickDeutschBox = () => {
+  const handleClick = () => {
     if (!ref.current) return;
     const button = ref.current.nextElementSibling as HTMLButtonElement;
-    const state = button.className;
-    const isGonnaDOCH = state === "dechecked";
-    const isGonnaJA = state === "unchecked";
-    setMultiplier(isGonnaDOCH ? 3 : isGonnaJA ? 1 : 0);
     button.click();
   };
 
+  useEffect(() => {
+    setChecked(0);
+  }, [player.code]);
+
+  useInterval(
+    () => {
+      dispatch(moveJumpmanAuto({ x: speed, y: 0 }));
+    },
+    isDeutschBox ? undefined : 0
+  );
+
   useKeyboard({
     key: "Shift",
-    onKeyDown: clickDeutschBox,
+    onKeyDown: handleClick,
   });
 
   useKeyboard({
@@ -41,20 +49,14 @@ const DeutschBox: React.FC = () => {
     onKeyDown: () => dispatch(setPlayer(CODE)),
   });
 
-  useInterval(
-    () => {
-      dispatch(moveJumpman({ x: multiplier * speed, y: 0 }));
-    },
-    isDeutschBox ? undefined : 0
-  );
-
   return isDeutschBox ? (
-    <div className="DeutschBox" onClick={clickDeutschBox}>
+    <div className="DeutschBox" onClick={handleClick}>
       <ReactDeutschBox
         name="DeutschBox"
         feedback={direction}
         size={26}
         ref={ref}
+        onChange={() => setChecked((c) => (c + 1) % 4)}
       />
     </div>
   ) : null;

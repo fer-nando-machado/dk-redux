@@ -1,18 +1,6 @@
 .Jumpman.D {
   outline-color: #fc0;
 
-  &:has(.deutschbox .checked) {
-    animation: walk 0.5s infinite linear;
-  }
-
-  &:has(.deutschbox .dechecked) {
-    animation: shake 0.1s infinite linear;
-  }
-
-  &:has(.deutschbox .rechecked) {
-    animation: spin 0.1s infinite linear;
-  }
-
   &::before {
     color: #d00;
   }
@@ -27,7 +15,7 @@
       outline: none;
     }
 
-    .bubble-label {
+    aside {
       top: 0;
       &.left {
         right: 100%;
@@ -52,4 +40,18 @@
 
 .Game:has(.Player.Jumpman.D) {
   color: #fc0;
+}
+
+.Block {
+  &:has(.deutschbox .checked) {
+    animation: walk 0.5s infinite linear;
+  }
+
+  &:has(.deutschbox .dechecked) {
+    animation: shake 0.1s infinite linear;
+  }
+
+  &:has(.deutschbox .rechecked) {
+    animation: spin 0.1s infinite linear;
+  }
 }

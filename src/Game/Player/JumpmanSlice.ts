@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StoreDispatch, RootState } from "../reduxStore";
 import { checkBoundaries, checkPlatforms, Position } from "../Level/Position";
-import { getDirection, LEFT } from "../Level/Block";
+import { flipDirection, getDirection, LEFT } from "../Level/Block";
 import { Jumpman } from "./Jumpman";
 
 const initialState: Jumpman = {
@@ -42,12 +42,53 @@ export const moveJumpman = createAsyncThunk<
       y: jumpman.y + y,
     };
     const bounded = checkBoundaries(moved);
-    const plataformed = checkPlatforms(bounded, platforms);
-    const direction = getDirection(x);
+    const platformed = checkPlatforms(bounded, platforms);
+    const directioned = getDirection(x);
     const update: Jumpman = {
+      ...platformed,
+      ...(directioned ? { direction: directioned } : {}),
+    };
+    dispatch(setJumpman(update));
+  }
+);
+
+export const moveJumpmanAuto = createAsyncThunk<
+  void,
+  Position,
+  {
+    state: RootState;
+    dispatch: StoreDispatch;
+  }
+>(
+  "JumpmanSlice/moveJumpmanAuto",
+  async (payload: Position, { getState, dispatch }) => {
+    const state: RootState = getState();
+    const platforms = state.platformFactory.platforms;
+    const jumpman = state.jumpman;
+
+    let { x, y } = payload;
+    const moved = {
       ...jumpman,
-      ...plataformed,
-      ...(direction ? { direction } : {}),
+      x: jumpman.x + x,
+      y: jumpman.y + y,
+    };
+    const bounded = checkBoundaries(moved);
+    const platformed = checkPlatforms(bounded, platforms);
+
+    let directioned = getDirection(x);
+    if (directioned !== undefined) {
+      const platformedAhead = checkPlatforms(
+        { ...platformed, x: platformed.x + x },
+        platforms
+      );
+      if (platformedAhead.isJumping) {
+        directioned = flipDirection(directioned);
+      }
+    }
+
+    const update: Jumpman = {
+      ...platformed,
+      ...(directioned ? { direction: directioned } : {}),
     };
     dispatch(setJumpman(update));
   }
