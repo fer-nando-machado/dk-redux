@@ -3,7 +3,7 @@
   min-height: 100vh;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 18px;
   &:has(.Maker) {
     background: #001300;
@@ -11,7 +11,7 @@
 
   h1 {
     padding: 0;
-    margin: 0;
+    margin-top: 18px;
     display: flex;
     font-size: 20px;
     align-items: center;
@@ -104,6 +104,7 @@
           font-family: "Nanum Pen Script", cursive;
           font-size: 1.5vw;
           color: darkblue;
+          white-space: nowrap;
 
           &.Gravity {
             margin: -9.8px 9.8px;
@@ -114,9 +115,9 @@
             transform: rotate(-9.8deg);
           }
           &.Player {
-            margin: 3px 6px;
+            margin: 2px 4px;
             line-height: 50%;
-            transform: rotate(-4deg);
+            transform: rotate(-6deg);
           }
         }
 
