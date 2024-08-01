@@ -40,7 +40,7 @@ const Option: React.FC<Option> = ({ name, value, onClick }) => {
     <div className="Option">
       {name}:
       <span
-        className={`${onClick ? "clickable" : ""} LargerBoldItalic`}
+        className={`${onClick ? "Clickable" : ""} LargerBoldItalic`}
         onClick={onClick}
       >
         {display}
@@ -115,20 +115,20 @@ const Options: React.FC = () => {
             <u>{name}</u> <small>v{version}</small>
             <p>{description}</p>
             <u>OPTIONS</u>
-            <Option
-              name="FILTERS"
-              value={options.filters}
-              onClick={dispatchToggleFilters}
-            />
-            <Option
-              name="REFRESH"
-              value={options.lowFPS ? "30FPS" : "60FPS"}
-              onClick={dispatchToggleLowFPS}
-            />
+            <div className="Toggles">
+              <Option
+                name="FILTERS"
+                value={options.filters}
+                onClick={dispatchToggleFilters}
+              />
+              <Option
+                name="REFRESH"
+                value={options.lowFPS ? "30FPS" : "60FPS"}
+                onClick={dispatchToggleLowFPS}
+              />
+            </div>
           </div>
-          <div className="Paused" onClick={dispatchUnpause}>
-            PAUSE
-          </div>
+          <div className="Paused" onClick={dispatchUnpause} />
           <div>
             <PlayerSelect />
             <div className="Credits">

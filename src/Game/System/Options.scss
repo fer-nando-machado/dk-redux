@@ -11,13 +11,22 @@
   background: black;
   opacity: 0.81;
 
-  .Option {
+  .Toggles {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-top: 12.5px;
-    span {
-      padding: 12.5px;
-      &.clickable {
-        cursor: pointer;
-        text-decoration: underline;
+    .Option {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+
+      span {
+        padding: 12.5px 0 12.5px 12.5px;
+        &.Clickable {
+          cursor: pointer;
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -25,11 +34,16 @@
   .Paused {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex: 1;
-    margin: 12.5px 0;
-    font-size: larger;
-    cursor: pointer;
+    height: 100%;
+    width: 100%;
+
+    &::after {
+      content: "PAUSE";
+      font-weight: bold;
+      font-size: 50px;
+      position: absolute;
+      top: 50%;
+    }
   }
 
   .Credits {
