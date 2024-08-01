@@ -3,6 +3,7 @@
   background-color: #c64a09;
   outline-color: #ce8147;
   font-weight: bold;
+  animation: walk 0.5s infinite linear;
   //cursor: grab;
   &::before {
     content: "{.}";
