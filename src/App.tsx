@@ -11,7 +11,7 @@ import "./App.scss";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>
+      <h1 onClick={() => window.location.reload()}>
         <Icon />
         DK<span>{"<Redux/>"}</span>
       </h1>

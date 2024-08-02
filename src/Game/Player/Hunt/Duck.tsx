@@ -29,7 +29,6 @@ const Duck: React.FC<Duck> = (duck) => {
   const { x, y } = useMemo(() => {
     let x = (isDirectionLeft(duck.direction) ? -1 : 1) * 5;
     let y = 4 + Math.floor(Math.random() * 3);
-    console.log(x, y);
     if (isDead) {
       x = 0;
       y = -10;
