@@ -26,12 +26,16 @@ const Duck: React.FC<Duck> = (duck) => {
   const [state, setState] = useState(0);
   const isDead = state === 1 ? "Dead" : "";
 
-  let x = (isDirectionLeft(duck.direction) ? -1 : 1) * 7;
-  let y = 4;
-  if (isDead) {
-    x = 0;
-    y = -10;
-  }
+  const { x, y } = useMemo(() => {
+    let x = (isDirectionLeft(duck.direction) ? -1 : 1) * 5;
+    let y = 4 + Math.floor(Math.random() * 3);
+    console.log(x, y);
+    if (isDead) {
+      x = 0;
+      y = -10;
+    }
+    return { x, y };
+  }, [isDead, duck.direction]);
 
   useIntervalFPS(() => {
     dispatch(
@@ -87,7 +91,7 @@ export const DuckFactory: React.FC = () => {
 
   const isUnlocked = hasUnlockedDuckHunting();
   const isHunting = isDuckHunting();
-  const interval = isHunting ? 2000 : !isUnlocked ? 7777 : 0;
+  const interval = isHunting ? 3000 : !isUnlocked ? 7777 : 0;
 
   useIntervalTimed(() => {
     dispatch(
