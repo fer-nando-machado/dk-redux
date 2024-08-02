@@ -9,6 +9,10 @@
     justify-content: center;
   }
 
+  a:hover {
+    opacity: 0.81;
+  }
+
   &:has(.Maker) {
     background: #001300;
   }
@@ -252,19 +256,22 @@
     display: flex;
     align-items: flex-end;
     gap: 18px;
+  }
 
-    a:hover {
-      opacity: 0.81;
+  nav {
+    display: block;
+    @media only screen and (min-width: 630px) {
+      display: none;
     }
+  }
 
-    .Button {
-      border-radius: 24px;
-      font-size: 12px;
-      padding: 6px 12px;
-      text-decoration: none;
-      background-color: white;
-      color: black;
-    }
+  .Button {
+    border-radius: 24px;
+    font-size: 12px;
+    padding: 6px 12px;
+    text-decoration: none;
+    background-color: white;
+    color: black;
   }
 }
 

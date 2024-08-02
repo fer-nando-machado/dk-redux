@@ -11,7 +11,7 @@ import "./App.scss";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1 onClick={() => window.location.reload()}>
+      <h1>
         <Icon />
         DK<span>{"<Redux/>"}</span>
       </h1>
@@ -27,6 +27,15 @@ const App: React.FC = () => {
           Support
         </a>
       </footer>
+      <nav>
+        <a
+          href="# "
+          className="Button"
+          onClick={() => window.location.reload()}
+        >
+          Restart
+        </a>
+      </nav>
     </div>
   );
 };
