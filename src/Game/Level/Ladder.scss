@@ -1,0 +1,12 @@
+.Ladder {
+  background-color: cyan;
+  transform: translateY(-12.5px);
+  background: repeating-linear-gradient(
+    cyan 0,
+    cyan 4px,
+    transparent 4px,
+    transparent 12px
+  );
+
+  outline: 1px solid rgba($color: cyan, $alpha: 0.81);
+}

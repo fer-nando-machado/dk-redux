@@ -109,10 +109,8 @@ const Options: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener("blur", dispatchPause);
-    window.addEventListener("focus", dispatchUnpause);
     return () => {
       window.removeEventListener("blur", dispatchPause);
-      window.removeEventListener("focus", dispatchUnpause);
     };
   }, []);
 

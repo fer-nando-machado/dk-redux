@@ -5,7 +5,7 @@ import useKeyboard from "../Hooks/useKeyboard";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/OptionsSlice";
 import { Block } from "../Level/Block";
-import { moveJumpman } from "./JumpmanSlice";
+import { moveJumpman, moveJumpmanClimb } from "./JumpmanSlice";
 import DeutschBox from "./DeutschBox";
 import Dog from "./Hunt/Dog";
 import "./Jumpman.scss";
@@ -61,7 +61,7 @@ export const Jumpman: React.FC = () => {
   const climbing = useRef<number | null>(null);
   useIntervalFPS(() => {
     if (!climbing.current || walking.current || jumping.current) return;
-    dispatch(moveJumpman({ x: 0, y: climbing.current }));
+    dispatch(moveJumpmanClimb({ x: 0, y: climbing.current }));
   });
   const startClimbing = (speed: number) => {
     if (climbing.current) return;
@@ -71,6 +71,7 @@ export const Jumpman: React.FC = () => {
     if (!climbing.current) return;
     climbing.current = null;
   };
+
   useIntervalFPS(() => {
     if (jumping.current || climbing.current) return;
     dispatch(
@@ -80,6 +81,7 @@ export const Jumpman: React.FC = () => {
       })
     );
   });
+
   useKeyboard({
     key: "ArrowUp",
     onKeyDown: () => startClimbing(+1),

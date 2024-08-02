@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StoreDispatch, RootState } from "../reduxStore";
-import { checkBoundaries, checkPlatforms, Position } from "../Level/Position";
+import {
+  checkBoundaries,
+  checkLadders,
+  checkPlatforms,
+  Position,
+} from "../Level/Position";
 import { flipDirection, getDirection, LEFT } from "../Level/Block";
 import { Jumpman } from "./Jumpman";
 
@@ -34,6 +39,7 @@ export const moveJumpman = createAsyncThunk<
     const state: RootState = getState();
     const fps = state.options.lowFPS ? 2 : 1;
     const platforms = state.platformFactory.platforms;
+    const ladders = state.ladderFactory.ladders;
     const jumpman = state.jumpman;
 
     let { x, y } = payload;
@@ -42,6 +48,10 @@ export const moveJumpman = createAsyncThunk<
       x: jumpman.x + x * fps,
       y: jumpman.y + y * fps,
     };
+
+    const isOnLadder = checkLadders(moved, ladders);
+    if (isOnLadder && y < 0) return; //disable gravity on ladders (TODO bring to Jumpman state)
+
     const bounded = checkBoundaries(moved);
     const platformed = checkPlatforms(bounded, platforms);
     const direction = getDirection(x);
@@ -50,6 +60,37 @@ export const moveJumpman = createAsyncThunk<
       ...(direction ? { direction } : {}),
     };
     dispatch(setJumpman(update));
+  }
+);
+
+export const moveJumpmanClimb = createAsyncThunk<
+  void,
+  Position,
+  {
+    state: RootState;
+    dispatch: StoreDispatch;
+  }
+>(
+  "JumpmanSlice/moveJumpmanClimb",
+  async (payload: Position, { getState, dispatch }) => {
+    const state: RootState = getState();
+    const fps = state.options.lowFPS ? 2 : 1;
+    const ladders = state.ladderFactory.ladders;
+    const jumpman = state.jumpman;
+
+    let { y } = payload;
+    const moved = {
+      ...jumpman,
+      y: jumpman.y + y * fps,
+    };
+
+    const isOnLadder = checkLadders(moved, ladders);
+    if (isOnLadder === true) {
+      const update: Jumpman = {
+        ...moved,
+      };
+      dispatch(setJumpman(update));
+    }
   }
 );
 

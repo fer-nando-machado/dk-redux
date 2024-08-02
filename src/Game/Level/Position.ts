@@ -1,4 +1,5 @@
 import { Block } from "./Block";
+import { Ladder } from "./Ladder";
 import { Platform } from "./Platform";
 
 export type Position = {
@@ -61,7 +62,34 @@ const isOnPlatform = (position: Position, platform: Platform): boolean => {
   );
 };
 
+export const checkLadders = (
+  position: Position,
+  ladders: Ladder[]
+): boolean => {
+  for (const ladder of ladders) {
+    if (isOnLadder(position, ladder)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const isOnLadder = (position: Position, ladder: Ladder): boolean => {
+  if (!ladder.height) return false;
+
+  const currentX = position.x - ladder.x;
+  const currentY = position.y - ladder.y;
+
+  return (
+    currentX >= -thickness.x &&
+    currentX <= thickness.x &&
+    currentY >= thickness.y &&
+    currentY <= ladder.height + thickness.y
+  );
+};
+
 const thickness: Position = {
   x: 25,
-  y: 12.5,
+  y: 13,
 };

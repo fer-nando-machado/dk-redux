@@ -4,6 +4,9 @@ import { RootState, StoreDispatch } from "../reduxStore";
 
 import { RIGHT } from "./Block";
 
+import { Ladder, LadderFactory } from "./Ladder";
+import { setLadders } from "./LadderSlice";
+
 import { Platform, PlatformFactory } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
 
@@ -25,6 +28,7 @@ export type CustomLevel = Partial<Level>;
 export type Level = {
   id: number;
   jumpman: Jumpman;
+  ladders: Ladder[];
   platforms: Platform[];
   barrelFactory: BarrelFactory;
 };
@@ -36,11 +40,12 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
   useEffect(() => {
     const isMaker = hasCustomLevel(customLevel);
     if (isMaker) {
-      const { id, jumpman, barrelFactory, platforms } = customLevel;
+      const { id, jumpman, barrelFactory, platforms, ladders } = customLevel;
       dispatch(setMaker(true));
       dispatch(
         setLevel({
           id: id || 0,
+          ladders: ladders || [],
           platforms: platforms || [],
           jumpman: { ...JUMPMAN, ...jumpman },
           barrelFactory: { ...BARREL_FACTORY, ...barrelFactory },
@@ -54,19 +59,21 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
 
   useEffect(() => {
     dispatch(setJumpman(level.jumpman));
+    dispatch(setLadders(level.ladders));
     dispatch(setPlatforms(level.platforms));
     dispatch(setBarrelFactory(level.barrelFactory));
     dispatch(setDuckFactory(DUCK_FACTORY));
   }, [level]);
 
   useEffect(() => {
-    //dispatch(setPlayer("M"));
     dispatch(setPlayer("D"));
+    // dispatch(setPlayer("M"));
   }, []);
 
   return (
     <>
       <PlatformFactory />
+      <LadderFactory />
       <BarrelFactory />
       <Jumpman />
       <DuckFactory />

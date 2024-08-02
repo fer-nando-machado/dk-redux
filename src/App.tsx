@@ -218,12 +218,15 @@ const demoLevel = `{
     { "x": 125, "y": 125, "length": 200 },
     { "x": 25, "y": 25, "length": 450 }
   ],
+  "ladders": [
+    { "x": 200, "y": 25, "height": 100 }
+  ],
   "barrelFactory": {
     "x": 25,
     "y": 650
   },
   "jumpman": {
-    "x": 25,
+    "x": 100,
     "y": 70
   }
 }

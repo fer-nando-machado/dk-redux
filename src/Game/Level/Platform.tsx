@@ -5,24 +5,14 @@ import "./Platform.scss";
 
 export type Platform = Position & {
   length: number;
-  angle?: number;
 };
 
 export type PlatformFactory = {
   platforms: Platform[];
 };
 
-const Platform: React.FC<Platform> = ({ x, y, length, angle = 0 }) => {
+const Platform: React.FC<Platform> = ({ x, y, length }) => {
   if (!length) return <></>;
-
-  const rotate =
-    angle !== 0
-      ? {
-          transform: `rotate(${angle}deg)`,
-          transformOrigin: "0 0",
-        }
-      : {};
-
   return (
     <div
       className="Platform Block"
@@ -30,7 +20,6 @@ const Platform: React.FC<Platform> = ({ x, y, length, angle = 0 }) => {
         left: x,
         bottom: y,
         width: length,
-        ...rotate,
       }}
     />
   );
