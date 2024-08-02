@@ -1,7 +1,8 @@
-import { useDispatch } from "react-redux";
-import { StoreDispatch } from "../reduxStore";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, StoreDispatch } from "../reduxStore";
 
-import { RIGHT, LEFT } from "./Block";
+import { RIGHT } from "./Block";
 
 import { Platform, PlatformFactory } from "./Platform";
 import { setPlatforms } from "./PlatformSlice";
@@ -15,72 +16,53 @@ import { setBarrelFactory } from "./BarrelSlice";
 import { DuckFactory } from "../Player/Hunt/Duck";
 import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
-import { setMaker, setPlayer } from "../System/OptionsSlice";
-import { useEffect } from "react";
+import { resetOptions, setMaker, setPlayer } from "../System/OptionsSlice";
 
-export type CustomLevel = {
-  jumpman?: Jumpman;
-  platforms?: Platform[];
-  barrelFactory?: BarrelFactory;
+import { resetLevel, setLevel } from "./LevelSlice";
+
+export type CustomLevel = Partial<Level>;
+
+export type Level = {
+  id: number;
+  jumpman: Jumpman;
+  platforms: Platform[];
+  barrelFactory: BarrelFactory;
 };
 
-const JUMPMAN: Jumpman = {
-  x: 25,
-  y: 400,
-  isJumping: false,
-  direction: RIGHT,
-};
-
-const BARREL_FACTORY: BarrelFactory = {
-  x: 450,
-  y: 425,
-  isJumping: false,
-  direction: LEFT,
-  barrels: [],
-};
-
-const DUCK_FACTORY: DuckFactory = {
-  x: 250,
-  y: -25,
-  isJumping: false,
-  direction: LEFT,
-  ducks: [],
-};
-
-const PLATFORMS: Platform[] = [
-  { x: 0, y: 700, length: 505 },
-  { x: 25, y: 625, length: 25 },
-  { x: 100, y: 525, length: 175 },
-  { x: 400, y: 425, length: 75 },
-  { x: 25, y: 325, length: 350 },
-  { x: 325, y: 225, length: 150 },
-  { x: 125, y: 125, length: 200 },
-  { x: 25, y: 25, length: 450 },
-];
-
-const Level: React.FC<CustomLevel> = ({
-  jumpman = JUMPMAN,
-  platforms = PLATFORMS,
-  barrelFactory = BARREL_FACTORY,
-}) => {
+const Level: React.FC<CustomLevel> = (customLevel) => {
   const dispatch: StoreDispatch = useDispatch();
+  const level = useSelector((state: RootState) => state.level);
 
   useEffect(() => {
-    const isMaker =
-      jumpman !== JUMPMAN ||
-      platforms !== PLATFORMS ||
-      barrelFactory !== BARREL_FACTORY;
-    dispatch(setMaker(isMaker));
+    const isMaker = hasCustomLevel(customLevel);
+    if (isMaker) {
+      const { id, jumpman, barrelFactory, platforms } = customLevel;
+      dispatch(setMaker(true));
+      dispatch(
+        setLevel({
+          id: id || 0,
+          platforms: platforms || [],
+          jumpman: { ...JUMPMAN, ...jumpman },
+          barrelFactory: { ...BARREL_FACTORY, ...barrelFactory },
+        })
+      );
+    } else {
+      dispatch(resetOptions());
+      dispatch(resetLevel());
+    }
+  }, [customLevel]);
 
-    dispatch(setJumpman({ ...JUMPMAN, ...jumpman }));
-    dispatch(setPlatforms(platforms));
-
-    dispatch(setBarrelFactory({ ...BARREL_FACTORY, ...barrelFactory }));
+  useEffect(() => {
+    dispatch(setJumpman(level.jumpman));
+    dispatch(setPlatforms(level.platforms));
+    dispatch(setBarrelFactory(level.barrelFactory));
     dispatch(setDuckFactory(DUCK_FACTORY));
+  }, [level]);
 
+  useEffect(() => {
     //dispatch(setPlayer("M"));
     dispatch(setPlayer("D"));
-  }, [jumpman, platforms, barrelFactory]);
+  }, []);
 
   return (
     <>
@@ -90,6 +72,33 @@ const Level: React.FC<CustomLevel> = ({
       <DuckFactory />
     </>
   );
+};
+
+const hasCustomLevel = (customLevel: CustomLevel): boolean => {
+  return customLevel != null && Object.keys(customLevel).length > 0;
+};
+
+const JUMPMAN: Jumpman = {
+  x: 0,
+  y: 750,
+  isJumping: true,
+  direction: RIGHT,
+};
+
+const BARREL_FACTORY: BarrelFactory = {
+  x: 475,
+  y: 725,
+  isJumping: false,
+  direction: RIGHT,
+  barrels: [],
+};
+
+const DUCK_FACTORY: DuckFactory = {
+  x: 250,
+  y: -25,
+  isJumping: false,
+  direction: RIGHT,
+  ducks: [],
 };
 
 export default Level;

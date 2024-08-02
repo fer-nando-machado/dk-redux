@@ -6,14 +6,14 @@ import Options from "./System/Options";
 import "./index.scss";
 
 export type Game = {
-  level?: CustomLevel;
+  customLevel?: CustomLevel;
 };
 
-const Game: React.FC<Game> = ({ level }) => {
+const Game: React.FC<Game> = ({ customLevel }) => {
   return (
     <Provider store={Store}>
       <div className="Game">
-        <Level {...level} />
+        <Level {...customLevel} />
         <Status />
         <Options />
       </div>

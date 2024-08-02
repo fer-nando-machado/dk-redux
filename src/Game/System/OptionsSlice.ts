@@ -53,10 +53,19 @@ const slice = createSlice({
       state.gravity = !state.gravity;
       state.debug = true;
     },
-    setMaker: (_, action: PayloadAction<boolean>) => {
+    resetOptions: (state) => {
+      return {
+        ...initialState,
+        player: state.player,
+        playerSelect: state.playerSelect,
+      };
+    },
+    setMaker: (state, action: PayloadAction<boolean>) => {
       const isMaker = action.payload;
       return {
         ...initialState,
+        player: state.player,
+        playerSelect: state.playerSelect,
         debug: isMaker,
         maker: isMaker,
       };
@@ -85,6 +94,7 @@ export const setPlayer = createAsyncThunk<
 });
 
 export const {
+  resetOptions,
   setPaused,
   winPlayer,
   togglePaused,

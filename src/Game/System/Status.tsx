@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalTimed } from "../Hooks/useInterval";
 import { Position } from "../Level/Position";
+import { resetLevel } from "../Level/LevelSlice";
 import { setPaused } from "./OptionsSlice";
 import { clearMessage, clearPoints } from "./StatusSlice";
 import "./Status.scss";
@@ -26,9 +27,9 @@ const Status: React.FC = () => {
     dispatch(setPaused(true));
   };
 
-  const clickRefresh = (event: React.MouseEvent<HTMLAnchorElement>) => {
+  const clickReset = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    window.location.reload();
+    dispatch(resetLevel());
   };
 
   return (
@@ -37,7 +38,7 @@ const Status: React.FC = () => {
         PAUSE
       </a>
       {score}
-      <a href="#" onClick={clickRefresh}>
+      <a href="#" onClick={clickReset}>
         RESET
       </a>
       <PointsDisplay />

@@ -5,6 +5,7 @@ import { StoreDispatch, RootState } from "../reduxStore";
 import useHash from "../Hooks/useHash";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
 import PlayerSelect, { Player, PlayerSelectMap } from "./PlayerSelect";
+import { resetLevel } from "../Level/LevelSlice";
 import {
   setPaused,
   setPlayer,
@@ -62,6 +63,10 @@ const Options: React.FC = () => {
   const dispatchTogglePaused = () => dispatch(togglePaused());
   const dispatchUnpause = () => dispatch(setPaused(false));
   const dispatchPause = () => dispatch(setPaused(true));
+  const dispatchReset = () => {
+    if (options.maker || options.paused) return;
+    dispatch(resetLevel());
+  };
 
   const dispatchToggleGravity = () => dispatch(toggleGravity());
   const dispatchEnableDebug = () => dispatch(enableDebug());
@@ -70,10 +75,13 @@ const Options: React.FC = () => {
     key: "0",
     onKeyDown: dispatchWinPlayer,
   });
-  // F4
   useKeyboard({
     key: "F2",
     onKeyDown: dispatchToggleLowFPS,
+  });
+  useKeyboard({
+    key: "F4",
+    onKeyDown: dispatchReset,
   });
   useKeyboard({
     key: "F8",
@@ -100,12 +108,13 @@ const Options: React.FC = () => {
   }, [hash]);
 
   useEffect(() => {
-    if (options.debug) return;
     window.addEventListener("blur", dispatchPause);
+    window.addEventListener("focus", dispatchUnpause);
     return () => {
       window.removeEventListener("blur", dispatchPause);
+      window.removeEventListener("focus", dispatchUnpause);
     };
-  }, [options.debug]);
+  }, []);
 
   return (
     <>
