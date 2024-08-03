@@ -83,25 +83,10 @@
 
 .Game:has(.Filters) {
   animation: text-filter 0.1s infinite alternate;
-  @keyframes text-filter {
-    from {
-      text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
-    }
-    to {
-      text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
-    }
-  }
 
   @media only screen and (min-width: 630px) {
-    animation: screen-filter 0.1s infinite alternate;
-    @keyframes screen-filter {
-      from {
-        box-shadow: 0 0 50px #75fa6950;
-      }
-      to {
-        box-shadow: 0 0 75px #ea36af50;
-      }
-    }
+    animation: text-filter 0.1s infinite alternate,
+      screen-filter 0.1s infinite alternate;
 
     &::after {
       content: "";
@@ -116,14 +101,33 @@
         repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 60% 60%/2500px
           2500px;
       background-blend-mode: difference;
-      opacity: 0.075;
-      animation: grain-filter 0.2s infinite alternate;
-      @keyframes grain-filter {
-        100% {
-          background-position: 50% 0, 60% 50%;
-        }
-      }
+      opacity: 0.081;
+      animation: grain-filter 0.1s infinite alternate;
     }
+  }
+}
+
+@keyframes text-filter {
+  from {
+    text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
+  }
+  to {
+    text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
+  }
+}
+
+@keyframes grain-filter {
+  100% {
+    background-position: 50% 0, 60% 50%;
+  }
+}
+
+@keyframes screen-filter {
+  from {
+    box-shadow: 0 0 50px #75fa6950;
+  }
+  to {
+    box-shadow: 0 0 75px #ea36af50;
   }
 }
 
