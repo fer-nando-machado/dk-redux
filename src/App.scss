@@ -267,12 +267,11 @@
     position: relative;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
     img {
       border-radius: 8px;
       border: 1px solid brown;
       width: 24px;
-      opacity: 0.81;
     }
     &::before {
       content: "+";
