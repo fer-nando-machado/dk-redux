@@ -82,8 +82,8 @@
 }
 
 .Game:has(.Filters) {
-  animation: game-flicker 0.1s infinite alternate;
-  @keyframes game-flicker {
+  animation: screen-flicker 0.2s infinite alternate;
+  @keyframes screen-flicker {
     from {
       text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
       box-shadow: 0 0 50px #75fa6950;
@@ -94,24 +94,26 @@
     }
   }
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 50% 0/2500px
-        2500px,
-      repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 60% 60%/2500px
-        2500px;
-    background-blend-mode: difference;
-    opacity: 0.075;
-    animation: screen-flicker 0.2s infinite alternate;
-    @keyframes screen-flicker {
-      100% {
-        background-position: 50% 0, 60% 50%;
+  @media only screen and (min-width: 630px) {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 50%
+          0/2500px 2500px,
+        repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 60% 60%/2500px
+          2500px;
+      background-blend-mode: difference;
+      opacity: 0.075;
+      animation: grain-flicker 0.2s infinite alternate;
+      @keyframes grain-flicker {
+        100% {
+          background-position: 50% 0, 60% 50%;
+        }
       }
     }
   }
