@@ -1,35 +1,42 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RIGHT, LEFT } from "./Block";
+import { RIGHT } from "./Block";
 import { Level } from ".";
 
 const initialState: Level = {
   id: 1,
   platforms: [
     { x: 0, y: 700, length: 505 },
-    { x: 25, y: 625, length: 25 },
-    { x: 100, y: 525, length: 175 },
-    { x: 400, y: 425, length: 75 },
-    { x: 25, y: 325, length: 400 },
-    { x: 300, y: 225, length: 175 },
-    { x: 125, y: 125, length: 200 },
-    { x: 25, y: 25, length: 450 },
+    { x: 150, y: 600, length: 100 },
+    { x: 0, y: 500, length: 455 },
+    { x: 50, y: 400, length: 455 },
+    { x: 0, y: 300, length: 455 },
+    { x: 50, y: 200, length: 455 },
+    { x: 0, y: 100, length: 455 },
+    { x: 0, y: 0, length: 505 },
   ],
   ladders: [
-    { x: 200, y: 25, height: 100 },
-    { x: 300, y: 125, height: 100 },
-    { x: 375, y: 225, height: 100 },
+    { x: 125, y: 500, height: 200 },
+    { x: 225, y: 500, height: 100 },
+    { x: 400, y: 400, height: 100 },
+    { x: 150, y: 300, height: 100 },
+    { x: 50, y: 300, height: 100 },
+    { x: 425, y: 200, height: 100 },
+    { x: 250, y: 200, height: 100 },
+    { x: 200, y: 100, height: 100 },
+    { x: 50, y: 100, height: 100 },
+    { x: 425, y: 0, height: 100 },
   ],
   jumpman: {
-    x: 150,
-    y: 100,
+    x: 25,
+    y: 75,
     isJumping: false,
     direction: RIGHT,
   },
   barrelFactory: {
-    x: 450,
-    y: 425,
+    x: 125,
+    y: 500,
     isJumping: false,
-    direction: LEFT,
+    direction: RIGHT,
     barrels: [],
   },
 };
