@@ -127,24 +127,6 @@
           }
         }
 
-        .Download {
-          position: relative;
-          display: flex;
-          align-items: center;
-          font-size: smaller;
-          gap: 1.25vw;
-          margin-top: 12.5px;
-          img {
-            border-radius: 12.5px;
-          }
-          &::after {
-            content: "+";
-            position: absolute;
-            top: 0;
-            opacity: 0.81;
-          }
-        }
-
         &.Maker {
           background: green;
           outline-color: green;
@@ -259,19 +241,45 @@
   }
 
   nav {
-    display: block;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 18px;
     @media only screen and (min-width: 630px) {
       display: none;
     }
   }
 
-  .Button {
-    border-radius: 24px;
+  .Button,
+  .Download {
     font-size: 12px;
+  }
+
+  .Button {
+    border-radius: 18px;
     padding: 6px 12px;
     text-decoration: none;
-    background-color: white;
+    background: white;
     color: black;
+  }
+
+  .Download {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    img {
+      border-radius: 8px;
+      border: 1px solid brown;
+      width: 24px;
+      opacity: 0.81;
+    }
+    &::before {
+      content: "+";
+      position: absolute;
+      top: -3px;
+      left: -6px;
+    }
   }
 }
 

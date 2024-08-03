@@ -28,6 +28,10 @@ const App: React.FC = () => {
         </a>
       </footer>
       <nav>
+        <span className="Download">
+          <img src={AppIcon} alt="DK-Redux App Icon" />
+          Add to Home Screen
+        </span>
         <a
           href="# "
           className="Button"
@@ -118,15 +122,6 @@ const GameWithManual: React.FC = () => {
             </div>
           </div>
         )}
-        {!isMaker && (
-          <div className="Manual">
-            <u>DOWNLOAD</u>
-            <span className="Download">
-              <img src={AppIcon} alt="DK-Redux App Icon" />
-              Add to Home Screen
-            </span>
-          </div>
-        )}
         {isMaker && (
           <div className="Manual Maker">
             <u>HOW TO MAKE</u>
@@ -195,14 +190,6 @@ const GameWithManual: React.FC = () => {
                 is real <br /> 2024
               </span>
             </div>
-          </div>
-        )}
-        {!isMaker && (
-          <div className="Manual">
-            <u>MUSIC SELECT</u>
-            <p>
-              <small>coming soon</small>
-            </p>
           </div>
         )}
       </aside>
