@@ -22,9 +22,12 @@ const slice = createSlice({
     clearMessage: (state) => {
       state.message = undefined;
     },
+    resetScore: () => {
+      return initialState;
+    },
   },
 });
 
-export const { addPoints, clearPoints, showMessage, clearMessage } =
+export const { addPoints, clearPoints, showMessage, clearMessage, resetScore } =
   slice.actions;
 export default slice.reducer;

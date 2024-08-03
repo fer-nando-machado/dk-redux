@@ -22,6 +22,7 @@ import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 import { resetOptions, setMaker, setPlayer } from "../System/OptionsSlice";
 
 import { resetLevel, setLevel } from "./LevelSlice";
+import { resetScore } from "../System/StatusSlice";
 
 export type CustomLevel = Partial<Level>;
 
@@ -58,6 +59,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
   }, [customLevel]);
 
   useEffect(() => {
+    dispatch(resetScore());
     dispatch(setJumpman(level.jumpman));
     dispatch(setLadders(level.ladders));
     dispatch(setPlatforms(level.platforms));
