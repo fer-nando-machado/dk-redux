@@ -72,7 +72,7 @@ const Duck: React.FC<Duck> = (duck) => {
         bottom: duck.y,
       }}
     >
-      {"oo"}
+      {isDead ? "xx" : "oo"}
       {!isDead && (
         <Target
           points={{ value: 25, position: duck }}

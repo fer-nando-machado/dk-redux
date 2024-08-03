@@ -120,11 +120,15 @@ export const moveJumpmanAuto = createAsyncThunk<
 
     let direction = getDirection(x);
     if (direction !== undefined) {
+      const boundedAhead = checkBoundaries({
+        ...platformed,
+        x: platformed.x + x * fps,
+      });
       const platformedAhead = checkPlatforms(
         { ...platformed, x: platformed.x + x * fps },
         platforms
       );
-      if (platformedAhead.isJumping) {
+      if (platformedAhead.isJumping || boundedAhead.x === jumpman.x) {
         direction = flipDirection(direction);
       }
     }
