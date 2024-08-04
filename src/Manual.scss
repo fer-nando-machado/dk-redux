@@ -1,0 +1,74 @@
+.Manual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 18px 0;
+  background-color: brown;
+  outline: 10px ridge brown;
+  border-radius: 5px;
+  width: 22vw;
+  font-size: 1vw;
+  z-index: 1;
+
+  a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    &:hover {
+      opacity: 0.81;
+      &::before {
+        position: absolute;
+        content: "<";
+        left: -1vw;
+      }
+      &::after {
+        position: absolute;
+        content: "/>";
+        right: -2vw;
+      }
+    }
+  }
+
+  .Hint {
+    position: absolute;
+    font-family: "Nanum Pen Script", cursive;
+    font-size: 1.5vw;
+    color: darkblue;
+    white-space: nowrap;
+
+    &.Gravity {
+      margin: -9.8px 9.8px;
+      transform: rotate(9.8deg);
+    }
+    &.Code {
+      margin: -6px;
+      transform: rotate(-9.8deg);
+    }
+    &.Player {
+      margin: 2px 4px;
+      line-height: 50%;
+      transform: rotate(-6deg);
+    }
+  }
+}
+
+.Switch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: white;
+  border-color: black;
+  border-radius: 5px;
+  border-width: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1280px) {
+  .Manual,
+  .Switch {
+    display: none;
+  }
+}

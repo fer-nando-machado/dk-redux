@@ -1,0 +1,102 @@
+.Manual.Maker {
+  background: green;
+  outline-color: green;
+
+  p {
+    font-size: smaller;
+    span {
+      margin-left: -35px;
+      margin-top: -5px;
+    }
+    .Block {
+      scale: (50%);
+      animation: none;
+    }
+  }
+
+  textarea {
+    border: 0;
+    outline: 0;
+    margin: 25px 0px 5px 0px;
+    padding: 0.75vw 1vw;
+    width: 20vw;
+    height: 100vh;
+    max-height: 500px;
+    line-height: 1.25;
+    resize: none;
+    white-space: nowrap;
+    overflow: auto;
+    background: black;
+    color: lime;
+    &.Error {
+      color: white;
+    }
+    &:focus {
+      opacity: 0.81;
+    }
+  }
+
+  .Control,
+  .Console {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+  }
+
+  .Control {
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -6vw;
+      margin-top: 4px;
+      border-radius: 4px;
+      padding: 4px;
+      color: lime;
+      outline: 1px dotted green;
+      background: green;
+      animation: run 1s infinite;
+    }
+    &.Error::before {
+      content: "Error!";
+      left: 0.5vw;
+      outline: 0;
+      color: white;
+      animation: none;
+    }
+
+    @keyframes run {
+      0%,
+      100% {
+        content: "||||||||||||||| RUN()";
+        outline-width: 1px;
+      }
+      50% {
+        content: "/////////////// RUN()";
+        outline-width: 3px;
+      }
+    }
+  }
+
+  .Console {
+    margin: 3vw;
+    bottom: 0;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.5;
+    cursor: help;
+  }
+}
+
+.Control,
+.Console,
+.Switch,
+textarea {
+  font-family: monospace;
+  font-size: 0.75vw;
+}

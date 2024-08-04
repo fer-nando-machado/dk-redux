@@ -9,10 +9,6 @@
     justify-content: center;
   }
 
-  a:hover {
-    opacity: 0.81;
-  }
-
   &:has(.Maker) {
     background: #001300;
   }
@@ -44,6 +40,7 @@
   }
 
   main {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,191 +50,7 @@
       display: flex;
       flex-direction: column;
       gap: 4vw;
-
-      .Manual {
-        display: none;
-
-        @media only screen and (min-width: 1280px) {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          padding: 18px 0;
-          background-color: brown;
-          outline: 10px ridge brown;
-          border-radius: 5px;
-          width: 22vw;
-          font-size: 1vw;
-          z-index: 1;
-        }
-
-        a {
-          color: white;
-          text-decoration: none;
-          position: relative;
-          &:hover {
-            opacity: 0.81;
-            &::before {
-              position: absolute;
-              content: "<";
-              left: -1vw;
-            }
-            &::after {
-              position: absolute;
-              content: "/>";
-              right: -2vw;
-            }
-          }
-        }
-
-        textarea {
-          outline: 4px double white;
-          border: 0;
-          margin: 25px 0px 5px 0px;
-          padding: 0.75vw 1vw;
-          resize: none;
-          overflow: hidden;
-          white-space: nowrap;
-          font-size: 0.75vw;
-          line-height: 1.25;
-          min-height: 60px;
-          width: 20vw;
-        }
-
-        .Hint {
-          position: absolute;
-          font-family: "Nanum Pen Script", cursive;
-          font-size: 1.5vw;
-          color: darkblue;
-          white-space: nowrap;
-
-          &.Gravity {
-            margin: -9.8px 9.8px;
-            transform: rotate(9.8deg);
-          }
-          &.Code {
-            margin: -6px;
-            transform: rotate(-9.8deg);
-          }
-          &.Player {
-            margin: 2px 4px;
-            line-height: 50%;
-            transform: rotate(-6deg);
-          }
-        }
-
-        &.Maker {
-          background: green;
-          outline-color: green;
-
-          p {
-            font-size: smaller;
-            span {
-              margin-left: -35px;
-              margin-top: -5px;
-            }
-            .Block {
-              scale: (50%);
-              animation: none;
-            }
-          }
-
-          textarea {
-            outline: 0;
-            background: black;
-            height: 100vh;
-            max-height: 600px;
-            overflow: auto;
-            color: lime;
-            &.Error {
-              color: white;
-            }
-
-            &:focus {
-              opacity: 0.81;
-            }
-          }
-
-          .Control,
-          .Console {
-            display: flex;
-            justify-content: space-between;
-            position: absolute;
-          }
-
-          .Control,
-          .Console,
-          .Control *,
-          .Console * {
-            font-family: "Courier New", monospace;
-            font-size: smaller;
-          }
-
-          .Control {
-            top: 0;
-            left: 0;
-            width: 100%;
-
-            button {
-              background: white;
-              border-color: black;
-              border-radius: 5px;
-              border-width: 4px;
-              padding: 4px 8px;
-              cursor: pointer;
-            }
-
-            &::before {
-              content: "";
-              position: absolute;
-              top: 34px;
-              left: -6vw;
-              border-radius: 5px;
-              color: lime;
-              outline: 2px dotted green;
-              padding: 4px;
-              background: green;
-              animation: run 1s infinite;
-            }
-            &.Error::before {
-              content: "|||| Error";
-              left: -2vw;
-              color: white;
-              animation: none;
-            }
-
-            @keyframes run {
-              0%,
-              100% {
-                content: "//////////// RUN()";
-                outline-width: 1px;
-              }
-              50% {
-                content: "|||||||||||| RUN()";
-                outline-width: 3px;
-              }
-            }
-          }
-
-          .Console {
-            margin: 3vw;
-            bottom: 0;
-            color: white;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            opacity: 0.5;
-            cursor: help;
-          }
-        }
-      }
     }
-  }
-
-  footer {
-    display: flex;
-    align-items: flex-end;
-    gap: 18px;
   }
 
   nav {
@@ -248,36 +61,47 @@
     @media only screen and (min-width: 630px) {
       display: none;
     }
+
+    .Download {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      img {
+        border-radius: 8px;
+        border: 1px solid brown;
+        width: 24px;
+      }
+      &::before {
+        content: "+";
+        position: absolute;
+        top: -3px;
+        left: -6px;
+      }
+    }
+  }
+
+  footer {
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+    img:hover {
+      opacity: 0.81;
+    }
   }
 
   .Button,
   .Download {
     font-size: 12px;
   }
-
   .Button {
     border-radius: 18px;
     padding: 6px 12px;
     text-decoration: none;
     background: white;
     color: black;
-  }
-
-  .Download {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    img {
-      border-radius: 8px;
-      border: 1px solid brown;
-      width: 24px;
-    }
-    &::before {
-      content: "+";
-      position: absolute;
-      top: -3px;
-      left: -6px;
+    &:hover {
+      opacity: 0.81;
     }
   }
 }
