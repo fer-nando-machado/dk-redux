@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
-import { Block } from "../Level/Block";
+import { useIntervalFPS } from "../Hooks/useInterval";
+import useKeyboard from "../Hooks/useKeyboard";
+import Controller from "./Controller";
 import DeutschBox from "./DeutschBox";
 import Dog from "./Hunt/Dog";
-import Joystick from "./Joystick";
-import { useIntervalFPS } from "../Hooks/useInterval";
+import { Block } from "../Level/Block";
 import { moveJumpman } from "./JumpmanSlice";
-import useKeyboard from "../Hooks/useKeyboard";
 import { setPlayer } from "../System/OptionsSlice";
 import "./Jumpman.scss";
 
@@ -46,8 +46,8 @@ export const Jumpman: React.FC = () => {
         bottom: jumpman.y,
       }}
     >
-      {player.code == CODE && <Joystick />}
-      {/** TODO generalize as option to all chars with joysticks */}
+      {player.code == CODE && <Controller />}
+      {/** TODO generalize as option to all chars with keyboard */}
       <DeutschBox />
       <Dog />
     </div>

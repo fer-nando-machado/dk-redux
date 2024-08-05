@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalFPS } from "../Hooks/useInterval";
@@ -11,55 +11,52 @@ import {
   setWalking,
 } from "./JumpmanSlice";
 
-const Joystick: React.FC = () => {
+const Controller: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
 
-  const {
-    onAir,
-    climbingSpeed: isClimbing,
-    jumpingSpeed: isJumping,
-    walkingSpeed: isWalking,
-  } = useSelector((state: RootState) => state.jumpman);
+  const { onAir, climbingSpeed, jumpingSpeed, walkingSpeed } = useSelector(
+    (state: RootState) => state.jumpman
+  );
   const { lowFPS } = useSelector((state: RootState) => state.options);
 
   const [remaining, setRemaining] = useState(0);
 
   useIntervalFPS(() => {
-    if (!isJumping) return;
-    dispatch(moveJumpman({ x: 0, y: isJumping }));
+    if (!jumpingSpeed) return;
+    dispatch(moveJumpman({ x: 0, y: jumpingSpeed }));
     setRemaining(remaining - (lowFPS ? 2 : 1));
     if (remaining > 0) return;
     dispatch(setJumping(0));
   });
   const startJumping = (speed: number, length: number) => {
-    if (onAir || isJumping) return;
+    if (onAir || jumpingSpeed) return;
     dispatch(setJumping(speed));
     setRemaining(length);
   };
 
   useIntervalFPS(() => {
-    if (!isWalking || isClimbing) return;
-    dispatch(moveJumpman({ x: isWalking, y: 0 }));
+    if (!walkingSpeed || climbingSpeed) return;
+    dispatch(moveJumpman({ x: walkingSpeed, y: 0 }));
   });
   const startWalking = (speed: number) => {
-    if (isWalking === speed) return;
+    if (walkingSpeed === speed) return;
     dispatch(setWalking(speed));
   };
   const stopWalking = (speed: number) => {
-    if (isWalking !== speed) return;
+    if (walkingSpeed !== speed) return;
     dispatch(setWalking(0));
   };
 
   useIntervalFPS(() => {
-    if (!isClimbing || isWalking || isJumping) return;
-    dispatch(moveJumpmanClimb({ x: 0, y: isClimbing }));
+    if (!climbingSpeed || walkingSpeed || jumpingSpeed) return;
+    dispatch(moveJumpmanClimb({ x: 0, y: climbingSpeed }));
   });
   const startClimbing = (speed: number) => {
-    if (isClimbing === speed) return;
+    if (climbingSpeed === speed) return;
     dispatch(setClimbing(speed));
   };
   const stopClimbing = (speed: number) => {
-    if (isClimbing !== speed) return;
+    if (climbingSpeed !== speed) return;
     dispatch(setClimbing(0));
   };
 
@@ -88,7 +85,14 @@ const Joystick: React.FC = () => {
     onKeyDown: () => startJumping(3, 18),
   });
 
-  return <div className="Joystick" />;
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("controller:inserted"));
+    return () => {
+      window.dispatchEvent(new CustomEvent("controller:removed"));
+    };
+  }, []);
+
+  return null;
 };
 
-export default Joystick;
+export default Controller;

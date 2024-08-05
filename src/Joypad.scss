@@ -1,0 +1,101 @@
+.Joypad {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: goldenrod;
+  outline: 1.5vw outset darkred;
+  border-radius: 1vw;
+  width: 70vw;
+  margin-top: -1vw;
+  padding: 3vw 6vw;
+
+  * {
+    font-family: monospace;
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  button {
+    border-width: 4px;
+  }
+
+  .dpad {
+    display: grid;
+    width: 90px;
+    height: 90px;
+
+    button,
+    span {
+      width: 30px;
+      height: 30px;
+      background: black;
+    }
+
+    button {
+      color: white;
+
+      &.active {
+        background: darkred;
+        transform: scale(1.05);
+      }
+    }
+
+    .left {
+      grid-row-start: 2;
+      grid-column-start: 1;
+      &:active {
+        border-style: outset;
+      }
+    }
+
+    .up {
+      grid-row-start: 1;
+      grid-column-start: 2;
+      &:active {
+        border-style: outset;
+      }
+    }
+
+    span {
+      grid-row-start: 2;
+      grid-column-start: 2;
+    }
+
+    .down {
+      grid-row-start: 3;
+      grid-column-start: 2;
+      border-style: inset;
+    }
+
+    .right {
+      grid-row-start: 2;
+      grid-column-start: 3;
+      border-style: inset;
+    }
+  }
+
+  .start {
+    position: relative;
+    background: black;
+    border-color: black;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 25%;
+    &::before {
+      content: "START";
+      position: absolute;
+      color: black;
+      margin: -24px -18px;
+    }
+  }
+
+  .action {
+    background: red;
+    border-color: darkred;
+    padding: 30px;
+    border-radius: 50%;
+  }
+}

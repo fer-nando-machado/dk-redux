@@ -5,6 +5,7 @@ import GitHub from "/GitHub.svg?url";
 import Game from "./Game";
 import Maker from "./Maker";
 import Manual from "./Manual";
+import Joypad from "./Joypad";
 import "./App.scss";
 
 const App: React.FC = () => {
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <img src={AppIcon} alt="DK-Redux App Icon" />
           Add to Home Screen
         </span>
+        <Joypad />
         <a href="#" className="Button" onClick={() => window.location.reload()}>
           Restart
         </a>

@@ -49,6 +49,17 @@ export const dispatchKeyDown = (key: string) => {
     key: key,
     code: key,
     bubbles: true,
+    cancelable: true,
+  });
+  window.dispatchEvent(event);
+};
+
+export const dispatchKeyUp = (key: string) => {
+  const event = new KeyboardEvent("keyup", {
+    key: key,
+    code: key,
+    bubbles: true,
+    cancelable: true,
   });
   window.dispatchEvent(event);
 };

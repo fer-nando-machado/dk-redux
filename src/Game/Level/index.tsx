@@ -69,8 +69,8 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
   }, [level]);
 
   useEffect(() => {
+    dispatch(setPlayer("M"));
     dispatch(setPlayer("D"));
-    // dispatch(setPlayer("M"));
   }, []);
 
   return (

@@ -24,4 +24,9 @@
     vertical-align: bottom;
     font-style: normal;
   }
+
+  * {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
