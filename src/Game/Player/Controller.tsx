@@ -72,17 +72,17 @@ const Controller: React.FC = () => {
   });
   useKeyboard({
     key: "ArrowLeft",
-    onKeyDown: () => startWalking(-2),
-    onKeyUp: () => stopWalking(-2),
+    onKeyDown: () => startWalking(-1),
+    onKeyUp: () => stopWalking(-1),
   });
   useKeyboard({
     key: "ArrowRight",
-    onKeyDown: () => startWalking(+2),
-    onKeyUp: () => stopWalking(+2),
+    onKeyDown: () => startWalking(+1),
+    onKeyUp: () => stopWalking(+1),
   });
   useKeyboard({
     key: " ",
-    onKeyDown: () => startJumping(3, 18),
+    onKeyDown: () => startJumping(2, 28),
   });
 
   useEffect(() => {

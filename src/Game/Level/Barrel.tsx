@@ -19,7 +19,7 @@ const Barrel: React.FC<Barrel> = (barrel) => {
 
   const { gravity } = useSelector((state: RootState) => state.options);
   const gravitySpeed = gravity ? -6 : 0;
-  const speed = isDirectionLeft(barrel.direction) ? -1 : 1;
+  const speed = isDirectionLeft(barrel.direction) ? -2 : 2;
 
   useIntervalFPS(() => {
     dispatch(
