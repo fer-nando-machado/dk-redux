@@ -12,7 +12,10 @@ import { Jumpman } from "./Jumpman";
 const initialState: Jumpman = {
   x: 0,
   y: 0,
-  isJumping: false,
+  onAir: false,
+  climbingSpeed: 0,
+  jumpingSpeed: 0,
+  walkingSpeed: 0,
   direction: LEFT,
 };
 
@@ -22,6 +25,15 @@ const slice = createSlice({
   reducers: {
     setJumpman: (_, action: PayloadAction<Jumpman>) => {
       return action.payload;
+    },
+    setClimbing: (state, action: PayloadAction<number>) => {
+      state.climbingSpeed = action.payload;
+    },
+    setJumping: (state, action: PayloadAction<number>) => {
+      state.jumpingSpeed = action.payload;
+    },
+    setWalking: (state, action: PayloadAction<number>) => {
+      state.walkingSpeed = action.payload;
     },
   },
 });
@@ -56,6 +68,7 @@ export const moveJumpman = createAsyncThunk<
     const platformed = checkPlatforms(bounded, platforms);
     const direction = getDirection(x);
     const update: Jumpman = {
+      ...jumpman,
       ...platformed,
       ...(direction ? { direction } : {}),
     };
@@ -128,12 +141,13 @@ export const moveJumpmanAuto = createAsyncThunk<
         { ...platformed, x: platformed.x + x * fps },
         platforms
       );
-      if (platformedAhead.isJumping || boundedAhead.x === jumpman.x) {
+      if (platformedAhead.onAir || boundedAhead.x === jumpman.x) {
         direction = flipDirection(direction);
       }
     }
 
     const update: Jumpman = {
+      ...jumpman,
       ...platformed,
       ...(direction ? { direction } : {}),
     };
@@ -141,5 +155,6 @@ export const moveJumpmanAuto = createAsyncThunk<
   }
 );
 
-export const { setJumpman } = slice.actions;
+export const { setJumpman, setClimbing, setJumping, setWalking } =
+  slice.actions;
 export default slice.reducer;

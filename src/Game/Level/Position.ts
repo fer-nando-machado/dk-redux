@@ -36,7 +36,7 @@ export const checkPlatforms = (
       const updated: Block = {
         ...position,
         y: platform.y + thickness.y,
-        isJumping: false,
+        onAir: false,
       };
       return updated;
     }
@@ -44,7 +44,7 @@ export const checkPlatforms = (
 
   return {
     ...position,
-    isJumping: true,
+    onAir: true,
   };
 };
 

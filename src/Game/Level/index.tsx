@@ -37,6 +37,7 @@ export type Level = {
 const Level: React.FC<CustomLevel> = (customLevel) => {
   const dispatch: StoreDispatch = useDispatch();
   const level = useSelector((state: RootState) => state.level);
+  // TODO make level a local state instead of slice (as it is not modified elsewhere)
 
   useEffect(() => {
     const isMaker = hasCustomLevel(customLevel);
@@ -90,14 +91,17 @@ const hasCustomLevel = (customLevel: CustomLevel): boolean => {
 const JUMPMAN: Jumpman = {
   x: 0,
   y: 750,
-  isJumping: true,
+  climbingSpeed: 0,
+  jumpingSpeed: 0,
+  walkingSpeed: 0,
+  onAir: true,
   direction: RIGHT,
 };
 
 const BARREL_FACTORY: BarrelFactory = {
   x: 475,
   y: 725,
-  isJumping: false,
+  onAir: false,
   direction: RIGHT,
   barrels: [],
 };
@@ -105,7 +109,7 @@ const BARREL_FACTORY: BarrelFactory = {
 const DUCK_FACTORY: DuckFactory = {
   x: 250,
   y: -25,
-  isJumping: false,
+  onAir: false,
   direction: RIGHT,
   ducks: [],
 };

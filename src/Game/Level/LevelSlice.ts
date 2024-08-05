@@ -29,13 +29,16 @@ const initialState: Level = {
   jumpman: {
     x: 25,
     y: 75,
-    isJumping: false,
+    onAir: true,
+    jumpingSpeed: 0,
+    walkingSpeed: 0,
+    climbingSpeed: 0,
     direction: RIGHT,
   },
   barrelFactory: {
     x: 125,
     y: 500,
-    isJumping: false,
+    onAir: false,
     direction: RIGHT,
     barrels: [],
   },

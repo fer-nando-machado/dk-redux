@@ -7,7 +7,7 @@ import { flipDirection, LEFT } from "./Block";
 const initialState: BarrelFactory = {
   x: 0,
   y: 0,
-  isJumping: false,
+  onAir: false,
   direction: LEFT,
   barrels: [],
 };
@@ -61,14 +61,14 @@ export const moveBarrel = createAsyncThunk<
     y: barrel.y + y * fps,
   };
   const bounded = checkBoundaries(moved);
-  const plataformed = checkPlatforms(bounded, platforms);
-  const dropped = barrel.isJumping && !plataformed.isJumping;
+  const platformed = checkPlatforms(bounded, platforms);
+  const dropped = barrel.onAir && !platformed.onAir;
   const direction = dropped
     ? flipDirection(barrel.direction)
     : barrel.direction;
   const update: Barrel = {
     ...barrel,
-    ...plataformed,
+    ...platformed,
     direction,
   };
   dispatch(setBarrel(update));

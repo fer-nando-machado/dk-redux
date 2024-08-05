@@ -7,7 +7,7 @@ import { checkBoundaries } from "../../Level/Position";
 const initialState: DuckFactory = {
   x: 0,
   y: 0,
-  isJumping: false,
+  onAir: false,
   direction: LEFT,
   ducks: [],
 };

@@ -5,10 +5,9 @@ export const LEFT = "left";
 export const RIGHT = "right";
 type Direction = "left" | "right";
 
-// TODO TURN into component (render target etc inside)
 export type Block = Position & {
   direction: Direction;
-  isJumping: boolean; // change to onAir
+  onAir: boolean;
 };
 
 export const isDirectionLeft = (direction: Direction): boolean => {
@@ -24,7 +23,7 @@ export const getDirection = (x: number): Direction | undefined => {
 };
 
 export const getRandomDirection = (): Direction => {
-  return Math.random() < 0.5 ? "left" : "right";
+  return Math.random() < 0.5 ? LEFT : RIGHT;
 };
 
 export const flipDirection = (direction: Direction): Direction => {
