@@ -29,10 +29,10 @@ const App: React.FC = () => {
           <img src={AppIcon} alt="DK-Redux App Icon" />
           Add to Home Screen
         </span>
-        <Joypad />
         <a href="#" className="Button" onClick={() => window.location.reload()}>
           Restart
         </a>
+        <Joypad />
       </nav>
       <footer>
         <a href={`mailto:${contact}`} className="Button">

@@ -12,7 +12,7 @@ const initialState: Level = {
     { x: 0, y: 300, length: 455 },
     { x: 50, y: 200, length: 455 },
     { x: 0, y: 100, length: 455 },
-    { x: 0, y: 0, length: 505 },
+    { x: 25, y: 0, length: 505 },
   ],
   ladders: [
     { x: 125, y: 500, height: 200 },

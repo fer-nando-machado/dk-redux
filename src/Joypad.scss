@@ -3,11 +3,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  outline: 1.5vw outset darkred;
-  border-radius: 1vw;
-  width: 81vw;
-  padding: 3vw 6vw;
-  background: linear-gradient(45deg, goldenrod, darkgoldenrod);
+  outline: 7px outset darkred;
+  margin-top: -7px;
+  border-radius: 7px;
+  width: 350px;
+  padding: 7px 14px;
+  background: linear-gradient(
+    45deg,
+    darkgoldenrod,
+    goldenrod,
+    gold,
+    goldenrod,
+    darkgoldenrod
+  );
 
   &::before {
     content: "";
@@ -28,18 +36,30 @@
     pointer-events: none;
   }
 
-  * {
-    font-family: monospace;
-    font-size: 13px;
-    font-weight: bold;
-  }
-
   &.hidden {
     display: none;
   }
 
+  &.stored {
+    height: 20px;
+    background: darkred;
+    opacity: 0.95;
+    * {
+      display: none;
+    }
+    &::before {
+      background: none;
+    }
+  }
+
+  * {
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
   button {
-    border-width: 4px;
+    box-shadow: 2px 2px black;
   }
 
   .dpad {
@@ -47,41 +67,30 @@
     width: 90px;
     height: 90px;
 
-    button,
-    span {
+    button {
       width: 30px;
       height: 30px;
       background: black;
-      border-color: black;
-    }
-
-    button {
       color: gray;
+      border: 0;
+      outline: 0;
+      border-radius: 5px;
       &.active {
-        color: darkgray;
-        transform: scale(1.11);
+        color: white;
       }
     }
 
     .left {
       grid-row-start: 2;
       grid-column-start: 1;
-      border-style: outset;
-      &:active {
-        border-style: outset;
-      }
     }
 
     .up {
       grid-row-start: 1;
       grid-column-start: 2;
-      border-style: outset;
-      &:active {
-        border-style: outset;
-      }
     }
 
-    span {
+    .center {
       grid-row-start: 2;
       grid-column-start: 2;
     }
@@ -89,37 +98,79 @@
     .down {
       grid-row-start: 3;
       grid-column-start: 2;
-      border-style: inset;
-      &:active {
-        border-style: inset;
-      }
     }
 
     .right {
       grid-row-start: 2;
       grid-column-start: 3;
+    }
+
+    &:has(.up.active) {
+      transform: perspective(90px) rotateX(7deg);
+    }
+
+    &:has(.down.active) {
+      transform: perspective(90px) rotateX(-7deg);
+    }
+
+    &:has(.left.active) {
+      transform: perspective(90px) rotateY(-7deg);
+    }
+
+    &:has(.right.active) {
+      transform: perspective(90px) rotateY(7deg);
+    }
+  }
+
+  .option {
+    border: 5px outset darkred;
+    &:active {
+      transform: translateY(2px);
       border-style: inset;
-      &:active {
-        border-style: inset;
+    }
+
+    &.start {
+      background: gray;
+      border-color: dimgray;
+      border-radius: 25%;
+      &::before {
+        content: "START";
+        color: black;
       }
     }
-  }
 
-  .start {
-    position: relative;
-    background: gray;
-    border-color: black;
-    border-radius: 25%;
-    &::before {
-      content: "START";
-      color: black;
+    &.action {
+      background: red;
+      border-color: darkred;
+      padding: 30px;
+      border-radius: 50%;
     }
   }
+}
 
-  .action {
-    background: red;
-    border-color: darkred;
-    padding: 30px;
-    border-radius: 50%;
+.Joycable {
+  position: relative;
+  margin: 4px;
+  padding: 2px;
+  outline: 2px solid darkred;
+  border: 2px solid black;
+  background: black;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    top: -17px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 25px;
+    background: black;
+    border-radius: 5px;
   }
 }
