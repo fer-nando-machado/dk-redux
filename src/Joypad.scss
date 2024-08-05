@@ -6,12 +6,13 @@
   background: goldenrod;
   outline: 1.5vw outset darkred;
   border-radius: 1vw;
-  width: 70vw;
-  margin-top: -1vw;
+  width: 81vw;
   padding: 3vw 6vw;
 
   * {
     font-family: monospace;
+    font-size: 13px;
+    font-weight: bold;
   }
 
   &.hidden {
@@ -32,11 +33,11 @@
       width: 30px;
       height: 30px;
       background: black;
+      border-color: black;
     }
 
     button {
-      color: white;
-
+      color: gray;
       &.active {
         background: darkred;
         transform: scale(1.05);
@@ -79,16 +80,12 @@
 
   .start {
     position: relative;
-    background: black;
+    background: gray;
     border-color: black;
-    color: white;
-    padding: 5px 15px;
     border-radius: 25%;
     &::before {
       content: "START";
-      position: absolute;
       color: black;
-      margin: -24px -18px;
     }
   }
 
