@@ -15,7 +15,7 @@ type Direction = "up" | "down" | "left" | "right";
 
 const Joypad: React.FC = () => {
   const [hidden, setHidden] = useState(true);
-  const [stored, setStored] = useState(false);
+  const [stored, setStored] = useState(true);
 
   const [direction, setDirection] = useState<Direction>();
 
@@ -40,14 +40,12 @@ const Joypad: React.FC = () => {
   };
 
   const handleButtonClick = (key: string) => {
-    if (key === keys.start) {
-      handleDirectionReset();
-    }
-
     dispatchKeyDown(key);
-    //  setTimeout(() => {
-    //    dispatchKeyUp(keyMap.space);
-    //  }, 100);
+    /*
+    setTimeout(() => {
+      dispatchKeyUp(key);
+    }, 100);
+   */
   };
 
   const takeJoypad = () => {
