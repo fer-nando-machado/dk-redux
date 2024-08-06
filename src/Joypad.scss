@@ -3,11 +3,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  outline: 7px outset darkred;
-  margin-top: -7px;
-  border-radius: 7px;
-  width: 350px;
-  padding: 7px 14px;
+  outline: 10px outset darkred;
+  border-radius: 8px;
+  margin-top: -4px;
+  width: 333px;
+  padding: 8px 16px;
   background: linear-gradient(
     45deg,
     darkgoldenrod,
@@ -41,14 +41,21 @@
   }
 
   &.stored {
-    height: 20px;
+    height: 10px;
     background: darkred;
-    opacity: 0.95;
+    opacity: 0.975;
+    cursor: pointer;
     * {
       display: none;
     }
-    &::before {
-      background: none;
+    .Joycable {
+      display: block;
+      outline-color: black;
+      opacity: 0.81;
+      &::after,
+      &::before {
+        display: none;
+      }
     }
   }
 
@@ -58,8 +65,10 @@
     line-height: 12px;
   }
 
-  button {
+  span {
     box-shadow: 2px 2px black;
+    text-align: center;
+    cursor: pointer;
   }
 
   .dpad {
@@ -67,14 +76,15 @@
     width: 90px;
     height: 90px;
 
-    button {
+    span {
       width: 30px;
       height: 30px;
+      line-height: 30px;
       background: black;
       color: gray;
       border: 0;
       outline: 0;
-      border-radius: 5px;
+      border-radius: 4px;
       &.active {
         color: white;
       }
@@ -123,7 +133,7 @@
   }
 
   .option {
-    border: 5px outset darkred;
+    border: 5px outset white;
     &:active {
       transform: translateY(2px);
       border-style: inset;
@@ -133,6 +143,7 @@
       background: gray;
       border-color: dimgray;
       border-radius: 25%;
+      padding: 1px 4px;
       &::before {
         content: "START";
         color: black;
@@ -149,8 +160,8 @@
 }
 
 .Joycable {
-  position: relative;
-  margin: 4px;
+  position: absolute;
+  margin: 4px -8px;
   padding: 2px;
   outline: 2px solid darkred;
   border: 2px solid black;
@@ -158,19 +169,23 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  position: absolute;
   top: 0;
   left: 50%;
   cursor: pointer;
   &::before {
     content: "";
     position: absolute;
-    top: -17px;
+    top: -16px;
     left: 50%;
     transform: translateX(-50%);
-    width: 10px;
-    height: 25px;
+    width: 7px;
+    height: 22px;
     background: black;
-    border-radius: 5px;
+  }
+  &::after {
+    content: "P1";
+    position: absolute;
+    color: black;
+    margin: -3px 25px;
   }
 }

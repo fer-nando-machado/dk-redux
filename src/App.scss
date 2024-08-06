@@ -4,23 +4,20 @@
   gap: 2vh;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  @media only screen and (min-width: 630px) {
-    justify-content: center;
-  }
+  justify-content: center;
 
   &:has(.Maker) {
     background: #001300;
   }
 
   h1 {
-    padding-top: 1.5vh;
+    padding-top: 12px;
     margin: 0;
     display: flex;
     font-size: 24px;
     align-items: center;
     span {
-      font-size: 16px;
+      font-size: 18px;
     }
     .dk {
       position: fixed;
@@ -48,13 +45,10 @@
   }
 
   nav {
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction: column;
     gap: 2vh;
-    @media only screen and (min-width: 630px) {
-      display: none;
-    }
 
     .Download {
       position: relative;
@@ -106,5 +100,18 @@
   }
   @media only screen and (min-height: 1000px) {
     zoom: 1.25;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .App {
+    justify-content: flex-start;
+    nav {
+      display: flex;
+    }
+    .Manual,
+    .Switch {
+      display: none;
+    }
   }
 }

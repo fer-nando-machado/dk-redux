@@ -86,51 +86,41 @@ const Joypad: React.FC = () => {
       onClick={takeJoypad}
       className={`Joypad ${hidden ? "hidden" : ""} ${stored ? "stored" : ""}`}
     >
-      <div className="Joycable" onClick={storeJoypad}></div>
+      <div className="Joycable" onClick={storeJoypad} />
       <div className="dpad">
-        <button
-          tabIndex={-1}
+        <span
           onClick={() => handleDirectionClick("left")}
           className={`left ${direction === "left" ? "active" : ""}`}
         >
           ◁
-        </button>
-        <button
-          tabIndex={-1}
+        </span>
+        <span
           onClick={() => handleDirectionClick("up")}
           className={`up ${direction === "up" ? "active" : ""}`}
         >
           △
-        </button>
-        <button
-          tabIndex={-1}
-          className="center"
-          onClick={() => handleDirectionReset()}
-        >
+        </span>
+        <span className="center" onClick={() => handleDirectionReset()}>
           ◯
-        </button>
-        <button
-          tabIndex={-1}
+        </span>
+        <span
           onClick={() => handleDirectionClick("down")}
           className={`down ${direction === "down" ? "active" : ""}`}
         >
           ▽
-        </button>
-        <button
-          tabIndex={-1}
+        </span>
+        <span
           onClick={() => handleDirectionClick("right")}
           className={`right ${direction === "right" ? "active" : ""}`}
         >
           ▷
-        </button>
+        </span>
       </div>
-      <button
-        tabIndex={-1}
+      <span
         className="option start"
         onClick={() => handleButtonClick(keys.start)}
       />
-      <button
-        tabIndex={-1}
+      <span
         className="option action"
         onClick={() => handleButtonClick(keys.space)}
       />

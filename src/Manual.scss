@@ -10,7 +10,6 @@
   border-radius: 5px;
   width: 22vw;
   font-size: 1vw;
-  z-index: 1;
 
   a {
     color: white;
@@ -64,11 +63,4 @@
   border-width: 4px;
   padding: 4px 8px;
   cursor: pointer;
-}
-
-@media only screen and (max-width: 1280px) {
-  .Manual,
-  .Switch {
-    display: none;
-  }
 }

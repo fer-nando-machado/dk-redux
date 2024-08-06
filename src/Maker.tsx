@@ -83,53 +83,49 @@ const Maker: React.FC<Maker> = ({ isMaker, children }) => {
   return (
     <>
       {isMaker && (
-        <aside>
-          <div className="Manual Maker">
-            <u>HOW TO MAKE</u>
-            <div>
-              <p>
-                <span className="Jumpman Block M" />
-                {"jumpman:{}"}
-              </p>
-              <p>
-                <span className="Barrel Block Round" />
-                {"barrelFactory:{}"}
-              </p>
-              <p>
-                <span className="Platform Block" />
-                {"platforms:[{}]"}
-              </p>
-            </div>
-            {"{ x, y, … }"}
+        <div className="Manual Maker">
+          <u>HOW TO MAKE</u>
+          <div>
+            <p>
+              <span className="Jumpman Block M" />
+              {"jumpman:{}"}
+            </p>
+            <p>
+              <span className="Barrel Block Round" />
+              {"barrelFactory:{}"}
+            </p>
+            <p>
+              <span className="Platform Block" />
+              {"platforms:[{}]"}
+            </p>
           </div>
-        </aside>
+          {"{ x, y, … }"}
+        </div>
       )}
       {children({ customLevel: { ...level } })}
       {isMaker && (
-        <aside>
-          <div className="Manual Maker">
-            <u>LEVEL MAKER</u>
-            <div className={`Control ${error ? "Error" : ""}`}>
-              <button className="Switch" onClick={handleReset}>
-                RESET
-              </button>
-            </div>
-            <textarea
-              value={input}
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              onChange={handleChange}
-              onKeyDown={handleKeyPress}
-              onKeyUp={handleKeyPress}
-              className={error ? "Error" : ""}
-            />
-            <div className="Console" title={error}>
-              {error}
-            </div>
+        <div className="Manual Maker">
+          <u>LEVEL MAKER</u>
+          <div className={`Control ${error ? "Error" : ""}`}>
+            <button className="Switch" onClick={handleReset}>
+              RESET
+            </button>
           </div>
-        </aside>
+          <textarea
+            value={input}
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            onChange={handleChange}
+            onKeyDown={handleKeyPress}
+            onKeyUp={handleKeyPress}
+            className={error ? "Error" : ""}
+          />
+          <div className="Console" title={error}>
+            {error}
+          </div>
+        </div>
       )}
     </>
   );
