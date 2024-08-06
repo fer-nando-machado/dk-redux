@@ -1,6 +1,6 @@
 .Barrel {
-  background-color: orange;
-  outline: 2px ridge yellow;
+  background: orange;
+  outline: 2px solid yellow;
   color: darkblue;
   animation: spin 2s infinite linear;
 
@@ -8,11 +8,20 @@
     animation-direction: reverse;
   }
 
+  &.Falling {
+    animation: spinDown 2s infinite linear;
+    border-radius: 33%;
+
+    &::after,
+    &::before {
+      display: none;
+    }
+  }
+
   &::before {
     content: ".";
     position: absolute;
     font-size: larger;
-    font-weight: bold;
     top: 2px;
     left: 1px;
   }
@@ -20,7 +29,6 @@
   &::after {
     content: "\\";
     position: absolute;
-    font-weight: bold;
     top: 2px;
     left: 9px;
   }

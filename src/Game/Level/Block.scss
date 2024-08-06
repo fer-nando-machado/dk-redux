@@ -26,6 +26,15 @@
   }
 }
 
+@keyframes spinDown {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(360deg);
+  }
+}
+
 @keyframes walk {
   0%,
   100% {

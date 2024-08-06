@@ -65,14 +65,13 @@ const isOnPlatform = (position: Position, platform: Platform): boolean => {
 export const checkLadders = (
   position: Position,
   ladders: Ladder[]
-): boolean => {
+): Ladder | null => {
   for (const ladder of ladders) {
     if (isOnLadder(position, ladder)) {
-      return true;
+      return ladder;
     }
   }
-
-  return false;
+  return null;
 };
 
 const isOnLadder = (position: Position, ladder: Ladder): boolean => {

@@ -4,18 +4,20 @@ import { Position } from "./Position";
 import "./Ladder.scss";
 
 export type Ladder = Position & {
+  id?: number;
   height: number;
+  target?: boolean;
 };
 
 export type LadderFactory = {
   ladders: Ladder[];
 };
 
-const Ladder: React.FC<Ladder> = ({ x, y, height }) => {
-  if (!height) return <></>;
+const Ladder: React.FC<Ladder> = ({ x, y, height, target }) => {
+  if (!height) return null;
   return (
     <div
-      className="Ladder Block"
+      className={`Ladder Block ${target ? "Target" : ""}`}
       style={{
         left: x,
         bottom: y,
@@ -30,9 +32,17 @@ export const LadderFactory: React.FC = () => {
 
   return (
     <>
-      {ladderFactory.ladders.map((l, index) => (
-        <Ladder {...l} key={index} />
+      {ladderFactory.ladders.map((l) => (
+        <Ladder {...l} key={l.id} />
       ))}
     </>
   );
 };
+
+export const getRandomLadderIds = (ladders: Ladder[]): number[] => {
+  return ladders
+    .filter((ladder) => ladder.id !== undefined && Math.random() < PROBABILITY)
+    .map((ladder) => ladder.id!);
+};
+
+const PROBABILITY = 0.5;

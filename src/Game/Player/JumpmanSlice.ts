@@ -98,7 +98,7 @@ export const moveJumpmanClimb = createAsyncThunk<
     };
 
     const isOnLadder = checkLadders(moved, ladders);
-    if (isOnLadder === true) {
+    if (isOnLadder !== null) {
       const update: Jumpman = {
         ...moved,
       };

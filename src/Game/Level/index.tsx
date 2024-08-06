@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { StoreDispatch } from "../reduxStore";
 
-import { RIGHT } from "./Block";
+import { LEFT, RIGHT } from "./Block";
 
 import { Ladder, LadderFactory } from "./Ladder";
 import { setLadders } from "./LadderSlice";
@@ -66,10 +66,10 @@ const LEVEL_1: Level = {
     direction: RIGHT,
   },
   barrelFactory: {
-    x: 125,
-    y: 500,
-    onAir: false,
-    direction: RIGHT,
+    x: 100,
+    y: 600,
+    onAir: true,
+    direction: LEFT,
     barrels: [],
   },
 };
