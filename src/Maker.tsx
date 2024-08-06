@@ -35,7 +35,6 @@ const demoLevel = `{
 
 const parseCustomLevel = (string: string) => {
   const customLevel: CustomLevel = JSON.parse(string);
-  customLevel.id = Number(new Date());
   return customLevel;
 };
 

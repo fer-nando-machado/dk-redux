@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalTimed } from "../Hooks/useInterval";
 import { Position } from "../Level/Position";
-import { resetLevel } from "../Level/LevelSlice";
 import { setPaused } from "./OptionsSlice";
 import { clearMessage, clearPoints } from "./StatusSlice";
 import "./Status.scss";
@@ -29,7 +28,7 @@ const Status: React.FC = () => {
 
   const clickReset = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    dispatch(resetLevel());
+    window.dispatchEvent(new CustomEvent("level:reset"));
   };
 
   return (

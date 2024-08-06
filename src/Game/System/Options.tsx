@@ -5,7 +5,6 @@ import { StoreDispatch, RootState } from "../reduxStore";
 import useHash from "../Hooks/useHash";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
 import PlayerSelect, { Player, PlayerSelectMap } from "./PlayerSelect";
-import { resetLevel } from "../Level/LevelSlice";
 import {
   setPaused,
   setPlayer,
@@ -65,7 +64,7 @@ const Options: React.FC = () => {
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchReset = () => {
     if (options.maker || options.paused) return;
-    dispatch(resetLevel());
+    window.dispatchEvent(new CustomEvent("level:reset"));
   };
 
   const dispatchToggleGravity = () => dispatch(toggleGravity());
