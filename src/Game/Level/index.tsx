@@ -36,7 +36,7 @@ const LEVEL_1: Level = {
   id: 1,
   platforms: [
     { x: 0, y: 700, length: 505 },
-    { x: 150, y: 600, length: 100 },
+    { x: 200, y: 600, length: 100 },
     { x: 0, y: 500, length: 455 },
     { x: 50, y: 400, length: 455 },
     { x: 0, y: 300, length: 455 },
@@ -45,16 +45,30 @@ const LEVEL_1: Level = {
     { x: 25, y: 0, length: 505 },
   ],
   ladders: [
-    { x: 125, y: 500, height: 200 },
-    { x: 225, y: 500, height: 100 },
-    { x: 425, y: 400, height: 100 },
-    { x: 150, y: 300, height: 100 },
-    { x: 50, y: 300, height: 100 },
-    { x: 425, y: 200, height: 100 },
-    { x: 250, y: 200, height: 100 },
-    { x: 200, y: 100, height: 100 },
-    { x: 50, y: 100, height: 100 },
-    { x: 425, y: 0, height: 100 },
+    { x: 130, y: 500, height: 200 },
+    { x: 170, y: 500, height: 200 },
+    { x: 270, y: 500, height: 100 },
+
+    { x: 200, y: 480, height: 20 },
+    { x: 200, y: 400, height: 50 },
+    { x: 410, y: 400, height: 100 },
+
+    { x: 70, y: 300, height: 100 },
+    { x: 160, y: 300, height: 100 },
+    { x: 370, y: 300, height: 30 },
+    { x: 370, y: 375, height: 25 },
+
+    { x: 135, y: 200, height: 35 },
+    { x: 135, y: 275, height: 25 },
+    { x: 410, y: 200, height: 100 },
+    { x: 275, y: 200, height: 100 },
+
+    { x: 225, y: 100, height: 100 },
+    { x: 70, y: 100, height: 100 },
+
+    { x: 410, y: 0, height: 100 },
+    { x: 180, y: 85, height: 15 },
+    { x: 180, y: 0, height: 25 },
   ],
   jumpman: {
     x: 25,
