@@ -119,7 +119,7 @@ const Options: React.FC = () => {
         <div className="Options">
           <div>
             <u>{name}</u> <small>v{version}</small>
-            <p>{description}</p>
+            <p onClick={dispatchUnpause}>{description}</p>
             <u>OPTIONS</u>
             <div className="Toggles">
               <Option

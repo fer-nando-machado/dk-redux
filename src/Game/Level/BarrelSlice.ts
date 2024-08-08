@@ -59,9 +59,7 @@ export const moveBarrel = createAsyncThunk<
 
   let update = { ...barrel };
 
-  const speed = isDirectionLeft(barrel.direction) ? -2 : 2;
   const ladder = checkLadders(barrel, ladders);
-
   if (
     ladder &&
     ladder.id &&
@@ -70,8 +68,8 @@ export const moveBarrel = createAsyncThunk<
   ) {
     update = {
       ...update,
-      x: update.x + speed * 12,
-      y: update.y - 28,
+      x: ladder.x,
+      y: update.y - 27,
       fallingSpeed: -2,
     };
   } else if (barrel.fallingSpeed !== 0) {
@@ -80,21 +78,20 @@ export const moveBarrel = createAsyncThunk<
       y: update.y + barrel.fallingSpeed * fps,
     };
   } else {
+    const speed = isDirectionLeft(barrel.direction) ? -2 : 2;
     update = {
       ...update,
       x: update.x + speed * fps,
     };
+    update = { ...update, ...checkBoundaries(update) };
   }
 
-  update = { ...update, ...checkBoundaries(update) };
   update = { ...update, ...checkPlatforms(update, platforms) };
 
   if (update.onAir && gravity && barrel.fallingSpeed === 0) {
-    const gravitySpeed = -9 * fps;
+    const gravitySpeed = -10 * fps;
     update = { ...update, y: update.y + gravitySpeed };
-  }
-
-  if (barrel.onAir && !update.onAir) {
+  } else if (!update.onAir && barrel.onAir) {
     const direction = flipDirection(barrel.direction);
     update = { ...update, direction, fallingSpeed: 0 };
   }
