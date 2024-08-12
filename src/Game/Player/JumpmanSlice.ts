@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StoreDispatch, RootState } from "../reduxStore";
 import {
   checkBoundaries,
+  checkGoal,
   checkLadders,
   checkPlatforms,
   Position,
@@ -53,6 +54,7 @@ export const moveJumpman = createAsyncThunk<
     const platforms = state.platformFactory.platforms;
     const ladders = state.ladderFactory.ladders;
     const jumpman = state.jumpman;
+    const goal = state.goal;
 
     let { x, y } = payload;
     const moved = {
@@ -61,8 +63,13 @@ export const moveJumpman = createAsyncThunk<
       y: jumpman.y + y * fps,
     };
 
+    const isOnGoal = checkGoal(moved, goal);
+    if (isOnGoal) {
+      window.dispatchEvent(new CustomEvent("level:reset"));
+    }
+
     const isOnLadder = checkLadders(moved, ladders);
-    if (isOnLadder && y < 0) return; //disable gravity on ladders (TODO bring to Jumpman state)
+    if (isOnLadder && y < 0) return; //disable gravity on ladders
 
     const bounded = checkBoundaries(moved);
     const platformed = checkPlatforms(bounded, platforms);

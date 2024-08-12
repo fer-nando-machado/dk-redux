@@ -51,14 +51,14 @@ export const checkPlatforms = (
 const isOnPlatform = (position: Position, platform: Platform): boolean => {
   if (!platform.length) return false;
 
-  const currentX = position.x - platform.x;
-  const currentY = position.y - platform.y;
+  const relativeX = position.x - platform.x;
+  const relativeY = position.y - platform.y;
 
   return (
-    currentX >= -thickness.x &&
-    currentX <= platform.length &&
-    currentY >= -thickness.y &&
-    currentY <= thickness.y
+    relativeX >= -thickness.x &&
+    relativeX <= platform.length &&
+    relativeY >= -thickness.y &&
+    relativeY <= thickness.y
   );
 };
 
@@ -77,14 +77,26 @@ export const checkLadders = (
 const isOnLadder = (position: Position, ladder: Ladder): boolean => {
   if (!ladder.height) return false;
 
-  const currentX = position.x - ladder.x;
-  const currentY = position.y - ladder.y;
+  const relativeX = position.x - ladder.x;
+  const relativeY = position.y - ladder.y;
 
   return (
-    currentX >= -thickness.x &&
-    currentX <= thickness.x &&
-    currentY >= thickness.y &&
-    currentY <= ladder.height + thickness.y
+    relativeX >= -thickness.x &&
+    relativeX <= thickness.x &&
+    relativeY >= thickness.y &&
+    relativeY <= ladder.height + thickness.y
+  );
+};
+
+export const checkGoal = (position: Position, goal: Position): boolean => {
+  const relativeX = position.x - goal.x;
+  const relativeY = position.y - goal.y;
+
+  return (
+    relativeX >= -thickness.x &&
+    relativeX <= thickness.x &&
+    relativeY >= thickness.y &&
+    relativeY <= thickness.y
   );
 };
 

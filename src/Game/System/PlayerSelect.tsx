@@ -3,7 +3,7 @@ import { StoreDispatch, RootState } from "../reduxStore";
 import { setPlayer } from "./OptionsSlice";
 import "./PlayerSelect.scss";
 
-const MAX_PLAYERS = 4;
+const MAX_PLAYERS = 5;
 
 export type Player = {
   code: string;

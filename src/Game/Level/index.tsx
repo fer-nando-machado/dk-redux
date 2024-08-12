@@ -21,6 +21,8 @@ import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
 import { resetOptions, setMaker, setPlayer } from "../System/OptionsSlice";
 import { resetScore } from "../System/StatusSlice";
+import { Goal } from "./Goal";
+import { setGoal } from "./GoalSlice";
 
 export type CustomLevel = Partial<Level>;
 
@@ -30,10 +32,12 @@ export type Level = {
   ladders: Ladder[];
   platforms: Platform[];
   barrelFactory: BarrelFactory;
+  goal: Goal;
 };
 
 const LEVEL_1: Level = {
   id: 1,
+  goal: { x: 204, y: 600, direction: RIGHT, onAir: false },
   platforms: [
     { x: 0, y: 700, length: 505 },
     { x: 200, y: 600, length: 100 },
@@ -90,6 +94,7 @@ const LEVEL_1: Level = {
 
 const LEVEL_0: Level = {
   id: 0,
+  goal: { x: 0, y: 888, direction: LEFT, onAir: false },
   platforms: [],
   ladders: [],
   jumpman: {
@@ -140,6 +145,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
 
   useEffect(() => {
     dispatch(resetScore());
+    dispatch(setGoal(level.goal));
     dispatch(setJumpman(level.jumpman));
     dispatch(setLadders(level.ladders));
     dispatch(setPlatforms(level.platforms));
@@ -167,6 +173,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
       <PlatformFactory />
       <LadderFactory />
       <BarrelFactory />
+      <Goal />
       <Jumpman />
       <DuckFactory />
     </>

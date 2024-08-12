@@ -3,6 +3,7 @@ import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import useKeyboard from "../Hooks/useKeyboard";
 import Controller from "./Controller";
+import Lady from "./Lady";
 import DeutschBox from "./DeutschBox";
 import Dog from "./Hunt/Dog";
 import { Block } from "../Level/Block";
@@ -46,10 +47,10 @@ export const Jumpman: React.FC = () => {
         bottom: jumpman.y,
       }}
     >
-      {player.code == CODE && <Controller />}
-      {/** TODO generalize as option to all chars with keyboard */}
+      {player.code !== "DH" && player.code !== "D" && <Controller />}
       <DeutschBox />
       <Dog />
+      <Lady />
     </div>
   );
 };

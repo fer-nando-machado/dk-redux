@@ -1,0 +1,41 @@
+.Jumpman.LADY {
+  outline-color: crimson;
+  background-color: crimson;
+
+  &::before {
+    content: "w";
+    transform: rotate(-180deg);
+    font-size: 32px;
+    top: -24px;
+    left: -5px;
+    color: brown;
+  }
+
+  &::after {
+    content: ",,";
+    transform: rotate(180deg);
+    top: 3px;
+    color: black;
+  }
+  &.left::after {
+    transform: rotateX(-180deg);
+  }
+  &.right::after {
+    left: -3px;
+  }
+
+  .Hat::after {
+    content: ")";
+    position: absolute;
+    font-size: 40px;
+    transform: rotate(-90deg) scaleY(175%) scaleX(75%);
+    top: -25px;
+    left: -2px;
+    //left: 60px;
+    color: crimson;
+  }
+}
+
+.Game:has(.Player.Jumpman.LADY) {
+  color: crimson;
+}

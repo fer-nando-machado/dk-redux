@@ -107,11 +107,13 @@ const Options: React.FC = () => {
   }, [hash]);
 
   useEffect(() => {
+    if (options.debug) return;
+
     window.addEventListener("blur", dispatchPause);
     return () => {
       window.removeEventListener("blur", dispatchPause);
     };
-  }, []);
+  }, [options.debug]);
 
   return (
     <>

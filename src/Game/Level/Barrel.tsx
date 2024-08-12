@@ -34,10 +34,7 @@ const Barrel: React.FC<Barrel> = (barrel) => {
       className={`Barrel Block Round ${barrel.direction} ${
         barrel.fallingSpeed !== 0 ? "Falling" : ""
       }`}
-      style={{
-        left: barrel.x,
-        bottom: barrel.y,
-      }}
+      style={{ left: barrel.x, bottom: barrel.y }}
     >
       <Target
         points={{ value: 100, position: barrel }}

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import optionsReducer from "./System/OptionsSlice";
 import statusReducer from "./System/StatusSlice";
+import goalReducer from "./Level/GoalSlice";
 import barrelReducer from "./Level/BarrelSlice";
 import ladderReducer from "./Level/LadderSlice";
 import platformReducer from "./Level/PlatformSlice";
@@ -12,6 +13,7 @@ export const Store = configureStore({
     options: optionsReducer,
     jumpman: jumpmanReducer,
     status: statusReducer,
+    goal: goalReducer,
     barrelFactory: barrelReducer,
     ladderFactory: ladderReducer,
     platformFactory: platformReducer,
