@@ -88,15 +88,18 @@ const isOnLadder = (position: Position, ladder: Ladder): boolean => {
   );
 };
 
-export const checkGoal = (position: Position, goal: Position): boolean => {
-  const relativeX = position.x - goal.x;
-  const relativeY = position.y - goal.y;
+export const checkCollision = (
+  position: Position,
+  target: Position
+): boolean => {
+  const relativeX = position.x - target.x;
+  const relativeY = position.y - target.y;
 
   return (
     relativeX >= -thickness.x &&
     relativeX <= thickness.x &&
-    relativeY >= thickness.y &&
-    relativeY <= thickness.y
+    relativeY >= -thickness.x &&
+    relativeY <= thickness.x
   );
 };
 

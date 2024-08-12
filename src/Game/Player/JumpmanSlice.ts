@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StoreDispatch, RootState } from "../reduxStore";
 import {
   checkBoundaries,
-  checkGoal,
+  checkCollision,
   checkLadders,
   checkPlatforms,
   Position,
@@ -63,7 +63,7 @@ export const moveJumpman = createAsyncThunk<
       y: jumpman.y + y * fps,
     };
 
-    const isOnGoal = checkGoal(moved, goal);
+    const isOnGoal = checkCollision(moved, goal);
     if (isOnGoal) {
       window.dispatchEvent(new CustomEvent("level:reset"));
     }

@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Barrel, BarrelFactory, MAX_BARRELS } from "./Barrel";
-import { checkBoundaries, checkLadders, checkPlatforms } from "./Position";
+import {
+  checkBoundaries,
+  checkCollision,
+  checkLadders,
+  checkPlatforms,
+} from "./Position";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { flipDirection, isDirectionLeft, LEFT } from "./Block";
 import { getRandomLadderIds } from "./Ladder";
@@ -48,6 +53,7 @@ export const moveBarrel = createAsyncThunk<
 >("BarrelSlice/moveBarrel", async (payload: Number, { getState, dispatch }) => {
   const state: RootState = getState();
   const fps = state.options.lowFPS ? 2 : 1;
+  const jumpman = state.jumpman;
   const gravity = state.options.gravity;
   const platforms = state.platformFactory.platforms;
   const barrels = state.barrelFactory.barrels;
@@ -58,6 +64,10 @@ export const moveBarrel = createAsyncThunk<
   const barrel = barrels[index];
 
   let update = { ...barrel };
+  const isOnJumpman = checkCollision(update, jumpman);
+  if (isOnJumpman) {
+    window.dispatchEvent(new CustomEvent("level:reset"));
+  }
 
   const ladder = checkLadders(barrel, ladders);
   if (
