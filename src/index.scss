@@ -5,13 +5,14 @@ body {
   font-family: "Press Start 2P", monospace;
   margin: 0;
   overflow: hidden;
+}
+
+* {
+  -ms-touch-action: none;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-* {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
 }

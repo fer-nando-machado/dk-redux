@@ -11,42 +11,9 @@ const keys = {
   start: "Enter",
 };
 
-type Direction = "up" | "down" | "left" | "right";
-
 const Joypad: React.FC = () => {
-  const [hidden, setHidden] = useState(true);
-  const [stored, setStored] = useState(true);
-
-  const [direction, setDirection] = useState<Direction>();
-
-  const handleDirectionReset = () => {
-    if (direction) {
-      dispatchKeyUp(keys[direction]);
-    }
-    setDirection(undefined);
-  };
-
-  const handleDirectionClick = (eventDirection: Direction) => {
-    if (eventDirection === direction) {
-      handleDirectionReset();
-      return;
-    }
-
-    if (direction) {
-      dispatchKeyUp(keys[direction]);
-    }
-    dispatchKeyDown(keys[eventDirection]);
-    setDirection(eventDirection);
-  };
-
-  const handleButtonClick = (key: string) => {
-    dispatchKeyDown(key);
-    /*
-    setTimeout(() => {
-      dispatchKeyUp(key);
-    }, 100);
-   */
-  };
+  const [hidden, setHidden] = useState<boolean>(true);
+  const [stored, setStored] = useState<boolean>(false);
 
   const takeJoypad = () => {
     if (stored) {
@@ -57,7 +24,6 @@ const Joypad: React.FC = () => {
   const storeJoypad = () => {
     if (!stored) {
       setStored(true);
-      handleDirectionReset();
     }
   };
 
@@ -67,6 +33,14 @@ const Joypad: React.FC = () => {
 
   const hideJoypad = () => {
     setHidden(true);
+  };
+
+  const handleButtonStart = (key: string) => () => {
+    dispatchKeyDown(key);
+  };
+
+  const handleButtonEnd = (key: string) => () => {
+    dispatchKeyUp(key);
   };
 
   useEffect(() => {
@@ -87,40 +61,52 @@ const Joypad: React.FC = () => {
       <div className="Joycable" onClick={storeJoypad} />
       <div className="dpad">
         <span
-          onClick={() => handleDirectionClick("left")}
-          className={`left ${direction === "left" ? "active" : ""}`}
+          className="left"
+          onTouchStart={handleButtonStart(keys.left)}
+          onMouseDown={handleButtonStart(keys.left)}
+          onTouchEnd={handleButtonEnd(keys.left)}
+          onMouseUp={handleButtonEnd(keys.left)}
+          onMouseLeave={handleButtonEnd(keys.left)}
         >
           ◁
         </span>
         <span
-          onClick={() => handleDirectionClick("up")}
-          className={`up ${direction === "up" ? "active" : ""}`}
+          className="up"
+          onTouchStart={handleButtonStart(keys.up)}
+          onMouseDown={handleButtonStart(keys.up)}
+          onTouchEnd={handleButtonEnd(keys.up)}
+          onMouseUp={handleButtonEnd(keys.up)}
+          onMouseLeave={handleButtonEnd(keys.up)}
         >
           △
         </span>
-        <span className="center" onClick={() => handleDirectionReset()}>
-          ◯
-        </span>
+        <span className="center">◯</span>
         <span
-          onClick={() => handleDirectionClick("down")}
-          className={`down ${direction === "down" ? "active" : ""}`}
+          className="down"
+          onTouchStart={handleButtonStart(keys.down)}
+          onMouseDown={handleButtonStart(keys.down)}
+          onTouchEnd={handleButtonEnd(keys.down)}
+          onMouseUp={handleButtonEnd(keys.down)}
+          onMouseLeave={handleButtonEnd(keys.down)}
         >
           ▽
         </span>
         <span
-          onClick={() => handleDirectionClick("right")}
-          className={`right ${direction === "right" ? "active" : ""}`}
+          className="right"
+          onTouchStart={handleButtonStart(keys.right)}
+          onMouseDown={handleButtonStart(keys.right)}
+          onTouchEnd={handleButtonEnd(keys.right)}
+          onMouseUp={handleButtonEnd(keys.right)}
+          onMouseLeave={handleButtonEnd(keys.right)}
         >
           ▷
         </span>
       </div>
-      <span
-        className="option start"
-        onClick={() => handleButtonClick(keys.start)}
-      />
+      <span className="option start" onClick={handleButtonStart(keys.start)} />
       <span
         className="option action"
-        onClick={() => handleButtonClick(keys.space)}
+        onTouchStart={handleButtonStart(keys.space)}
+        onClick={handleButtonStart(keys.space)}
       />
     </div>
   );

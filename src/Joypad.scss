@@ -6,7 +6,7 @@
   outline: 10px outset darkred;
   border-radius: 8px;
   width: 333px;
-  padding: 8px 16px;
+  padding: 4px 16px;
   background: linear-gradient(
     45deg,
     darkgoldenrod,
@@ -40,7 +40,7 @@
   }
 
   &.stored {
-    height: 10px;
+    height: 16px;
     background: darkred;
     opacity: 0.975;
     cursor: pointer;
@@ -71,20 +71,20 @@
 
   .dpad {
     display: grid;
-    width: 90px;
-    height: 90px;
+    width: 99px;
+    height: 99px;
 
     span {
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
+      width: 33px;
+      height: 33px;
+      line-height: 33px;
       background: black;
       color: gray;
       box-shadow: 2px 2px dimgray;
       border: 0;
       outline: 0;
       border-radius: 4px;
-      &.active {
+      &:active {
         color: white;
       }
     }
@@ -114,20 +114,20 @@
       grid-column-start: 3;
     }
 
-    &:has(.up.active) {
-      transform: perspective(90px) translateY(-2px) rotateX(7deg);
+    &:has(.up:active) {
+      transform: perspective(99px) translateY(-2px) rotateX(7deg);
     }
 
-    &:has(.down.active) {
-      transform: perspective(90px) translateY(2px) rotateX(-7deg);
+    &:has(.down:active) {
+      transform: perspective(99px) translateY(2px) rotateX(-7deg);
     }
 
-    &:has(.left.active) {
-      transform: perspective(90px) translateX(-2px) rotateY(-7deg);
+    &:has(.left:active) {
+      transform: perspective(99px) translateX(-2px) rotateY(-7deg);
     }
 
-    &:has(.right.active) {
-      transform: perspective(90px) translateX(2px) rotateY(7deg);
+    &:has(.right:active) {
+      transform: perspective(99px) translateX(2px) rotateY(7deg);
     }
   }
 
@@ -185,9 +185,12 @@
     background: black;
   }
   &::after {
-    content: "I";
+    content: "P1";
     position: absolute;
-    color: black;
-    margin: -3px 25px;
+    color: gold;
+    margin: -7px 25px;
+    outline: 1px solid black;
+    padding: 3px;
+    background: black;
   }
 }
