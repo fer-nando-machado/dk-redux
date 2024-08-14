@@ -56,6 +56,8 @@ const slice = createSlice({
     resetOptions: (state) => {
       return {
         ...initialState,
+        lowFPS: state.lowFPS,
+        filters: state.filters,
         player: state.player,
         playerSelect: state.playerSelect,
       };
@@ -64,6 +66,8 @@ const slice = createSlice({
       const isMaker = action.payload;
       return {
         ...initialState,
+        lowFPS: state.lowFPS,
+        filters: state.filters,
         player: state.player,
         playerSelect: state.playerSelect,
         debug: isMaker,
