@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useHash from "../Hooks/useHash";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
-import PlayerSelect from "./PlayerSelect";
+import Roster from "./Roster";
 import {
   setPaused,
   toggleFilters,
@@ -122,7 +122,7 @@ const Options: React.FC = () => {
           </div>
           <div className="Paused" onClick={dispatchUnpause} />
           <div>
-            <PlayerSelect />
+            <Roster />
             <div className="Credits">
               <div className="Date">
                 <span>{then}</span>

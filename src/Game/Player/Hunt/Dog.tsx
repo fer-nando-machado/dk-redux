@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../../reduxStore";
 import useKeyboard from "../../Hooks/useKeyboard";
 import { useIntervalFPS } from "../../Hooks/useInterval";
-import { setPlayer } from "../../System/PlayerSelectSlice";
+import { setPlayer } from "../../System/RosterSlice";
 import { moveJumpman } from "../JumpmanSlice";
 import { isDirectionLeft } from "../../Level/Block";
 import "./Dog.scss";
@@ -29,12 +29,12 @@ const Dog: React.FC = () => {
 };
 
 export const isDuckHunting = () => {
-  const { current } = useSelector((state: RootState) => state.playerSelect);
+  const { current } = useSelector((state: RootState) => state.roster);
   return current === CODE;
 };
 
 export const hasUnlockedDuckHunting = () => {
-  const { players } = useSelector((state: RootState) => state.playerSelect);
+  const { players } = useSelector((state: RootState) => state.roster);
   return Boolean(players[CODE]);
 };
 

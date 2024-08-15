@@ -1,15 +1,15 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Player, PlayerSelect } from "./PlayerSelect";
+import { Player, Roster } from "./Roster";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { showMessage } from "./StatusSlice";
 
-const initialState: PlayerSelect = {
+const initialState: Roster = {
   current: "M",
   players: {},
 };
 
 const slice = createSlice({
-  name: "PlayerSelectSlice",
+  name: "RosterSlice",
   initialState,
   reducers: {
     unlockPlayer(state, action: PayloadAction<Player>) {
@@ -38,19 +38,16 @@ export const setPlayer = createAsyncThunk<
     state: RootState;
     dispatch: StoreDispatch;
   }
->(
-  "PlayerSelectSlice/setPlayer",
-  async (payload: string, { getState, dispatch }) => {
-    const { playerSelect }: RootState = getState();
-    const code = payload.toString();
+>("RosterSlice/setPlayer", async (payload: string, { getState, dispatch }) => {
+  const { roster }: RootState = getState();
+  const code = payload.toString();
 
-    if (!playerSelect.players[code]) {
-      dispatch(showMessage("PLAYER UNLOCKED: " + code));
-      dispatch(slice.actions.unlockPlayer({ code }));
-    }
-    dispatch(slice.actions.setCurrent(code));
+  if (!roster.players[code]) {
+    dispatch(showMessage("PLAYER UNLOCKED: " + code));
+    dispatch(slice.actions.unlockPlayer({ code }));
   }
-);
+  dispatch(slice.actions.setCurrent(code));
+});
 
 export const { winPlayer } = slice.actions;
 export default slice.reducer;

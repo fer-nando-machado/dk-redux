@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
 import { then } from "./Options";
-import { setPlayer, winPlayer } from "./PlayerSelectSlice";
-import "./PlayerSelect.scss";
+import { setPlayer, winPlayer } from "./RosterSlice";
+import "./Roster.scss";
 
 const MAX_PLAYERS = 5;
 
@@ -14,16 +14,14 @@ export type Player = {
   highScore?: number;
 };
 
-export type PlayerSelect = {
+export type Roster = {
   players: Record<string, Player>;
   current: string;
 };
 
-const PlayerSelect: React.FC = () => {
+const Roster: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { players, current } = useSelector(
-    (state: RootState) => state.playerSelect
-  );
+  const { players, current } = useSelector((state: RootState) => state.roster);
   const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
   const dispatchWinPlayer = () => dispatch(winPlayer());
 
@@ -48,7 +46,7 @@ const PlayerSelect: React.FC = () => {
       : (unlocked.length * 100) / MAX_PLAYERS;
 
   return (
-    <div className="PlayerSelect">
+    <div className="Roster">
       <u>PLAYER SELECT</u>
       <div className="Completion LargerBoldItalic">{rate.toFixed(0)}%</div>
       <div className="Players">
@@ -102,4 +100,4 @@ const PlayerSelect: React.FC = () => {
   );
 };
 
-export default PlayerSelect;
+export default Roster;

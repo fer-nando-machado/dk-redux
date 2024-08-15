@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
 import { useIntervalFPS } from "../Hooks/useInterval";
-import { setPlayer } from "../System/PlayerSelectSlice";
+import { setPlayer } from "../System/RosterSlice";
 import { moveJumpmanAuto } from "./JumpmanSlice";
 import { isDirectionLeft } from "../Level/Block";
 import "./DeutschBox.scss";
@@ -13,7 +13,7 @@ const CODE = "D";
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { direction } = useSelector((state: RootState) => state.jumpman);
-  const { current } = useSelector((state: RootState) => state.playerSelect);
+  const { current } = useSelector((state: RootState) => state.roster);
   const isDeutschBox = current === CODE;
 
   const [state, setState] = useState(0);

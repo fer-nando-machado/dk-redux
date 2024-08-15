@@ -4,7 +4,7 @@ import { StoreDispatch, RootState } from "../../reduxStore";
 import { useIntervalTimed, useIntervalFPS } from "../../Hooks/useInterval";
 import { Block, isDirectionLeft, getRandomDirection } from "../../Level/Block";
 import { getRandomX } from "../../Level/Position";
-import { setPlayer } from "../../System/PlayerSelectSlice";
+import { setPlayer } from "../../System/RosterSlice";
 import { moveJumpman } from "../JumpmanSlice";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";

@@ -9,7 +9,7 @@ import Dog from "./Hunt/Dog";
 import { Block } from "../Level/Block";
 import { moveJumpman } from "./JumpmanSlice";
 import "./Jumpman.scss";
-import { setPlayer } from "../System/PlayerSelectSlice";
+import { setPlayer } from "../System/RosterSlice";
 
 export type Jumpman = Block & {
   jumpingSpeed: number;
@@ -21,7 +21,7 @@ const CODE = "M";
 export const Jumpman: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
-  const { current } = useSelector((state: RootState) => state.playerSelect);
+  const { current } = useSelector((state: RootState) => state.roster);
   const { gravity } = useSelector((state: RootState) => state.options);
 
   useIntervalFPS(() => {

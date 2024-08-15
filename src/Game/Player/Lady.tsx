@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
-import { setPlayer } from "../System/PlayerSelectSlice";
+import { setPlayer } from "../System/RosterSlice";
 import "./Lady.scss";
 
 const CODE = "LADY";
 const Lady: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { current } = useSelector((state: RootState) => state.playerSelect);
+  const { current } = useSelector((state: RootState) => state.roster);
   const isLady = current === CODE;
 
   useKeyboard({
