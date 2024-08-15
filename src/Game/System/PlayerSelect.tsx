@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
-import { setPlayer } from "./OptionsSlice";
+import useKeyboard from "../Hooks/useKeyboard";
+import { then } from "./Options";
+import { setPlayer, winPlayer } from "./PlayerSelectSlice";
 import "./PlayerSelect.scss";
 
 const MAX_PLAYERS = 5;
@@ -12,18 +14,29 @@ export type Player = {
   highScore?: number;
 };
 
-export type PlayerSelectMap = {
-  [code: string]: Player;
+export type PlayerSelect = {
+  players: Record<string, Player>;
+  current: string;
 };
 
 const PlayerSelect: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { player, playerSelect } = useSelector(
-    (state: RootState) => state.options
+  const { players, current } = useSelector(
+    (state: RootState) => state.playerSelect
   );
   const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
+  const dispatchWinPlayer = () => dispatch(winPlayer());
 
-  const unlocked = Object.values(playerSelect);
+  useKeyboard({
+    key: "0",
+    onKeyDown: dispatchWinPlayer,
+  });
+  useKeyboard({
+    key: then.slice(-4),
+    onKeyDown: () => dispatchSetPlayer("​"),
+  });
+
+  const unlocked = Object.values(players);
   const complete = unlocked.filter((player) => player.complete).length;
 
   const missing = MAX_PLAYERS - unlocked.length;
@@ -40,7 +53,7 @@ const PlayerSelect: React.FC = () => {
       <div className="Completion LargerBoldItalic">{rate.toFixed(0)}%</div>
       <div className="Players">
         {unlocked.map(({ code, complete, highScore, speedRun }) => {
-          const isActive = code === player.code ? "Active" : "";
+          const isActive = code === current ? "Active" : "";
           return (
             <div
               key={code}
@@ -54,12 +67,12 @@ const PlayerSelect: React.FC = () => {
               {complete && (
                 <div className="Records">
                   {isActive ? (
-                    <>
+                    <div className={isActive}>
                       <span className="emoji">🏆</span>
                       {highScore} <br />
                       <span className="emoji">⏱</span>
                       {speedRun}s
-                    </>
+                    </div>
                   ) : (
                     <span className="emoji">⭐</span>
                   )}

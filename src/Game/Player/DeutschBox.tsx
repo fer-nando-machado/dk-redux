@@ -1,10 +1,10 @@
 import ReactDeutschBox from "react-deutschbox";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
-import { useEffect, useRef, useState } from "react";
-import { setPlayer } from "../System/OptionsSlice";
 import useKeyboard from "../Hooks/useKeyboard";
 import { useIntervalFPS } from "../Hooks/useInterval";
+import { setPlayer } from "../System/PlayerSelectSlice";
 import { moveJumpmanAuto } from "./JumpmanSlice";
 import { isDirectionLeft } from "../Level/Block";
 import "./DeutschBox.scss";
@@ -12,10 +12,9 @@ import "./DeutschBox.scss";
 const CODE = "D";
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { player } = useSelector((state: RootState) => state.options);
   const { direction } = useSelector((state: RootState) => state.jumpman);
-
-  const isDeutschBox = player.code === CODE;
+  const { current } = useSelector((state: RootState) => state.playerSelect);
+  const isDeutschBox = current === CODE;
 
   const [state, setState] = useState(0);
   const multiplier = state == 3 ? 3 : state == 1 ? 1 : 0;
@@ -30,7 +29,7 @@ const DeutschBox: React.FC = () => {
 
   useEffect(() => {
     setState(0);
-  }, [player.code]);
+  }, [current]);
 
   useIntervalFPS(() => {
     if (!isDeutschBox) return;

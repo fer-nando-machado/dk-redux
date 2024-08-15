@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../../reduxStore";
 import useKeyboard from "../../Hooks/useKeyboard";
 import { useIntervalFPS } from "../../Hooks/useInterval";
-import { setPlayer } from "../../System/OptionsSlice";
+import { setPlayer } from "../../System/PlayerSelectSlice";
 import { moveJumpman } from "../JumpmanSlice";
 import { isDirectionLeft } from "../../Level/Block";
 import "./Dog.scss";
@@ -10,10 +10,9 @@ import "./Dog.scss";
 const CODE = "DH";
 const Dog: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { player } = useSelector((state: RootState) => state.options);
   const { direction } = useSelector((state: RootState) => state.jumpman);
 
-  const isDog = player.code === CODE;
+  const isDog = isDuckHunting();
   const speed = isDirectionLeft(direction) ? -1 : 1;
 
   useIntervalFPS(() => {
@@ -26,17 +25,17 @@ const Dog: React.FC = () => {
     onKeyDown: () => dispatch(setPlayer(CODE)),
   });
 
-  return player.code === CODE ? <span>oo</span> : <></>;
+  return isDog ? <span>oo</span> : null;
 };
 
 export const isDuckHunting = () => {
-  const { player } = useSelector((state: RootState) => state.options);
-  return player.code === CODE;
+  const { current } = useSelector((state: RootState) => state.playerSelect);
+  return current === CODE;
 };
 
 export const hasUnlockedDuckHunting = () => {
-  const { playerSelect } = useSelector((state: RootState) => state.options);
-  return Boolean(playerSelect[CODE]);
+  const { players } = useSelector((state: RootState) => state.playerSelect);
+  return Boolean(players[CODE]);
 };
 
 export default Dog;

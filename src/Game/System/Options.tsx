@@ -4,22 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useHash from "../Hooks/useHash";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
-import PlayerSelect, { Player, PlayerSelectMap } from "./PlayerSelect";
+import PlayerSelect from "./PlayerSelect";
 import {
   setPaused,
-  setPlayer,
   toggleFilters,
   togglePaused,
   toggleGravity,
   enableDebug,
-  winPlayer,
   toggleLowFPS,
 } from "./OptionsSlice";
 import "./Options.scss";
 
 export type Options = {
-  player: Player;
-  playerSelect: PlayerSelectMap;
   paused: boolean;
   lowFPS: boolean;
   gravity: boolean;
@@ -54,12 +50,11 @@ const Options: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const options = useSelector((state: RootState) => state.options);
 
-  const dispatchWinPlayer = () => dispatch(winPlayer());
-  const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
-
   const dispatchToggleLowFPS = () => dispatch(toggleLowFPS());
   const dispatchToggleFilters = () => dispatch(toggleFilters());
   const dispatchTogglePaused = () => dispatch(togglePaused());
+  const dispatchToggleGravity = () => dispatch(toggleGravity());
+  const dispatchEnableDebug = () => dispatch(enableDebug());
   const dispatchUnpause = () => dispatch(setPaused(false));
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchReset = () => {
@@ -67,13 +62,6 @@ const Options: React.FC = () => {
     window.dispatchEvent(new CustomEvent("level:reset"));
   };
 
-  const dispatchToggleGravity = () => dispatch(toggleGravity());
-  const dispatchEnableDebug = () => dispatch(enableDebug());
-
-  useKeyboard({
-    key: "0",
-    onKeyDown: dispatchWinPlayer,
-  });
   useKeyboard({
     key: "F2",
     onKeyDown: dispatchToggleLowFPS,
@@ -97,10 +85,6 @@ const Options: React.FC = () => {
   useKeyboard({
     key: "Enter",
     onKeyDown: dispatchTogglePaused,
-  });
-  useKeyboard({
-    key: then.slice(-4),
-    onKeyDown: () => dispatchSetPlayer("​"),
   });
   useEffect(() => {
     dispatchKeyDown(hash);

@@ -21,7 +21,7 @@
     }
 
     .Select {
-      padding: 15px;
+      padding: 12.5px;
       cursor: pointer;
       &.Active {
         border-radius: 50px;
@@ -33,6 +33,10 @@
       position: absolute;
       margin: 6px 3px;
       font-size: smaller;
+      white-space: nowrap;
+      .Active {
+        margin-left: -25px;
+      }
     }
   }
 

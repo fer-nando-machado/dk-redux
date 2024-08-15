@@ -8,8 +8,8 @@ import DeutschBox from "./DeutschBox";
 import Dog from "./Hunt/Dog";
 import { Block } from "../Level/Block";
 import { moveJumpman } from "./JumpmanSlice";
-import { setPlayer } from "../System/OptionsSlice";
 import "./Jumpman.scss";
+import { setPlayer } from "../System/PlayerSelectSlice";
 
 export type Jumpman = Block & {
   jumpingSpeed: number;
@@ -20,9 +20,9 @@ export type Jumpman = Block & {
 const CODE = "M";
 export const Jumpman: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-
   const jumpman = useSelector((state: RootState) => state.jumpman);
-  const { player, gravity } = useSelector((state: RootState) => state.options);
+  const { current } = useSelector((state: RootState) => state.playerSelect);
+  const { gravity } = useSelector((state: RootState) => state.options);
 
   useIntervalFPS(() => {
     if (jumpman.climbingSpeed || jumpman.jumpingSpeed > 0) return;
@@ -41,13 +41,13 @@ export const Jumpman: React.FC = () => {
 
   return (
     <div
-      className={`Player Jumpman Block ${player.code} ${jumpman.direction}`}
+      className={`Player Jumpman Block ${current} ${jumpman.direction}`}
       style={{
         left: jumpman.x,
         bottom: jumpman.y,
       }}
     >
-      {player.code !== "DH" && player.code !== "D" && <Controller />}
+      {current !== "DH" && current !== "D" && <Controller />}
       <DeutschBox />
       <Dog />
       <Lady />

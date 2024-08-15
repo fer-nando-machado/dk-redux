@@ -1,14 +1,14 @@
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../../reduxStore";
+import { useIntervalTimed, useIntervalFPS } from "../../Hooks/useInterval";
 import { Block, isDirectionLeft, getRandomDirection } from "../../Level/Block";
 import { getRandomX } from "../../Level/Position";
-import { setPlayer } from "../../System/OptionsSlice";
-import { useIntervalTimed, useIntervalFPS } from "../../Hooks/useInterval";
+import { setPlayer } from "../../System/PlayerSelectSlice";
+import { moveJumpman } from "../JumpmanSlice";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";
 import Target from "./Target";
-import { moveJumpman } from "../JumpmanSlice";
 import "./Duck.scss";
 
 export type Duck = Block & { id: number };
