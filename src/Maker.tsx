@@ -97,6 +97,10 @@ const Maker: React.FC<Maker> = ({ isMaker, children }) => {
               <span className="Platform Block" />
               {"platforms:[{}]"}
             </p>
+            <p>
+              <span className="Ladder Block" />
+              {"ladders:[{}]"}
+            </p>
           </div>
           {"{ x, y, … }"}
         </div>
