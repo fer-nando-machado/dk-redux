@@ -6,10 +6,11 @@ import Controller from "./Controller";
 import Lady from "./Lady";
 import DeutschBox from "./DeutschBox";
 import Dog from "./Hunt/Dog";
+import { setPlayer } from "../System/RosterSlice";
+import { ROSTER, Features } from "../System/Roster";
 import { Block } from "../Level/Block";
 import { moveJumpman } from "./JumpmanSlice";
 import "./Jumpman.scss";
-import { setPlayer } from "../System/RosterSlice";
 
 export type Jumpman = Block & {
   jumpingSpeed: number;
@@ -17,7 +18,12 @@ export type Jumpman = Block & {
   walkingSpeed: number;
 };
 
-const CODE = "M";
+const PLAYER: Features = {
+  code: "M",
+  touch: false,
+};
+ROSTER[PLAYER.code] = PLAYER;
+
 export const Jumpman: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
@@ -35,19 +41,19 @@ export const Jumpman: React.FC = () => {
   });
 
   useKeyboard({
-    key: CODE,
-    onKeyDown: () => dispatch(setPlayer(CODE)),
+    key: PLAYER.code,
+    onKeyDown: () => dispatch(setPlayer(PLAYER.code)),
   });
 
   return (
     <div
-      className={`Player Jumpman Block ${current} ${jumpman.direction}`}
+      className={`Player Block Jumpman ${current} ${jumpman.direction}`}
       style={{
         left: jumpman.x,
         bottom: jumpman.y,
       }}
     >
-      {current !== "DH" && current !== "D" && <Controller />}
+      {!ROSTER[current]?.touch && <Controller />}
       <DeutschBox />
       <Dog />
       <Lady />

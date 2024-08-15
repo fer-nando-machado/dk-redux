@@ -22,6 +22,7 @@ import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 import { resetOptions, setMaker } from "../System/OptionsSlice";
 import { setPlayer } from "../System/RosterSlice";
 import { resetScore } from "../System/StatusSlice";
+
 import { Goal } from "./Goal";
 import { setGoal } from "./GoalSlice";
 

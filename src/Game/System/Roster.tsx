@@ -6,6 +6,12 @@ import { setPlayer, winPlayer } from "./RosterSlice";
 import "./Roster.scss";
 
 const MAX_PLAYERS = 5;
+export const ROSTER: Record<string, Features> = {};
+export type Features = {
+  code: string;
+  weapon?: JSX.Element;
+  touch?: boolean;
+};
 
 export type Player = {
   code: string;
@@ -59,8 +65,7 @@ const Roster: React.FC = () => {
               onClick={() => dispatchSetPlayer(code)}
             >
               <div className={`Jumpman Block right ${code}`}>
-                {/** TODO generalize optional decoration (eyes, dress) */}
-                {code == "DH" ? "oo" : ""}
+                {ROSTER[code]?.weapon}
               </div>
               {complete && (
                 <div className="Records">

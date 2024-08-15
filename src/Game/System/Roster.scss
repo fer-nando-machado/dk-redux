@@ -1,6 +1,6 @@
 .Roster {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 12.5px;
 
   .Completion {
     position: absolute;
@@ -11,6 +11,7 @@
   .Players {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     margin-top: 20px;
     margin-bottom: 40px;
@@ -21,10 +22,10 @@
     }
 
     .Select {
-      padding: 12.5px;
+      padding: 10px;
       cursor: pointer;
       &.Active {
-        border-radius: 50px;
+        border-radius: 50%;
         background: #ffffff50;
       }
     }
@@ -35,7 +36,7 @@
       font-size: smaller;
       white-space: nowrap;
       .Active {
-        margin-left: -25px;
+        margin-left: -35px;
       }
     }
   }

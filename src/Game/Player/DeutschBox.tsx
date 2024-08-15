@@ -5,17 +5,24 @@ import { RootState, StoreDispatch } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/RosterSlice";
+import { ROSTER, Features } from "../System/Roster";
 import { moveJumpmanAuto } from "./JumpmanSlice";
 import { isDirectionLeft } from "../Level/Block";
 import "./DeutschBox.scss";
 
-const CODE = "D";
+const PLAYER: Features = {
+  code: "D",
+  touch: true,
+};
+ROSTER[PLAYER.code] = PLAYER;
+
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { direction } = useSelector((state: RootState) => state.jumpman);
   const { current } = useSelector((state: RootState) => state.roster);
-  const isDeutschBox = current === CODE;
+  const isDeutschBox = current === PLAYER.code;
 
+  // TODO move to Slice
   const [state, setState] = useState(0);
   const multiplier = state == 3 ? 3 : state == 1 ? 1 : 0;
   const speed = multiplier * (isDirectionLeft(direction) ? -2 : 2);
@@ -42,8 +49,8 @@ const DeutschBox: React.FC = () => {
   });
 
   useKeyboard({
-    key: CODE,
-    onKeyDown: () => dispatch(setPlayer(CODE)),
+    key: PLAYER.code,
+    onKeyDown: () => dispatch(setPlayer(PLAYER.code)),
   });
 
   return isDeutschBox ? (
