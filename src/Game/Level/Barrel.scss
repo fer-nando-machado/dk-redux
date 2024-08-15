@@ -33,3 +33,35 @@
     left: 9px;
   }
 }
+
+.Curtain {
+  outline: 4px outset darkred;
+  background: linear-gradient(
+    90deg,
+    red,
+    darkred,
+    red,
+    darkred,
+    red,
+    darkred,
+    red
+  );
+
+  &::before {
+    content: "~~~~~~";
+    color: gold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 2.5px;
+  }
+
+  &::after {
+    content: "~~DK~~";
+    color: gold;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 2.5px;
+  }
+}

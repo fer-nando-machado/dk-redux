@@ -91,6 +91,7 @@ export const DuckFactory: React.FC = () => {
   const isUnlocked = hasUnlockedDuckHunting();
   const isHunting = isDuckHunting();
   const interval = isHunting ? 3000 : !isUnlocked ? 7777 : 0;
+  const color = isDirectionLeft(duckFactory.direction) ? "Purple" : "Green";
 
   useIntervalTimed(() => {
     dispatch(
@@ -108,11 +109,11 @@ export const DuckFactory: React.FC = () => {
     );
   }, interval);
 
-  if (interval === 0) return <></>;
+  if (interval === 0) return null;
   return (
     <>
       <div
-        className={`Duck Factory Block Round ${duckFactory.direction}`}
+        className={`Duck Factory Block Round ${duckFactory.direction} ${color}`}
         style={{
           left: duckFactory.x,
           bottom: duckFactory.y,

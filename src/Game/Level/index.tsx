@@ -86,8 +86,10 @@ const LEVEL_1: Level = {
     direction: RIGHT,
   },
   barrelFactory: {
-    x: 100,
+    x: 50,
     y: 600,
+    height: 200,
+    width: 100,
     onAir: true,
     direction: LEFT,
     barrels: [],
@@ -111,6 +113,8 @@ const LEVEL_0: Level = {
   barrelFactory: {
     x: 475,
     y: 725,
+    height: 100,
+    width: 100,
     onAir: false,
     direction: RIGHT,
     barrels: [],
@@ -174,9 +178,9 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
     <>
       <PlatformFactory />
       <LadderFactory />
-      <BarrelFactory />
       <Goal />
       <Jumpman />
+      <BarrelFactory />
       <DuckFactory />
     </>
   );

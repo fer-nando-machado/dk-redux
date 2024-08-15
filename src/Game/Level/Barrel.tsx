@@ -14,9 +14,9 @@ export type Barrel = Block & {
 
 export type BarrelFactory = Block & {
   barrels: Barrel[];
+  height: number;
+  width: number;
 };
-
-export const MAX_BARRELS = 5;
 
 const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
@@ -64,6 +64,17 @@ export const BarrelFactory: React.FC = () => {
       {barrelFactory.barrels.map((b) => (
         <Barrel {...b} key={b.id} />
       ))}
+      {true && (
+        <div
+          className="Curtain Block"
+          style={{
+            left: barrelFactory.x + (25 - barrelFactory.width) / 2,
+            bottom: barrelFactory.y + (25 - barrelFactory.height) / 2,
+            width: barrelFactory.width,
+            height: barrelFactory.height,
+          }}
+        />
+      )}
     </>
   );
 };

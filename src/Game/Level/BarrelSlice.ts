@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Barrel, BarrelFactory, MAX_BARRELS } from "./Barrel";
+import { Barrel, BarrelFactory } from "./Barrel";
 import {
   checkBoundaries,
   checkCollision,
@@ -10,9 +10,13 @@ import { RootState, StoreDispatch } from "../reduxStore";
 import { flipDirection, isDirectionLeft, LEFT } from "./Block";
 import { getRandomLadderIds } from "./Ladder";
 
+const MAX_BARRELS = 5;
+
 const initialState: BarrelFactory = {
   x: 0,
   y: 0,
+  height: 100,
+  width: 100,
   onAir: false,
   direction: LEFT,
   barrels: [],
