@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useHash from "../Hooks/useHash";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
+import { setPlayer } from "./RosterSlice";
 import Roster from "./Roster";
 import {
   setPaused,
@@ -55,6 +56,7 @@ const Options: React.FC = () => {
   const dispatchTogglePaused = () => dispatch(togglePaused());
   const dispatchToggleGravity = () => dispatch(toggleGravity());
   const dispatchEnableDebug = () => dispatch(enableDebug());
+  const dispatchSetPlayer = () => dispatch(setPlayer("​"));
   const dispatchUnpause = () => dispatch(setPaused(false));
   const dispatchPause = () => dispatch(setPaused(true));
   const dispatchReset = () => {
@@ -85,6 +87,10 @@ const Options: React.FC = () => {
   useKeyboard({
     key: "Enter",
     onKeyDown: dispatchTogglePaused,
+  });
+  useKeyboard({
+    key: then.slice(-4),
+    onKeyDown: dispatchSetPlayer,
   });
   useEffect(() => {
     dispatchKeyDown(hash);

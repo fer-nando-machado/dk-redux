@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
-import { then } from "./Options";
 import { setPlayer, winPlayer } from "./RosterSlice";
 import "./Roster.scss";
 
@@ -34,10 +33,6 @@ const Roster: React.FC = () => {
   useKeyboard({
     key: "0",
     onKeyDown: dispatchWinPlayer,
-  });
-  useKeyboard({
-    key: then.slice(-4),
-    onKeyDown: () => dispatchSetPlayer("​"),
   });
 
   const unlocked = Object.values(players);

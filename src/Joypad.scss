@@ -39,7 +39,7 @@
     display: none;
   }
 
-  &.stored {
+  &.P0 {
     height: 16px;
     background: darkred;
     opacity: 0.975;
@@ -58,13 +58,26 @@
     }
   }
 
+  &.P1 {
+    .Joycable::after {
+      content: "P1";
+    }
+  }
+
+  &.P2 {
+    .Joycable::after {
+      content: "P2";
+    }
+  }
+
   * {
     font-family: monospace;
     font-size: 12px;
     line-height: 12px;
   }
 
-  span {
+  span,
+  button {
     text-align: center;
     cursor: pointer;
   }
@@ -159,38 +172,60 @@
       border-radius: 50%;
     }
   }
-}
 
-.Joycable {
-  position: absolute;
-  margin: 4px -8px;
-  padding: 2px;
-  outline: 2px solid darkred;
-  border: 2px solid black;
-  background: black;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  top: 0;
-  left: 50%;
-  cursor: pointer;
-  &::before {
-    content: "";
-    position: absolute;
-    top: -16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 7px;
-    height: 22px;
-    background: black;
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
-  &::after {
-    content: "P1";
-    position: absolute;
-    color: gold;
-    margin: -7px 25px;
-    outline: 1px solid black;
-    padding: 3px;
+
+  input {
+    height: 9px;
+    padding: 5px;
+    letter-spacing: 2.5px;
+    margin: 40px 5px;
+    border: 0;
+    width: 69%;
+    outline: 3px dashed black;
     background: black;
+    color: white;
+    border-radius: 5px;
+    &:focus {
+      background: dimgray;
+    }
+  }
+
+  .Joycable {
+    position: absolute;
+    margin: 4px -8px;
+    padding: 2px;
+    outline: 2px solid darkred;
+    border: 2px solid black;
+    background: black;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    cursor: pointer;
+    &::before {
+      content: "";
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 7px;
+      height: 22px;
+      background: black;
+    }
+    &::after {
+      position: absolute;
+      color: gold;
+      margin: -7px 25px;
+      outline: 1px solid black;
+      padding: 3px;
+      background: black;
+    }
   }
 }
