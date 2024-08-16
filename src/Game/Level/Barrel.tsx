@@ -20,6 +20,7 @@ export type BarrelFactory = Block & {
 
 const Barrel: React.FC<Barrel> = (barrel) => {
   const dispatch: StoreDispatch = useDispatch();
+  const isFalling = barrel.fallingSpeed !== 0;
 
   useIntervalFPS(() => {
     dispatch(moveBarrel(barrel.id));
@@ -31,15 +32,17 @@ const Barrel: React.FC<Barrel> = (barrel) => {
 
   return (
     <div
-      className={`Barrel Block Round ${barrel.direction} ${
-        barrel.fallingSpeed !== 0 ? "Falling" : ""
+      className={`Barrel Block Round ${isFalling ? "Falling" : ""} ${
+        barrel.direction
       }`}
       style={{ left: barrel.x, bottom: barrel.y }}
     >
-      <Target
-        points={{ value: 100, position: barrel }}
-        callback={onClickBarrel}
-      />
+      {!isFalling && (
+        <Target
+          points={{ value: 100, position: barrel }}
+          callback={onClickBarrel}
+        />
+      )}
     </div>
   );
 };
