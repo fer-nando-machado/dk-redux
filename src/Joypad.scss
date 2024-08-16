@@ -84,7 +84,7 @@
       border: 0;
       outline: 0;
       border-radius: 4px;
-      &:active {
+      &.pressed {
         color: white;
       }
     }
@@ -114,19 +114,19 @@
       grid-column-start: 3;
     }
 
-    &:has(.up:active) {
+    &:has(.up.pressed) {
       transform: perspective(99px) translateY(-2px) rotateX(7deg);
     }
 
-    &:has(.down:active) {
+    &:has(.down.pressed) {
       transform: perspective(99px) translateY(2px) rotateX(-7deg);
     }
 
-    &:has(.left:active) {
+    &:has(.left.pressed) {
       transform: perspective(99px) translateX(-2px) rotateY(-7deg);
     }
 
-    &:has(.right:active) {
+    &:has(.right.pressed) {
       transform: perspective(99px) translateX(2px) rotateY(7deg);
     }
   }
