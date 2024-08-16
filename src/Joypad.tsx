@@ -14,6 +14,7 @@ const keys = {
 const Joypad: React.FC = () => {
   const [hidden, setHidden] = useState<boolean>(true);
   const [stored, setStored] = useState<boolean>(false);
+  const [pressedKey, setPressedKey] = useState<string | undefined>();
 
   const takeJoypad = () => {
     if (stored) {
@@ -35,21 +36,65 @@ const Joypad: React.FC = () => {
     setHidden(true);
   };
 
-  const handleButtonStart = (key: string) => () => {
+  const handleButtonStart = (key: string, direction?: boolean) => () => {
+    if (direction) {
+      setPressedKey(key);
+    }
     dispatchKeyDown(key);
   };
 
-  const handleButtonEnd = (key: string) => () => {
+  const handleButtonEnd = (key: string, direction?: boolean) => () => {
+    if (direction) {
+      releasePressedKey();
+    }
     dispatchKeyUp(key);
   };
+
+  const releasePressedKey = () => {
+    setPressedKey(undefined);
+  };
+
+  const handleTouchMove = (currentKey: string) => (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    const touchedElement = document.elementFromPoint(
+      touch.clientX,
+      touch.clientY
+    ) as HTMLElement;
+    if (!touchedElement) return;
+
+    const touchedKey = touchedElement.getAttribute("data-key");
+    if (touchedKey !== currentKey) {
+      handleButtonEnd(currentKey, true)();
+    }
+    if (touchedKey) {
+      handleButtonStart(touchedKey, true)();
+    }
+  };
+
+  const renderDirection = (key: string, className: string, label: string) => (
+    <span
+      data-key={key}
+      onTouchStart={handleButtonStart(key, true)}
+      onTouchMove={handleTouchMove(key)}
+      onTouchEnd={handleButtonEnd(key, true)}
+      onMouseDown={handleButtonStart(key, true)}
+      onMouseLeave={handleButtonEnd(key, true)}
+      onMouseUp={handleButtonEnd(key, true)}
+      className={`${className} ${key === pressedKey ? "pressed" : ""}`}
+    >
+      {label}
+    </span>
+  );
 
   useEffect(() => {
     window.addEventListener("controller:inserted", showJoypad);
     window.addEventListener("controller:removed", hideJoypad);
+    window.addEventListener("level:reset", releasePressedKey);
 
     return () => {
       window.removeEventListener("controller:inserted", showJoypad);
       window.removeEventListener("controller:removed", hideJoypad);
+      window.removeEventListener("level:reset", releasePressedKey);
     };
   }, []);
 
@@ -60,47 +105,11 @@ const Joypad: React.FC = () => {
     >
       <div className="Joycable" onClick={storeJoypad} />
       <div className="dpad">
-        <span
-          className="left"
-          onTouchStart={handleButtonStart(keys.left)}
-          onMouseDown={handleButtonStart(keys.left)}
-          onTouchEnd={handleButtonEnd(keys.left)}
-          onMouseUp={handleButtonEnd(keys.left)}
-          onMouseLeave={handleButtonEnd(keys.left)}
-        >
-          ◁
-        </span>
-        <span
-          className="up"
-          onTouchStart={handleButtonStart(keys.up)}
-          onMouseDown={handleButtonStart(keys.up)}
-          onTouchEnd={handleButtonEnd(keys.up)}
-          onMouseUp={handleButtonEnd(keys.up)}
-          onMouseLeave={handleButtonEnd(keys.up)}
-        >
-          △
-        </span>
-        <span className="center">◯</span>
-        <span
-          className="down"
-          onTouchStart={handleButtonStart(keys.down)}
-          onMouseDown={handleButtonStart(keys.down)}
-          onTouchEnd={handleButtonEnd(keys.down)}
-          onMouseUp={handleButtonEnd(keys.down)}
-          onMouseLeave={handleButtonEnd(keys.down)}
-        >
-          ▽
-        </span>
-        <span
-          className="right"
-          onTouchStart={handleButtonStart(keys.right)}
-          onMouseDown={handleButtonStart(keys.right)}
-          onTouchEnd={handleButtonEnd(keys.right)}
-          onMouseUp={handleButtonEnd(keys.right)}
-          onMouseLeave={handleButtonEnd(keys.right)}
-        >
-          ▷
-        </span>
+        {renderDirection(keys.left, "left", "◁")}
+        {renderDirection(keys.up, "up", "△")}
+        {renderDirection("", "center", "◯")}
+        {renderDirection(keys.down, "down", "▽")}
+        {renderDirection(keys.right, "right", "▷")}
       </div>
       <span className="option start" onClick={handleButtonStart(keys.start)} />
       <span
