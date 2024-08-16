@@ -24,4 +24,9 @@ const Lady: React.FC = () => {
   return isLady ? PLAYER.weapon! : null;
 };
 
+export const hasUnlockedLady = () => {
+  const { players } = useSelector((state: RootState) => state.roster);
+  return Boolean(players[PLAYER.code]);
+};
+
 export default Lady;

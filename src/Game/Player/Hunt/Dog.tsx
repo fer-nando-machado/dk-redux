@@ -11,7 +11,7 @@ import "./Dog.scss";
 const PLAYER: Features = {
   code: "DH",
   touch: true,
-  weapon: <>oo</>,
+  weapon: <div className="Eyes" />,
 };
 ROSTER[PLAYER.code] = PLAYER;
 
