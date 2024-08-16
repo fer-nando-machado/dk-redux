@@ -178,21 +178,22 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-  }
-
-  input {
-    height: 9px;
-    padding: 5px;
-    letter-spacing: 2.5px;
-    margin: 40px 5px;
-    border: 0;
-    width: 69%;
-    outline: 3px dashed black;
-    background: black;
-    color: white;
-    border-radius: 5px;
-    &:focus {
-      background: dimgray;
+    input {
+      height: 9px;
+      padding: 5px;
+      letter-spacing: 5px;
+      font-weight: bold;
+      font-size: 20px;
+      margin: 40px 5px;
+      border: 0;
+      width: 69%;
+      outline: 4px double black;
+      background: black;
+      color: white;
+      border-radius: 5px;
+      &:focus {
+        background: dimgray;
+      }
     }
   }
 
