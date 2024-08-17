@@ -8,6 +8,11 @@ import Manual from "./Manual";
 import Joypad from "./Joypad";
 import "./index.scss";
 
+const handleRestart = () => {
+  sessionStorage.clear();
+  window.location.reload();
+};
+
 const App: React.FC = () => {
   return (
     <div className="App">
@@ -29,7 +34,7 @@ const App: React.FC = () => {
           <img src={AppIcon} alt="DK-Redux App Icon" />
           Add to Home Screen
         </span>
-        <a href="#" className="Button" onClick={() => window.location.reload()}>
+        <a href="#" className="Button" onClick={handleRestart}>
           Restart
         </a>
         <Joypad />

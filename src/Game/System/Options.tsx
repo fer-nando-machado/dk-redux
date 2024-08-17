@@ -1,4 +1,4 @@
-import { name, version, author, description } from "../../../package.json";
+import { name, author, description } from "../../../package.json";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
@@ -6,6 +6,7 @@ import useHash from "../Hooks/useHash";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
 import { setPlayer } from "./RosterSlice";
 import Roster from "./Roster";
+import Version from "./Version";
 import {
   setPaused,
   toggleFilters,
@@ -110,7 +111,7 @@ const Options: React.FC = () => {
       {options.paused && (
         <div className="Options">
           <div>
-            <u>{name}</u> <small>v{version}</small>
+            <u>{name}</u> <Version />
             <p onClick={dispatchUnpause}>{description}</p>
             <u>OPTIONS</u>
             <div className="Toggles">
@@ -158,6 +159,6 @@ const Options: React.FC = () => {
 };
 
 export const then = "JUL 09 1981";
-const now = new Date(Date.now()).toDateString().slice(4).toUpperCase();
+const now = new Date().toDateString().slice(4).toUpperCase();
 
 export default Options;
