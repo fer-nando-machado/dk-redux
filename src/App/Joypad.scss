@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  outline: 10px outset darkred;
+  outline: 6px outset darkred;
   border-radius: 8px;
   width: 333px;
   padding: 4px 16px;
@@ -15,6 +15,12 @@
     goldenrod,
     darkgoldenrod
   );
+  bottom: 0;
+  margin: 10px;
+  @media only screen and (min-width: 630px) {
+    left: 0;
+    margin: 25px;
+  }
 
   &::before {
     content: "";
@@ -42,7 +48,7 @@
   &.P0 {
     height: 16px;
     background: darkred;
-    opacity: 0.975;
+    opacity: 0.81;
     cursor: pointer;
     * {
       display: none;
@@ -60,13 +66,13 @@
 
   &.P1 {
     .Joycable::after {
-      content: "P1";
+      content: "I";
     }
   }
 
   &.P2 {
     .Joycable::after {
-      content: "P2";
+      content: "II";
     }
   }
 
@@ -214,11 +220,11 @@
     &::before {
       content: "";
       position: absolute;
-      top: -16px;
+      width: 7px;
+      height: 13px;
+      top: -13px;
       left: 50%;
       transform: translateX(-50%);
-      width: 7px;
-      height: 22px;
       background: black;
     }
     &::after {

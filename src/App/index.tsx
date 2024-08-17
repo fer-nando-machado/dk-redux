@@ -37,7 +37,6 @@ const App: React.FC = () => {
         <a href="#" className="Button" onClick={handleRestart}>
           Restart
         </a>
-        <Joypad />
       </nav>
       <footer>
         <a href={`mailto:${contact}`} className="Button">
@@ -50,6 +49,7 @@ const App: React.FC = () => {
           Support
         </a>
       </footer>
+      <Joypad />
     </div>
   );
 };

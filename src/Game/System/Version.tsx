@@ -25,7 +25,7 @@ const Version: React.FC = () => {
 
   return (
     <small>
-      v{version} {date}
+      v{version}/{date}
     </small>
   );
 };
