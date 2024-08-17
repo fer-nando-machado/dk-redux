@@ -86,6 +86,8 @@
     display: grid;
     width: 99px;
     height: 99px;
+    touch-action: none;
+    -ms-touch-action: none;
 
     span {
       width: 33px;
