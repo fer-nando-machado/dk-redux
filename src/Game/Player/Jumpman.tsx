@@ -9,7 +9,7 @@ import Dog from "./Hunt/Dog";
 import { setPlayer } from "../System/RosterSlice";
 import { ROSTER, Features } from "../System/Roster";
 import { Block } from "../Level/Block";
-import { moveJumpman } from "./JumpmanSlice";
+import { moveJumpman, setJumpman } from "./JumpmanSlice";
 import "./Jumpman.scss";
 
 export type Jumpman = Block & {
@@ -29,6 +29,7 @@ export const Jumpman: React.FC = () => {
   const jumpman = useSelector((state: RootState) => state.jumpman);
   const { current } = useSelector((state: RootState) => state.roster);
   const { gravity } = useSelector((state: RootState) => state.options);
+  const goal = useSelector((state: RootState) => state.goal);
 
   useIntervalFPS(() => {
     if (jumpman.climbingSpeed || jumpman.jumpingSpeed > 0) return;
@@ -43,6 +44,18 @@ export const Jumpman: React.FC = () => {
   useKeyboard({
     key: PLAYER.code,
     onKeyDown: () => dispatch(setPlayer(PLAYER.code)),
+  });
+
+  useKeyboard({
+    key: "W",
+    onKeyDown: () =>
+      dispatch(
+        setJumpman({
+          ...jumpman,
+          x: goal.x,
+          y: goal.y,
+        })
+      ),
   });
 
   return (
