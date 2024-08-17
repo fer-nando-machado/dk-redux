@@ -36,6 +36,7 @@
 
 .Curtain {
   outline: 5px outset darkred;
+  border-radius: 12.5px;
   background: linear-gradient(
     90deg,
     red,
@@ -63,5 +64,12 @@
   &::after {
     content: "~~DK~~";
     bottom: 0;
+  }
+
+  &.Rolled {
+    border-radius: 25px;
+    &::before {
+      content: "";
+    }
   }
 }

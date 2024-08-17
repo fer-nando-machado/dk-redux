@@ -53,16 +53,17 @@ export const BarrelFactory: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const barrelFactory = useSelector((state: RootState) => state.barrelFactory);
   const { players } = useSelector((state: RootState) => state.roster);
+  const completed = getCompleteCount(players);
+  const rolled = barrelFactory.height - 25;
 
   const shift = useMemo(() => {
-    const completed = getCompleteCount(players);
     const shiftUnits = barrelFactory.height / 4;
     const shift = completed * shiftUnits;
-    if (shift > barrelFactory.height - 25) {
-      return barrelFactory.height - 25;
+    if (shift > rolled) {
+      return rolled;
     }
     return shift;
-  }, [players, barrelFactory]);
+  }, [completed, barrelFactory.height]);
 
   useIntervalTimed(() => {
     dispatch(createBarrel());
@@ -81,7 +82,7 @@ export const BarrelFactory: React.FC = () => {
         <Barrel {...b} key={b.id} />
       ))}
       <div
-        className="Curtain Block"
+        className={`Curtain Block ${shift === rolled ? "Rolled" : ""}`}
         style={{
           left: barrelFactory.x + (25 - barrelFactory.width) / 2,
           bottom: barrelFactory.y + shift + (25 - barrelFactory.height) / 2,
