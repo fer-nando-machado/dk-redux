@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { then } from "./Game/System/Options";
+import { then } from "../Game/System/Options";
 
 const Icon: React.FC = () => {
   const [icon, setIcon] = useState("");

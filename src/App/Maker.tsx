@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import useKeyboard from "./Game/Hooks/useKeyboard";
-import { CustomLevel } from "./Game/Level";
+import useKeyboard from "../Game/Hooks/useKeyboard";
+import { CustomLevel } from "../Game/Level";
 import "./Maker.scss";
 
 type Maker = {

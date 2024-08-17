@@ -1,12 +1,12 @@
-import { name, repository, contact, support } from "../package.json";
-import Icon from "./Icon";
-import AppIcon from "/favicon.ico";
+import { name, repository, contact, support } from "../../package.json";
+import Game from "../Game";
 import GitHub from "/GitHub.svg?url";
-import Game from "./Game";
+import AppIcon from "/favicon.ico";
+import Icon from "./Icon";
 import Maker from "./Maker";
 import Manual from "./Manual";
 import Joypad from "./Joypad";
-import "./App.scss";
+import "./index.scss";
 
 const App: React.FC = () => {
   return (

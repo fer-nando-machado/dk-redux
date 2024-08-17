@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { dispatchKeyUp, dispatchKeyDown } from "./Game/Hooks/useKeyboard";
+import { dispatchKeyUp, dispatchKeyDown } from "../Game/Hooks/useKeyboard";
 import "./Joypad.scss";
 
 const KEYS = {
