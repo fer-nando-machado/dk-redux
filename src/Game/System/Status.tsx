@@ -21,25 +21,19 @@ const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { score } = useSelector((state: RootState) => state.status);
 
-  const clickPause = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
+  const clickPause = () => {
     dispatch(setPaused(true));
   };
 
-  const clickReset = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
+  const clickReset = () => {
     window.dispatchEvent(new CustomEvent("level:reset"));
   };
 
   return (
     <div className="Status">
-      <a href="#" onClick={clickPause}>
-        PAUSE
-      </a>
+      <span onClick={clickPause}>PAUSE</span>
       {score}
-      <a href="#" onClick={clickReset}>
-        RESET
-      </a>
+      <span onClick={clickReset}>RESET</span>
       <PointsDisplay />
       <MessageDisplay />
     </div>

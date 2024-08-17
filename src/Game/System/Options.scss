@@ -9,7 +9,7 @@
   height: 100%;
   text-align: justify;
   background: black;
-  opacity: 0.81;
+  opacity: 0.9;
 
   .Toggles {
     display: flex;
@@ -39,10 +39,11 @@
 
     &::after {
       content: "PAUSE";
-      font-weight: bold;
-      font-size: 32px;
       position: absolute;
       top: 50%;
+      font-weight: bold;
+      font-size: 81px;
+      opacity: 0.81;
     }
   }
 
