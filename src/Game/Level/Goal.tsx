@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../reduxStore";
-import { ROSTER, Roster } from "../System/Roster";
-import { hasUnlockedLady } from "../Player/Lady";
+import { ROSTER } from "../System/Roster";
+import { getPartner } from "../Player/Lady";
 import { Block } from "./Block";
 import "./Goal.scss";
 
@@ -11,9 +11,7 @@ export type Goal = Block & {
 
 export const Goal: React.FC = () => {
   const goal = useSelector((state: RootState) => state.goal);
-  const roster = useSelector((state: RootState) => state.roster);
-  const hasLady = hasUnlockedLady();
-  const code = hasLady ? getPartner(roster) : "LADY";
+  const code = getPartner();
 
   return (
     <div
@@ -24,10 +22,4 @@ export const Goal: React.FC = () => {
       <div className="bubble right shadow">help!</div>
     </div>
   );
-};
-
-export const getPartner = ({ current, players }: Roster) => {
-  const partners = Object.keys(players).filter((code) => code !== current);
-  const randomPartner = partners[Math.floor(Math.random() * partners.length)];
-  return randomPartner;
 };

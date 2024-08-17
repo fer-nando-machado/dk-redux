@@ -24,9 +24,14 @@ const Lady: React.FC = () => {
   return isLady ? PLAYER.weapon! : null;
 };
 
-export const hasUnlockedLady = () => {
-  const { players } = useSelector((state: RootState) => state.roster);
-  return Boolean(players[PLAYER.code]);
+export const getPartner = () => {
+  const { players, current } = useSelector((state: RootState) => state.roster);
+  if (!Boolean(players[PLAYER.code])) {
+    return PLAYER.code;
+  }
+  const partners = Object.keys(players).filter((code) => code !== current);
+  const randomPartner = partners[Math.floor(Math.random() * partners.length)];
+  return randomPartner;
 };
 
 export default Lady;
