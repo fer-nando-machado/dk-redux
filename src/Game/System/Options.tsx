@@ -130,7 +130,7 @@ const Options: React.FC = () => {
           <div className="Paused" onClick={dispatchUnpause} />
           <div>
             <Roster />
-            <div className="Credits">
+            <div className="Credits" onClick={dispatchUnpause}>
               <div className="Date">
                 <span>{then}</span>
                 <span>{now}</span>
