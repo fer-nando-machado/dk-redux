@@ -10,6 +10,7 @@ export type Features = {
   code: string;
   weapon?: JSX.Element;
   touch?: boolean;
+  help?: string;
 };
 
 export type Player = {

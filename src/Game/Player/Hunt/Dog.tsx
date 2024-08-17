@@ -12,6 +12,7 @@ const PLAYER: Features = {
   code: "DH",
   touch: true,
   weapon: <div className="Eyes" />,
+  help: "WOOF!",
 };
 ROSTER[PLAYER.code] = PLAYER;
 

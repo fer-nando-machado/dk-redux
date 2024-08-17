@@ -13,6 +13,7 @@ import "./DeutschBox.scss";
 const PLAYER: Features = {
   code: "D",
   touch: true,
+  help: "HILFE!",
 };
 ROSTER[PLAYER.code] = PLAYER;
 

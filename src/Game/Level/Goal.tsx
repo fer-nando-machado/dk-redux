@@ -19,7 +19,7 @@ export const Goal: React.FC = () => {
       style={{ left: goal.x, bottom: goal.y }}
     >
       {ROSTER[code]?.weapon}
-      <div className="bubble right shadow">help!</div>
+      <div className="bubble right shadow">{ROSTER[code]?.help || "HELP!"}</div>
     </div>
   );
 };
