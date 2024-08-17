@@ -1,9 +1,11 @@
+import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
+import { useIntervalFPS, useIntervalTimed } from "../Hooks/useInterval";
+import { getCompleteCount } from "../System/Roster";
+import Target from "../Player/Hunt/Target";
 import { Block } from "./Block";
 import { moveBarrel, destroyBarrel, createBarrel } from "./BarrelSlice";
-import { useIntervalFPS, useIntervalTimed } from "../Hooks/useInterval";
-import Target from "../Player/Hunt/Target";
 import "./Barrel.scss";
 
 export type Barrel = Block & {
@@ -50,6 +52,17 @@ const Barrel: React.FC<Barrel> = (barrel) => {
 export const BarrelFactory: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const barrelFactory = useSelector((state: RootState) => state.barrelFactory);
+  const { players } = useSelector((state: RootState) => state.roster);
+
+  const shift = useMemo(() => {
+    const completed = getCompleteCount(players);
+    const shiftUnits = barrelFactory.height / 4;
+    const shift = completed * shiftUnits;
+    if (shift > barrelFactory.height - 25) {
+      return barrelFactory.height - 25;
+    }
+    return shift;
+  }, [players, barrelFactory]);
 
   useIntervalTimed(() => {
     dispatch(createBarrel());
@@ -67,17 +80,15 @@ export const BarrelFactory: React.FC = () => {
       {barrelFactory.barrels.map((b) => (
         <Barrel {...b} key={b.id} />
       ))}
-      {true && (
-        <div
-          className="Curtain Block"
-          style={{
-            left: barrelFactory.x + (25 - barrelFactory.width) / 2,
-            bottom: barrelFactory.y + (25 - barrelFactory.height) / 2,
-            width: barrelFactory.width,
-            height: barrelFactory.height,
-          }}
-        />
-      )}
+      <div
+        className="Curtain Block"
+        style={{
+          left: barrelFactory.x + (25 - barrelFactory.width) / 2,
+          bottom: barrelFactory.y + shift + (25 - barrelFactory.height) / 2,
+          width: barrelFactory.width,
+          height: barrelFactory.height - shift,
+        }}
+      />
     </>
   );
 };

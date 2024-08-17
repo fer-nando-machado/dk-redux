@@ -47,21 +47,21 @@
     red
   );
 
-  &::before {
-    content: "~~~~~~";
+  &::before,
+  &::after {
     color: gold;
     position: absolute;
-    top: 0;
     left: 0;
-    margin: 2.5px;
+    margin: 5px 2.5px;
+  }
+
+  &::before {
+    content: "~~~~~~";
+    top: 0;
   }
 
   &::after {
     content: "~~DK~~";
-    color: gold;
-    position: absolute;
     bottom: 0;
-    left: 0;
-    margin: 2.5px;
   }
 }

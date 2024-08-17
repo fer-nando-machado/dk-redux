@@ -26,6 +26,10 @@ export type Roster = {
   current: string;
 };
 
+export const getCompleteCount = (players: PlayerRecord) => {
+  return Object.values(players).filter((player) => player.complete).length;
+};
+
 const Roster: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { players, current } = useSelector((state: RootState) => state.roster);
@@ -44,15 +48,14 @@ const Roster: React.FC = () => {
     onKeyDown: dispatchWinPlayer,
   });
 
+  const completed = getCompleteCount(players);
   const unlocked = Object.values(players);
-  const complete = unlocked.filter((player) => player.complete).length;
-
   const missing = MAX_PLAYERS - unlocked.length;
   const message = `${missing} PLAYER${missing > 1 ? "S" : ""}`;
 
   const rate =
     missing === 0
-      ? ((unlocked.length + complete) * 100) / (MAX_PLAYERS * 2)
+      ? ((unlocked.length + completed) * 100) / (MAX_PLAYERS * 2)
       : (unlocked.length * 100) / MAX_PLAYERS;
 
   return (
