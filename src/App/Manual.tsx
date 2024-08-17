@@ -20,6 +20,7 @@ const Manual: React.FC<Manual> = ({ children }) => {
             <p>
               &nbsp;Move: ARROW KEYS <br />
               &nbsp;Jump: SPACE
+              <span className="Hint">{"~Joypad I -> II"}</span>
             </p>
             <p>
               Pause: ENTER <br />
