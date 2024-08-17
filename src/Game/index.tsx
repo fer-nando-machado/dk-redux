@@ -12,10 +12,12 @@ export type Game = {
 const Game: React.FC<Game> = ({ customLevel }) => {
   return (
     <Provider store={Store}>
-      <div className="Game">
-        <Level {...customLevel} />
-        <Status />
-        <Options />
+      <div className="Screen">
+        <div className="Game">
+          <Level {...customLevel} />
+          <Status />
+          <Options />
+        </div>
       </div>
     </Provider>
   );

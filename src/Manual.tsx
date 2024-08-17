@@ -55,6 +55,8 @@ const Manual: React.FC<Manual> = ({ children }) => {
               </a>
               <br />
               +: DK Hunt<span className="Player Hint">Touch</span>
+              <br />
+              *: Pauline
             </p>
             ?: ///////////
             <span className="Player Hint">

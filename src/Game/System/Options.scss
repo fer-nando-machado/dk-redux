@@ -83,14 +83,14 @@
 
 .Game:has(.Filters) {
   animation: text-filter 0.1s infinite alternate;
+}
 
-  @media only screen and (min-width: 630px) {
-    animation: text-filter 0.1s infinite alternate,
-      glow-filter 0.1s infinite alternate;
-
+@media only screen and (min-width: 630px) {
+  .Game:has(.Filters) {
     &::after {
-      content: "";
+      animation: grain-filter 0.1s infinite alternate;
       position: absolute;
+      content: "";
       top: 0;
       left: 0;
       width: 100%;
@@ -102,8 +102,11 @@
           2500px;
       background-blend-mode: difference;
       opacity: 0.081;
-      animation: grain-filter 0.1s infinite alternate;
     }
+  }
+
+  .Screen:has(.Filters) {
+    animation: glow-filter 0.1s infinite alternate;
   }
 }
 
