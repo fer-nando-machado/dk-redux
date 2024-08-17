@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
-import { ROSTER, Features } from "../System/Roster";
+import { ROSTER, Features, PlayerRecord } from "../System/Roster";
 import { setPlayer } from "../System/RosterSlice";
 import "./Lady.scss";
 
@@ -18,7 +18,7 @@ const Lady: React.FC = () => {
 
   useKeyboard({
     key: PLAYER.code,
-    onKeyDown: () => dispatch(setPlayer(PLAYER.code)),
+    onKeyDown: () => dispatch(unlockLady()),
   });
 
   return isLady ? PLAYER.weapon! : null;
@@ -26,12 +26,20 @@ const Lady: React.FC = () => {
 
 export const getPartner = () => {
   const { players, current } = useSelector((state: RootState) => state.roster);
-  if (!Boolean(players[PLAYER.code])) {
+  if (!hasUnlockedLady(players)) {
     return PLAYER.code;
   }
   const partners = Object.keys(players).filter((code) => code !== current);
   const randomPartner = partners[Math.floor(Math.random() * partners.length)];
   return randomPartner;
+};
+
+export const hasUnlockedLady = (players: PlayerRecord) => {
+  return Boolean(players[PLAYER.code]);
+};
+
+export const unlockLady = () => {
+  return setPlayer(PLAYER.code);
 };
 
 export default Lady;

@@ -4,24 +4,25 @@ import useKeyboard from "../Hooks/useKeyboard";
 import { setPlayer, winPlayer } from "./RosterSlice";
 import "./Roster.scss";
 
-const MAX_PLAYERS = 5;
-export const ROSTER: Record<string, Features> = {};
+export type RosterRecord = Record<string, Features>;
 export type Features = {
   code: string;
   weapon?: JSX.Element;
   touch?: boolean;
   help?: string;
 };
+export const ROSTER: RosterRecord = {};
+const MAX_PLAYERS = 5;
 
+export type PlayerRecord = Record<string, Player>;
 export type Player = {
   code: string;
   complete?: boolean;
   speedRun?: number;
   highScore?: number;
 };
-
 export type Roster = {
-  players: Record<string, Player>;
+  players: PlayerRecord;
   current: string;
 };
 

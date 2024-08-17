@@ -8,6 +8,7 @@ import {
   Position,
 } from "../Level/Position";
 import { flipDirection, getDirection, LEFT } from "../Level/Block";
+import { hasUnlockedLady, unlockLady } from "./Lady";
 import { Jumpman } from "./Jumpman";
 
 const initialState: Jumpman = {
@@ -51,6 +52,7 @@ export const moveJumpman = createAsyncThunk<
   async (payload: Position, { getState, dispatch }) => {
     const state: RootState = getState();
     const fps = state.options.lowFPS ? 2 : 1;
+    const { players } = state.roster;
     const platforms = state.platformFactory.platforms;
     const ladders = state.ladderFactory.ladders;
     const jumpman = state.jumpman;
@@ -65,6 +67,9 @@ export const moveJumpman = createAsyncThunk<
 
     const isOnGoal = checkCollision(moved, goal);
     if (isOnGoal) {
+      if (!hasUnlockedLady(players)) {
+        dispatch(unlockLady());
+      }
       window.dispatchEvent(new CustomEvent("level:reset"));
     }
 
