@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { dispatchKeyUp, dispatchKeyDown } from "./Game/Hooks/useKeyboard";
 import "./Joypad.scss";
 
-const keys = {
+const KEYS = {
   up: "ArrowUp",
   down: "ArrowDown",
   left: "ArrowLeft",
   right: "ArrowRight",
-  space: " ",
   start: "Enter",
+  space: " ",
+  blank: "",
 };
 
 const Joypad: React.FC = () => {
   const [hidden, setHidden] = useState<boolean>(true);
   const [port, setPort] = useState<number>(1);
-  const [pressedKey, setPressedKey] = useState<string | undefined>();
 
   const showJoypad = () => {
     setHidden(false);
@@ -37,6 +37,30 @@ const Joypad: React.FC = () => {
       setPort(0);
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("controller:inserted", showJoypad);
+    window.addEventListener("controller:removed", hideJoypad);
+
+    return () => {
+      window.removeEventListener("controller:inserted", showJoypad);
+      window.removeEventListener("controller:removed", hideJoypad);
+    };
+  }, []);
+
+  return (
+    <div
+      onClick={connectJoypad}
+      className={`Joypad P${port} ${hidden ? "hidden" : ""}`}
+    >
+      <div className="Joycable" onClick={switchPort} />
+      {port === 1 ? <P1 /> : port === 2 ? <P2 /> : null}
+    </div>
+  );
+};
+
+const P1: React.FC = () => {
+  const [pressedKey, setPressedKey] = useState<string | undefined>();
 
   const handleButtonStart = (key: string, direction?: boolean) => () => {
     if (direction) {
@@ -62,9 +86,8 @@ const Joypad: React.FC = () => {
       touch.clientX,
       touch.clientY
     ) as HTMLElement;
-    if (!touchedElement) return;
 
-    const touchedKey = touchedElement.getAttribute("data-key");
+    const touchedKey = touchedElement?.getAttribute("data-key");
     if (touchedKey !== currentKey) {
       handleButtonEnd(currentKey, true)();
     }
@@ -89,45 +112,28 @@ const Joypad: React.FC = () => {
   );
 
   useEffect(() => {
-    window.addEventListener("controller:inserted", showJoypad);
-    window.addEventListener("controller:removed", hideJoypad);
     window.addEventListener("level:reset", releasePressedKey);
-
     return () => {
-      window.removeEventListener("controller:inserted", showJoypad);
-      window.removeEventListener("controller:removed", hideJoypad);
       window.removeEventListener("level:reset", releasePressedKey);
     };
   }, []);
 
   return (
-    <div
-      onClick={connectJoypad}
-      className={`Joypad P${port} ${hidden ? "hidden" : ""}`}
-    >
-      <div className="Joycable" onClick={switchPort} />
-      {port === 1 && (
-        <>
-          <div className="dpad">
-            {renderDirection(keys.left, "left", "◁")}
-            {renderDirection(keys.up, "up", "△")}
-            {renderDirection("", "center", "◯")}
-            {renderDirection(keys.down, "down", "▽")}
-            {renderDirection(keys.right, "right", "▷")}
-          </div>
-          <span
-            className="option start"
-            onClick={handleButtonStart(keys.start)}
-          />
-          <span
-            className="option action"
-            onTouchStart={handleButtonStart(keys.space)}
-            onClick={handleButtonStart(keys.space)}
-          />
-        </>
-      )}
-      {port === 2 && <P2 />}
-    </div>
+    <>
+      <div className="dpad">
+        {renderDirection(KEYS.left, "left", "◁")}
+        {renderDirection(KEYS.up, "up", "△")}
+        {renderDirection(KEYS.blank, "center", "◯")}
+        {renderDirection(KEYS.down, "down", "▽")}
+        {renderDirection(KEYS.right, "right", "▷")}
+      </div>
+      <span className="option start" onClick={handleButtonStart(KEYS.start)} />
+      <span
+        className="option action"
+        onTouchStart={handleButtonStart(KEYS.space)}
+        onClick={handleButtonStart(KEYS.space)}
+      />
+    </>
   );
 };
 
