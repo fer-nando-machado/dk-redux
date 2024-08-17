@@ -18,7 +18,7 @@ const Lady: React.FC = () => {
 
   useKeyboard({
     key: PLAYER.code,
-    onKeyDown: () => dispatch(unlockLady()),
+    onKeyDown: () => dispatch(setLady()),
   });
 
   return isLady ? PLAYER.weapon! : null;
@@ -38,7 +38,7 @@ export const hasUnlockedLady = (players: PlayerRecord) => {
   return Boolean(players[PLAYER.code]);
 };
 
-export const unlockLady = () => {
+export const setLady = () => {
   return setPlayer(PLAYER.code);
 };
 

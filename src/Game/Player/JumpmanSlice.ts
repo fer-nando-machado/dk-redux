@@ -8,7 +8,8 @@ import {
   Position,
 } from "../Level/Position";
 import { flipDirection, getDirection, LEFT } from "../Level/Block";
-import { hasUnlockedLady, unlockLady } from "./Lady";
+import { winPlayer } from "../System/RosterSlice";
+import { hasUnlockedLady, setLady } from "./Lady";
 import { Jumpman } from "./Jumpman";
 
 const initialState: Jumpman = {
@@ -52,13 +53,12 @@ export const moveJumpman = createAsyncThunk<
   async (payload: Position, { getState, dispatch }) => {
     const state: RootState = getState();
     const fps = state.options.lowFPS ? 2 : 1;
-    const { players } = state.roster;
     const platforms = state.platformFactory.platforms;
     const ladders = state.ladderFactory.ladders;
     const jumpman = state.jumpman;
     const goal = state.goal;
 
-    let { x, y } = payload;
+    const { x, y } = payload;
     const moved = {
       ...jumpman,
       x: jumpman.x + x * fps,
@@ -67,8 +67,19 @@ export const moveJumpman = createAsyncThunk<
 
     const isOnGoal = checkCollision(moved, goal);
     if (isOnGoal) {
+      const { players, current } = state.roster;
+      const { score } = state.status;
+      const highScore = players[current]?.highScore || 0;
+      dispatch(
+        winPlayer({
+          code: current,
+          highScore: score > highScore ? score : highScore,
+          speedRun: 0,
+        })
+      );
+
       if (!hasUnlockedLady(players)) {
-        dispatch(unlockLady());
+        dispatch(setLady());
       }
       window.dispatchEvent(new CustomEvent("level:reset"));
     }

@@ -29,8 +29,15 @@ export type Roster = {
 const Roster: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { players, current } = useSelector((state: RootState) => state.roster);
-  const dispatchSetPlayer = (p: string) => dispatch(setPlayer(p));
-  const dispatchWinPlayer = () => dispatch(winPlayer());
+  const dispatchSetPlayer = (code: string) => dispatch(setPlayer(code));
+  const dispatchWinPlayer = () =>
+    dispatch(
+      winPlayer({
+        code: current,
+        highScore: Math.floor(1000 + Math.random() * 9000),
+        speedRun: Math.floor(100 + Math.random() * 900),
+      })
+    );
 
   useKeyboard({
     key: "0",
@@ -54,11 +61,11 @@ const Roster: React.FC = () => {
       <div className="Completion LargerBoldItalic">{rate.toFixed(0)}%</div>
       <div className="Players">
         {unlocked.map(({ code, complete, highScore, speedRun }) => {
-          const isActive = code === current ? "Active" : "";
+          const isCurrent = code === current ? "Current" : "";
           return (
             <div
               key={code}
-              className={`Select ${isActive}`}
+              className={`Select ${isCurrent}`}
               onClick={() => dispatchSetPlayer(code)}
             >
               <div className={`Jumpman Block right ${code}`}>
@@ -66,13 +73,13 @@ const Roster: React.FC = () => {
               </div>
               {complete && (
                 <div className="Records">
-                  {isActive ? (
-                    <div className={isActive}>
+                  {isCurrent ? (
+                    <>
                       <span className="emoji">🏆</span>
                       {highScore} <br />
                       <span className="emoji">⏱</span>
                       {speedRun}s
-                    </div>
+                    </>
                   ) : (
                     <span className="emoji">⭐</span>
                   )}

@@ -18,15 +18,15 @@ const slice = createSlice({
     setCurrent(state, action: PayloadAction<string>) {
       state.current = action.payload;
     },
-    winPlayer: (state) => {
-      const { current, players } = state;
+    winPlayer: (state, action: PayloadAction<Player>) => {
+      const { players } = state;
+      const { code } = action.payload;
       const update: Player = {
-        ...players[current],
+        ...players[code],
+        ...action.payload,
         complete: true,
-        highScore: Math.floor(10000 + Math.random() * 90000),
-        speedRun: Math.floor(100 + Math.random() * 900),
       };
-      state.players[current] = update;
+      state.players[code] = update;
     },
   },
 });
