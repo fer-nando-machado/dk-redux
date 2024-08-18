@@ -88,15 +88,12 @@ const Music: React.FC = () => {
         onDoubleClick={() => {
           rate === Rate.NORMAL && dispatch(toggleRate());
         }}
+        onTouchMove={() => {
+          rate === Rate.NORMAL && dispatch(toggleRate());
+        }}
         className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
-        <span
-          onTouchMove={() => {
-            playing && dispatch(toggleRate());
-          }}
-        >
-          {playing ? ";%" : ":/"}
-        </span>
+        {playing ? ";%" : ":/"}
         {rate !== Rate.NORMAL && (
           <div
             onClick={(event) => {
