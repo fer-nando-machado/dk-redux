@@ -10,12 +10,10 @@
   text-align: justify;
   background: black;
   opacity: 0.9;
-
   .Toggles {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    margin-top: 12.5px;
+    margin: 12.5px 0;
     .Option {
       display: flex;
       justify-content: space-between;
@@ -47,9 +45,9 @@
     &::after {
       content: "PAUSE";
       position: absolute;
-      top: 50%;
+      top: 60%;
       font-weight: bold;
-      font-size: 81px;
+      font-size: 50px;
     }
   }
 

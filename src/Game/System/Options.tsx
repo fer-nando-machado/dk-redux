@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useHash from "../Hooks/useHash";
+import useMusic from "../Hooks/useMusic";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
 import { setPlayer } from "./RosterSlice";
 import Roster from "./Roster";
+import Music from "./Music";
 import Version from "./Version";
 import {
   setPaused,
@@ -65,6 +67,8 @@ const Options: React.FC = () => {
     window.dispatchEvent(new CustomEvent("level:reset"));
   };
 
+  useMusic();
+
   useKeyboard({
     key: "F2",
     onKeyDown: dispatchToggleLowFPS,
@@ -113,7 +117,7 @@ const Options: React.FC = () => {
           <div>
             <u>{name}</u> <Version />
             <p onClick={dispatchUnpause}>{description}</p>
-            <u>OPTIONS</u>
+            <u>GRAPHICS</u>
             <div className="Toggles">
               <Option
                 name="FILTERS"
@@ -126,6 +130,7 @@ const Options: React.FC = () => {
                 onClick={dispatchToggleLowFPS}
               />
             </div>
+            <Music />
           </div>
           <div className="Paused" onClick={dispatchUnpause} />
           <div>

@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import optionsReducer from "./System/OptionsSlice";
+import musicReducer from "./System/MusicSlice";
 import statusReducer from "./System/StatusSlice";
 import rosterReducer from "./System/RosterSlice";
 import goalReducer from "./Level/GoalSlice";
@@ -13,6 +14,7 @@ export const Store = configureStore({
   reducer: {
     options: optionsReducer,
     status: statusReducer,
+    music: musicReducer,
     roster: rosterReducer,
     jumpman: jumpmanReducer,
     goal: goalReducer,
