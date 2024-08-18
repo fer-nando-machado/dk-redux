@@ -26,9 +26,9 @@
     position: absolute;
     font-weight: bold;
     top: -40px;
-    left: -20px;
+    left: 35px;
     font-size: 50px;
-    transform: rotate(-9.81deg);
+    transform: rotate(45deg);
     animation: bounce 1.981s linear infinite;
     animation-play-state: paused;
   }
@@ -49,9 +49,14 @@
 
 @keyframes bounce {
   0% {
-    transform: rotate(-9.81deg) rotateY(0);
+    transform: rotate(45deg) rotateY(0);
+    scale: (1);
+  }
+  50% {
+    scale: (1.1);
   }
   100% {
-    transform: rotate(-9.81deg) rotateY(360deg);
+    transform: rotate(45deg) rotateY(360deg);
+    scale: (1);
   }
 }

@@ -30,6 +30,10 @@ const useMusic = () => {
     key: ">",
     onKeyDown: () => dispatch(changeVolumeSFX(+VOLUME_SHIFT)),
   });
+  useKeyboard({
+    key: ";",
+    onKeyDown: () => dispatch(setPlaying(!playing)),
+  });
 
   useEffect(() => {
     MusicHowler.load("theme", {

@@ -17,7 +17,7 @@ type Option = {
   onMore?: () => void;
 };
 
-export const VOLUME_SHIFT = 10;
+export const VOLUME_SHIFT = 25;
 
 const Option: React.FC<Option> = ({ name, value, onLess, onMore }) => {
   const display = Math.round(value).toString().padStart(3, "0");
@@ -66,7 +66,7 @@ const Music: React.FC = () => {
         onClick={() => dispatch(setPlaying(!music.playing))}
         className={`Gramophone ${music.playing ? "Playing" : ""}`}
       >
-        {music.playing ? "_%" : "//"}
+        {music.playing ? ";%" : ";/"}
         <div className="Block Platform" />
       </div>
     </>

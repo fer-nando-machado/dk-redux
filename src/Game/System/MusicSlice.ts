@@ -3,7 +3,7 @@ import { Music } from "./Music";
 
 const initialState: Music = {
   bgm: 50,
-  sfx: 20,
+  sfx: 25,
   playing: false,
 };
 
