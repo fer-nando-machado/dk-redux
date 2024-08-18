@@ -28,9 +28,9 @@ const Manual: React.FC<Manual> = ({ children }) => {
               <span className="Hint Music">
                 MUSIC
                 <br />
-                control
+                CONTROL
                 <br />
-                {",. <>  ;"}
+                {"<%;>,."}
               </span>
             </p>
             <p>
@@ -64,7 +64,7 @@ const Manual: React.FC<Manual> = ({ children }) => {
               <br />
               +: DK Hunt<span className="Player Hint">Touch</span>
               <br />
-              *: Pauline
+              _: Pauline
             </p>
             ?: ///////////
             <span className="Player Hint">

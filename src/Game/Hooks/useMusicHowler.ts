@@ -1,4 +1,5 @@
 import { Howl, HowlOptions } from "howler";
+import { Rate, Volume } from "../System/Music";
 
 class MusicHowler {
   private static music: Record<string, Howl> = {};
@@ -23,8 +24,12 @@ class MusicHowler {
     return this.music[name].stop();
   }
 
-  static setVolume(name: string, volume: number) {
+  static setVolume(name: string, volume: Volume) {
     return this.music[name].volume(volume);
+  }
+
+  static setRate(name: string, rate: Rate) {
+    return this.music[name].rate(rate)
   }
 
   /*

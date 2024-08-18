@@ -8,12 +8,15 @@ import {
   raiseVolumeBGM,
   raiseVolumeSFX,
   setPlaying,
+  toggleRate,
 } from "../System/MusicSlice";
 import useKeyboard from "./useKeyboard";
 
 const useMusic = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { bgm, sfx, playing } = useSelector((state: RootState) => state.music);
+  const { bgm, sfx, playing, rate } = useSelector(
+    (state: RootState) => state.music
+  );
 
   useKeyboard({
     key: ",",
@@ -34,6 +37,10 @@ const useMusic = () => {
   useKeyboard({
     key: ";",
     onKeyDown: () => dispatch(setPlaying(!playing)),
+  });
+  useKeyboard({
+    key: "%",
+    onKeyDown: () => dispatch(toggleRate()),
   });
 
   useEffect(() => {
@@ -72,6 +79,10 @@ const useMusic = () => {
   useEffect(() => {
     MusicHowler.setVolume("jump", playing ? sfx : 0);
   }, [sfx, playing]);
+
+  useEffect(() => {
+    MusicHowler.setRate("theme", rate);
+  }, [rate]);
 };
 
 export default useMusic;

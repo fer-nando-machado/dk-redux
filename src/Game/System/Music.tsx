@@ -7,6 +7,7 @@ import {
   raiseVolumeBGM,
   raiseVolumeSFX,
   setPlaying,
+  toggleRate,
 } from "./MusicSlice";
 import "./Music.scss";
 
@@ -17,15 +18,22 @@ export enum Volume {
   MAX = 1,
 }
 
+export enum Rate {
+  SLOWED = 0.5,
+  NORMAL = 1,
+  DOUBLE = 2,
+}
+
 export type Music = {
-  bgm: number;
-  sfx: number;
+  bgm: Volume;
+  sfx: Volume;
+  rate: Rate;
   playing: boolean;
 };
 
 type Option = {
   name: string;
-  value: number;
+  value: Volume;
   onLess?: () => void;
   onMore?: () => void;
 };
@@ -48,7 +56,9 @@ const Option: React.FC<Option> = ({ name, value, onLess, onMore }) => {
 
 const Music: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const music = useSelector((state: RootState) => state.music);
+  const { bgm, sfx, rate, playing } = useSelector(
+    (state: RootState) => state.music
+  );
 
   return (
     <>
@@ -56,13 +66,13 @@ const Music: React.FC = () => {
       <div className="Toggles">
         <Option
           name="MUSIC"
-          value={music.bgm}
+          value={bgm}
           onLess={() => dispatch(lowerVolumeBGM())}
           onMore={() => dispatch(raiseVolumeBGM())}
         />
         <Option
           name="SFX"
-          value={music.sfx}
+          value={sfx}
           onLess={() => {
             MusicHowler.play("jump");
             dispatch(lowerVolumeSFX());
@@ -74,10 +84,15 @@ const Music: React.FC = () => {
         />
       </div>
       <div
-        onClick={() => dispatch(setPlaying(!music.playing))}
-        className={`Gramophone ${music.playing ? "Playing" : ""}`}
+        onClick={() => dispatch(setPlaying(!playing))}
+        onDoubleClick={() => dispatch(toggleRate())}
+        className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
-        {music.playing ? ";%" : ";/"}
+        {playing ? ";%" : ":/"}
+
+        {rate !== Rate.NORMAL && (
+          <div className="bubble right shadow">{Rate[rate]}</div>
+        )}
         <div className="Platform Block" />
       </div>
     </>

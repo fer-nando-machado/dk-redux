@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Music, Volume } from "./Music";
+import { Music, Rate, Volume } from "./Music";
 
 const initialState: Music = {
   bgm: Volume.MID,
   sfx: Volume.LOW,
+  rate: Rate.NORMAL,
   playing: false,
 };
 
@@ -23,6 +24,9 @@ const slice = createSlice({
     lowerVolumeSFX: (state) => {
       state.sfx = lowerVolume(state.sfx);
     },
+    toggleRate: (state) => {
+      state.rate = switchRate(state.rate);
+    },
     setPlaying: (state, action: PayloadAction<boolean>) => {
       state.playing = action.payload;
     },
@@ -38,7 +42,6 @@ const raiseVolume = (volume: Volume): Volume => {
     case Volume.MID:
       return Volume.MAX;
     case Volume.MAX:
-    default:
       return Volume.MAX;
   }
 };
@@ -52,8 +55,18 @@ const lowerVolume = (volume: Volume): Volume => {
     case Volume.LOW:
       return Volume.OFF;
     case Volume.OFF:
-    default:
       return Volume.OFF;
+  }
+};
+
+const switchRate = (rate: Rate): Rate => {
+  switch (rate) {
+    case Rate.SLOWED:
+      return Rate.NORMAL;
+    case Rate.NORMAL:
+      return Rate.DOUBLE;
+    case Rate.DOUBLE:
+      return Rate.SLOWED;
   }
 };
 
@@ -62,6 +75,7 @@ export const {
   lowerVolumeBGM,
   raiseVolumeSFX,
   lowerVolumeSFX,
+  toggleRate,
   setPlaying,
 } = slice.actions;
 export default slice.reducer;

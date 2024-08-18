@@ -30,12 +30,25 @@
     left: 35px;
     font-size: 50px;
     transform: rotate(45deg);
-    animation: bounce 1.981s linear infinite;
+    animation: bounce 2s linear infinite;
     animation-play-state: paused;
   }
-
   &.Playing::before {
     animation-play-state: running;
+  }
+  &.SLOWED::before {
+    animation-duration: 4s;
+  }
+  &.NORMAL::before {
+    animation-duration: 2s;
+  }
+  &.DOUBLE::before {
+    animation-duration: 1s;
+  }
+
+  .bubble {
+    top: -25px;
+    left: 50px;
   }
 
   .Platform {
