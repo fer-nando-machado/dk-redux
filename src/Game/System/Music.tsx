@@ -85,13 +85,22 @@ const Music: React.FC = () => {
       </div>
       <div
         onClick={() => dispatch(setPlaying(!playing))}
-        onDoubleClick={() => dispatch(toggleRate())}
+        onDoubleClick={() => {
+          rate === Rate.NORMAL && dispatch(toggleRate());
+        }}
         className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
         {playing ? ";%" : ":/"}
-
         {rate !== Rate.NORMAL && (
-          <div className="bubble right shadow">{Rate[rate]}</div>
+          <div
+            onClick={(event) => {
+              event.stopPropagation();
+              dispatch(toggleRate());
+            }}
+            className="bubble right shadow"
+          >
+            {Rate[rate]}
+          </div>
         )}
         <div className="Platform Block" />
       </div>
