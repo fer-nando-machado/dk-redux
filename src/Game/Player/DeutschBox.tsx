@@ -45,7 +45,7 @@ const DeutschBox: React.FC = () => {
   });
 
   useKeyboard({
-    key: "Shift",
+    key: " ",
     onKeyDown: onClickDeutschBox,
   });
 

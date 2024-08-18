@@ -20,7 +20,7 @@ const Manual: React.FC<Manual> = ({ children }) => {
             <p>
               &nbsp;Move: ARROW KEYS <br />
               &nbsp;Jump: SPACE
-              <span className="Hint">{"~Joypad I -> II"}</span>
+              <span className="Hint">{"//Joypad I => II"}</span>
             </p>
             <p>
               Pause: ENTER <br />
@@ -32,7 +32,7 @@ const Manual: React.FC<Manual> = ({ children }) => {
               &nbsp;&nbsp;FPS: F2 <br />
               /////: //
               <span className="Gravity Hint">
-                FX.80665... m/s<sup>2</sup>
+                F(x.81) m/s<sup>2</sup>
               </span>
               <br />
               Debug: F13
