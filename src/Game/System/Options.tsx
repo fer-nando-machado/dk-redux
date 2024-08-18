@@ -1,4 +1,4 @@
-import { name, author, description } from "../../../package.json";
+import { author } from "../../../package.json";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
@@ -115,8 +115,7 @@ const Options: React.FC = () => {
       {options.paused && (
         <div className="Options">
           <div>
-            <u>{name}</u> <Version />
-            <p onClick={dispatchUnpause}>{description}</p>
+            <Version />
             <u>GRAPHICS</u>
             <div className="Toggles">
               <Option

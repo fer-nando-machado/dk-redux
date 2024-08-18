@@ -30,6 +30,7 @@
   }
 
   p,
+  pre,
   .Paused,
   .Credits {
     opacity: 0.81;
@@ -44,10 +45,13 @@
 
     &::after {
       content: "PAUSE";
-      position: absolute;
-      top: 62%;
-      font-weight: bold;
+      position: relative;
       font-size: 50px;
+      margin: 25px;
+    }
+
+    &:hover {
+      font-weight: bold;
     }
   }
 
