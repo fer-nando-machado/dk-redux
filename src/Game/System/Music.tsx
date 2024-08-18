@@ -67,7 +67,7 @@ const Music: React.FC = () => {
         className={`Gramophone ${music.playing ? "Playing" : ""}`}
       >
         {music.playing ? ";%" : ";/"}
-        <div className="Block Platform" />
+        <div className="Platform Block" />
       </div>
     </>
   );
