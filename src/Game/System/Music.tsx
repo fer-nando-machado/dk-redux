@@ -90,7 +90,13 @@ const Music: React.FC = () => {
         }}
         className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
-        {playing ? ";%" : ":/"}
+        <span
+          onTouchMove={() => {
+            playing && dispatch(toggleRate());
+          }}
+        >
+          {playing ? ";%" : ":/"}
+        </span>
         {rate !== Rate.NORMAL && (
           <div
             onClick={(event) => {
