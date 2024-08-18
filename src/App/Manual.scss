@@ -37,6 +37,11 @@
     color: darkblue;
     white-space: nowrap;
 
+    &.Port {
+      margin: 5px;
+      transform: rotate(9.8deg);
+    }
+
     &.Gravity {
       margin: -9.8px 9.8px;
       transform: rotate(9.8deg);
@@ -49,6 +54,12 @@
       margin: 2px 8px;
       line-height: 50%;
       transform: rotate(-6deg);
+    }
+    &.Music {
+      right: 0;
+      margin: 5px;
+      line-height: 81%;
+      text-align: center;
     }
   }
 }

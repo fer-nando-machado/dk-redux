@@ -1,8 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import MusicHowler from "../Hooks/useMusicHowler";
-import { changeVolumeBGM, changeVolumeSFX, setPlaying } from "./MusicSlice";
+import {
+  lowerVolumeBGM,
+  lowerVolumeSFX,
+  raiseVolumeBGM,
+  raiseVolumeSFX,
+  setPlaying,
+} from "./MusicSlice";
 import "./Music.scss";
+
+export enum Volume {
+  OFF = 0,
+  LOW = 0.1,
+  MID = 0.5,
+  MAX = 1,
+}
 
 export type Music = {
   bgm: number;
@@ -17,10 +30,8 @@ type Option = {
   onMore?: () => void;
 };
 
-export const VOLUME_SHIFT = 25;
-
 const Option: React.FC<Option> = ({ name, value, onLess, onMore }) => {
-  const display = Math.round(value).toString().padStart(3, "0");
+  const display = Volume[value];
   return (
     <div className="Option Music">
       {name}:
@@ -46,19 +57,19 @@ const Music: React.FC = () => {
         <Option
           name="MUSIC"
           value={music.bgm}
-          onLess={() => dispatch(changeVolumeBGM(-VOLUME_SHIFT))}
-          onMore={() => dispatch(changeVolumeBGM(+VOLUME_SHIFT))}
+          onLess={() => dispatch(lowerVolumeBGM())}
+          onMore={() => dispatch(raiseVolumeBGM())}
         />
         <Option
-          name="EFFECTS"
+          name="SFX"
           value={music.sfx}
           onLess={() => {
             MusicHowler.play("jump");
-            dispatch(changeVolumeSFX(-VOLUME_SHIFT));
+            dispatch(lowerVolumeSFX());
           }}
           onMore={() => {
             MusicHowler.play("jump");
-            dispatch(changeVolumeSFX(+VOLUME_SHIFT));
+            dispatch(raiseVolumeSFX());
           }}
         />
       </div>

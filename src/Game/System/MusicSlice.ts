@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Music } from "./Music";
+import { Music, Volume } from "./Music";
 
 const initialState: Music = {
-  bgm: 50,
-  sfx: 25,
+  bgm: Volume.MID,
+  sfx: Volume.LOW,
   playing: false,
 };
 
@@ -11,11 +11,17 @@ const slice = createSlice({
   name: "MusicSlice",
   initialState,
   reducers: {
-    changeVolumeBGM: (state, action: PayloadAction<number>) => {
-      state.bgm = Math.max(0, Math.min(100, state.bgm + action.payload));
+    raiseVolumeBGM: (state) => {
+      state.bgm = raiseVolume(state.bgm);
     },
-    changeVolumeSFX: (state, action: PayloadAction<number>) => {
-      state.sfx = Math.max(0, Math.min(100, state.sfx + action.payload));
+    lowerVolumeBGM: (state) => {
+      state.bgm = lowerVolume(state.bgm);
+    },
+    raiseVolumeSFX: (state) => {
+      state.sfx = raiseVolume(state.sfx);
+    },
+    lowerVolumeSFX: (state) => {
+      state.sfx = lowerVolume(state.sfx);
     },
     setPlaying: (state, action: PayloadAction<boolean>) => {
       state.playing = action.payload;
@@ -23,5 +29,39 @@ const slice = createSlice({
   },
 });
 
-export const { changeVolumeBGM, changeVolumeSFX, setPlaying } = slice.actions;
+const raiseVolume = (volume: Volume): Volume => {
+  switch (volume) {
+    case Volume.OFF:
+      return Volume.LOW;
+    case Volume.LOW:
+      return Volume.MID;
+    case Volume.MID:
+      return Volume.MAX;
+    case Volume.MAX:
+    default:
+      return Volume.MAX;
+  }
+};
+
+const lowerVolume = (volume: Volume): Volume => {
+  switch (volume) {
+    case Volume.MAX:
+      return Volume.MID;
+    case Volume.MID:
+      return Volume.LOW;
+    case Volume.LOW:
+      return Volume.OFF;
+    case Volume.OFF:
+    default:
+      return Volume.OFF;
+  }
+};
+
+export const {
+  raiseVolumeBGM,
+  lowerVolumeBGM,
+  raiseVolumeSFX,
+  lowerVolumeSFX,
+  setPlaying,
+} = slice.actions;
 export default slice.reducer;

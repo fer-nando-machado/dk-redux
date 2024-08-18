@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import MusicHowler from "./useMusicHowler";
 import {
-  changeVolumeBGM,
-  changeVolumeSFX,
+  lowerVolumeBGM,
+  lowerVolumeSFX,
+  raiseVolumeBGM,
+  raiseVolumeSFX,
   setPlaying,
 } from "../System/MusicSlice";
 import useKeyboard from "./useKeyboard";
-import { VOLUME_SHIFT } from "../System/Music";
 
 const useMusic = () => {
   const dispatch: StoreDispatch = useDispatch();
@@ -16,19 +17,19 @@ const useMusic = () => {
 
   useKeyboard({
     key: ",",
-    onKeyDown: () => dispatch(changeVolumeBGM(-VOLUME_SHIFT)),
+    onKeyDown: () => dispatch(lowerVolumeBGM()),
   });
   useKeyboard({
     key: ".",
-    onKeyDown: () => dispatch(changeVolumeBGM(+VOLUME_SHIFT)),
+    onKeyDown: () => dispatch(raiseVolumeBGM()),
   });
   useKeyboard({
     key: "<",
-    onKeyDown: () => dispatch(changeVolumeSFX(-VOLUME_SHIFT)),
+    onKeyDown: () => dispatch(lowerVolumeSFX()),
   });
   useKeyboard({
     key: ">",
-    onKeyDown: () => dispatch(changeVolumeSFX(+VOLUME_SHIFT)),
+    onKeyDown: () => dispatch(raiseVolumeSFX()),
   });
   useKeyboard({
     key: ";",
@@ -38,12 +39,12 @@ const useMusic = () => {
   useEffect(() => {
     MusicHowler.load("theme", {
       src: ["theme.mp3"],
-      volume: bgm / 100,
+      volume: bgm,
       loop: true,
     });
     MusicHowler.load("jump", {
       src: ["jump.mp3"],
-      volume: sfx / 100,
+      volume: sfx,
       rate: 1,
     });
 
@@ -65,11 +66,11 @@ const useMusic = () => {
   }, [playing]);
 
   useEffect(() => {
-    MusicHowler.setVolume("theme", playing ? bgm / 100 : 0);
+    MusicHowler.setVolume("theme", playing ? bgm : 0);
   }, [bgm, playing]);
 
   useEffect(() => {
-    MusicHowler.setVolume("jump", playing ? sfx / 100 : 0);
+    MusicHowler.setVolume("jump", playing ? sfx : 0);
   }, [sfx, playing]);
 };
 

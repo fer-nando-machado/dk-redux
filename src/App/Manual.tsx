@@ -20,11 +20,18 @@ const Manual: React.FC<Manual> = ({ children }) => {
             <p>
               &nbsp;Move: ARROW KEYS <br />
               &nbsp;Jump: SPACE
-              <span className="Hint">{"//Joypad I => II"}</span>
+              <span className="Hint Port">{"// Port I => II"}</span>
             </p>
             <p>
               Pause: ENTER <br />
               Reset: F4
+              <span className="Hint Music">
+                MUSIC
+                <br />
+                control
+                <br />
+                {",. <>  ;"}
+              </span>
             </p>
             <p>
               &nbsp;Zoom: F11 <br />
