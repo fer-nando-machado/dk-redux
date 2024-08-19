@@ -85,7 +85,7 @@ const Music: React.FC = () => {
       </div>
       <div
         onClick={() => dispatch(setPlaying(!playing))}
-        onDoubleClick={() => {
+        onWheel={() => {
           rate === Rate.NORMAL && dispatch(toggleRate());
         }}
         onTouchMove={() => {

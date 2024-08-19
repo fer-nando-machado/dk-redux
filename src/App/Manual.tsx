@@ -26,11 +26,15 @@ const Manual: React.FC<Manual> = ({ children }) => {
               Pause: ENTER <br />
               Reset: F4
               <span className="Hint Music">
-                MUSIC
+                <b>SOUNDS</b>
                 <br />
-                CONTROL
+                {"<;%>,."}
                 <br />
-                {"<%;>,."}
+                <small>
+                  wheel/
+                  <br />
+                  swipe
+                </small>
               </span>
             </p>
             <p>

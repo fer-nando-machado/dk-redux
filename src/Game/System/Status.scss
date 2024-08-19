@@ -4,8 +4,10 @@
   align-items: flex-start;
 
   span {
-    font-weight: bold;
     cursor: pointer;
+    &:hover {
+      font-weight: bold;
+    }
   }
 
   .Points {
