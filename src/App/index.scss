@@ -93,25 +93,41 @@
   }
 }
 
-.Game {
-  zoom: 0.75;
-  @media only screen and (min-width: 630px) {
-    zoom: 1;
-  }
-  @media only screen and (min-height: 1000px) {
-    zoom: 1.25;
+.App {
+  .Game {
+    zoom: 0.75;
+    @media only screen and (min-width: 630px) {
+      zoom: 1;
+    }
+    @media only screen and (min-height: 1000px) {
+      zoom: 1.25;
+    }
   }
 }
 
 @media only screen and (max-width: 1280px) {
   .App {
-    justify-content: flex-start;
     nav {
       display: flex;
     }
+  }
+}
+
+@media only screen and (max-width: 1280px) and (orientation: portrait) {
+  .App {
+    justify-content: flex-start;
     .Manual,
     .Switch {
       display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1280px) and (orientation: landscape) {
+  .App {
+    .Game,
+    textarea {
+      zoom: 0.333;
     }
   }
 }
