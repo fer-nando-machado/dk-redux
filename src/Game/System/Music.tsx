@@ -62,16 +62,16 @@ const Music: React.FC = () => {
   );
 
   const [swipe, setSwipe] = useState(0);
-  const handleSwipe = () => {
+  const handleSwipe = (s: number) => {
     if (!playing || rate !== Rate.NORMAL) return;
     if (swipe < 9) {
-      setSwipe(swipe + 1);
+      setSwipe(swipe + s);
     } else {
       dispatch(toggleRate());
       setSwipe(0);
     }
   };
-  const controls = playing ? ";" + (swipe == 0 ? "%" : swipe) : ":/";
+  const controls = playing ? `;${swipe == 0 ? "%" : Math.round(swipe)}` : ":/";
 
   return (
     <>
@@ -98,8 +98,8 @@ const Music: React.FC = () => {
       </div>
       <div
         onClick={() => dispatch(setPlaying(!playing))}
-        onWheel={handleSwipe}
-        onTouchMove={handleSwipe}
+        onWheel={() => handleSwipe(1)}
+        onTouchMove={() => handleSwipe(0.1)}
         className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
         {controls}

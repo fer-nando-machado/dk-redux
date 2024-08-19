@@ -95,15 +95,12 @@
 
 .Game:has(.Filters) {
   animation: text-filter 0.1s infinite alternate;
+  &::after {
+    animation: grain-filter 0.1s infinite alternate;
+  }
 }
 
 @media only screen and (min-width: 630px) {
-  .Game:has(.Filters) {
-    &::after {
-      animation: grain-filter 0.1s infinite alternate;
-    }
-  }
-
   .Screen:has(.Filters) {
     animation: glow-filter 0.1s infinite alternate;
   }
