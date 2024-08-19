@@ -99,7 +99,7 @@ const Music: React.FC = () => {
       <div
         onClick={() => dispatch(setPlaying(!playing))}
         onWheel={() => handleSwipe(1)}
-        onTouchMove={() => handleSwipe(0.1)}
+        onTouchMove={() => handleSwipe(0.25)}
         className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
         {controls}
