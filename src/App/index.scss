@@ -66,6 +66,12 @@
         top: -3px;
         left: -6px;
       }
+      &.Offline {
+        filter: grayscale(100%);
+        &::before {
+          content: "";
+        }
+      }
     }
   }
 

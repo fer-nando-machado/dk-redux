@@ -1,4 +1,5 @@
 import { name, repository, contact, support } from "../../package.json";
+import useOnline from "../Game/Hooks/useOnline";
 import Game from "../Game";
 import GitHub from "/GitHub.svg?url";
 import AppIcon from "/favicon.ico";
@@ -14,6 +15,7 @@ const handleRestart = () => {
 };
 
 const App: React.FC = () => {
+  const isOnline = useOnline();
   return (
     <div className="App">
       <h1>
@@ -30,9 +32,9 @@ const App: React.FC = () => {
         </Manual>
       </main>
       <nav>
-        <span className="Download">
+        <span className={`Download ${isOnline ? "" : "Offline"}`}>
           <img src={AppIcon} alt="DK-Redux App Icon" />
-          Add to Home Screen
+          {isOnline ? "Add to Home Screen" : ""}
         </span>
         <a href="#" className="Button" onClick={handleRestart}>
           Restart
@@ -49,6 +51,7 @@ const App: React.FC = () => {
           Support
         </a>
       </footer>
+
       <Joypad />
     </div>
   );
