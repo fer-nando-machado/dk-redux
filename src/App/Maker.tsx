@@ -103,7 +103,7 @@ const Maker: React.FC<Maker> = ({ isMaker, children }) => {
             </p>
             <span className="Hint Codebook">
               <a href="https://fer-nando-machado.github.io/codebook/">
-                CODEBOOK
+                CodeBook
               </a>
             </span>
           </div>
