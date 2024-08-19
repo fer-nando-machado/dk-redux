@@ -6,6 +6,7 @@ import useHash from "../Hooks/useHash";
 import useMusic from "../Hooks/useMusic";
 import useKeyboard, { dispatchKeyDown } from "../Hooks/useKeyboard";
 import { setPlayer } from "./RosterSlice";
+import { setPlaying } from "./MusicSlice";
 import Roster from "./Roster";
 import Music from "./Music";
 import Version from "./Version";
@@ -61,7 +62,10 @@ const Options: React.FC = () => {
   const dispatchEnableDebug = () => dispatch(enableDebug());
   const dispatchSetPlayer = () => dispatch(setPlayer("​"));
   const dispatchUnpause = () => dispatch(setPaused(false));
-  const dispatchPause = () => dispatch(setPaused(true));
+  const dispatchPause = () => {
+    dispatch(setPlaying(false));
+    dispatch(setPaused(true));
+  };
   const dispatchReset = () => {
     if (options.maker || options.paused) return;
     window.dispatchEvent(new CustomEvent("level:reset"));
