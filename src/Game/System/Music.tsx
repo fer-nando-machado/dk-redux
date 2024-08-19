@@ -14,7 +14,7 @@ import "./Music.scss";
 export enum Volume {
   OFF = 0,
   LOW = 0.1,
-  MID = 0.5,
+  MID = 0.25,
   MAX = 1,
 }
 
