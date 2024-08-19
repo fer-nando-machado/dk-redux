@@ -45,22 +45,24 @@ const Version: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <u>{name}</u>{" "}
-      <small>
-        v{version} {date}
-      </small>
-      <p onClick={toggleView}>
+    <span onClick={toggleView}>
+      <span className="Version">
+        <u>{name}</u>{" "}
+        <small>
+          v{version} {date}
+        </small>
+      </span>
+      <p>
         {full ? description : description.slice(0, 111) + ". (…)"}
       </p>
       {full && (
         <>
           <u>DEPENDENCIES</u>
-          <pre onClick={toggleView}>{dependenciesTree}</pre>
-          <pre onClick={toggleView}>{devDependenciesTree}</pre>
+          <pre>{dependenciesTree}</pre>
+          <pre>{devDependenciesTree}</pre>
         </>
       )}
-    </>
+    </span>
   );
 };
 
