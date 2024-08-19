@@ -126,19 +126,11 @@
 @media only screen and (max-width: 1280px) and (orientation: landscape) {
   .App {
     .Game {
-      animation: broken infinite 0.1s;
-      @keyframes broken {
-        0% {
-          transform: scale(1.081) skew(0.81deg);
-        }
-        100% {
-          transform: scale(1.094) skew(180.94deg);
-        }
-      }
-    }
-
-    .Game {
       zoom: 0.25;
+      pointer-events: none;
+      &::after {
+        opacity: 0.81;
+      }
     }
     .Manual.Maker textarea {
       height: 25px;
