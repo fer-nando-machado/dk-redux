@@ -41,7 +41,6 @@
       margin: 5px;
       transform: rotate(9.8deg);
     }
-
     &.Gravity {
       margin: -9.8px 9.8px;
       transform: rotate(9.8deg);
@@ -60,6 +59,10 @@
       margin: 7px;
       line-height: 70%;
       text-align: right;
+    }
+    &.Codebook {
+      right: 0;
+      transform: rotate(9.8deg);
     }
   }
 }
