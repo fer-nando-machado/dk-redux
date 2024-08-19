@@ -8,29 +8,46 @@ import {
   devDependencies,
 } from "../../../package.json";
 
-const KEY = "version.date";
+type GitHubDeployment = {
+  ref: string;
+  environment: string;
+  original_environment: string;
+  production_environment: string;
+  transient_environment: string;
+  created_at: string;
+  updated_at: string;
+};
+
 const Version: React.FC = () => {
-  const [date, setDate] = useState<string | null>(sessionStorage.getItem(KEY));
-  const [full, setFull] = useState<boolean>();
-  const toggleView = () => setFull(!full);
+  const [hasDetails, setDetails] = useState<boolean>();
+  const [deployment, setDeployment] = useState<string>();
+  const toggleDetails = () => setDetails(!hasDetails);
 
   const fetchDeploymentDate = async () => {
     try {
       const response = await fetch(repository.api);
       const data = await response.json();
-      const deploymentDate = data[0].created_at;
-      setDate(deploymentDate);
-      sessionStorage.setItem(KEY, deploymentDate);
+      const latest = data[0] as GitHubDeployment;
+      const deployment =
+        `${latest.ref}: ${latest.created_at} - ${latest.updated_at}\n` +
+        `environment: ${latest.environment} (${[
+          latest.original_environment && "original",
+          latest.transient_environment && "transient",
+          latest.production_environment && "production",
+        ]
+          .filter(Boolean)
+          .join(" ")})`;
+      setDeployment(deployment);
     } catch (error) {
       console.error("Failed to fetch deployment date: ", error);
     }
   };
 
   useEffect(() => {
-    if (!date) {
+    if (hasDetails && !deployment) {
       fetchDeploymentDate();
     }
-  }, [date]);
+  }, [hasDetails, deployment]);
 
   const dependenciesTree = useMemo(() => {
     return Object.entries(dependencies)
@@ -45,21 +62,18 @@ const Version: React.FC = () => {
   }, []);
 
   return (
-    <span onClick={toggleView}>
+    <span onClick={toggleDetails}>
       <span className="Version">
-        <u>{name}</u>{" "}
-        <small>
-          v{version} {date}
-        </small>
+        <u>{name}</u> <small>v{version}</small>
       </span>
-      <p>
-        {full ? description : description.slice(0, 111) + ". (…)"}
-      </p>
-      {full && (
+      <p>{hasDetails ? description : description.slice(0, 111) + ". (…)"}</p>
+      {hasDetails && (
         <>
           <u>DEPENDENCIES</u>
           <pre>{dependenciesTree}</pre>
           <pre>{devDependenciesTree}</pre>
+          <u>DEPLOYMENT</u>
+          <pre>{deployment ? deployment : "LOADING..."}</pre>
         </>
       )}
     </span>
