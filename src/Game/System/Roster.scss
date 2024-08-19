@@ -24,8 +24,11 @@
     .Select {
       padding: 10px;
       cursor: pointer;
+      border-radius: 50%;
+      &:hover {
+        background: #ffffff25;
+      }
       &.Current {
-        border-radius: 50%;
         background: #ffffff50;
       }
     }

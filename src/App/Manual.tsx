@@ -26,7 +26,7 @@ const Manual: React.FC<Manual> = ({ children }) => {
               Pause: ENTER <br />
               Reset: F4
               <span className="Hint Music">
-                <b>SOUNDS</b>
+                #SOUNDS
                 <br />
                 {"<;%>,."}
                 <br />

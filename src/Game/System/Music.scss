@@ -1,7 +1,8 @@
 .Options .Toggles {
   .Option.Music {
-    .Clickable {
-      text-decoration: none;
+    .LargerBoldItalic {
+      font-weight: normal;
+      margin-left: -5px;
     }
   }
 }
@@ -41,6 +42,9 @@
   }
   &.DOUBLE::before {
     animation-duration: 1s;
+  }
+  &.Playing:hover {
+    font-weight: bold;
   }
 
   .bubble {
