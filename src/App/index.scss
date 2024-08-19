@@ -49,30 +49,6 @@
     align-items: center;
     flex-direction: column;
     gap: 1.25vh;
-
-    .Download {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 2vh;
-      img {
-        border-radius: 8px;
-        border: 1px solid brown;
-        width: 24px;
-      }
-      &::before {
-        content: "+";
-        position: absolute;
-        top: -3px;
-        left: -6px;
-      }
-      &.Offline {
-        filter: grayscale(100%);
-        &::before {
-          content: "";
-        }
-      }
-    }
   }
 
   footer {
@@ -83,8 +59,7 @@
     }
   }
 
-  .Button,
-  .Download {
+  .Button {
     font-size: 12px;
   }
   .Button {
