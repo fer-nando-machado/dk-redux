@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import MusicHowler from "../Hooks/useMusicHowler";
@@ -60,6 +61,18 @@ const Music: React.FC = () => {
     (state: RootState) => state.music
   );
 
+  const [swipe, setSwipe] = useState(0);
+  const handleSwipe = () => {
+    if (!playing || rate !== Rate.NORMAL) return;
+    if (swipe < 9) {
+      setSwipe(swipe + 1);
+    } else {
+      dispatch(toggleRate());
+      setSwipe(0);
+    }
+  };
+  const controls = playing ? ";" + (swipe == 0 ? "%" : swipe) : ":/";
+
   return (
     <>
       <u>SOUNDS</u>
@@ -85,15 +98,11 @@ const Music: React.FC = () => {
       </div>
       <div
         onClick={() => dispatch(setPlaying(!playing))}
-        onWheel={() => {
-          rate === Rate.NORMAL && dispatch(toggleRate());
-        }}
-        onTouchMove={() => {
-          rate === Rate.NORMAL && dispatch(toggleRate());
-        }}
+        onWheel={handleSwipe}
+        onTouchMove={handleSwipe}
         className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
-        {playing ? ";%" : ":/"}
+        {controls}
         {rate !== Rate.NORMAL && (
           <div
             onClick={(event) => {
