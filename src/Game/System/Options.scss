@@ -23,10 +23,6 @@
         padding: 12.5px 0 12.5px 12.5px;
         &.Clickable {
           cursor: pointer;
-          font-weight: normal;
-          &:hover {
-            font-weight: bold;
-          }
         }
       }
     }
