@@ -33,7 +33,7 @@ const Manual: React.FC<Manual> = ({ children }) => {
                 <small>
                   wheel/
                   <br />
-                  swipe
+                  spin
                 </small>
               </span>
             </p>

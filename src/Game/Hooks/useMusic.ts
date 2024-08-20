@@ -52,7 +52,10 @@ const useMusic = () => {
     MusicHowler.load("jump", {
       src: ["jump.mp3"],
       volume: sfx,
-      rate: 1,
+    });
+    MusicHowler.load("tick", {
+      src: ["tick.mp3"],
+      volume: sfx,
     });
 
     dispatch(setPlaying(true));
@@ -78,6 +81,7 @@ const useMusic = () => {
 
   useEffect(() => {
     MusicHowler.setVolume("jump", playing ? sfx : 0);
+    MusicHowler.setVolume("tick", playing ? sfx : 0);
   }, [sfx, playing]);
 
   useEffect(() => {

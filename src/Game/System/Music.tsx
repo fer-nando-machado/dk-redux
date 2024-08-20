@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import MusicHowler from "../Hooks/useMusicHowler";
@@ -63,15 +63,26 @@ const Music: React.FC = () => {
 
   const [swipe, setSwipe] = useState(0);
   const handleSwipe = (s: number) => {
-    if (!playing || rate !== Rate.NORMAL) return;
+    if (rate !== Rate.NORMAL) return;
     if (swipe < 9) {
       setSwipe(swipe + s);
+      MusicHowler.play("tick");
     } else {
       dispatch(toggleRate());
       setSwipe(0);
     }
   };
-  const controls = playing ? `;${swipe == 0 ? "%" : Math.round(swipe)}` : ":/";
+  const panel = useMemo(
+    () => (
+      <>
+        {playing ? ";" : ":"}
+        <span style={{ transform: `rotate(${swipe * 36}deg)` }}>
+          {playing ? "%" : "/"}
+        </span>
+      </>
+    ),
+    [playing, swipe]
+  );
 
   return (
     <>
@@ -102,7 +113,7 @@ const Music: React.FC = () => {
         onTouchMove={() => handleSwipe(0.25)}
         className={`Gramophone ${playing ? "Playing" : ""} ${Rate[rate]}`}
       >
-        {controls}
+        {panel}
         {rate !== Rate.NORMAL && (
           <div
             onClick={(event) => {
