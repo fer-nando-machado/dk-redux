@@ -29,7 +29,7 @@ const Version: React.FC = () => {
       const data = await response.json();
       const latest = data[0] as GitHubDeployment;
       const deployment =
-        `${latest.ref}: ${latest.created_at} / ${latest.updated_at}\n` +
+        `${latest.ref}: ${latest.created_at}(${latest.updated_at})\n` +
         `environment: ${latest.environment} (${[
           latest.original_environment && "original",
           latest.transient_environment && "transient",
@@ -63,9 +63,7 @@ const Version: React.FC = () => {
 
   return (
     <span onClick={toggleDetails}>
-      <span className="Version">
-        <u>{name}</u> <small>v{version}</small>
-      </span>
+      <u>{name}</u> <small>v{version}</small>
       <p>{hasDetails ? description : description.slice(0, 111) + ". (…)"}</p>
       {hasDetails && (
         <>
