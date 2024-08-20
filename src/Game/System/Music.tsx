@@ -119,6 +119,7 @@ const Music: React.FC = () => {
             onClick={(event) => {
               event.stopPropagation();
               dispatch(toggleRate());
+              Howler.play("tick");
             }}
             className="bubble right shadow"
           >
