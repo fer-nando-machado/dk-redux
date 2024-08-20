@@ -1,0 +1,45 @@
+import { name, repository, contact, support } from "../../package.json";
+import AppIcon from "/favicon.ico?url";
+import GitHubIcon from "/GitHub.svg?url";
+import useOnline from "../Game/Hooks/useOnline";
+import "./Navigation.scss";
+
+const handleRestart = () => {
+  const confirm = window.confirm(
+    "This operation will erase your progress and all stored data. Proceed?"
+  );
+  if (confirm) {
+    sessionStorage.clear();
+    window.location.reload();
+  }
+};
+
+const Navigation: React.FC = () => {
+  const isOnline = useOnline();
+  return (
+    <>
+      <nav className={`${isOnline ? "" : "Offline"}`}>
+        <span className="Download">
+          <img src={AppIcon} alt="DK-Redux App Icon" />
+          {isOnline ? "Add to Home Screen" : ""}
+        </span>
+        <a href="#" className="Button" onClick={handleRestart}>
+          Restart
+        </a>
+      </nav>
+      <footer className={`${isOnline ? "" : "Offline"}`}>
+        <a href={`mailto:${contact}`} className="Button">
+          Contact
+        </a>
+        <a href={repository.link}>
+          <img src={GitHubIcon} alt={`${name} @ GitHub`} height={24} />
+        </a>
+        <a href={support} className="Button">
+          Support
+        </a>
+      </footer>
+    </>
+  );
+};
+
+export default Navigation;

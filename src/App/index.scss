@@ -6,10 +6,6 @@
   align-items: center;
   justify-content: center;
 
-  &:has(.Maker) {
-    background: #001300;
-  }
-
   h1 {
     padding-top: 1vh;
     margin: 0.1vh;
@@ -27,9 +23,6 @@
       max-width: 222px;
       opacity: 0.81;
       color: transparent;
-      &:target {
-        color: brown;
-      }
       rect {
         fill: transparent;
       }
@@ -44,33 +37,12 @@
     gap: 6vw;
   }
 
-  nav {
-    display: none;
-    align-items: center;
-    flex-direction: column;
-    gap: 1.25vh;
+  &:has(.Maker) {
+    background: #001300;
   }
-
-  footer {
-    display: flex;
-    gap: 2vh;
-    img:hover {
-      opacity: 0.81;
-    }
-  }
-
-  .Button {
-    font-size: 12px;
-  }
-  .Button {
-    border-radius: 18px;
-    padding: 6px 12px;
-    text-decoration: none;
-    background: white;
-    color: black;
-    &:hover {
-      opacity: 0.81;
-    }
+  &:has(.Player.​) object,
+  h1 object:target {
+    color: brown;
   }
 }
 
