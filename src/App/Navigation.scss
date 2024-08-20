@@ -1,10 +1,15 @@
 nav {
-  display: none;
+  display: flex;
   align-items: center;
   flex-direction: column;
   gap: 2vh;
-  .Download {
+
+  .Download,
+  .Restart {
     position: relative;
+  }
+
+  .Download {
     display: flex;
     align-items: center;
     gap: 2vh;
@@ -22,11 +27,28 @@ nav {
   }
 
   .Restart::after {
-    content: "*ONLINE";
+    content: "ONLINE";
     position: absolute;
-    color: lime;
+    text-align: center;
     font-size: 6px;
-    margin: -6px 12px;
+    border-radius: 18px;
+    top: -12px;
+    left: 0;
+    animation: flash 2s forwards;
+    width: 100%;
+    line-height: 200%;
+    @keyframes flash {
+      0%,
+      40%,
+      80%,
+      100% {
+        background: green;
+      }
+      20%,
+      60% {
+        background: lime;
+      }
+    }
   }
 }
 
