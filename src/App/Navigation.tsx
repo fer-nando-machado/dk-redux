@@ -10,8 +10,11 @@ const handleRestart = () => {
     "This operation will erase all your progress and stored data. Proceed?"
   );
   if (confirm) {
+    document.body.innerHTML = "Restarting...";
     sessionStorage.clear();
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 };
 
@@ -24,9 +27,9 @@ const Navigation: React.FC = () => {
           <img src={AppIcon} alt="DK-Redux App Icon" />
           {isOnline ? "Add to Home Screen" : `#${then.slice(-4)}`}
         </span>
-        <a href="#" className="Button" onClick={handleRestart}>
+        <span className="Button" onClick={handleRestart}>
           Restart
-        </a>
+        </span>
       </nav>
       <footer className={`${isOnline ? "" : "Offline"}`}>
         <a href={`mailto:${contact}`} className="Button">
