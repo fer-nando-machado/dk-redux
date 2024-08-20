@@ -110,6 +110,13 @@ export const moveBarrel = createAsyncThunk<
     update = { ...update, direction, fallingSpeed: 0 };
   }
 
+  if (index === 0) {
+    update = {
+      ...update,
+      path: update.path?.concat({ x: update.x, y: update.y }),
+    };
+    //console.log(update.path);
+  }
   dispatch(setBarrel(update));
 });
 
@@ -129,6 +136,7 @@ export const createBarrel = createAsyncThunk<
     id: Date.now(),
     ladders: getRandomLadderIds(ladders),
     fallingSpeed: 0,
+    path: [],
   };
 
   dispatch(slice.actions.createBarrel(barrel));

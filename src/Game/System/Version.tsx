@@ -29,7 +29,7 @@ const Version: React.FC = () => {
       const data = await response.json();
       const latest = data[0] as GitHubDeployment;
       const deployment =
-        `${latest.ref}: ${latest.created_at} - ${latest.updated_at}\n` +
+        `${latest.ref}: ${latest.created_at} / ${latest.updated_at}\n` +
         `environment: ${latest.environment} (${[
           latest.original_environment && "original",
           latest.transient_environment && "transient",

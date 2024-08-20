@@ -5,6 +5,7 @@ import { useIntervalFPS, useIntervalTimed } from "../Hooks/useInterval";
 import { getCompleteCount } from "../System/Roster";
 import Target from "../Player/Hunt/Target";
 import { Block } from "./Block";
+import { Position } from "./Position";
 import { moveBarrel, destroyBarrel, createBarrel } from "./BarrelSlice";
 import "./Barrel.scss";
 
@@ -12,6 +13,7 @@ export type Barrel = Block & {
   id: number;
   ladders: number[];
   fallingSpeed: number;
+  path: Position[];
 };
 
 export type BarrelFactory = Block & {
@@ -33,19 +35,24 @@ const Barrel: React.FC<Barrel> = (barrel) => {
   };
 
   return (
-    <div
-      className={`Barrel Block Round ${isFalling ? "Falling" : ""} ${
-        barrel.direction
-      }`}
-      style={{ left: barrel.x, bottom: barrel.y }}
-    >
-      {!isFalling && (
-        <Target
-          points={{ value: 100, position: barrel }}
-          callback={onClickBarrel}
-        />
-      )}
-    </div>
+    <>
+      <div
+        className={`Barrel Block Round ${isFalling ? "Falling" : ""} ${
+          barrel.direction
+        }`}
+        style={{ left: barrel.x, bottom: barrel.y }}
+      >
+        {!isFalling && (
+          <Target
+            points={{ value: 100, position: barrel }}
+            callback={onClickBarrel}
+          />
+        )}
+      </div>
+      {barrel.path.map((p) => (
+        <div className="Path Block" style={{ left: p.x, bottom: p.y }} />
+      ))}
+    </>
   );
 };
 
