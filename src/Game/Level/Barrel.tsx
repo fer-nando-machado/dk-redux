@@ -49,8 +49,12 @@ const Barrel: React.FC<Barrel> = (barrel) => {
           />
         )}
       </div>
-      {barrel.path.map((p) => (
-        <div className="Path Block" style={{ left: p.x, bottom: p.y }} />
+      {barrel.path.map((p, index) => (
+        <div
+          className="Path Block"
+          key={barrel.id + "_" + index}
+          style={{ left: p.x, bottom: p.y }}
+        />
       ))}
     </>
   );
