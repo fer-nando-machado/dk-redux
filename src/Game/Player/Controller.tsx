@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import useKeyboard from "../Hooks/useKeyboard";
-import MusicHowler from "../Hooks/useMusicHowler";
+import Howler from "../../Library/Howler";
 import {
   moveJumpman,
   moveJumpmanClimb,
@@ -33,7 +33,7 @@ const Controller: React.FC = () => {
     if (onAir || jumpingSpeed) return;
     dispatch(setJumping(speed));
     setRemaining(length);
-    MusicHowler.play("jump");
+    Howler.play("jump");
   };
 
   useIntervalFPS(() => {

@@ -1,7 +1,7 @@
 import { Howl, HowlOptions } from "howler";
-import { Rate, Volume } from "../System/Music";
+import { Rate, Volume } from "../Game/System/Music";
 
-class MusicHowler {
+export default class Howler {
   private static music: Record<string, Howl> = {};
 
   static load(name: string, options: HowlOptions): void {
@@ -29,7 +29,7 @@ class MusicHowler {
   }
 
   static setRate(name: string, rate: Rate) {
-    return this.music[name].rate(rate)
+    return this.music[name].rate(rate);
   }
 
   /*
@@ -41,5 +41,3 @@ class MusicHowler {
   }
   */
 }
-
-export default MusicHowler;

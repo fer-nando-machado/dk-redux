@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
-import MusicHowler from "./useMusicHowler";
+import Howler from "../../Library/Howler";
 import {
   lowerVolumeBGM,
   lowerVolumeSFX,
@@ -44,16 +44,16 @@ const useMusic = () => {
   });
 
   useEffect(() => {
-    MusicHowler.load("theme", {
+    Howler.load("theme", {
       src: ["theme.mp3"],
       volume: bgm,
       loop: true,
     });
-    MusicHowler.load("jump", {
+    Howler.load("jump", {
       src: ["jump.mp3"],
       volume: sfx,
     });
-    MusicHowler.load("tick", {
+    Howler.load("tick", {
       src: ["tick.mp3"],
       volume: sfx,
     });
@@ -61,7 +61,7 @@ const useMusic = () => {
     dispatch(setPlaying(true));
 
     return () => {
-      MusicHowler.stop("theme");
+      Howler.stop("theme");
       // MusicHowler.unload("theme");
       // MusicHowler.unload("jump");
     };
@@ -69,23 +69,23 @@ const useMusic = () => {
 
   useEffect(() => {
     if (playing) {
-      MusicHowler.play("theme");
+      Howler.play("theme");
     } else {
-      MusicHowler.pause("theme");
+      Howler.pause("theme");
     }
   }, [playing]);
 
   useEffect(() => {
-    MusicHowler.setVolume("theme", playing ? bgm : 0);
+    Howler.setVolume("theme", playing ? bgm : 0);
   }, [bgm, playing]);
 
   useEffect(() => {
-    MusicHowler.setVolume("jump", playing ? sfx : 0);
-    MusicHowler.setVolume("tick", playing ? sfx : 0);
+    Howler.setVolume("jump", playing ? sfx : 0);
+    Howler.setVolume("tick", playing ? sfx : 0);
   }, [sfx, playing]);
 
   useEffect(() => {
-    MusicHowler.setRate("theme", rate);
+    Howler.setRate("theme", rate);
   }, [rate]);
 };
 
