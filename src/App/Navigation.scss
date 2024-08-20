@@ -20,6 +20,14 @@ nav {
       left: -6px;
     }
   }
+
+  .Restart::after {
+    content: "*ONLINE";
+    position: absolute;
+    color: lime;
+    font-size: 6px;
+    margin: -6px 12px;
+  }
 }
 
 footer {
@@ -56,6 +64,9 @@ footer {
       &::before {
         display: none;
       }
+    }
+    .Restart::after {
+      display: none;
     }
   }
 }

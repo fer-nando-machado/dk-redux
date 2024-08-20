@@ -27,7 +27,7 @@ const Navigation: React.FC = () => {
           <img src={AppIcon} alt="DK-Redux App Icon" />
           {isOnline ? "Add to Home Screen" : `#${then.slice(-4)}`}
         </span>
-        <span className="Button" onClick={handleRestart}>
+        <span className="Button Restart" onClick={handleRestart}>
           Restart
         </span>
       </nav>
