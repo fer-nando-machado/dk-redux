@@ -56,9 +56,8 @@ footer {
       background: gray;
     }
     .Download {
-      img {
-        filter: grayscale(100%);
-      }
+      font-size: 50%;
+      color: brown;
       &::before {
         display: none;
       }

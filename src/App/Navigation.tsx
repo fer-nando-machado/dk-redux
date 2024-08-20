@@ -1,12 +1,13 @@
 import { name, repository, contact, support } from "../../package.json";
+import { then } from "../Game/System/Options";
+import useOnline from "../Game/Hooks/useOnline";
 import AppIcon from "/favicon.ico?url";
 import GitHubIcon from "/GitHub.svg?url";
-import useOnline from "../Game/Hooks/useOnline";
 import "./Navigation.scss";
 
 const handleRestart = () => {
   const confirm = window.confirm(
-    "This operation will erase your progress and all stored data. Proceed?"
+    "This operation will erase all your progress and stored data. Proceed?"
   );
   if (confirm) {
     sessionStorage.clear();
@@ -21,7 +22,7 @@ const Navigation: React.FC = () => {
       <nav className={`${isOnline ? "" : "Offline"}`}>
         <span className="Download">
           <img src={AppIcon} alt="DK-Redux App Icon" />
-          {isOnline ? "Add to Home Screen" : ""}
+          {isOnline ? "Add to Home Screen" : `#${then.slice(-4)}`}
         </span>
         <a href="#" className="Button" onClick={handleRestart}>
           Restart
