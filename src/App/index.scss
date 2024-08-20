@@ -86,17 +86,17 @@
   }
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1179px) {
   .App {
-    justify-content: flex-start;
     nav {
       display: flex;
     }
   }
 }
 
-@media only screen and (max-width: 1280px) and (orientation: portrait) {
+@media only screen and (max-width: 1179px) and (orientation: portrait) {
   .App {
+    justify-content: flex-start;
     .Manual,
     .Switch {
       display: none;
@@ -104,10 +104,13 @@
   }
 }
 
-@media only screen and (max-width: 1280px) and (orientation: landscape) {
+@media only screen and (max-width: 1179px) and (orientation: landscape) {
   .App {
+    .Screen {
+      margin: 5px;
+    }
     .Game {
-      zoom: 0.25;
+      zoom: 0.3;
       pointer-events: none;
       &::after {
         content: "/////// PLEASE ROTATE YOUR SCREEN ///////";
