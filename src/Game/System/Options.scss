@@ -99,10 +99,19 @@
     animation: grain-filter 0.1s infinite alternate;
   }
 }
+.Screen:has(.Filters) {
+  animation: glow-filter 0.1s infinite alternate;
+}
 
-@media only screen and (min-width: 630px) {
+@media only screen and (max-width: 630px) {
+  .Game:has(.Filters) {
+    animation-duration: 0.25;
+    &::after {
+      animation: none;
+    }
+  }
   .Screen:has(.Filters) {
-    animation: glow-filter 0.1s infinite alternate;
+    animation-duration: 0.25;
   }
 }
 

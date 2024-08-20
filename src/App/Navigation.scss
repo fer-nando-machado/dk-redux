@@ -50,6 +50,11 @@ footer {
     cursor: pointer;
   }
 
+  .Button:hover,
+  img:hover {
+    opacity: 0.81;
+  }
+
   &.Offline {
     * {
       pointer-events: none;
