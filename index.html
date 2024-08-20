@@ -29,12 +29,6 @@
       name="keywords"
       content="HTML, JavaScript, TypeScript, React, Redux, Redux Toolkit, CSS, SCSS, Game, Donkey Kong, Duck Hunt, Arcade"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
     <link
       rel="icon"
       type="image/png"
@@ -102,10 +96,30 @@
       gtag("config", "G-E2NXS5RG7W");
     </script>
     <title>DK-Redux</title>
-    <script type="module" crossorigin src="/dk-redux/assets/index-BpSx_NCb.js"></script>
-    <link rel="stylesheet" crossorigin href="/dk-redux/assets/index-Bp0cAEey.css">
+    <style>
+      @font-face {
+        font-family: "Press Start 2P";
+        src: url("/dk-redux/fonts/Press_Start_2P/PressStart2P-Regular.ttf")
+          format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Nanum Pen Script";
+        src: url("/dk-redux/fonts/Nanum_Pen_Script/NanumPenScript-Regular.ttf")
+          format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        background: black;
+      }
+    </style>
+    <script type="module" crossorigin src="/dk-redux/assets/index-C7p-fEno.js"></script>
+    <link rel="stylesheet" crossorigin href="/dk-redux/assets/index-DicwMAZ8.css">
   <link rel="manifest" href="/dk-redux/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/dk-redux/registerSW.js"></script></head>
-  <body style="background: black">
+  <body>
     <div id="root"></div>
   </body>
 </html>
