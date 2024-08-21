@@ -34,9 +34,9 @@ nav {
     border-radius: 18px;
     top: -12px;
     left: 0;
-    animation: flash 2s forwards;
     width: 100%;
     line-height: 200%;
+    animation: flash 2s forwards;
     @keyframes flash {
       0%,
       40%,
@@ -70,11 +70,6 @@ footer {
     background: white;
     color: black;
     cursor: pointer;
-  }
-
-  .Button:hover,
-  img:hover {
-    opacity: 0.81;
   }
 
   &.Offline {

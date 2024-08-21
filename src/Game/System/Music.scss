@@ -22,11 +22,13 @@
     display: inline-block;
   }
 
+  &:hover::before {
+    font-weight: bold;
+  }
   &::before {
     content: "V";
     color: orange;
     position: absolute;
-    font-weight: bold;
     top: -40px;
     left: 35px;
     font-size: 50px;
