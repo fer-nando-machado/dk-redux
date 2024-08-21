@@ -47,6 +47,7 @@ export const setPlayer = createAsyncThunk<
     dispatch(slice.actions.unlockPlayer({ code }));
   }
   dispatch(slice.actions.setCurrent(code));
+  window.dispatchEvent(new CustomEvent("level:reset"));
 });
 
 export const { winPlayer } = slice.actions;

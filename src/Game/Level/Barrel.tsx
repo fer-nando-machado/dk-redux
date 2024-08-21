@@ -4,6 +4,7 @@ import { StoreDispatch, RootState } from "../reduxStore";
 import { useIntervalFPS, useIntervalTimed } from "../Hooks/useInterval";
 import { getCompleteCount } from "../System/Roster";
 import Target from "../Player/Hunt/Target";
+import { isStar } from "../Player/Star";
 import { Block } from "./Block";
 import { Position } from "./Position";
 import { moveBarrel, destroyBarrel, createBarrel } from "./BarrelSlice";
@@ -49,13 +50,14 @@ const Barrel: React.FC<Barrel> = (barrel) => {
           />
         )}
       </div>
-      {barrel.path.map((p, index) => (
-        <div
-          className="Path Block"
-          key={barrel.id + "_" + index}
-          style={{ left: p.x, bottom: p.y }}
-        />
-      ))}
+      {isStar() &&
+        barrel.path.map((p, index) => (
+          <div
+            className="Path Block"
+            key={barrel.id + "_" + index}
+            style={{ left: p.x, bottom: p.y }}
+          />
+        ))}
     </>
   );
 };

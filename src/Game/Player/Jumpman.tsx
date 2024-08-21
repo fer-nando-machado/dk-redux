@@ -3,6 +3,7 @@ import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import useKeyboard from "../Hooks/useKeyboard";
 import Controller from "./Controller";
+import Star from "./Star";
 import Lady from "./Lady";
 import DeutschBox from "./DeutschBox";
 import Dog from "./Hunt/Dog";
@@ -70,6 +71,7 @@ export const Jumpman: React.FC = () => {
       <DeutschBox />
       <Dog />
       <Lady />
+      <Star />
     </div>
   );
 };

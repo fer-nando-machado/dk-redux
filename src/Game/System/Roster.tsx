@@ -12,7 +12,7 @@ export type Features = {
   help?: string;
 };
 export const ROSTER: RosterRecord = {};
-const MAX_PLAYERS = 5;
+const MAX_PLAYERS = 6;
 
 export type PlayerRecord = Record<string, Player>;
 export type Player = {

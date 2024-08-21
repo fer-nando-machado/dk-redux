@@ -113,9 +113,8 @@ export const moveBarrel = createAsyncThunk<
   if (index === 0) {
     update = {
       ...update,
-      //  path: update.path?.concat({ x: update.x, y: update.y }),
+      path: update.path?.concat({ x: update.x, y: update.y }),
     };
-    //console.log(update.path);
   }
   dispatch(setBarrel(update));
 });

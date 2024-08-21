@@ -1,0 +1,25 @@
+.Jumpman.STAR {
+  background-color: transparent;
+  outline-color: transparent;
+
+  .emoji {
+    position: absolute;
+    zoom: 2;
+    left: -5px;
+    top: -6px;
+  }
+
+  &::before {
+    display: none;
+  }
+  &.left::after {
+    right: 0;
+  }
+  &::after {
+    color: aquamarine;
+  }
+}
+
+.Game:has(.Player.Jumpman.STAR) {
+  color: aquamarine;
+}
