@@ -145,7 +145,7 @@ const P2: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCode(e.target.value.toUpperCase());
+    setCode(e.target.value.toUpperCase().trim());
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
