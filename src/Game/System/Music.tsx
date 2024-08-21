@@ -63,7 +63,6 @@ const Music: React.FC = () => {
 
   const [swipe, setSwipe] = useState(0);
   const handleSwipe = (s: number) => {
-    if (rate !== Rate.NORMAL) return;
     if (swipe < 9) {
       setSwipe(swipe + s);
       Howler.play("tick");
@@ -74,12 +73,12 @@ const Music: React.FC = () => {
   };
   const panel = useMemo(
     () => (
-      <>
-        {playing ? ";" : ":"}
+      <div className="Panel">
+        <span>{playing ? ";" : ":"}</span>
         <span style={{ transform: `rotate(${swipe * 36}deg)` }}>
           {playing ? "%" : "/"}
         </span>
-      </>
+      </div>
     ),
     [playing, swipe]
   );
@@ -115,16 +114,7 @@ const Music: React.FC = () => {
       >
         {panel}
         {rate !== Rate.NORMAL && (
-          <div
-            onClick={(event) => {
-              event.stopPropagation();
-              dispatch(toggleRate());
-              Howler.play("tick");
-            }}
-            className="bubble right shadow"
-          >
-            {Rate[rate]}
-          </div>
+          <div className="bubble right shadow">{Rate[rate]}</div>
         )}
         <div className="Platform Block" />
       </div>
