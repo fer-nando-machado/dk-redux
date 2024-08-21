@@ -58,12 +58,10 @@ const useMusic = () => {
       volume: sfx,
     });
 
-    dispatch(setPlaying(true));
-
     return () => {
       Howler.stop("theme");
-      // MusicHowler.unload("theme");
-      // MusicHowler.unload("jump");
+      // Howler.unload("theme");
+      // Howler.unload("jump");
     };
   }, []);
 
