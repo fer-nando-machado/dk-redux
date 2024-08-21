@@ -3,20 +3,24 @@ import { VitePWA } from "vite-plugin-pwa";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  base: "/dk-redux/",
   plugins: [
     react(),
     VitePWA({
       registerType: "autoUpdate",
       includeAssets: ["**/*"],
       manifest: {
+        id: "DK-Redux",
         name: "DK-Redux",
         short_name: "DK-Redux",
         start_url: "/dk-redux/",
-        background_color: "black",
-        theme_color: "black",
-        orientation: "portrait",
-        display: "standalone",
-        lang: "en",
+        background_color: "#000000",
+        theme_color: "#000000",
+        orientation: "any",
+        display: "fullscreen",
+        launch_handler: {
+          client_mode: "focus-existing",
+        },
         description:
           "A reduxed-remixed-remake of Donkey Kong, the original arcade game from 1981.",
         icons: [
@@ -46,10 +50,27 @@ export default defineConfig({
             type: "image/png",
           },
         ],
+        screenshots: [
+          {
+            src: "/dk-redux/screenshot-640x1136.png",
+            sizes: "640x1136",
+            type: "image/png",
+          },
+          {
+            src: "/dk-redux/screenshot-750x1334.png",
+            sizes: "750x1334",
+            type: "image/png",
+          },
+          {
+            src: "/dk-redux/screenshot-1242x2208.png",
+            sizes: "1242x2208",
+            type: "image/png",
+          },
+        ],
+        lang: "en",
       },
     }),
   ],
-  base: "/dk-redux/",
   build: {
     outDir: "build",
   },
