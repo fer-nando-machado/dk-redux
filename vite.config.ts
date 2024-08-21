@@ -21,6 +21,7 @@ export default defineConfig({
         launch_handler: {
           client_mode: "focus-existing",
         },
+        categories: ["games", "education", "entertainment"],
         description:
           "A reduxed-remixed-remake of Donkey Kong, the original arcade game from 1981.",
         icons: [
@@ -68,6 +69,8 @@ export default defineConfig({
           },
         ],
         lang: "en",
+        dir: "ltr",
+        prefer_related_applications: false,
       },
     }),
   ],
