@@ -33,6 +33,7 @@ const slice = createSlice({
     resetOptions: (state) => {
       return {
         ...initialState,
+        paused: state.paused,
         lowFPS: state.lowFPS,
         filters: state.filters,
       };
