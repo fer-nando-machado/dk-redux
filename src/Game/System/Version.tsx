@@ -70,8 +70,12 @@ const Version: React.FC = () => {
           <u>DEPENDENCIES</u>
           <pre>{dependenciesTree}</pre>
           <pre>{devDependenciesTree}</pre>
-          <u>DEPLOYMENT</u>
-          <pre>{deployment ? deployment : "LOADING..."}</pre>
+          {deployment && (
+            <>
+              <u>DEPLOYMENT</u>
+              <pre>{deployment}</pre>
+            </>
+          )}
         </>
       )}
     </span>

@@ -10,8 +10,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>
-        <Icon />
-        DK<span>{"<Redux/>"}</span>
+        <Icon /> DK<span>{"<Redux/>"}</span>
       </h1>
       <main>
         <Manual>
@@ -22,8 +21,8 @@ const App: React.FC = () => {
           )}
         </Manual>
       </main>
-      <Navigation />
       <Joypad />
+      <Navigation />
     </div>
   );
 };

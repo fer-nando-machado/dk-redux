@@ -20,8 +20,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 13vw;
-      max-width: 222px;
+      width: 15vw;
       opacity: 0.81;
       color: transparent;
       rect {
@@ -67,6 +66,13 @@
       right: 0;
       margin: 25px;
       align-items: end;
+    }
+    .Joypad {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      bottom: 0;
+      margin: 25px;
     }
   }
 }

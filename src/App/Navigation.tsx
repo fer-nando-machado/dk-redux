@@ -11,7 +11,6 @@ const handleRestart = () => {
   );
   if (confirm) {
     document.body.innerHTML = "Restarting...";
-    sessionStorage.clear();
     setTimeout(() => {
       window.location.reload();
     }, 1000);

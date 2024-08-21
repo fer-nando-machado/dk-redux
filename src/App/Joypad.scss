@@ -1,5 +1,5 @@
 .Joypad {
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,12 +15,6 @@
     goldenrod,
     darkgoldenrod
   );
-  bottom: 0;
-  margin: 10px;
-  @media only screen and (min-width: 630px) {
-    left: 0;
-    margin: 25px;
-  }
 
   &::before {
     content: "";
@@ -53,7 +47,7 @@
     * {
       display: none;
     }
-    .Joycable {
+    .Cable {
       display: block;
       outline-color: black;
       opacity: 0.81;
@@ -65,13 +59,13 @@
   }
 
   &.P1 {
-    .Joycable::after {
+    .Cable::after {
       content: "I";
     }
   }
 
   &.P2 {
-    .Joycable::after {
+    .Cable::after {
       content: "II";
     }
   }
@@ -204,7 +198,7 @@
     }
   }
 
-  .Joycable {
+  .Cable {
     position: absolute;
     margin: 4px -8px;
     padding: 2px;

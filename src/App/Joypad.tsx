@@ -53,7 +53,7 @@ const Joypad: React.FC = () => {
       onClick={connectJoypad}
       className={`Joypad P${port} ${hidden ? "hidden" : ""}`}
     >
-      <div className="Joycable" onClick={switchPort} />
+      <div className="Cable" onClick={switchPort} />
       {port === 1 ? <P1 /> : port === 2 ? <P2 /> : null}
     </div>
   );
