@@ -7,7 +7,7 @@ import "./Star.scss";
 
 const PLAYER: Features = {
   code: "STAR",
-  weapon: <div className="emoji">⭐</div>,
+  weapon: <div className="Star" />,
 };
 ROSTER[PLAYER.code] = PLAYER;
 

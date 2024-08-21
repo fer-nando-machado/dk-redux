@@ -2,22 +2,44 @@
   background-color: transparent;
   outline-color: transparent;
 
-  .emoji {
+  .Star {
     position: absolute;
-    zoom: 2;
-    left: -5px;
+    left: -6px;
     top: -6px;
+    width: 37.5px;
+    height: 37.5px;
   }
 
   &::before {
-    display: none;
+    content: "~";
+    transform: scale(2);
+    top: 17.5px;
+    color: aquamarine;
   }
-  &.left::after {
-    right: 0;
+  &.left::before {
+    transform: scale(2) rotateY(-180deg);
+    left: -1px;
   }
+
   &::after {
     color: aquamarine;
   }
+}
+
+.Star {
+  background: gold;
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
 }
 
 .Game:has(.Player.Jumpman.STAR) {
