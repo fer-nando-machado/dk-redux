@@ -45,6 +45,7 @@ nav {
   .Download.Installed {
     font-size: 50%;
     color: brown;
+    animation: install 2s forwards;
     &::after {
       display: none;
     }
@@ -106,5 +107,17 @@ footer {
   20%,
   60% {
     background: lime;
+  }
+}
+
+@keyframes install {
+  from {
+    opacity: 1;
+    height: 24px;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+    margin: -8px 0;
   }
 }
