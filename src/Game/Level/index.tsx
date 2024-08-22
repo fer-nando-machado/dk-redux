@@ -20,7 +20,7 @@ import { DuckFactory } from "../Player/Hunt/Duck";
 import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
 import { resetOptions, setMaker } from "../System/OptionsSlice";
-import { setPlayer } from "../System/RosterSlice";
+import { setStarters } from "../System/RosterSlice";
 import { resetScore } from "../System/StatusSlice";
 
 import { Goal } from "./Goal";
@@ -160,9 +160,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
   }, [level]);
 
   useEffect(() => {
-    dispatch(setPlayer("M"));
-    dispatch(setPlayer("D"));
-
+    dispatch(setStarters(["M", "D"]));
     window.addEventListener("level:reset", handleReset);
     return () => {
       window.removeEventListener("level:reset", handleReset);

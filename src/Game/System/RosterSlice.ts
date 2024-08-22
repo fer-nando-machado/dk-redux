@@ -50,5 +50,19 @@ export const setPlayer = createAsyncThunk<
   window.dispatchEvent(new CustomEvent("level:reset"));
 });
 
+export const setStarters = createAsyncThunk<
+  void,
+  string[],
+  {
+    state: RootState;
+    dispatch: StoreDispatch;
+  }
+>("RosterSlice/setStarters", async (payload: string[], { dispatch }) => {
+  payload.forEach((code) => {
+    dispatch(slice.actions.unlockPlayer({ code }));
+    dispatch(slice.actions.setCurrent(code));
+  });
+});
+
 export const { winPlayer } = slice.actions;
 export default slice.reducer;
