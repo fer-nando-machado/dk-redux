@@ -12,12 +12,12 @@
 
   &::before {
     content: "~";
-    transform: scale(2);
-    top: 17.5px;
+    transform: scale(1.5);
+    top: 17px;
     color: aquamarine;
   }
   &.left::before {
-    transform: scale(2) rotateY(-180deg);
+    transform: scale(1.5) rotateY(-180deg);
     left: -1px;
   }
 

@@ -56,7 +56,9 @@ const Manual: React.FC<Manual> = ({ children }) => {
       {children({ isMaker })}
       {!isMaker && (
         <div className="Manual">
-          <u>PLAYER SELECT</u>
+          <u>
+            PLAYER SELECT <span className="Player Hint Star" />
+          </u>
           <div>
             <p>
               M: Jumpman

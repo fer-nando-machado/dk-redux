@@ -53,10 +53,7 @@ const Roster: React.FC = () => {
   const missing = MAX_PLAYERS - unlocked.length;
   const message = `${missing} PLAYER${missing > 1 ? "S" : ""}`;
 
-  const rate =
-    missing === 0
-      ? ((unlocked.length + completed) * 100) / (MAX_PLAYERS * 2)
-      : (unlocked.length * 100) / MAX_PLAYERS;
+  const rate = (unlocked.length * 100) / MAX_PLAYERS;
 
   return (
     <div className="Roster">
@@ -97,7 +94,7 @@ const Roster: React.FC = () => {
           <>MISSING: {message}</>
         ) : (
           <span className="LargerBoldItalic">
-            {rate < 100 ? (
+            {completed < unlocked.length ? (
               <>EVERYBODY IS HERE! </>
             ) : (
               <>
