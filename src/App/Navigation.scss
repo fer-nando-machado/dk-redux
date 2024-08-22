@@ -37,12 +37,14 @@ nav {
     &.Mobile::after {
       content: "+";
     }
-    &.Installed {
-      font-size: 50%;
-      color: brown;
-      &::after {
-        display: none;
-      }
+  }
+
+  &.Offline .Download,
+  .Download.Installed {
+    font-size: 50%;
+    color: brown;
+    &::after {
+      display: none;
     }
   }
 
