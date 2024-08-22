@@ -9,7 +9,6 @@
   min-width: 500px;
   padding: 2.5px;
   color: white;
-  background: black;
 
   .LargerBoldItalic {
     font-size: larger;
@@ -42,5 +41,6 @@
 .Screen {
   overflow: hidden;
   outline: 10px ridge black;
+  background: black;
   border-radius: 5px;
 }

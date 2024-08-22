@@ -39,7 +39,9 @@
   }
 
   &:has(.Maker) {
-    background: #001300;
+    .Screen {
+      background: #001300;
+    }
   }
   &:has(.Player.​) object,
   h1 object:target {
