@@ -7,6 +7,7 @@ import Star from "./Star";
 import Lady from "./Lady";
 import DeutschBox from "./DeutschBox";
 import Dog from "./Hunt/Dog";
+import { Song } from "../Hooks/useMusic";
 import { setPlayer } from "../System/RosterSlice";
 import { ROSTER, Features } from "../System/Roster";
 import { Block } from "../Level/Block";
@@ -22,6 +23,7 @@ export type Jumpman = Block & {
 const PLAYER: Features = {
   code: "M",
   touch: false,
+  theme: Song.Theme,
 };
 ROSTER[PLAYER.code] = PLAYER;
 

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
+import { Song } from "../Hooks/useMusic";
 import useKeyboard from "../Hooks/useKeyboard";
 import { ROSTER, Features, PlayerRecord } from "../System/Roster";
 import { setPlayer } from "../System/RosterSlice";
@@ -8,6 +9,7 @@ import "./Lady.scss";
 const PLAYER: Features = {
   code: "LADY",
   weapon: <div className="Hat" />,
+  theme: Song.Bop,
 };
 ROSTER[PLAYER.code] = PLAYER;
 

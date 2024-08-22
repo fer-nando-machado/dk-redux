@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../../reduxStore";
+import { Song } from "../../Hooks/useMusic";
 import useKeyboard from "../../Hooks/useKeyboard";
 import { useIntervalFPS } from "../../Hooks/useInterval";
 import { setPlayer } from "../../System/RosterSlice";
@@ -13,6 +14,7 @@ const PLAYER: Features = {
   touch: true,
   weapon: <div className="Eyes" />,
   help: "WOOF!",
+  theme: Song.Hunter,
 };
 ROSTER[PLAYER.code] = PLAYER;
 

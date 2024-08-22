@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
+import useKeyboard from "./useKeyboard";
 import Howler from "../../Library/Howler";
+import { ROSTER } from "../System/Roster";
 import {
   lowerVolumeBGM,
   lowerVolumeSFX,
@@ -10,10 +12,10 @@ import {
   setPlaying,
   toggleRate,
 } from "../System/MusicSlice";
-import useKeyboard from "./useKeyboard";
 
 const useMusic = () => {
   const dispatch: StoreDispatch = useDispatch();
+  const { current } = useSelector((state: RootState) => state.roster);
   const { bgm, sfx, playing, rate } = useSelector(
     (state: RootState) => state.music
   );
@@ -44,26 +46,31 @@ const useMusic = () => {
   });
 
   useEffect(() => {
-    Howler.load("theme", {
-      src: ["assets/music/theme.mp3"],
-      volume: bgm,
-      loop: true,
-    });
     Howler.load("jump", {
-      src: ["assets/sfx/jump.mp3"],
+      src: [Effect.Jump],
       volume: sfx,
     });
     Howler.load("tick", {
-      src: ["assets/sfx/tick.mp3"],
+      src: [Effect.Tick],
       volume: sfx,
     });
+    return () => {
+      Howler.unload("jump");
+      Howler.unload("tick");
+    };
+  }, []);
 
+  useEffect(() => {
+    Howler.load("theme", {
+      src: [ROSTER[current]?.theme || Song.Remix],
+      volume: bgm,
+      loop: true,
+    });
     return () => {
       Howler.stop("theme");
       Howler.unload("theme");
-      Howler.unload("jump");
     };
-  }, []);
+  }, [current]);
 
   useEffect(() => {
     if (playing) {
@@ -71,7 +78,7 @@ const useMusic = () => {
     } else {
       Howler.pause("theme");
     }
-  }, [playing]);
+  }, [playing, current]);
 
   useEffect(() => {
     Howler.setVolume("theme", playing ? bgm : 0);
@@ -86,5 +93,20 @@ const useMusic = () => {
     Howler.setRate("theme", rate);
   }, [rate]);
 };
+
+export enum Song {
+  LB99 = "assets/music/99.m4a",
+  Hunter = "assets/music/hunter.mp4",
+  Konga = "assets/music/konga.m4a",
+  Remix = "assets/music/remix.m4a",
+  Bop = "assets/music/she.m4a",
+  Lucky = "assets/music/star.m4a",
+  Theme = "assets/music/theme.mp3",
+}
+
+enum Effect {
+  Jump = "assets/sfx/jump.mp3",
+  Tick = "assets/sfx/tick.mp3",
+}
 
 export default useMusic;

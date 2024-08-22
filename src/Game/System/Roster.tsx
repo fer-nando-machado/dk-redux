@@ -3,6 +3,7 @@ import { StoreDispatch, RootState } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
 import { setPlayer, winPlayer } from "./RosterSlice";
 import "./Roster.scss";
+import { Song } from "../Hooks/useMusic";
 
 export type RosterRecord = Record<string, Features>;
 export type Features = {
@@ -10,6 +11,7 @@ export type Features = {
   weapon?: JSX.Element;
   touch?: boolean;
   help?: string;
+  theme?: Song;
 };
 export const ROSTER: RosterRecord = {};
 const MAX_PLAYERS = 6;

@@ -2,6 +2,7 @@ import ReactDeutschBox from "react-deutschbox";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
+import { Song } from "../Hooks/useMusic";
 import useKeyboard from "../Hooks/useKeyboard";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/RosterSlice";
@@ -14,6 +15,7 @@ const PLAYER: Features = {
   code: "D",
   touch: true,
   help: "HILFE!",
+  theme: Song.LB99,
 };
 ROSTER[PLAYER.code] = PLAYER;
 
