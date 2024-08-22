@@ -13,15 +13,10 @@ const KEYS = {
 };
 
 const Joypad: React.FC = () => {
-  const [hidden, setHidden] = useState<boolean>(true);
-  const [port, setPort] = useState<number>(1);
+  const [port, setPort] = useState<number>(0);
 
-  const showJoypad = () => {
-    setHidden(false);
-  };
-
-  const hideJoypad = () => {
-    setHidden(true);
+  const disconnectJoypad = () => {
+    setPort(0);
   };
 
   const connectJoypad = () => {
@@ -39,20 +34,17 @@ const Joypad: React.FC = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("controller:inserted", showJoypad);
-    window.addEventListener("controller:removed", hideJoypad);
+    window.addEventListener("controller:inserted", connectJoypad);
+    window.addEventListener("controller:removed", disconnectJoypad);
 
     return () => {
-      window.removeEventListener("controller:inserted", showJoypad);
-      window.removeEventListener("controller:removed", hideJoypad);
+      window.removeEventListener("controller:inserted", connectJoypad);
+      window.removeEventListener("controller:removed", disconnectJoypad);
     };
   }, []);
 
   return (
-    <div
-      onClick={connectJoypad}
-      className={`Joypad P${port} ${hidden ? "hidden" : ""}`}
-    >
+    <div onClick={connectJoypad} className={`Joypad P${port}`}>
       <div className="Cable" onClick={switchPort} />
       {port === 1 ? <P1 /> : port === 2 ? <P2 /> : null}
     </div>
@@ -62,15 +54,15 @@ const Joypad: React.FC = () => {
 const P1: React.FC = () => {
   const [pressedKey, setPressedKey] = useState<string | undefined>();
 
-  const handleButtonStart = (key: string, direction?: boolean) => () => {
-    if (direction) {
+  const handleButtonStart = (key: string, isHoldable?: boolean) => () => {
+    if (isHoldable) {
       setPressedKey(key);
     }
     dispatchKeyDown(key);
   };
 
-  const handleButtonEnd = (key: string, direction?: boolean) => () => {
-    if (direction) {
+  const handleButtonEnd = (key: string, isHoldable?: boolean) => () => {
+    if (isHoldable) {
       releasePressedKey();
     }
     dispatchKeyUp(key);
