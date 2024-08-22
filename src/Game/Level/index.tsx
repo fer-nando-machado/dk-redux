@@ -19,7 +19,7 @@ import { setBarrelFactory } from "./BarrelSlice";
 import { DuckFactory } from "../Player/Hunt/Duck";
 import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
-import { resetOptions, setMaker } from "../System/OptionsSlice";
+import { resetOptions, setMaker, setPaused } from "../System/OptionsSlice";
 import { setStarters } from "../System/RosterSlice";
 import { resetScore } from "../System/StatusSlice";
 
@@ -147,6 +147,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
     } else {
       handleReset();
     }
+    dispatch(setPaused(!isMaker));
   }, [customLevel]);
 
   useEffect(() => {

@@ -72,8 +72,9 @@
   right: 0;
   background: white;
   color: black;
-  border: 4px outset black;
+  border-color: black;
   border-radius: 5px;
+  border-width: 5px;
   padding: 4px 8px;
   cursor: pointer;
 }
