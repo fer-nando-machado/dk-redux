@@ -58,20 +58,21 @@
 
 @media only screen and (min-width: 630px) {
   .App {
-    nav {
+    nav,
+    .Joypad {
       position: absolute;
+      margin: 1vw;
+    }
+    nav {
       bottom: 0;
       right: 0;
-      margin: 25px;
       flex-direction: row;
       align-items: end;
     }
     .Joypad {
-      position: absolute;
-      z-index: 1;
       left: 0;
       bottom: 0;
-      margin: 25px;
+      z-index: 1;
     }
   }
 }

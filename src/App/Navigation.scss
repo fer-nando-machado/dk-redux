@@ -8,6 +8,10 @@ nav {
   .Restart {
     position: relative;
     &::after {
+      color: white;
+      position: absolute;
+      animation: flash 2s forwards;
+      text-align: center;
       z-index: -1;
     }
   }
@@ -15,7 +19,7 @@ nav {
   .Download {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 
     img {
       border-radius: 8px;
@@ -23,13 +27,11 @@ nav {
       width: 24px;
     }
     &::after {
-      position: absolute;
-      font-size: smaller;
-      top: -5px;
+      top: -6px;
       left: 20px;
       border-radius: 50%;
-      padding: 1px;
-      animation: flash 2s forwards;
+      padding: 3px;
+      font-size: 8px;
     }
     &.Desktop::after {
       content: "↓";
@@ -50,16 +52,12 @@ nav {
 
   .Restart::after {
     content: "ONLINE!";
-    position: absolute;
-    text-align: center;
-    font-size: 6px;
     border-radius: 18px;
     top: -12px;
     right: 0;
     width: 50%;
     line-height: 300%;
-    animation: flash 2s forwards;
-    color: white;
+    font-size: 6px;
   }
 }
 
