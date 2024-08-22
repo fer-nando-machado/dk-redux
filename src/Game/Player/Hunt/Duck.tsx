@@ -22,6 +22,7 @@ export const MAX_DUCKS = 3;
 const Duck: React.FC<Duck> = (duck) => {
   const dispatch: StoreDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
+  const isUnlocked = hasUnlockedDuckHunting();
 
   const [state, setState] = useState(0);
   const isDead = state === 1 ? "Dead" : "";
@@ -54,9 +55,11 @@ const Duck: React.FC<Duck> = (duck) => {
   );
 
   const onClickDuck = () => {
+    if (!isUnlocked) {
+      dispatch(setPlayer("DH"));
+    }
     const chaseSpeed = duck.x === jumpman.x ? 0 : duck.x < jumpman.x ? -1 : 1;
     dispatch(moveJumpman({ x: chaseSpeed, y: 7 }));
-    dispatch(setPlayer("DH"));
     setState(1);
   };
 

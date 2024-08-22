@@ -22,8 +22,8 @@ const slice = createSlice({
     clearMessage: (state) => {
       state.message = undefined;
     },
-    resetScore: () => {
-      return initialState;
+    resetScore: (state) => {
+      return { message: state.message, ...initialState };
     },
   },
 });
