@@ -4,6 +4,7 @@ import useOnline from "../Game/Hooks/useOnline";
 import AppIcon from "/favicon.ico?url";
 import GitHubIcon from "/GitHub.svg?url";
 import "./Navigation.scss";
+import { useEffect, useState } from "react";
 
 const handleRestart = () => {
   const confirm = window.confirm(
@@ -19,12 +20,36 @@ const handleRestart = () => {
 
 const Navigation: React.FC = () => {
   const isOnline = useOnline();
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const [isInstallable, setInstallable] = useState<boolean>(false);
+  const handleInstallPrompt = () => setInstallable(true);
+  const handleAppInstalled = () => setInstallable(false);
+
+  useEffect(() => {
+    window.addEventListener("appinstalled", handleAppInstalled);
+    window.addEventListener("beforeinstallprompt", handleInstallPrompt);
+    return () => {
+      window.removeEventListener("appinstalled", handleAppInstalled);
+      window.removeEventListener("beforeinstallprompt", handleInstallPrompt);
+    };
+  }, []);
+
   return (
     <>
       <nav className={`${isOnline ? "" : "Offline"}`}>
-        <span className="Download">
+        <span
+          className={`Download ${isInstallable ? "" : "Installed"} ${
+            isMobile ? "Mobile" : "Desktop"
+          } `}
+        >
           <img src={AppIcon} alt="DK-Redux App Icon" />
-          {isOnline ? "Add to Home Screen" : `#${then.slice(-4)}`}
+          <span>
+            {isInstallable
+              ? isMobile
+                ? "Add to Home Screen"
+                : "Install App"
+              : `#${then.slice(-4)}`}
+          </span>
         </span>
         <span className="Button Restart" onClick={handleRestart}>
           Restart

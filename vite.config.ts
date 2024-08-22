@@ -18,6 +18,7 @@ export default defineConfig({
         theme_color: "#000000",
         orientation: "any",
         display: "fullscreen",
+        display_override: ["fullscreen", "standalone"],
         launch_handler: {
           client_mode: "focus-existing",
         },
@@ -71,6 +72,12 @@ export default defineConfig({
         lang: "en",
         dir: "ltr",
         prefer_related_applications: false,
+        related_applications: [
+          {
+            platform: "webapp",
+            url: "https://fer-nando-machado.github.io/dk-redux/manifest.webmanifest",
+          },
+        ],
       },
     }),
   ],
