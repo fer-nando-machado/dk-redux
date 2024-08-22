@@ -104,6 +104,7 @@
     animation-duration: 0.25;
     &::after {
       animation: none;
+      background: none;
     }
   }
   .Screen:has(.Filters) {
