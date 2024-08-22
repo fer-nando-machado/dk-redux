@@ -56,6 +56,7 @@ export const moveBarrel = createAsyncThunk<
   }
 >("BarrelSlice/moveBarrel", async (payload: Number, { getState, dispatch }) => {
   const state: RootState = getState();
+  const debug = state.options.debug;
   const fps = state.options.lowFPS ? 2 : 1;
   const jumpman = state.jumpman;
   const gravity = state.options.gravity;
@@ -69,7 +70,7 @@ export const moveBarrel = createAsyncThunk<
 
   let update = { ...barrel };
   const isOnJumpman = checkCollision(update, jumpman);
-  if (isOnJumpman) {
+  if (isOnJumpman && !debug) {
     window.dispatchEvent(new CustomEvent("level:reset"));
   }
 
