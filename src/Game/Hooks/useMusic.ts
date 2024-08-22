@@ -45,23 +45,23 @@ const useMusic = () => {
 
   useEffect(() => {
     Howler.load("theme", {
-      src: ["assets/theme.mp3"],
+      src: ["assets/music/theme.mp3"],
       volume: bgm,
       loop: true,
     });
     Howler.load("jump", {
-      src: ["assets/jump.mp3"],
+      src: ["assets/sfx/jump.mp3"],
       volume: sfx,
     });
     Howler.load("tick", {
-      src: ["assets/tick.mp3"],
+      src: ["assets/sfx/tick.mp3"],
       volume: sfx,
     });
 
     return () => {
       Howler.stop("theme");
-      // Howler.unload("theme");
-      // Howler.unload("jump");
+      Howler.unload("theme");
+      Howler.unload("jump");
     };
   }, []);
 

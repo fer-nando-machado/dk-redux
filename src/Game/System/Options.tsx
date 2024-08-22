@@ -109,7 +109,6 @@ const Options: React.FC = () => {
     if (options.debug) return;
 
     window.addEventListener("blur", dispatchPause);
-    window.addEventListener("focusout", dispatchPause);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         dispatchPause();
@@ -118,7 +117,6 @@ const Options: React.FC = () => {
 
     return () => {
       window.removeEventListener("blur", dispatchPause);
-      window.removeEventListener("focusout", dispatchPause);
       document.removeEventListener("visibilitychange", dispatchPause);
     };
   }, [options.debug]);

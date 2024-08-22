@@ -32,12 +32,10 @@ export default class Howler {
     return this.music[name].rate(rate);
   }
 
-  /*
   static unload(name: string): void {
-    if (this.music[name]) {
-      this.music[name].unload();
-      delete this.music[name];
-    }
+    if (!this.music[name]) return;
+
+    this.music[name].unload();
+    delete this.music[name];
   }
-  */
 }
