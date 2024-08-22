@@ -36,8 +36,8 @@
   }
 
   &.P0 {
-    height: 16px;
     background: darkred;
+    height: 18px;
     opacity: 0.81;
     cursor: pointer;
     * {
@@ -197,7 +197,7 @@
   .Cable {
     position: absolute;
     margin: 4px -8px;
-    padding: 2px;
+    padding: 4px;
     outline: 2px solid darkred;
     border: 2px solid black;
     background: black;
@@ -212,7 +212,7 @@
       position: absolute;
       width: 7px;
       height: 13px;
-      top: -13px;
+      top: -12px;
       left: 50%;
       transform: translateX(-50%);
       background: black;
@@ -220,10 +220,10 @@
     &::after {
       position: absolute;
       color: gold;
-      margin: -7px 25px;
-      outline: 1px solid black;
-      padding: 3px;
+      margin: -9px 25px;
+      padding: 5px;
       background: black;
+      outline: 1px solid black;
     }
   }
 }

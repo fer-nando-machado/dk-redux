@@ -7,6 +7,9 @@ nav {
   .Download,
   .Restart {
     position: relative;
+    &::after {
+      z-index: -1;
+    }
   }
 
   .Download {
@@ -44,15 +47,15 @@ nav {
   }
 
   .Restart::after {
-    content: "ONLINE";
+    content: "ONLINE!";
     position: absolute;
     text-align: center;
     font-size: 6px;
     border-radius: 18px;
     top: -12px;
-    left: 0;
-    width: 100%;
-    line-height: 200%;
+    right: 0;
+    width: 50%;
+    line-height: 300%;
     animation: flash 2s forwards;
     color: white;
   }
