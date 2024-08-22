@@ -5,7 +5,6 @@ import {
   version,
   description,
   dependencies,
-  devDependencies,
 } from "../../../package.json";
 
 type GitHubDeployment = {
@@ -29,7 +28,7 @@ const Version: React.FC = () => {
       const data = await response.json();
       const latest = data[0] as GitHubDeployment;
       const deployment =
-        `${latest.ref}: ${latest.created_at}(${latest.updated_at})\n` +
+        `date: ${latest.created_at}\n` +
         `environment: ${latest.environment} (${[
           latest.original_environment && "original",
           latest.transient_environment && "transient",
@@ -55,12 +54,6 @@ const Version: React.FC = () => {
       .join("\n");
   }, []);
 
-  const devDependenciesTree = useMemo(() => {
-    return Object.entries(devDependencies)
-      .map(([key, value]) => `${key}: ${value}`)
-      .join("\n");
-  }, []);
-
   return (
     <span onClick={toggleDetails}>
       <u>{name}</u> <small>v{version}</small>
@@ -69,7 +62,6 @@ const Version: React.FC = () => {
         <>
           <u>DEPENDENCIES</u>
           <pre>{dependenciesTree}</pre>
-          <pre>{devDependenciesTree}</pre>
           {deployment && (
             <>
               <u>DEPLOYMENT</u>
