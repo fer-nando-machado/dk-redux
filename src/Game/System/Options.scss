@@ -101,14 +101,14 @@
 
 @media only screen and (max-width: 630px) {
   .Game:has(.Filters) {
-    animation-duration: 0.25;
+    animation-duration: 0.5;
     &::after {
       animation: none;
       background: none;
     }
   }
   .Screen:has(.Filters) {
-    animation-duration: 0.25;
+    animation-duration: 0.5;
   }
 }
 
