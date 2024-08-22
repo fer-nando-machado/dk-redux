@@ -18,10 +18,16 @@ const handleRestart = () => {
   }
 };
 
+const isMobileDevice = () => {
+  return /Mobi|Android|iPad|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
+    navigator.userAgent
+  );
+};
+
 const Navigation: React.FC = () => {
   const isOnline = useOnline();
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  const [isInstallable, setInstallable] = useState<boolean>(false);
+  const isMobile = isMobileDevice();
+  const [isInstallable, setInstallable] = useState<boolean>(isMobile);
   const handleInstallPrompt = () => setInstallable(true);
   const handleAppInstalled = () => setInstallable(false);
 
@@ -44,7 +50,7 @@ const Navigation: React.FC = () => {
         >
           <img src={AppIcon} alt="DK-Redux App Icon" />
           <span>
-            {isInstallable
+            {isInstallable && isOnline
               ? isMobile
                 ? "Add to Home Screen"
                 : "Install App"
