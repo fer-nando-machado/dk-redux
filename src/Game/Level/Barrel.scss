@@ -78,3 +78,13 @@
     }
   }
 }
+
+.Stack {
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  .Barrel {
+    position: relative;
+    animation: none;
+  }
+}

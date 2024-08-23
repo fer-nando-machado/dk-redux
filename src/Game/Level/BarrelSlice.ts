@@ -72,6 +72,7 @@ export const moveBarrel = createAsyncThunk<
   const isOnJumpman = checkCollision(update, jumpman);
   if (isOnJumpman && !debug) {
     window.dispatchEvent(new CustomEvent("level:reset"));
+    return;
   }
 
   const ladder = checkLadders(barrel, ladders);

@@ -95,6 +95,18 @@ export const BarrelFactory: React.FC = () => {
         <Barrel {...b} key={b.id} />
       ))}
       <div
+        className="Stack Block"
+        style={{
+          left: barrelFactory.x - barrelFactory.width / 2,
+          bottom: barrelFactory.y + (25 - barrelFactory.height) / 2,
+        }}
+      >
+        <div className="Block Barrel Round" />
+        <div className="Block Barrel Round" />
+        <div className="Block Barrel Round" />
+        <div className="Block Barrel Round" />
+      </div>
+      <div
         className={`Curtain Block ${shift === rolled ? "Rolled" : ""}`}
         style={{
           left: barrelFactory.x + (25 - barrelFactory.width) / 2,

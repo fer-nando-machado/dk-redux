@@ -41,7 +41,7 @@ const LEVEL_1: Level = {
   id: 1,
   goal: { x: 204, y: 600, direction: RIGHT, onAir: false },
   platforms: [
-    { x: 0, y: 700, length: 505 },
+    { x: 0, y: 700, length: 200 },
     { x: 200, y: 600, length: 100 },
     { x: 0, y: 500, length: 455 },
     { x: 50, y: 400, length: 455 },
