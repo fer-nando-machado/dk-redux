@@ -99,6 +99,20 @@
   animation: glow-filter 0.1s infinite alternate;
 }
 
+.Screen:has(.Reached) {
+  animation: win 0.1s infinite alternate;
+}
+@keyframes win {
+  from {
+    transform: scale(1);
+    outline-color: black;
+  }
+  to {
+    transform: scale(1.01);
+    outline-color: brown;
+  }
+}
+
 @media only screen and (max-width: 630px) {
   .Game:has(.Filters) {
     animation-duration: 0.5;
@@ -135,22 +149,7 @@
     box-shadow: 0 0 75px #ea36af50;
   }
 }
-/*
-@keyframes broken {
-  0% {
-    transform: scale(1) skew(0deg);
-    background: red;
-  }
-  50% {
-    transform: scale(1.081) skew(0.81deg);
-    background: green;
-  }
-  100% {
-    transform: scale(1.094) skew(0.94deg);
-    background: blue;
-  }
-}
-*/
+
 .Game:has(.Paused) {
   > .Block,
   > .Block::before,

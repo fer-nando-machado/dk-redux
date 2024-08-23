@@ -2,6 +2,10 @@
   background: white;
   outline: 2px outset white;
 
+  &.Reached {
+    animation: dance 1s ease-out infinite;
+  }
+
   &.M {
     background-color: red;
     outline-color: blue;

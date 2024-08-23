@@ -11,7 +11,7 @@ const handleRestart = () => {
     "This operation will erase all your progress and stored data. Proceed?"
   );
   if (confirm) {
-    document.body.innerHTML = "<b>Restart</b><br/>";
+    document.body.innerHTML = "<b>RESTART</b><br/>";
     setTimeout(performRestart, 444);
   }
 };

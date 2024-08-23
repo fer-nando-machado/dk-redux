@@ -14,10 +14,11 @@ type Target = {
 const Target: React.FC<Target> = ({ points, callback, always }) => {
   const dispatch: StoreDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
+  const { reached } = useSelector((state: RootState) => state.goal);
 
   const isAbove = points.position.y >= jumpman.y;
   const isHunting = isDuckHunting();
-  const isClickable = isAbove && (isHunting || always);
+  const isClickable = !reached && isAbove && (isHunting || always);
 
   const onClickTarget = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();

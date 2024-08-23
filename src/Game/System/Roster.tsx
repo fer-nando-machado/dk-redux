@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useKeyboard from "../Hooks/useKeyboard";
-import { setPlayer, winPlayer } from "./RosterSlice";
+import { setPlayer, winPlayerCheat } from "./RosterSlice";
 import "./Roster.scss";
 import { Song } from "../Hooks/useMusic";
 
@@ -38,7 +38,7 @@ const Roster: React.FC = () => {
   const dispatchSetPlayer = (code: string) => dispatch(setPlayer(code));
   const dispatchWinPlayer = () =>
     dispatch(
-      winPlayer({
+      winPlayerCheat({
         code: current,
         highScore: Math.floor(1000 + Math.random() * 9000),
         speedRun: Math.floor(100 + Math.random() * 900),

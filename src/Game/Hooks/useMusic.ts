@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useKeyboard from "./useKeyboard";
 import Howler from "../../Library/Howler";
+import { Rate } from "../System/Music";
 import { ROSTER } from "../System/Roster";
 import {
   lowerVolumeBGM,
@@ -16,9 +17,14 @@ import {
 const useMusic = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { current } = useSelector((state: RootState) => state.roster);
+  const { reached } = useSelector((state: RootState) => state.goal);
   const { bgm, sfx, playing, rate } = useSelector(
     (state: RootState) => state.music
   );
+
+  const song = useMemo(() => {
+    return reached ? Song.Konga : ROSTER[current]?.theme || Song.Remix;
+  }, [reached, current]);
 
   useKeyboard({
     key: ",",
@@ -35,6 +41,10 @@ const useMusic = () => {
   useKeyboard({
     key: ">",
     onKeyDown: () => dispatch(raiseVolumeSFX()),
+  });
+  useKeyboard({
+    key: ":",
+    onKeyDown: () => dispatch(setPlaying(false)),
   });
   useKeyboard({
     key: ";",
@@ -62,15 +72,17 @@ const useMusic = () => {
 
   useEffect(() => {
     Howler.load("theme", {
-      src: [ROSTER[current]?.theme || Song.Remix],
+      src: [song],
       volume: bgm,
       loop: true,
+      rate: song === Song.Konga ? Rate.DOUBLE : rate,
+      autoplay: playing,
     });
     return () => {
       Howler.stop("theme");
       Howler.unload("theme");
     };
-  }, [current]);
+  }, [song]);
 
   useEffect(() => {
     if (playing) {
@@ -78,7 +90,7 @@ const useMusic = () => {
     } else {
       Howler.pause("theme");
     }
-  }, [playing, current]);
+  }, [playing]);
 
   useEffect(() => {
     Howler.setVolume("theme", playing ? bgm : 0);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import useKeyboard from "../Game/Hooks/useKeyboard";
 import { CustomLevel } from "../Game/Level";
 import "./Maker.scss";
 
@@ -73,11 +72,6 @@ const Maker: React.FC<Maker> = ({ isMaker, children }) => {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     event.stopPropagation();
   };
-
-  useKeyboard({
-    key: "F4",
-    onKeyDown: handleReset,
-  });
 
   return (
     <>

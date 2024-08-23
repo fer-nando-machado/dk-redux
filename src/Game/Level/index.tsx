@@ -162,6 +162,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
 
   useEffect(() => {
     dispatch(setStarters(["M", "D"]));
+
     window.addEventListener("level:reset", handleReset);
     return () => {
       window.removeEventListener("level:reset", handleReset);

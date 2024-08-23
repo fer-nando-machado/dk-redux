@@ -7,7 +7,7 @@ import useKeyboard from "../Hooks/useKeyboard";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/RosterSlice";
 import { ROSTER, Features } from "../System/Roster";
-import { moveJumpmanAuto } from "./JumpmanSlice";
+import { moveJumpman } from "./JumpmanSlice";
 import { isDirectionLeft } from "../Level/Block";
 import "./DeutschBox.scss";
 
@@ -23,6 +23,8 @@ const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { direction } = useSelector((state: RootState) => state.jumpman);
   const { current } = useSelector((state: RootState) => state.roster);
+  const { reached } = useSelector((state: RootState) => state.goal);
+
   const isDeutschBox = current === PLAYER.code;
 
   // TODO move to Slice
@@ -42,8 +44,8 @@ const DeutschBox: React.FC = () => {
   }, [current]);
 
   useIntervalFPS(() => {
-    if (!isDeutschBox) return;
-    dispatch(moveJumpmanAuto({ x: speed, y: 0 }));
+    if (!isDeutschBox || reached) return;
+    dispatch(moveJumpman({ x: speed, y: 0 }));
   });
 
   useKeyboard({

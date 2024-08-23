@@ -21,12 +21,13 @@ ROSTER[PLAYER.code] = PLAYER;
 const Dog: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { direction } = useSelector((state: RootState) => state.jumpman);
+  const { reached } = useSelector((state: RootState) => state.goal);
 
   const isDog = isDuckHunting();
   const speed = isDirectionLeft(direction) ? -1 : 1;
 
   useIntervalFPS(() => {
-    if (!isDog) return;
+    if (!isDog || reached) return;
     dispatch(moveJumpman({ x: speed, y: 0 }));
   });
 

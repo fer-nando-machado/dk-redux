@@ -6,21 +6,24 @@ export default class Howler {
 
   static load(name: string, options: HowlOptions): void {
     if (this.music[name]) return;
-
+    //console.log("loading " + name, options.src);
     this.music[name] = new Howl({
       ...options,
     });
   }
 
   static play(name: string) {
+    //console.log("playing", name);
     return this.music[name].play();
   }
 
   static pause(name: string) {
+    //console.log("pausing", name);
     return this.music[name].pause();
   }
 
   static stop(name: string) {
+    //console.log("stopping", name);
     return this.music[name].stop();
   }
 
@@ -34,7 +37,7 @@ export default class Howler {
 
   static unload(name: string): void {
     if (!this.music[name]) return;
-
+    //console.log("unloading", name);
     this.music[name].unload();
     delete this.music[name];
   }

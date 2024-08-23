@@ -6,6 +6,7 @@ import { Block } from "./Block";
 import "./Goal.scss";
 
 export type Goal = Block & {
+  reached?: boolean;
   //collectibles []
 };
 
@@ -15,11 +16,19 @@ export const Goal: React.FC = () => {
 
   return (
     <div
-      className={`Goal Block Jumpman ${code} ${goal.direction}`}
+      className={`Goal Block Jumpman ${code} ${goal.reached ? "Reached" : ""} ${
+        goal.direction
+      }`}
       style={{ left: goal.x, bottom: goal.y }}
     >
       {ROSTER[code]?.weapon}
-      <div className="bubble right shadow">{ROSTER[code]?.help || "HELP!"}</div>
+      {goal.reached ? (
+        <div className="Heart emoji">❤️</div>
+      ) : (
+        <div className="bubble right shadow">
+          {ROSTER[code]?.help || "HELP!"}
+        </div>
+      )}
     </div>
   );
 };

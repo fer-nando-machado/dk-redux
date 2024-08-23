@@ -10,7 +10,7 @@ import Dog from "./Hunt/Dog";
 import { Song } from "../Hooks/useMusic";
 import { setPlayer } from "../System/RosterSlice";
 import { ROSTER, Features } from "../System/Roster";
-import { Block } from "../Level/Block";
+import { Block, LEFT } from "../Level/Block";
 import { moveJumpman, setJumpman } from "./JumpmanSlice";
 import "./Jumpman.scss";
 
@@ -55,21 +55,25 @@ export const Jumpman: React.FC = () => {
       dispatch(
         setJumpman({
           ...jumpman,
-          x: goal.x,
-          y: goal.y,
+          x: goal.x + 50,
+          y: goal.y + 50,
+          direction: LEFT,
+          // TODO extract a determined W Position nearby Goal that can be used for victory animation placement
         })
       ),
   });
 
   return (
     <div
-      className={`Player Block Jumpman ${current} ${jumpman.direction}`}
+      className={`Player Block Jumpman ${current} ${jumpman.direction} ${
+        goal.reached ? "Reached" : ""
+      }`}
       style={{
         left: jumpman.x,
         bottom: jumpman.y,
       }}
     >
-      {!ROSTER[current]?.touch && <Controller />}
+      {!ROSTER[current]?.touch && !goal.reached && <Controller />}
       <DeutschBox />
       <Dog />
       <Lady />

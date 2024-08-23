@@ -1,4 +1,6 @@
 import { useEffect, useCallback } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../reduxStore";
 
 type KeyHandler = {
   key: string;
@@ -7,6 +9,8 @@ type KeyHandler = {
 };
 
 const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
+  const { reached } = useSelector((state: RootState) => state.goal);
+
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (onKeyDown && (event.key === key || event.key === key.toLowerCase())) {
@@ -26,6 +30,8 @@ const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
   );
 
   useEffect(() => {
+    if (reached) return;
+
     if (onKeyDown) {
       window.addEventListener("keydown", handleKeyDown);
     }
@@ -41,7 +47,7 @@ const useKeyboard = ({ key, onKeyDown, onKeyUp }: KeyHandler) => {
         window.removeEventListener("keyup", handleKeyUp);
       }
     };
-  }, [handleKeyDown, handleKeyUp, onKeyDown, onKeyUp]);
+  }, [handleKeyDown, handleKeyUp, onKeyDown, onKeyUp, reached]);
 };
 
 export const dispatchKeyDown = (key: string) => {

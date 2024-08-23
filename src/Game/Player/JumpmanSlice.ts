@@ -9,7 +9,6 @@ import {
 } from "../Level/Position";
 import { flipDirection, getDirection, LEFT } from "../Level/Block";
 import { winPlayer } from "../System/RosterSlice";
-import { hasUnlockedLady, setLady } from "./Lady";
 import { Jumpman } from "./Jumpman";
 
 const initialState: Jumpman = {
@@ -59,7 +58,7 @@ export const moveJumpman = createAsyncThunk<
     const goal = state.goal;
 
     const { x, y } = payload;
-    const moved = {
+    let moved = {
       ...jumpman,
       x: jumpman.x + x * fps,
       y: jumpman.y + y * fps,
@@ -77,11 +76,13 @@ export const moveJumpman = createAsyncThunk<
           speedRun: 0,
         })
       );
-
-      if (!hasUnlockedLady(players)) {
-        dispatch(setLady());
-      }
-      window.dispatchEvent(new CustomEvent("level:reset"));
+      moved = {
+        ...jumpman,
+        x: goal.x + 50,
+        y: goal.y + 50,
+        direction: LEFT,
+        // TODO integrate Position with "W" warp
+      };
     }
 
     const isOnLadder = checkLadders(moved, ladders);

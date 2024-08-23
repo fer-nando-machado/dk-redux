@@ -2,6 +2,8 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Player, Roster } from "./Roster";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { showMessage } from "./StatusSlice";
+import { hasUnlockedLady, setLady } from "../Player/Lady";
+import { setReached } from "../Level/GoalSlice";
 
 const initialState: Roster = {
   current: "M",
@@ -18,7 +20,7 @@ const slice = createSlice({
     setCurrent(state, action: PayloadAction<string>) {
       state.current = action.payload;
     },
-    winPlayer: (state, action: PayloadAction<Player>) => {
+    winPlayerCheat: (state, action: PayloadAction<Player>) => {
       const { players } = state;
       const { code } = action.payload;
       const update: Player = {
@@ -29,6 +31,28 @@ const slice = createSlice({
       state.players[code] = update;
     },
   },
+});
+
+export const winPlayer = createAsyncThunk<
+  void,
+  Player,
+  {
+    state: RootState;
+    dispatch: StoreDispatch;
+  }
+>("RosterSlice/winPlayer", async (payload: Player, { getState, dispatch }) => {
+  const { roster }: RootState = getState();
+  const player = payload;
+
+  dispatch(setReached());
+  dispatch(slice.actions.winPlayerCheat(player));
+
+  setTimeout(() => {
+    if (!hasUnlockedLady(roster.players)) {
+      dispatch(setLady());
+    }
+    window.dispatchEvent(new CustomEvent("level:reset"));
+  }, 13000);
 });
 
 export const setPlayer = createAsyncThunk<
@@ -60,9 +84,9 @@ export const setStarters = createAsyncThunk<
 >("RosterSlice/setStarters", async (payload: string[], { dispatch }) => {
   payload.forEach((code) => {
     dispatch(slice.actions.unlockPlayer({ code }));
-    dispatch(slice.actions.setCurrent(code));
   });
+  dispatch(slice.actions.setCurrent(payload[payload.length - 1]));
 });
 
-export const { winPlayer } = slice.actions;
+export const { winPlayerCheat } = slice.actions;
 export default slice.reducer;

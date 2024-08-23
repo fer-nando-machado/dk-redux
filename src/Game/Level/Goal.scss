@@ -2,6 +2,11 @@
   margin: 12.5px 0;
   animation: jump 1s ease-out infinite;
 
+  .Heart {
+    margin: -50px 25px;
+    padding: 5px;
+  }
+
   .bubble {
     left: 30px;
     top: -7px;
@@ -16,5 +21,15 @@
   }
   50% {
     transform: translateY(-12.5px);
+  }
+}
+
+@keyframes dance {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+  50% {
+    transform: translateX(-12.5px) rotate(0.5deg);
   }
 }

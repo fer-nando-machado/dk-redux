@@ -7,6 +7,7 @@ const initialState: Goal = {
   y: 0,
   direction: LEFT,
   onAir: false,
+  reached: false,
 };
 const slice = createSlice({
   name: "GoalSlice",
@@ -15,7 +16,10 @@ const slice = createSlice({
     setGoal: (_, action: PayloadAction<Goal>) => {
       return action.payload;
     },
+    setReached: (state) => {
+      state.reached = true;
+    },
   },
 });
-export const { setGoal } = slice.actions;
+export const { setGoal, setReached } = slice.actions;
 export default slice.reducer;
