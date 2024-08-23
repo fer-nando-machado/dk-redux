@@ -49,7 +49,7 @@ export const winPlayer = createAsyncThunk<
 
   setTimeout(() => {
     dispatch(setPlayer(getLadyOrRandomPartner(roster)));
-  }, 2000);
+  }, 13000);
 });
 
 export const setPlayer = createAsyncThunk<
