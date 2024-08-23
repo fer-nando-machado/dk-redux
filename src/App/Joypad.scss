@@ -56,13 +56,13 @@
   }
 
   &.P1 {
-    .Cable::after {
+    .Cable .Port::after {
       content: "I";
     }
   }
 
   &.P2 {
-    .Cable::after {
+    .Cable .Port::after {
       content: "II";
     }
   }
@@ -83,8 +83,11 @@
     display: grid;
     width: 99px;
     height: 99px;
-    touch-action: none;
-    -ms-touch-action: none;
+    //causes halt bug on android:
+    //touch-action: none;
+    //-ms-touch-action: none;
+    touch-action: pinch-zoom;
+    -ms-touch-action: pinch-zoom;
 
     span {
       width: 33px;
@@ -218,7 +221,7 @@
       transform: translateX(-50%);
       background: black;
     }
-    &::after {
+    .Port::after {
       position: absolute;
       color: gold;
       margin: -9px 25px;

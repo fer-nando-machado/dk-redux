@@ -25,11 +25,20 @@ const Joypad: React.FC = () => {
     }
   };
 
-  const switchPort = () => {
+  const switchCable = () => {
+    if (port !== 0) {
+      disconnectJoypad();
+    } else {
+      connectJoypad();
+    }
+  };
+
+  const switchPort = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.stopPropagation();
     if (port === 1) {
       setPort(2);
     } else if (port === 2) {
-      setPort(0);
+      setPort(1);
     }
   };
 
@@ -45,7 +54,9 @@ const Joypad: React.FC = () => {
 
   return (
     <div onClick={connectJoypad} className={`Joypad P${port}`}>
-      <div className="Cable" onClick={switchPort} />
+      <div className="Cable" onClick={switchCable}>
+        <span className="Port" onClick={switchPort} />
+      </div>
       {port === 1 ? <P1 /> : port === 2 ? <P2 /> : null}
     </div>
   );
