@@ -1,16 +1,49 @@
 .Platform {
   background-color: brown;
-  outline: 4px dashed rgba($color: brown, $alpha: 0.81);
+  outline: 4px dashed rgba(brown, 0.81);
 
+  $animation-duration: 1.981s;
+  $skew-amount: 1.981deg;
+  $scale: scaleY(50%);
+
+  transform: $scale;
   &:nth-child(even) {
-    transform: scaleY(50%) skewY(1.981deg);
+    animation: skewEven $animation-duration linear forwards;
   }
-
   &:nth-child(odd) {
-    transform: scaleY(50%) skewY(-1.981deg);
+    animation: skewOdd $animation-duration linear forwards;
+  }
+  &:last-child {
+    animation: none;
   }
 
-  &:last-child {
-    transform: scaleY(50%);
+  @keyframes skewEven {
+    0%,
+    40%,
+    80% {
+      transform: $scale skewY($skew-amount);
+    }
+    20%,
+    60% {
+      transform: $scale skewY(-$skew-amount);
+    }
+    100% {
+      transform: $scale skewY($skew-amount);
+    }
+  }
+
+  @keyframes skewOdd {
+    0%,
+    40%,
+    80% {
+      transform: $scale skewY(-$skew-amount);
+    }
+    20%,
+    60% {
+      transform: $scale skewY($skew-amount);
+    }
+    100% {
+      transform: $scale skewY(-$skew-amount);
+    }
   }
 }
