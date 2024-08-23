@@ -41,8 +41,8 @@
 }
 
 .Curtain {
-  outline: 5px outset darkred;
-  border-radius: 12.5px;
+  outline: 6px outset darkred;
+  border-radius: 0 0 12px 12px;
   background: linear-gradient(
     90deg,
     red,
@@ -73,9 +73,8 @@
   }
 
   &.Rolled {
-    border-radius: 25px;
     &::before {
-      content: "";
+      display: none;
     }
   }
 }

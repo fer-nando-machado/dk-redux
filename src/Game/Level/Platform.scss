@@ -1,5 +1,16 @@
 .Platform {
   background-color: brown;
   outline: 4px dashed rgba($color: brown, $alpha: 0.81);
-  transform: scaleY(50%);
+
+  &:nth-child(even) {
+    transform: scaleY(50%) skewY(1.981deg);
+  }
+
+  &:nth-child(odd) {
+    transform: scaleY(50%) skewY(-1.981deg);
+  }
+
+  &:last-child {
+    transform: scaleY(50%);
+  }
 }

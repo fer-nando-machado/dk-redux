@@ -176,8 +176,8 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
 
   return (
     <>
-      <PlatformFactory />
       <LadderFactory />
+      <PlatformFactory />
       <Goal />
       <Jumpman />
       <BarrelFactory />

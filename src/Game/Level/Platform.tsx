@@ -12,8 +12,7 @@ export type PlatformFactory = {
 };
 
 const Platform: React.FC<Platform> = ({ x, y, length }) => {
-  if (!length) return <></>;
-  return (
+  return !length ? null : (
     <div
       className="Platform Block"
       style={{
