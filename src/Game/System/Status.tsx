@@ -20,6 +20,7 @@ export type Status = {
 const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { score } = useSelector((state: RootState) => state.status);
+  const { reached } = useSelector((state: RootState) => state.goal);
 
   const clickPause = () => {
     dispatch(setPaused(true));
@@ -29,7 +30,7 @@ const Status: React.FC = () => {
     window.dispatchEvent(new CustomEvent("level:reset"));
   };
 
-  return (
+  return !reached ? (
     <div className="Status">
       <span onClick={clickPause}>PAUSE</span>
       {score}
@@ -37,7 +38,7 @@ const Status: React.FC = () => {
       <PointsDisplay />
       <MessageDisplay />
     </div>
-  );
+  ) : null;
 };
 
 const PointsDisplay: React.FC = () => {
