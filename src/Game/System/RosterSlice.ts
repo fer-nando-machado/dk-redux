@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Player, Roster } from "./Roster";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { showMessage } from "./StatusSlice";
-import { hasUnlockedLady, setLady } from "../Player/Lady";
+import { getLadyOrRandomPartner } from "../Player/Lady";
 import { setReached } from "../Level/GoalSlice";
 
 const initialState: Roster = {
@@ -48,11 +48,8 @@ export const winPlayer = createAsyncThunk<
   dispatch(slice.actions.winPlayerCheat(player));
 
   setTimeout(() => {
-    if (!hasUnlockedLady(roster.players)) {
-      dispatch(setLady());
-    }
-    window.dispatchEvent(new CustomEvent("level:reset"));
-  }, 13000);
+    dispatch(setPlayer(getLadyOrRandomPartner(roster)));
+  }, 2000);
 });
 
 export const setPlayer = createAsyncThunk<

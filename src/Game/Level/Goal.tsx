@@ -1,7 +1,8 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../reduxStore";
 import { ROSTER } from "../System/Roster";
-import { getPartner } from "../Player/Lady";
+import { getLadyOrRandomPartner } from "../Player/Lady";
 import { Block } from "./Block";
 import "./Goal.scss";
 
@@ -11,22 +12,27 @@ export type Goal = Block & {
 };
 
 export const Goal: React.FC = () => {
+  const roster = useSelector((state: RootState) => state.roster);
   const goal = useSelector((state: RootState) => state.goal);
-  const code = getPartner();
+
+  const partner = useMemo(
+    () => getLadyOrRandomPartner(roster),
+    [roster.current]
+  );
 
   return (
     <div
-      className={`Goal Block Jumpman ${code} ${goal.reached ? "Reached" : ""} ${
-        goal.direction
+      className={`Goal Block Jumpman ${partner} ${goal.direction} ${
+        goal.reached ? "Reached" : ""
       }`}
       style={{ left: goal.x, bottom: goal.y }}
     >
-      {ROSTER[code]?.weapon}
+      {ROSTER[partner]?.weapon}
       {goal.reached ? (
         <div className="Heart emoji">❤️</div>
       ) : (
         <div className="bubble right shadow">
-          {ROSTER[code]?.help || "HELP!"}
+          {ROSTER[partner]?.help || "HELP!"}
         </div>
       )}
     </div>

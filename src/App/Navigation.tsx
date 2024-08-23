@@ -18,7 +18,7 @@ const handleRestart = () => {
 
 const performRestart = async () => {
   if ("serviceWorker" in navigator) {
-    document.body.innerHTML += "Unregistering Service Workers...<br/>";
+    document.body.innerHTML += "Unregistering Services...<br/>";
     const registrations = await navigator.serviceWorker.getRegistrations();
     for (let registration of registrations) {
       await registration.unregister();
