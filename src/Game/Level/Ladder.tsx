@@ -41,7 +41,7 @@ export const LadderFactory: React.FC = () => {
 
 export const getRandomLadderIds = (ladders: Ladder[]): number[] => {
   return ladders
-    .filter((ladder) => ladder.id !== undefined && Math.random() < PROBABILITY)
+    .filter(() => Math.random() < PROBABILITY)
     .map((ladder) => ladder.id!);
 };
 

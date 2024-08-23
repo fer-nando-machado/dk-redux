@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../../reduxStore";
 import { useIntervalTimed, useIntervalFPS } from "../../Hooks/useInterval";
@@ -8,6 +8,7 @@ import { setPlayer } from "../../System/RosterSlice";
 import { moveJumpman } from "../JumpmanSlice";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";
+import MusicHowler from "../../../Library/Howler";
 import Target from "./Target";
 import "./Duck.scss";
 
@@ -58,8 +59,9 @@ const Duck: React.FC<Duck> = (duck) => {
     if (!isUnlocked) {
       dispatch(setPlayer("DH"));
     }
+    MusicHowler.play("fall");
     const chaseSpeed = duck.x === jumpman.x ? 0 : duck.x < jumpman.x ? -1 : 1;
-    dispatch(moveJumpman({ x: chaseSpeed, y: 7 }));
+    dispatch(moveJumpman({ x: chaseSpeed, y: 0 }));
     setState(1);
   };
 
@@ -110,10 +112,22 @@ export const DuckFactory: React.FC = () => {
         id: Date.now(),
       })
     );
+    MusicHowler.play("flap");
   }, interval);
 
-  if (interval === 0) return null;
-  return (
+  const handleShot = () => {
+    MusicHowler.play("shot");
+  };
+
+  useEffect(() => {
+    if (!isHunting) return;
+    document.addEventListener("click", handleShot);
+    return () => {
+      document.removeEventListener("click", handleShot);
+    };
+  }, [isHunting]);
+
+  return interval === 0 ? null : (
     <>
       <div
         className={`Duck Factory Block Round ${duckFactory.direction} ${color}`}

@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
 import useKeyboard from "./useKeyboard";
-import Howler from "../../Library/Howler";
+import MusicHowler from "../../Library/Howler";
 import { Rate } from "../System/Music";
 import { ROSTER } from "../System/Roster";
 import {
@@ -56,22 +56,37 @@ const useMusic = () => {
   });
 
   useEffect(() => {
-    Howler.load("jump", {
+    MusicHowler.load("jump", {
       src: [Effect.Jump],
       volume: sfx,
     });
-    Howler.load("tick", {
+    MusicHowler.load("tick", {
       src: [Effect.Tick],
       volume: sfx,
     });
+    MusicHowler.load("flap", {
+      src: [Effect.Flap],
+      volume: sfx,
+    });
+    MusicHowler.load("fall", {
+      src: [Effect.Fall],
+      volume: sfx,
+    });
+    MusicHowler.load("shot", {
+      src: [Effect.Shot],
+      volume: sfx,
+    });
     return () => {
-      Howler.unload("jump");
-      Howler.unload("tick");
+      MusicHowler.unload("shot");
+      MusicHowler.unload("fall");
+      MusicHowler.unload("flap");
+      MusicHowler.unload("jump");
+      MusicHowler.unload("tick");
     };
   }, []);
 
   useEffect(() => {
-    Howler.load("theme", {
+    MusicHowler.load("theme", {
       src: [song],
       volume: bgm,
       loop: true,
@@ -79,30 +94,33 @@ const useMusic = () => {
       autoplay: playing,
     });
     return () => {
-      Howler.stop("theme");
-      Howler.unload("theme");
+      MusicHowler.stop("theme");
+      MusicHowler.unload("theme");
     };
   }, [song]);
 
   useEffect(() => {
     if (playing) {
-      Howler.play("theme");
+      MusicHowler.play("theme");
     } else {
-      Howler.pause("theme");
+      MusicHowler.pause("theme");
     }
   }, [playing]);
 
   useEffect(() => {
-    Howler.setVolume("theme", playing ? bgm : 0);
+    MusicHowler.setVolume("theme", playing ? bgm : 0);
   }, [bgm, playing]);
 
   useEffect(() => {
-    Howler.setVolume("jump", playing ? sfx : 0);
-    Howler.setVolume("tick", playing ? sfx : 0);
+    MusicHowler.setVolume("shot", playing ? sfx : 0);
+    MusicHowler.setVolume("fall", playing ? sfx : 0);
+    MusicHowler.setVolume("flap", playing ? sfx : 0);
+    MusicHowler.setVolume("jump", playing ? sfx : 0);
+    MusicHowler.setVolume("tick", playing ? sfx : 0);
   }, [sfx, playing]);
 
   useEffect(() => {
-    Howler.setRate("theme", rate);
+    MusicHowler.setRate("theme", rate);
   }, [rate]);
 };
 
@@ -119,6 +137,9 @@ export enum Song {
 enum Effect {
   Jump = "assets/sfx/jump.mp3",
   Tick = "assets/sfx/tick.mp3",
+  Flap = "assets/sfx/flap.mp3",
+  Fall = "assets/sfx/fall.mp3",
+  Shot = "assets/sfx/shot.mp3",
 }
 
 export default useMusic;

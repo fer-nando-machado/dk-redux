@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
-import Howler from "../../Library/Howler";
+import MusicHowler from "../../Library/Howler";
 import {
   lowerVolumeBGM,
   lowerVolumeSFX,
@@ -65,7 +65,7 @@ const Music: React.FC = () => {
   const handleSwipe = (s: number) => {
     if (swipe < 9) {
       setSwipe(swipe + s);
-      Howler.play("tick");
+      MusicHowler.play("tick");
     } else {
       dispatch(toggleRate());
       setSwipe(0);
@@ -97,11 +97,11 @@ const Music: React.FC = () => {
           name="SFX"
           value={sfx}
           onLess={() => {
-            Howler.play("jump");
+            MusicHowler.play("jump");
             dispatch(lowerVolumeSFX());
           }}
           onMore={() => {
-            Howler.play("jump");
+            MusicHowler.play("jump");
             dispatch(raiseVolumeSFX());
           }}
         />
