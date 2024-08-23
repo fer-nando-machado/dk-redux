@@ -11,11 +11,33 @@ const handleRestart = () => {
     "This operation will erase all your progress and stored data. Proceed?"
   );
   if (confirm) {
-    document.body.innerHTML = "Restarting...";
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    document.body.innerHTML = "<b>Restart</b><br/>";
+    setTimeout(performRestart, 444);
   }
+};
+
+const performRestart = async () => {
+  if ("serviceWorker" in navigator) {
+    document.body.innerHTML += "Unregistering Service Workers...<br/>";
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    for (let registration of registrations) {
+      await registration.unregister();
+    }
+  }
+
+  document.body.innerHTML += "Deleting Cache...<br/>";
+  const cacheNames = await caches.keys();
+  for (let cacheName of cacheNames) {
+    await caches.delete(cacheName);
+  }
+
+  document.body.innerHTML += "Clearing Storages...<br/>";
+  localStorage.clear();
+  sessionStorage.clear();
+
+  document.body.innerHTML += "Reloading Game...<br/>";
+  window.location.reload();
+  document.body.innerHTML += "<b>READY!</b>";
 };
 
 const isMobileDevice = () => {
