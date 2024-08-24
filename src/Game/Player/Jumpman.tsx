@@ -56,7 +56,7 @@ export const Jumpman: React.FC = () => {
         setJumpman({
           ...jumpman,
           x: goal.x + 50,
-          y: goal.y + 50,
+          y: goal.y,
           direction: LEFT,
           // TODO extract a determined W Position nearby Goal that can be used for victory animation placement
         })

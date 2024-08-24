@@ -9,6 +9,7 @@ import {
 } from "../Level/Position";
 import { flipDirection, getDirection, LEFT } from "../Level/Block";
 import { winPlayer } from "../System/RosterSlice";
+import { ROSTER } from "../System/Roster";
 import { Jumpman } from "./Jumpman";
 
 const initialState: Jumpman = {
@@ -56,6 +57,7 @@ export const moveJumpman = createAsyncThunk<
     const ladders = state.ladderFactory.ladders;
     const jumpman = state.jumpman;
     const goal = state.goal;
+    const { current } = state.roster;
 
     const { x, y } = payload;
     let moved = {
@@ -66,7 +68,7 @@ export const moveJumpman = createAsyncThunk<
 
     const isOnGoal = checkCollision(moved, goal);
     if (isOnGoal) {
-      const { players, current } = state.roster;
+      const { players } = state.roster;
       const { score } = state.status;
       const highScore = players[current]?.highScore || 0;
       dispatch(
@@ -79,7 +81,7 @@ export const moveJumpman = createAsyncThunk<
       moved = {
         ...jumpman,
         x: goal.x + 50,
-        y: goal.y + 50,
+        y: goal.y,
         direction: LEFT,
         // TODO integrate Position with "W" warp
       };
@@ -90,7 +92,22 @@ export const moveJumpman = createAsyncThunk<
 
     const bounded = checkBoundaries(moved);
     const platformed = checkPlatforms(bounded, platforms);
-    const direction = getDirection(x);
+
+    let direction = getDirection(x);
+    if (ROSTER[current]?.touch && direction !== undefined) {
+      const boundedAhead = checkBoundaries({
+        ...platformed,
+        x: platformed.x + x * fps,
+      });
+      const platformedAhead = checkPlatforms(
+        { ...platformed, x: platformed.x + x * fps },
+        platforms
+      );
+      if (platformedAhead.onAir || boundedAhead.x === jumpman.x) {
+        direction = flipDirection(direction);
+      }
+    }
+
     const update: Jumpman = {
       ...jumpman,
       ...platformed,
@@ -128,54 +145,6 @@ export const moveJumpmanClimb = createAsyncThunk<
       };
       dispatch(setJumpman(update));
     }
-  }
-);
-
-export const moveJumpmanAuto = createAsyncThunk<
-  void,
-  Position,
-  {
-    state: RootState;
-    dispatch: StoreDispatch;
-  }
->(
-  "JumpmanSlice/moveJumpmanAuto",
-  async (payload: Position, { getState, dispatch }) => {
-    const state: RootState = getState();
-    const fps = state.options.lowFPS ? 2 : 1;
-    const platforms = state.platformFactory.platforms;
-    const jumpman = state.jumpman;
-
-    let { x, y } = payload;
-    const moved = {
-      ...jumpman,
-      x: jumpman.x + x * fps,
-      y: jumpman.y + y * fps,
-    };
-    const bounded = checkBoundaries(moved);
-    const platformed = checkPlatforms(bounded, platforms);
-
-    let direction = getDirection(x);
-    if (direction !== undefined) {
-      const boundedAhead = checkBoundaries({
-        ...platformed,
-        x: platformed.x + x * fps,
-      });
-      const platformedAhead = checkPlatforms(
-        { ...platformed, x: platformed.x + x * fps },
-        platforms
-      );
-      if (platformedAhead.onAir || boundedAhead.x === jumpman.x) {
-        direction = flipDirection(direction);
-      }
-    }
-
-    const update: Jumpman = {
-      ...jumpman,
-      ...platformed,
-      ...(direction ? { direction } : {}),
-    };
-    dispatch(setJumpman(update));
   }
 );
 
