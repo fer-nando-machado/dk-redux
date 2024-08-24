@@ -5,16 +5,17 @@ import "./Platform.scss";
 
 export type Platform = Position & {
   length: number;
+  skew?: boolean;
 };
 
 export type PlatformFactory = {
   platforms: Platform[];
 };
 
-const Platform: React.FC<Platform> = ({ x, y, length }) => {
+const Platform: React.FC<Platform> = ({ x, y, length, skew }) => {
   return !length ? null : (
     <div
-      className="Platform Block"
+      className={`Platform Block ${skew ? "Skew" : ""}`}
       style={{
         left: x,
         bottom: y,

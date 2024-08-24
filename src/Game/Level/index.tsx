@@ -19,7 +19,7 @@ import { setBarrelFactory } from "./BarrelSlice";
 import { DuckFactory } from "../Player/Hunt/Duck";
 import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
-import { resetOptions, setMaker, setPaused } from "../System/OptionsSlice";
+import { resetOptions, setMaker } from "../System/OptionsSlice";
 import { setStarters } from "../System/RosterSlice";
 import { resetScore } from "../System/StatusSlice";
 
@@ -43,11 +43,11 @@ const LEVEL_1: Level = {
   platforms: [
     { x: 0, y: 700, length: 200 },
     { x: 200, y: 600, length: 100 },
-    { x: 0, y: 500, length: 455 },
-    { x: 50, y: 400, length: 455 },
-    { x: 0, y: 300, length: 455 },
-    { x: 50, y: 200, length: 455 },
-    { x: 0, y: 100, length: 455 },
+    { x: 0, y: 500, length: 455, skew: true },
+    { x: 50, y: 400, length: 455, skew: true },
+    { x: 0, y: 300, length: 455, skew: true },
+    { x: 50, y: 200, length: 455, skew: true },
+    { x: 0, y: 100, length: 455, skew: true },
     { x: 25, y: 0, length: 480 },
   ],
   ladders: [
@@ -147,7 +147,6 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
     } else {
       handleReset();
     }
-    dispatch(setPaused(!isMaker));
   }, [customLevel]);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-$animation-duration: 1.981s;
+$animation-settings: 1.981s linear forwards;
 $skew-amount: 1.981deg;
 $scale: scaleY(50%);
 
@@ -6,17 +6,13 @@ $scale: scaleY(50%);
   background-color: brown;
   outline: 4px dashed rgba(brown, 0.81);
   transform: $scale;
-}
-
-.Game .Platform {
-  &:nth-child(even) {
-    animation: skewEven $animation-duration linear forwards;
-  }
-  &:nth-child(odd) {
-    animation: skewOdd $animation-duration linear forwards;
-  }
-  &:last-child {
-    animation: none;
+  &.Skew {
+    &:nth-child(even) {
+      animation: skewEven $animation-settings;
+    }
+    &:nth-child(odd) {
+      animation: skewOdd $animation-settings;
+    }
   }
 }
 

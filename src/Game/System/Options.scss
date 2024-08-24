@@ -98,10 +98,23 @@
 .Screen:has(.Filters) {
   animation: glow-filter 0.1s infinite alternate;
 }
-
 .Screen:has(.Reached) {
   animation: win 0.1s infinite alternate;
 }
+
+@media only screen and (max-width: 630px) {
+  .Game:has(.Filters) {
+    animation-duration: 0.81;
+    &::after {
+      animation: none;
+      background: none;
+    }
+  }
+  .Screen:has(.Filters) {
+    animation-duration: 0.81;
+  }
+}
+
 @keyframes win {
   from {
     transform: scale(1);
@@ -110,19 +123,6 @@
   to {
     transform: scale(0.99);
     outline-color: brown;
-  }
-}
-
-@media only screen and (max-width: 630px) {
-  .Game:has(.Filters) {
-    animation-duration: 0.5;
-    &::after {
-      animation: none;
-      background: none;
-    }
-  }
-  .Screen:has(.Filters) {
-    animation-duration: 0.5;
   }
 }
 
