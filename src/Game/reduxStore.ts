@@ -23,6 +23,7 @@ export const Store = configureStore({
     platformFactory: platformReducer,
     duckFactory: duckReducer,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export type RootState = ReturnType<typeof Store.getState>;

@@ -83,5 +83,12 @@ export default defineConfig({
   ],
   build: {
     outDir: "build",
+    sourcemap: false,
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
   },
 });
