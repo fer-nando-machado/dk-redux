@@ -1,4 +1,4 @@
-$animation-settings: 1.981s linear forwards;
+$animation-settings: 3s linear 1s forwards;
 $skew-amount: 1.981deg;
 $scale: scaleY(50%);
 
@@ -17,14 +17,16 @@ $scale: scaleY(50%);
 }
 
 @keyframes skewEven {
-  0%,
-  40%,
-  80% {
-    transform: $scale skewY($skew-amount);
+  0% {
+    transform: $scale;
   }
   20%,
   60% {
-    transform: $scale skewY(-$skew-amount);
+    transform: $scale skewY($skew-amount * 2);
+  }
+  40%,
+  80% {
+    transform: $scale skewY(-$skew-amount * 2);
   }
   100% {
     transform: $scale skewY($skew-amount);
@@ -32,14 +34,16 @@ $scale: scaleY(50%);
 }
 
 @keyframes skewOdd {
-  0%,
-  40%,
-  80% {
-    transform: $scale skewY(-$skew-amount);
+  0% {
+    transform: $scale;
   }
   20%,
   60% {
-    transform: $scale skewY($skew-amount);
+    transform: $scale skewY(-$skew-amount * 2);
+  }
+  40%,
+  80% {
+    transform: $scale skewY($skew-amount * 2);
   }
   100% {
     transform: $scale skewY(-$skew-amount);
