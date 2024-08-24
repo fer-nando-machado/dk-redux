@@ -56,6 +56,8 @@ const useMusic = () => {
   });
 
   useEffect(() => {
+    if (!playing) return;
+
     MusicHowler.load("jump", {
       src: [Effect.Jump],
       volume: sfx,
@@ -83,9 +85,11 @@ const useMusic = () => {
       MusicHowler.unload("jump");
       MusicHowler.unload("tick");
     };
-  }, []);
+  }, [playing]);
 
   useEffect(() => {
+    if (!playing) return;
+
     MusicHowler.load("theme", {
       src: [song],
       volume: bgm,
@@ -97,7 +101,7 @@ const useMusic = () => {
       MusicHowler.stop("theme");
       MusicHowler.unload("theme");
     };
-  }, [song]);
+  }, [playing, song]);
 
   useEffect(() => {
     if (playing) {

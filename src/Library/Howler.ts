@@ -14,25 +14,25 @@ export default class MusicHowler {
 
   static play(name: string) {
     //console.log("playing", name);
-    return this.music[name].play();
+    return this.music[name]?.play();
   }
 
   static pause(name: string) {
     //console.log("pausing", name);
-    return this.music[name].pause();
+    return this.music[name]?.pause();
   }
 
   static stop(name: string) {
     //console.log("stopping", name);
-    return this.music[name].stop();
+    return this.music[name]?.stop();
   }
 
   static setVolume(name: string, volume: Volume) {
-    return this.music[name].volume(volume);
+    return this.music[name]?.volume(volume);
   }
 
   static setRate(name: string, rate: Rate) {
-    return this.music[name].rate(rate);
+    return this.music[name]?.rate(rate);
   }
 
   static unload(name: string): void {

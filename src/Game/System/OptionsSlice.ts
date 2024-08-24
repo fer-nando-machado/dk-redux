@@ -46,6 +46,7 @@ const slice = createSlice({
         filters: state.filters,
         debug: isMaker,
         maker: isMaker,
+        paused: false,
       };
     },
     enableDebug: (state) => {

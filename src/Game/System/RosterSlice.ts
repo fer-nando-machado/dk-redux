@@ -6,7 +6,7 @@ import { getLadyOrRandomPartner } from "../Player/Lady";
 import { setReached } from "../Level/GoalSlice";
 
 const initialState: Roster = {
-  current: "M",
+  current: "",
   players: {},
 };
 
