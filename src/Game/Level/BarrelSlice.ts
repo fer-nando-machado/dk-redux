@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Barrel, BarrelFactory } from "./Barrel";
 import {
+  addPositionWithinTolerance,
   checkBoundaries,
   checkCollision,
   checkLadders,
@@ -99,9 +100,9 @@ export const moveBarrel = createAsyncThunk<
       ...update,
       x: update.x + speed * fps,
     };
-    update = { ...update, ...checkBoundaries(update) };
   }
 
+  update = { ...update, ...checkBoundaries(update) };
   update = { ...update, ...checkPlatforms(update, platforms) };
 
   if (update.onAir && gravity && barrel.fallingSpeed === 0) {
@@ -115,7 +116,10 @@ export const moveBarrel = createAsyncThunk<
   if (index === 0) {
     update = {
       ...update,
-      path: update.path?.concat({ x: update.x, y: update.y }),
+      path: addPositionWithinTolerance(update.path, {
+        x: update.x,
+        y: update.y,
+      }),
     };
   }
   dispatch(setBarrel(update));

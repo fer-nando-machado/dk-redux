@@ -7,6 +7,21 @@ export type Position = {
   y: number;
 };
 
+export const addPositionWithinTolerance = (
+  positions: Position[],
+  current: Position
+): Position[] => {
+  if (positions.length === 0) return [current];
+
+  const last = positions[positions.length - 1];
+  if (
+    Math.abs(current.x - last.x) > thickness.x ||
+    Math.abs(current.y - last.y) > thickness.y
+  ) {
+    return [...positions, current];
+  }
+  return positions;
+};
 const boundaries: { min: Position; max: Position } = {
   min: { x: -5, y: -50 },
   max: { x: 500 - 20, y: 750 - 15 },
@@ -37,6 +52,7 @@ export const checkPlatforms = (
         ...position,
         y: platform.y + thickness.y,
         onAir: false,
+        platformId: platform.id,
       };
       return updated;
     }

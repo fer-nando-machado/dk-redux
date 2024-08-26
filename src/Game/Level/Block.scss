@@ -28,10 +28,10 @@
 
 @keyframes spinDown {
   0% {
-    transform: rotateX(0deg);
+    transform: scaleX(1.25) rotateX(0deg);
   }
   100% {
-    transform: rotateX(360deg);
+    transform: scaleX(1.25) rotateX(360deg);
   }
 }
 

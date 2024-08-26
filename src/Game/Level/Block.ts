@@ -8,6 +8,7 @@ type Direction = "left" | "right";
 export type Block = Position & {
   direction: Direction;
   onAir: boolean;
+  platformId?: number;
 };
 
 export const isDirectionLeft = (direction: Direction): boolean => {

@@ -10,7 +10,7 @@
 
   &.Falling {
     animation: spinDown 2s infinite linear;
-    border-radius: 33%;
+    border-radius: 25% / 50%;
 
     &::after,
     &::before {
@@ -35,9 +35,19 @@
 }
 
 .Path {
-  border-radius: 50%;
+  border-radius: 20%;
   background: aquamarine;
-  opacity: 0.25;
+  outline: 2px dashed rgba(aquamarine, $alpha: 0.5);
+  animation: water 2s forwards ease;
+}
+
+@keyframes water {
+  from {
+    transform: scale(0) scaleY(66%);
+  }
+  to {
+    transform: scale(1.333) scaleY(66%) translateY(12px);
+  }
 }
 
 .Curtain {
