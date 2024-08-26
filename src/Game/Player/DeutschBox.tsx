@@ -8,8 +8,10 @@ import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/RosterSlice";
 import { ROSTER, Features } from "../System/Roster";
 import { moveJumpman } from "./JumpmanSlice";
+import { setTarget, unsetTarget } from "../Level/LadderSlice";
 import { generateRandomId, isDirectionLeft } from "../Level/Block";
 import "./DeutschBox.scss";
+import { checkLadders } from "../Level/Position";
 
 const PLAYER: Features = {
   code: "D",
@@ -21,16 +23,15 @@ ROSTER[PLAYER.code] = PLAYER;
 
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { direction } = useSelector((state: RootState) => state.jumpman);
+  const { direction, x, y } = useSelector((state: RootState) => state.jumpman);
   const { current } = useSelector((state: RootState) => state.roster);
   const { reached } = useSelector((state: RootState) => state.goal);
+  const { ladders } = useSelector((state: RootState) => state.ladderFactory);
+
   const isDeutschBox = current === PLAYER.code;
 
   const [state, setState] = useState(0);
   const [key, setKey] = useState(0);
-
-  const multiplier = state == 3 ? 5 : state == 1 ? 1 : 0;
-  const speed = multiplier * (isDirectionLeft(direction) ? -1 : 1);
 
   const ref = useRef<HTMLInputElement>(null);
   const onClickDeutschBox = () => {
@@ -39,12 +40,24 @@ const DeutschBox: React.FC = () => {
     button.click();
   };
 
+  const onChangeDeutschBox = () => {
+    if (state == 0) {
+      dispatch(setTarget({ x, y }));
+    } else {
+      dispatch(unsetTarget());
+    }
+    setState((c) => (c + 1) % 4);
+  };
+
   const resetDeutschBox = () => {
     setState(0);
     setKey(generateRandomId());
   };
 
-  const changeDeutschBox = () => setState((c) => (c + 1) % 4);
+  useKeyboard({
+    key: " ",
+    onKeyDown: onClickDeutschBox,
+  });
 
   useEffect(() => {
     resetDeutschBox();
@@ -58,8 +71,18 @@ const DeutschBox: React.FC = () => {
   }, []);
 
   useIntervalFPS(() => {
-    if (!isDeutschBox || reached) return;
-    dispatch(moveJumpman({ x: speed, y: 0 }));
+    if (reached || !isDeutschBox) return;
+
+    const multiplier = state == 3 ? 5 : state == 1 ? 1 : 0;
+    const speed = multiplier * (isDirectionLeft(direction) ? -1 : 1);
+
+    const isOnLadder = checkLadders({ x, y }, ladders);
+    if (speed) {
+      dispatch(moveJumpman({ x: speed, y: 0 }));
+    }
+    if (isOnLadder?.target) {
+      dispatch(moveJumpman({ x: 0, y: 3 }));
+    }
   });
 
   useKeyboard({
@@ -72,7 +95,7 @@ const DeutschBox: React.FC = () => {
       <ReactDeutschBox
         name="DeutschBox"
         feedback={direction}
-        onChange={changeDeutschBox}
+        onChange={onChangeDeutschBox}
         size={26}
         ref={ref}
         key={key}

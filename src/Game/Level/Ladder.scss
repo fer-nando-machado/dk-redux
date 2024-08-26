@@ -1,5 +1,4 @@
 .Ladder {
-  background-color: cyan;
   transform: translateY(-12.5px) scaleX(75%);
   background: repeating-linear-gradient(
     cyan 0,
@@ -10,6 +9,24 @@
   outline: 1px solid rgba($color: cyan, $alpha: 0.81);
 
   &.Target {
-    outline: red;
+    outline-color: red;
+    background: repeating-linear-gradient(
+      red 0,
+      red 4px,
+      transparent 4px,
+      transparent 12px
+    );
+  }
+}
+
+.Game:has(.Player.Jumpman.D) {
+  .Ladder.Target {
+    outline-color: #fc0;
+    background: repeating-linear-gradient(
+      #fc0 0,
+      #fc0 4px,
+      transparent 4px,
+      transparent 12px
+    );
   }
 }

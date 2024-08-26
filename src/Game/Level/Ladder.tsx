@@ -39,6 +39,29 @@ export const LadderFactory: React.FC = () => {
   );
 };
 
+export const findClosestLadder = (
+  ladders: Ladder[],
+  current: Position
+): Ladder | null => {
+  let closestLadder: Ladder | null = null;
+  let minDistance = Infinity;
+
+  for (const ladder of ladders) {
+    if (Math.abs(ladder.y - current.y) <= 25 && !ladder.target) {
+      const distance = Math.sqrt(
+        Math.pow(ladder.x - current.x, 2) + Math.pow(ladder.y - current.y, 2)
+      );
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestLadder = ladder;
+      }
+    }
+  }
+
+  return closestLadder;
+};
+
 export const getRandomLadderIds = (ladders: Ladder[]): number[] => {
   return ladders
     .filter(() => Math.random() < PROBABILITY)
