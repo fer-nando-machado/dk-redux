@@ -30,3 +30,7 @@ export const getRandomDirection = (): Direction => {
 export const flipDirection = (direction: Direction): Direction => {
   return direction === LEFT ? RIGHT : LEFT;
 };
+
+export const generateRandomId = (): number => {
+  return Math.trunc(Date.now() * Math.random());
+};

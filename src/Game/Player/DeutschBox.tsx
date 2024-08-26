@@ -8,7 +8,7 @@ import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/RosterSlice";
 import { ROSTER, Features } from "../System/Roster";
 import { moveJumpman } from "./JumpmanSlice";
-import { isDirectionLeft } from "../Level/Block";
+import { generateRandomId, isDirectionLeft } from "../Level/Block";
 import "./DeutschBox.scss";
 
 const PLAYER: Features = {
@@ -41,7 +41,7 @@ const DeutschBox: React.FC = () => {
 
   const resetDeutschBox = () => {
     setState(0);
-    setKey(Math.trunc(Math.random() * Date.now()));
+    setKey(generateRandomId());
   };
 
   const changeDeutschBox = () => setState((c) => (c + 1) % 4);

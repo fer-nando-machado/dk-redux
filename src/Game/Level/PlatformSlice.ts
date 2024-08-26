@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Platform, PlatformFactory } from "./Platform";
+import { generateRandomId } from "./Block";
 
 const initialState: PlatformFactory = {
   platforms: [],
@@ -11,7 +12,7 @@ const slice = createSlice({
     setPlatforms: (state, action: PayloadAction<Platform[]>) => {
       state.platforms = action.payload.map((platform) => ({
         ...platform,
-        id: Math.trunc(Date.now() * Math.random()),
+        id: generateRandomId(),
       }));
     },
   },
