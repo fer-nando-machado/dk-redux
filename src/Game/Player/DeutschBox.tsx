@@ -24,33 +24,42 @@ const DeutschBox: React.FC = () => {
   const { direction } = useSelector((state: RootState) => state.jumpman);
   const { current } = useSelector((state: RootState) => state.roster);
   const { reached } = useSelector((state: RootState) => state.goal);
-
   const isDeutschBox = current === PLAYER.code;
 
-  // TODO move to Slice
   const [state, setState] = useState(0);
-  const multiplier = state == 3 ? 3 : state == 1 ? 1 : 0;
-  const speed = multiplier * (isDirectionLeft(direction) ? -2 : 2);
+  const [key, setKey] = useState(0);
+
+  const multiplier = state == 3 ? 5 : state == 1 ? 1 : 0;
+  const speed = multiplier * (isDirectionLeft(direction) ? -1 : 1);
 
   const ref = useRef<HTMLInputElement>(null);
   const onClickDeutschBox = () => {
-    if (!ref.current) return;
+    if (reached || !ref.current) return;
     const button = ref.current.nextElementSibling as HTMLButtonElement;
     button.click();
   };
 
-  useEffect(() => {
+  const resetDeutschBox = () => {
     setState(0);
-  }, [current]);
+    setKey(Math.trunc(Math.random() * Date.now()));
+  };
+
+  const changeDeutschBox = () => setState((c) => (c + 1) % 4);
+
+  useEffect(() => {
+    resetDeutschBox();
+  }, [current, reached]);
+
+  useEffect(() => {
+    window.addEventListener("level:reset", resetDeutschBox);
+    return () => {
+      window.removeEventListener("level:reset", resetDeutschBox);
+    };
+  }, []);
 
   useIntervalFPS(() => {
     if (!isDeutschBox || reached) return;
     dispatch(moveJumpman({ x: speed, y: 0 }));
-  });
-
-  useKeyboard({
-    key: " ",
-    onKeyDown: onClickDeutschBox,
   });
 
   useKeyboard({
@@ -63,9 +72,10 @@ const DeutschBox: React.FC = () => {
       <ReactDeutschBox
         name="DeutschBox"
         feedback={direction}
+        onChange={changeDeutschBox}
         size={26}
         ref={ref}
-        onChange={() => setState((c) => (c + 1) % 4)}
+        key={key}
       />
     </div>
   ) : null;
