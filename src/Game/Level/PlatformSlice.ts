@@ -9,7 +9,10 @@ const slice = createSlice({
   initialState,
   reducers: {
     setPlatforms: (state, action: PayloadAction<Platform[]>) => {
-      state.platforms = action.payload;
+      state.platforms = action.payload.map((platform) => ({
+        ...platform,
+        id: Math.trunc(Date.now() * Math.random()),
+      }));
     },
   },
 });

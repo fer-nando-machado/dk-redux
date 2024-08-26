@@ -4,6 +4,7 @@ import { Position } from "./Position";
 import "./Platform.scss";
 
 export type Platform = Position & {
+  id?: number;
   length: number;
   skew?: boolean;
 };
@@ -32,8 +33,8 @@ export const PlatformFactory: React.FC = () => {
 
   return (
     <>
-      {platformFactory.platforms.map((p, index) => (
-        <Platform {...p} key={index} />
+      {platformFactory.platforms.map((p) => (
+        <Platform {...p} key={p.id} />
       ))}
     </>
   );
