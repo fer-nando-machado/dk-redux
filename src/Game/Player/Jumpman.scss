@@ -1,6 +1,7 @@
 .Jumpman {
   background: white;
   outline: 2px outset white;
+  border-radius: 2.5px;
 
   &.Reached {
     animation: dance 1s ease-out infinite;
