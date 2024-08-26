@@ -106,7 +106,7 @@ const Options: React.FC = () => {
   }, [hash]);
 
   useEffect(() => {
-    if (options.debug) return;
+    if (options.debug || process.env.NODE_ENV !== "production") return;
 
     window.addEventListener("blur", dispatchPause);
     document.addEventListener("visibilitychange", () => {
