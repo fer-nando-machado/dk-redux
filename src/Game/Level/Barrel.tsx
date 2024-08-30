@@ -64,15 +64,17 @@ const Barrel: React.FC<Barrel> = (barrel) => {
 
 export const BarrelFactory: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
+  const { debug } = useSelector((state: RootState) => state.options);
+
   const barrelFactory = useSelector((state: RootState) => state.barrelFactory);
   const { players } = useSelector((state: RootState) => state.roster);
   const completed = getCompleteCount(players);
   const rolled = barrelFactory.height - 25;
 
   const shift = useMemo(() => {
-    const shiftUnits = barrelFactory.height / 4;
+    const shiftUnits = 25; //barrelFactory.height / 4;
     const shift = completed * shiftUnits;
-    if (shift > rolled) {
+    if (shift > rolled || completed >= 4) {
       return rolled;
     }
     return shift;
@@ -94,27 +96,38 @@ export const BarrelFactory: React.FC = () => {
       {barrelFactory.barrels.map((b) => (
         <Barrel {...b} key={b.id} />
       ))}
-      <div
-        className="Stack Block"
-        style={{
-          left: barrelFactory.x - barrelFactory.width / 2,
-          bottom: barrelFactory.y + (25 - barrelFactory.height) / 2,
-        }}
-      >
-        <div className="Block Barrel Round" />
-        <div className="Block Barrel Round" />
-        <div className="Block Barrel Round" />
-        <div className="Block Barrel Round" />
-      </div>
-      <div
-        className={`Curtain Block ${shift === rolled ? "Rolled" : ""}`}
-        style={{
-          left: barrelFactory.x + (25 - barrelFactory.width) / 2,
-          bottom: barrelFactory.y + shift + (25 - barrelFactory.height) / 2,
-          width: barrelFactory.width,
-          height: barrelFactory.height - shift,
-        }}
-      />
+      {!debug && (
+        <>
+          <div
+            className={`BarrelFactory Jumpman Block ​`}
+            style={{
+              left: barrelFactory.x,
+              bottom: barrelFactory.y - barrelFactory.height / 5,
+            }}
+          />
+          <div
+            className="Stack Block"
+            style={{
+              left: barrelFactory.x - barrelFactory.width / 2,
+              bottom: barrelFactory.y + (25 - barrelFactory.height) / 2,
+            }}
+          >
+            <div className="Block Barrel Round" />
+            <div className="Block Barrel Round" />
+            <div className="Block Barrel Round" />
+            <div className="Block Barrel Round" />
+          </div>
+          <div
+            className={`Curtain Block ${shift === rolled ? "Rolled" : ""}`}
+            style={{
+              left: barrelFactory.x + (25 - barrelFactory.width) / 2,
+              bottom: barrelFactory.y + shift + (25 - barrelFactory.height) / 2,
+              width: barrelFactory.width,
+              height: barrelFactory.height - shift,
+            }}
+          />
+        </>
+      )}
     </>
   );
 };

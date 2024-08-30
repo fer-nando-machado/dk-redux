@@ -34,6 +34,29 @@
   }
 }
 
+.BarrelFactory {
+  transform: scale(3);
+  filter: grayscale(81%);
+  &::before {
+    margin-left: -6px;
+  }
+  &::after {
+    margin-top: 4px;
+    margin-left: -5px;
+    animation: factory 2s infinite linear;
+  }
+  @keyframes factory {
+    from {
+      content: "+-";
+      color: yellow;
+    }
+    to {
+      content: "-*";
+      color: hotpink;
+    }
+  }
+}
+
 .Path {
   border-radius: 20%;
   background: aquamarine;
@@ -51,7 +74,7 @@
 }
 
 .Curtain {
-  outline: 6px outset darkred;
+  outline: 8px outset darkred;
   border-radius: 0 0 12px 12px;
   background: linear-gradient(
     90deg,
