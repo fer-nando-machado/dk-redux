@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
-import MusicHowler from "../../Library/Howler";
+import MusicHowler from "../Hooks/useMusicHowler";
 import {
   lowerVolumeBGM,
   lowerVolumeSFX,

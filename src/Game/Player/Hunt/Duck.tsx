@@ -8,7 +8,7 @@ import { setPlayer } from "../../System/RosterSlice";
 import { moveJumpman } from "../JumpmanSlice";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";
-import MusicHowler from "../../../Library/Howler";
+import MusicHowler from "../../Hooks/useMusicHowler";
 import Target from "./Target";
 import "./Duck.scss";
 

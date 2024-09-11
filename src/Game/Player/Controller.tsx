@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import useKeyboard from "../Hooks/useKeyboard";
-import MusicHowler from "../../Library/Howler";
+import MusicHowler from "../Hooks/useMusicHowler";
 import {
   moveJumpman,
   moveJumpmanClimb,
