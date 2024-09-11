@@ -99,24 +99,25 @@ export const BarrelFactory: React.FC = () => {
       {!debug && (
         <>
           <div
+            className={`Stack Block ${shift === rolled ? "Rolled" : ""}`}
+            style={{
+              left: barrelFactory.x - barrelFactory.width / 2.5,
+              bottom: barrelFactory.y + (25 - barrelFactory.height) / 2,
+              width: barrelFactory.width,
+              height: barrelFactory.height,
+            }}
+          >
+            {Array.from({ length: 32 }, (_, i) => (
+              <div className="Block Barrel Round" key={i} />
+            ))}
+          </div>
+          <div
             className={`BarrelFactory Jumpman Block ​`}
             style={{
               left: barrelFactory.x,
-              bottom: barrelFactory.y - barrelFactory.height / 5,
+              bottom: barrelFactory.y - barrelFactory.height / 3.5,
             }}
           />
-          <div
-            className="Stack Block"
-            style={{
-              left: barrelFactory.x - barrelFactory.width / 2,
-              bottom: barrelFactory.y + (25 - barrelFactory.height) / 2,
-            }}
-          >
-            <div className="Block Barrel Round" />
-            <div className="Block Barrel Round" />
-            <div className="Block Barrel Round" />
-            <div className="Block Barrel Round" />
-          </div>
           <div
             className={`Curtain Block ${shift === rolled ? "Rolled" : ""}`}
             style={{

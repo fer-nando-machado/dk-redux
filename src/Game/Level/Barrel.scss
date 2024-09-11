@@ -35,24 +35,23 @@
 }
 
 .BarrelFactory {
-  transform: scale(3);
+  transform: scale(2);
   filter: grayscale(81%);
   &::before {
     margin-left: -6px;
   }
   &::after {
-    margin-top: 4px;
-    margin-left: -5px;
-    animation: factory 2s infinite linear;
+    margin-left: -3px;
+    animation: factory 1s infinite alternate linear;
   }
   @keyframes factory {
     from {
-      content: "+-";
-      color: yellow;
+      color: black;
+      transform: scaleY(1);
     }
     to {
-      content: "-*";
-      color: hotpink;
+      color: white;
+      transform: scaleY(1.1);
     }
   }
 }
@@ -114,10 +113,15 @@
 
 .Stack {
   display: flex;
-  height: fit-content;
+  flex-wrap: wrap;
   flex-direction: column;
   .Barrel {
     position: relative;
-    animation: none;
+    animation-play-state: paused;
+  }
+  &.Rolled {
+    .Barrel {
+      animation-play-state: running;
+    }
   }
 }
