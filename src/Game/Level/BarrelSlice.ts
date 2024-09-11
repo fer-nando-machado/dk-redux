@@ -10,6 +10,7 @@ import {
 import { RootState, StoreDispatch } from "../reduxStore";
 import { flipDirection, isDirectionLeft, LEFT } from "./Block";
 import { getRandomLadderIds } from "./Ladder";
+import { addPoints } from "../System/StatusSlice";
 
 const MAX_BARRELS = 5;
 
@@ -69,13 +70,24 @@ export const moveBarrel = createAsyncThunk<
   if (index === -1) return;
   const barrel = barrels[index];
 
-  let update = { ...barrel };
-  const isOnJumpman = checkCollision(update, jumpman);
+  const isOnJumpman = checkCollision(barrel, jumpman);
   if (isOnJumpman && !debug) {
     window.dispatchEvent(new CustomEvent("level:reset"));
     return;
   }
 
+  if (jumpman.onAir) {
+    const isUnderJumpman = checkCollision(
+      { x: barrel.x + 13, y: barrel.y + 50 },
+      jumpman,
+      { x: 2 * fps, y: 50 }
+    );
+    if (isUnderJumpman) {
+      dispatch(addPoints({ position: jumpman, value: 100 }));
+    }
+  }
+
+  let update = { ...barrel };
   const ladder = checkLadders(barrel, ladders);
   if (
     ladder &&

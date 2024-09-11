@@ -22,6 +22,7 @@ export const addPositionWithinTolerance = (
   }
   return positions;
 };
+
 const boundaries: { min: Position; max: Position } = {
   min: { x: -5, y: -50 },
   max: { x: 500 - 20, y: 750 - 15 },
@@ -106,16 +107,17 @@ const isOnLadder = (position: Position, ladder: Ladder): boolean => {
 
 export const checkCollision = (
   position: Position,
-  target: Position
+  target: Position,
+  tolerance: Position = { x: 25, y: 25 }
 ): boolean => {
   const relativeX = position.x - target.x;
   const relativeY = position.y - target.y;
 
   return (
-    relativeX >= -thickness.x &&
-    relativeX <= thickness.x &&
-    relativeY >= -thickness.x &&
-    relativeY <= thickness.x
+    relativeX >= -tolerance.x &&
+    relativeX <= tolerance.x &&
+    relativeY >= -tolerance.y &&
+    relativeY <= tolerance.y
   );
 };
 
