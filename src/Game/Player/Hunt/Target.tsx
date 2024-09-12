@@ -20,8 +20,7 @@ const Target: React.FC<Target> = ({ points, callback, always }) => {
   const isHunting = isDuckHunting();
   const isClickable = !reached && isAbove && (isHunting || always);
 
-  const onClickTarget = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
+  const onClickTarget = () => {
     if (!isClickable) return;
     dispatch(addPoints(points));
     callback();
@@ -29,7 +28,8 @@ const Target: React.FC<Target> = ({ points, callback, always }) => {
 
   return isClickable ? (
     <div
-      onClick={onClickTarget}
+      onMouseDown={onClickTarget}
+      onTouchStart={onClickTarget}
       className={`Target ${isHunting ? "Crosshair" : ""}`}
     />
   ) : null;
