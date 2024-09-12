@@ -80,10 +80,12 @@ export const moveBarrel = createAsyncThunk<
     const isUnderJumpman = checkCollision(
       { x: barrel.x + 13, y: barrel.y + 50 },
       jumpman,
-      { x: 2 * fps, y: 50 }
+      { x: 1 * fps, y: 50 }
     );
     if (isUnderJumpman) {
-      dispatch(addPoints({ position: jumpman, value: 100 }));
+      dispatch(
+        addPoints({ position: { x: barrel.x, y: jumpman.y }, value: 100 })
+      );
     }
   }
 

@@ -10,8 +10,10 @@ const slice = createSlice({
   initialState,
   reducers: {
     addPoints: (state, action: PayloadAction<Points>) => {
-      state.points = action.payload;
-      state.score += action.payload.value;
+      if (state.points !== action.payload) {
+        state.points = action.payload;
+        state.score += action.payload.value;
+      }
     },
     clearPoints: (state) => {
       state.points = undefined;
