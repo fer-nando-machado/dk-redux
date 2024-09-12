@@ -80,6 +80,15 @@ export const BarrelFactory: React.FC = () => {
     return shift;
   }, [completed, barrelFactory.height]);
 
+  const barrelStack = useMemo(() => {
+    const count = Math.floor(
+      (barrelFactory.width * barrelFactory.height) / 25 ** 2
+    );
+    return Array.from({ length: count }, (_, i) => (
+      <div className="Block Barrel Round" key={i} />
+    ));
+  }, [barrelFactory.width, barrelFactory.height]);
+
   useIntervalTimed(() => {
     dispatch(createBarrel());
   }, 5000);
@@ -107,12 +116,12 @@ export const BarrelFactory: React.FC = () => {
               height: barrelFactory.height,
             }}
           >
-            {Array.from({ length: 32 }, (_, i) => (
-              <div className="Block Barrel Round" key={i} />
-            ))}
+            {barrelStack}
           </div>
           <div
-            className={`BarrelFactory Jumpman Block ​`}
+            className={`BarrelFactory Jumpman Block ​ ${
+              shift === rolled ? "Rolled" : ""
+            }`}
             style={{
               left: barrelFactory.x,
               bottom: barrelFactory.y - barrelFactory.height / 3.5,

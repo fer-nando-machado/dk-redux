@@ -38,12 +38,20 @@
   transform: scale(2);
   filter: grayscale(81%);
   &::before {
-    margin-left: -6px;
-  }
-  &::after {
     margin-left: -3px;
-    animation: factory 1s infinite alternate linear;
   }
+  &:not(.Rolled) {
+    &::before,
+    &::after {
+      text-shadow: none;
+    }
+  }
+  &.Rolled {
+    &::after {
+      animation: factory 1s infinite alternate linear;
+    }
+  }
+
   @keyframes factory {
     from {
       color: black;
@@ -51,7 +59,8 @@
     }
     to {
       color: white;
-      transform: scaleY(1.1);
+      margin-top: -1px;
+      transform: scaleY(1.25);
     }
   }
 }
