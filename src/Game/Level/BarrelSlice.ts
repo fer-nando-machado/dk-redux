@@ -83,9 +83,7 @@ export const moveBarrel = createAsyncThunk<
       { x: 1 * fps, y: 50 }
     );
     if (isUnderJumpman) {
-      dispatch(
-        addPoints({ position: { x: barrel.x, y: jumpman.y }, value: 100 })
-      );
+      dispatch(addPoints({ position: jumpman, value: 100 }));
     }
   }
 
