@@ -1,5 +1,6 @@
 .Jumpman.D {
   outline-color: #fc0;
+  outline-width: 3px;
 
   &::before {
     color: #d00;
@@ -11,8 +12,11 @@
     left: -7px;
     z-index: 0;
 
-    button:focus {
-      outline: none;
+    button {
+      border: none;
+      &:focus {
+        outline: none;
+      }
     }
 
     aside {
