@@ -1,7 +1,6 @@
 .Status {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
 
   span {
     cursor: pointer;
@@ -9,8 +8,30 @@
       font-weight: bold;
     }
   }
+}
 
-  .Points {
+.Display {
+  display: flex;
+  justify-content: center;
+
+  .Header {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .Time,
+  .Score {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1px;
+  }
+
+  .Header,
+  .Points,
+  .Message {
     font-size: smaller;
   }
 
@@ -18,7 +39,6 @@
     width: 100%;
     bottom: 75px;
     margin: 0 20px;
-    font-size: smaller;
     font-style: italic;
   }
 }

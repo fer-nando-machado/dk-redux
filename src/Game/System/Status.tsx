@@ -19,7 +19,6 @@ export type Status = {
 
 const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { score } = useSelector((state: RootState) => state.status);
   const { reached } = useSelector((state: RootState) => state.goal);
 
   const clickPause = () => {
@@ -30,15 +29,49 @@ const Status: React.FC = () => {
     window.dispatchEvent(new CustomEvent("level:reset"));
   };
 
-  return !reached ? (
-    <div className="Status">
-      <span onClick={clickPause}>PAUSE</span>
-      {score}
-      <span onClick={clickReset}>RESET</span>
-      <PointsDisplay />
-      <MessageDisplay />
+  return (
+    <>
+      <div className="Display">
+        <HeaderDisplay />
+        <PointsDisplay />
+        <MessageDisplay />
+      </div>
+      {!reached && (
+        <div className="Status">
+          <span onClick={clickPause}>PAUSE</span>
+          <span onClick={clickReset}>RESET</span>
+        </div>
+      )}
+    </>
+  );
+};
+
+const HeaderDisplay: React.FC = () => {
+  const { score } = useSelector((state: RootState) => state.status);
+  const { reached } = useSelector((state: RootState) => state.goal);
+  return (
+    <div className="Header">
+      <div className="Score">
+        <span>{reached ? <span className="emoji">⭐</span> : "SCORE"}</span>
+        <small>
+          {reached && <span className="emoji">🏆</span>}
+          {score}
+        </small>
+        {reached && (
+          <small>
+            <span className="emoji">⏱</span>
+            {99}s
+          </small>
+        )}
+      </div>
+      {!reached && (
+        <div className="Time">
+          <span>TIME</span>
+          <small>{99}</small>
+        </div>
+      )}
     </div>
-  ) : null;
+  );
 };
 
 const PointsDisplay: React.FC = () => {
