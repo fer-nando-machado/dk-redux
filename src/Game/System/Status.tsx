@@ -3,7 +3,7 @@ import { RootState, StoreDispatch } from "../reduxStore";
 import { useIntervalTimed } from "../Hooks/useInterval";
 import { Position } from "../Level/Position";
 import { setPaused } from "./OptionsSlice";
-import { clearMessage, clearPoints } from "./StatusSlice";
+import { clearMessage, clearPoints, tickTime } from "./StatusSlice";
 import "./Status.scss";
 
 export type Points = {
@@ -13,6 +13,7 @@ export type Points = {
 
 export type Status = {
   score: number;
+  time: number;
   points?: Points;
   message?: string;
 };
@@ -64,12 +65,21 @@ const HeaderDisplay: React.FC = () => {
           </small>
         )}
       </div>
-      {!reached && (
-        <div className="Time">
-          <span>TIME</span>
-          <small>{99}</small>
-        </div>
-      )}
+      {!reached && <TimeDisplay />}
+    </div>
+  );
+};
+
+const TimeDisplay: React.FC = () => {
+  const dispatch: StoreDispatch = useDispatch();
+  const { time } = useSelector((state: RootState) => state.status);
+
+  useIntervalTimed(() => dispatch(tickTime()), 1000);
+
+  return (
+    <div className="Time">
+      <span>TIME</span>
+      <small>{time}</small>
     </div>
   );
 };

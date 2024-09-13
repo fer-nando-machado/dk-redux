@@ -3,6 +3,7 @@ import { Status, Points } from "./Status";
 
 const initialState: Status = {
   score: 0,
+  time: 100,
 };
 
 const slice = createSlice({
@@ -18,6 +19,11 @@ const slice = createSlice({
     clearPoints: (state) => {
       state.points = undefined;
     },
+    tickTime: (state) => {
+      if (state.time - 1 >= 0) {
+        state.time += -1;
+      }
+    },
     showMessage: (state, action: PayloadAction<string>) => {
       state.message = action.payload;
     },
@@ -30,6 +36,12 @@ const slice = createSlice({
   },
 });
 
-export const { addPoints, clearPoints, showMessage, clearMessage, resetScore } =
-  slice.actions;
+export const {
+  addPoints,
+  clearPoints,
+  tickTime,
+  showMessage,
+  clearMessage,
+  resetScore,
+} = slice.actions;
 export default slice.reducer;
