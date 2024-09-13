@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Status, Points } from "./Status";
+import { Status, Points, START_TIME } from "./Status";
 
 const initialState: Status = {
   score: 0,
-  time: 100,
+  time: START_TIME,
 };
 
 const slice = createSlice({

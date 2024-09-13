@@ -41,7 +41,7 @@ const Roster: React.FC = () => {
       winPlayerCheat({
         code: current,
         highScore: Math.floor(1000 + Math.random() * 9000),
-        speedRun: Math.floor(100 + Math.random() * 900),
+        speedRun: Math.floor(10 + Math.random() * 90),
       })
     );
 

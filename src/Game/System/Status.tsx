@@ -18,6 +18,8 @@ export type Status = {
   message?: string;
 };
 
+export const START_TIME = 100;
+
 const Status: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
   const { reached } = useSelector((state: RootState) => state.goal);
@@ -47,8 +49,9 @@ const Status: React.FC = () => {
   );
 };
 
+// TODO extract ScoreDisplay or ResultDisplay
 const HeaderDisplay: React.FC = () => {
-  const { score } = useSelector((state: RootState) => state.status);
+  const { score, time } = useSelector((state: RootState) => state.status);
   const { reached } = useSelector((state: RootState) => state.goal);
   return (
     <div className="Header">
@@ -61,7 +64,7 @@ const HeaderDisplay: React.FC = () => {
         {reached && (
           <small>
             <span className="emoji">⏱</span>
-            {99}s
+            {START_TIME - time}s
           </small>
         )}
       </div>

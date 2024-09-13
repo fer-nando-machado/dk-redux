@@ -10,6 +10,7 @@ import {
 import { flipDirection, getDirection, LEFT } from "../Level/Block";
 import { winPlayer } from "../System/RosterSlice";
 import { ROSTER } from "../System/Roster";
+import { START_TIME } from "../System/Status";
 import { Jumpman } from "./Jumpman";
 
 const initialState: Jumpman = {
@@ -69,13 +70,16 @@ export const moveJumpman = createAsyncThunk<
     const isOnGoal = checkCollision(moved, goal);
     if (isOnGoal) {
       const { players } = state.roster;
-      const { score } = state.status;
+      const { score, time } = state.status;
       const highScore = players[current]?.highScore || 0;
+      const speedRun = players[current]?.speedRun || START_TIME;
+      const run = START_TIME - time;
+
       dispatch(
         winPlayer({
           code: current,
           highScore: score > highScore ? score : highScore,
-          speedRun: 0,
+          speedRun: run < speedRun ? run : speedRun,
         })
       );
       moved = {
