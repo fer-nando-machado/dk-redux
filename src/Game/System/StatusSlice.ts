@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Status, Points, START_TIME } from "./Status";
+import { RootState, StoreDispatch } from "../reduxStore";
 
 const initialState: Status = {
   score: 0,
@@ -19,10 +20,8 @@ const slice = createSlice({
     clearPoints: (state) => {
       state.points = undefined;
     },
-    tickTime: (state) => {
-      if (state.time - 1 >= 0) {
-        state.time += -1;
-      }
+    setTime: (state, action: PayloadAction<number>) => {
+      state.time = action.payload;
     },
     showMessage: (state, action: PayloadAction<string>) => {
       state.message = action.payload;
@@ -30,18 +29,28 @@ const slice = createSlice({
     clearMessage: (state) => {
       state.message = undefined;
     },
-    resetScore: (state) => {
-      return { ...initialState, message: state.message };
+    resetScore: () => {
+      return initialState;
     },
   },
 });
 
-export const {
-  addPoints,
-  clearPoints,
-  tickTime,
-  showMessage,
-  clearMessage,
-  resetScore,
-} = slice.actions;
+export const tickTime = createAsyncThunk<
+  void,
+  void,
+  {
+    state: RootState;
+    dispatch: StoreDispatch;
+  }
+>("StatusSlice/tickTime", async (_, { getState, dispatch }) => {
+  const { status }: RootState = getState();
+  if (status.time === 0) {
+    window.dispatchEvent(new CustomEvent("level:reset"));
+  } else {
+    dispatch(slice.actions.setTime(status.time - 1));
+  }
+});
+
+export const { addPoints, clearPoints, showMessage, clearMessage, resetScore } =
+  slice.actions;
 export default slice.reducer;
