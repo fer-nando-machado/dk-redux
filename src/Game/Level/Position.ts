@@ -121,6 +121,17 @@ export const checkCollision = (
   );
 };
 
+export const checkCollisionRound = (
+  position: Position,
+  target: Position,
+  tolerance: number = 25
+): boolean => {
+  const relativeX = position.x - target.x;
+  const relativeY = position.y - target.y;
+  const distance = Math.sqrt(relativeX * relativeX + relativeY * relativeY);
+  return distance <= tolerance;
+};
+
 const thickness: Position = {
   x: 25,
   y: 13,

@@ -4,6 +4,7 @@ import {
   addPositionWithinTolerance,
   checkBoundaries,
   checkCollision,
+  checkCollisionRound,
   checkLadders,
   checkPlatforms,
 } from "./Position";
@@ -70,7 +71,7 @@ export const moveBarrel = createAsyncThunk<
   if (index === -1) return;
   const barrel = barrels[index];
 
-  const isOnJumpman = checkCollision(barrel, jumpman);
+  const isOnJumpman = checkCollisionRound(barrel, jumpman);
   if (isOnJumpman && !debug) {
     window.dispatchEvent(new CustomEvent("level:reset"));
     return;
