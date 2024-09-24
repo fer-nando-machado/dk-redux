@@ -20,7 +20,10 @@ const Target: React.FC<Target> = ({ points, callback, always }) => {
   const isHunting = isDuckHunting();
   const isClickable = !reached && isAbove && (isHunting || always);
 
-  const onClickTarget = () => {
+  const onClickTarget = (
+    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+  ) => {
+    event.preventDefault();
     if (!isClickable) return;
     dispatch(addPoints(points));
     callback();
