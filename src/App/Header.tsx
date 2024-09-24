@@ -1,5 +1,5 @@
-import { name, description, homepage } from "../../package.json";
 import { useState, useEffect } from "react";
+import { name, homepage } from "../../package.json";
 import { then } from "../Game/System/Options";
 import "./Header.scss";
 
@@ -7,7 +7,6 @@ const handleShare = () => {
   if (navigator.share) {
     navigator.share({
       title: name,
-      text: description,
       url: `${homepage}/#${then.slice(-4)}`,
     });
   }
