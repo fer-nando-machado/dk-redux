@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Options } from "./Options";
 
 const initialState: Options = {
-  paused: true,
+  paused: false,
   lowFPS: false,
   filters: true,
   gravity: true,

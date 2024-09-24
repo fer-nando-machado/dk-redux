@@ -5,7 +5,7 @@ const initialState: Music = {
   bgm: Volume.MID,
   sfx: Volume.LOW,
   rate: Rate.NORMAL,
-  playing: false,
+  playing: true,
 };
 
 const slice = createSlice({
