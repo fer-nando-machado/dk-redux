@@ -1,0 +1,55 @@
+.App {
+  h1 {
+    padding-top: 1vh;
+    margin: 0.1vh;
+    display: flex;
+    font-size: 24px;
+    align-items: center;
+    position: relative;
+    span {
+      font-size: 18px;
+    }
+    .dk {
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin: 0.25vw;
+      width: 15vw;
+      opacity: 0.81;
+      color: transparent;
+      rect {
+        fill: transparent;
+      }
+    }
+    .Share {
+      position: absolute;
+      cursor: pointer;
+      left: 200px;
+      transform: scale(0.75);
+      opacity: 0.25;
+      &:hover {
+        opacity: 1;
+      }
+      &::before,
+      &::after {
+        position: absolute;
+        font-size: 150%;
+      }
+      &::before {
+        content: ".";
+        bottom: 4px;
+        left: -15px;
+      }
+      &::after {
+        content: ":";
+        bottom: -7px;
+        right: -23px;
+      }
+    }
+  }
+
+  &:has(.Player.​) object,
+  h1 object:target {
+    color: brown;
+  }
+}

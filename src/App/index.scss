@@ -7,40 +7,12 @@
   justify-content: center;
   position: relative;
 
-  h1 {
-    padding-top: 1vh;
-    margin: 0.1vh;
-    display: flex;
-    font-size: 24px;
-    align-items: center;
-    span {
-      font-size: 18px;
-    }
-    .dk {
-      position: fixed;
-      top: 0;
-      left: 0;
-      margin: 0.25vw;
-      width: 15vw;
-      opacity: 0.81;
-      color: transparent;
-      rect {
-        fill: transparent;
-      }
-    }
-  }
-
   main {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6vw;
-  }
-
-  &:has(.Player.​) object,
-  h1 object:target {
-    color: brown;
   }
 }
 

@@ -1,5 +1,5 @@
 import Game from "../Game";
-import Icon from "./Icon";
+import Header from "./Header";
 import Maker from "./Maker";
 import Manual from "./Manual";
 import Navigation from "./Navigation";
@@ -9,9 +9,7 @@ import "./index.scss";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>
-        <Icon /> DK<span>{"<Redux/>"}</span>
-      </h1>
+      <Header />
       <main>
         <Manual>
           {({ isMaker }) => (
