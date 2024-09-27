@@ -3,7 +3,7 @@
   "description": "A reduxed remixed remake of Donkey Kong, the original arcade game from 1981, built with React and Redux Toolkit, written in TypeScript, styled with SCSS and compiled by Vite. Proudly hosted on GitHub Pages. Game and Code are destined for entertainment and educational purposes only.",
   "version": "0.0.1",
   "type": "module",
-  "homepage": "http://fer-nando-machado.github.io/dk-redux",
+  "homepage": "https://fer-nando-machado.github.io/dk-redux",
   "author": "Fernando Machado",
   "license": "MIT",
   "repository": {

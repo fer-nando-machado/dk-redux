@@ -47,7 +47,11 @@ export const findClosestLadder = (
   let minDistance = Infinity;
 
   for (const ladder of ladders) {
-    if (Math.abs(ladder.y - current.y) <= 25 && !ladder.target) {
+    if (
+      ladder.height === 100 &&
+      Math.abs(ladder.y - current.y) <= 25 &&
+      !ladder.target
+    ) {
       const distance = Math.sqrt(
         Math.pow(ladder.x - current.x, 2) + Math.pow(ladder.y - current.y, 2)
       );
