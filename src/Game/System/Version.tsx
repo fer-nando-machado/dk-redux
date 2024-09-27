@@ -56,7 +56,8 @@ const Version: React.FC = () => {
 
   return (
     <span onClick={toggleDetails}>
-      <u>{name}</u> <small>v{version} WIP</small>
+      <u>{name}</u>
+      <small> v{version} (WIP)</small>
       <p>{hasDetails ? description : description.slice(0, 111) + ". (…)"}</p>
       {hasDetails && (
         <>

@@ -126,6 +126,7 @@ const Options: React.FC = () => {
       {options.paused && (
         <div className="Options">
           <div>
+            <u onClick={dispatchTogglePaused}>PAUSE//</u>
             <Version />
             <u>GRAPHICS</u>
             <div className="Toggles">
