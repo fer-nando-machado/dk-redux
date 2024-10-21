@@ -81,7 +81,8 @@ const DeutschBox: React.FC = () => {
       dispatch(moveJumpman({ x: speed, y: 0 }));
     }
     if (isOnLadder?.target) {
-      dispatch(moveJumpman({ x: 0, y: 3 }));
+      dispatch(unsetTarget());
+      dispatch(moveJumpman({ x: 0, y: 100 }));
     }
   });
 

@@ -61,10 +61,12 @@ export const moveJumpman = createAsyncThunk<
     const { current } = state.roster;
 
     const { x, y } = payload;
+    const moveX = x < 25 ? x * fps : x;
+    const moveY = y < 25 ? y * fps : y;
     let moved = {
       ...jumpman,
-      x: jumpman.x + x * fps,
-      y: jumpman.y + y * fps,
+      x: jumpman.x + moveX,
+      y: jumpman.y + moveY,
     };
 
     const isOnGoal = checkCollision(moved, goal);
