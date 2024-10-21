@@ -91,15 +91,15 @@ export const moveBarrel = createAsyncThunk<
   let update = { ...barrel };
   const ladder = checkLadders(barrel, ladders);
   if (
-    ladder &&
-    ladder.id &&
+    ladder?.id &&
     barrel.ladders.includes(ladder.id) &&
+    barrel.x === ladder.x &&
     barrel.y > ladder.y + ladder.height
   ) {
     update = {
       ...update,
-      x: ladder.x,
-      y: update.y - 27,
+      x: update.x,
+      y: update.y - 25 - 2,
       fallingSpeed: -2,
     };
   } else if (barrel.fallingSpeed !== 0) {
