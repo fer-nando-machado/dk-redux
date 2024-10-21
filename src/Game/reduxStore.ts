@@ -4,6 +4,7 @@ import musicReducer from "./System/MusicSlice";
 import statusReducer from "./System/StatusSlice";
 import rosterReducer from "./System/RosterSlice";
 import goalReducer from "./Level/GoalSlice";
+import fireReducer from "./Level/FireSlice";
 import barrelReducer from "./Level/BarrelSlice";
 import ladderReducer from "./Level/LadderSlice";
 import platformReducer from "./Level/PlatformSlice";
@@ -19,6 +20,7 @@ export const Store = configureStore({
     jumpman: jumpmanReducer,
     goal: goalReducer,
     barrelFactory: barrelReducer,
+    fireFactory: fireReducer,
     ladderFactory: ladderReducer,
     platformFactory: platformReducer,
     duckFactory: duckReducer,

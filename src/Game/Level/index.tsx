@@ -16,6 +16,9 @@ import { setJumpman } from "../Player/JumpmanSlice";
 import { BarrelFactory } from "./Barrel";
 import { setBarrelFactory } from "./BarrelSlice";
 
+import { FireFactory } from "./Fire";
+import { setFireFactory } from "./FireSlice";
+
 import { DuckFactory } from "../Player/Hunt/Duck";
 import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
@@ -34,6 +37,7 @@ export type Level = {
   ladders: Ladder[];
   platforms: Platform[];
   barrelFactory: BarrelFactory;
+  fireFactory: FireFactory;
   goal: Goal;
 };
 
@@ -48,7 +52,7 @@ const LEVEL_1: Level = {
     { x: 0, y: 300, length: 455, skew: true },
     { x: 50, y: 200, length: 455, skew: true },
     { x: 0, y: 100, length: 455, skew: true },
-    { x: 25, y: 0, length: 480 },
+    { x: 0, y: 0, length: 505 },
   ],
   ladders: [
     { x: 130, y: 500, height: 200 },
@@ -77,7 +81,7 @@ const LEVEL_1: Level = {
     { x: 180, y: 0, height: 25 },
   ],
   jumpman: {
-    x: 25,
+    x: 75,
     y: 75,
     onAir: true,
     jumpingSpeed: 0,
@@ -93,6 +97,13 @@ const LEVEL_1: Level = {
     onAir: true,
     direction: LEFT,
     barrels: [],
+  },
+  fireFactory: {
+    x: 25,
+    y: 25,
+    onAir: true,
+    direction: RIGHT,
+    fires: [],
   },
 };
 
@@ -119,6 +130,13 @@ const LEVEL_0: Level = {
     direction: RIGHT,
     barrels: [],
   },
+  fireFactory: {
+    x: 400,
+    y: 250,
+    onAir: true,
+    direction: LEFT,
+    fires: [],
+  },
 };
 
 const DUCK_FACTORY: DuckFactory = {
@@ -136,13 +154,14 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
   useEffect(() => {
     const isMaker = hasCustomLevel(customLevel);
     if (isMaker) {
-      const { jumpman, barrelFactory } = customLevel;
+      const { jumpman, barrelFactory, fireFactory } = customLevel;
       dispatch(setMaker(true));
       setLevel({
         ...LEVEL_0,
         ...customLevel,
         jumpman: { ...LEVEL_0.jumpman, ...jumpman },
         barrelFactory: { ...LEVEL_0.barrelFactory, ...barrelFactory },
+        fireFactory: { ...LEVEL_0.fireFactory, ...fireFactory },
       });
     } else {
       handleReset();
@@ -155,6 +174,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
     dispatch(setJumpman(level.jumpman));
     dispatch(setLadders(level.ladders));
     dispatch(setPlatforms(level.platforms));
+    dispatch(setFireFactory(level.fireFactory));
     dispatch(setBarrelFactory(level.barrelFactory));
     dispatch(setDuckFactory(DUCK_FACTORY));
   }, [level]);
@@ -182,6 +202,7 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
       <Goal />
       <Jumpman />
       <BarrelFactory />
+      <FireFactory />
       <DuckFactory />
     </>
   );

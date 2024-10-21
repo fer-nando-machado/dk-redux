@@ -1,0 +1,60 @@
+.Fire {
+  background: red;
+  outline: none;
+
+  &::before,
+  &::after {
+    position: absolute;
+  }
+
+  &::before {
+    content: "W";
+    color: orangered;
+    font-size: smaller;
+    top: 7px;
+    left: 7px;
+    animation: fire 2s infinite linear;
+  }
+
+  &::after {
+    color: red;
+  }
+}
+
+@keyframes fire {
+  0%, 100% {
+    transform: scale(2);
+  }
+  50% {
+    transform: scale(2.444);
+  }
+}
+
+.Drum {
+  outline: 5px outset darkblue;
+  background: darkblue;
+
+  &::before,
+  &::after {
+    position: absolute;
+  }
+
+  &::before {
+    content: "";
+    height: 24px;
+    width: 1px;
+    left: 1px;
+    background: white;
+  }
+
+  &::after {
+    content: "OIL";
+    transform: scale(0.4);
+    left: -10px;
+    top: 1px;
+    padding-top: 4px;
+    border-top: 2px solid cyan;
+    border-bottom: 2px solid cyan;
+    color: cyan;
+  }
+}

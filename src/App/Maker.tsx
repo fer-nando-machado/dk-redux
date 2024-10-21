@@ -25,6 +25,10 @@ const demoLevel = `{
     "x": 25,
     "y": 650
   },
+  "fireFactory": {
+    "x": 400,
+    "y": 250
+  },
   "jumpman": {
     "x": 100,
     "y": 70
@@ -88,6 +92,10 @@ const Maker: React.FC<Maker> = ({ isMaker, children }) => {
               {"barrelFactory:{}"}
             </p>
             <p>
+              <span className="Drum Block" />
+              {"fireFactory:{}"}
+            </p>
+            <p>
               <span className="Platform Block" />
               {"platforms:[{}]"}
             </p>
@@ -95,11 +103,6 @@ const Maker: React.FC<Maker> = ({ isMaker, children }) => {
               <span className="Ladder Block" />
               {"ladders:[{}]"}
             </p>
-            <span className="Hint Codebook">
-              <a href="https://fer-nando-machado.github.io/codebook/">
-                CodeBook
-              </a>
-            </span>
           </div>
           {"{ x, y, … }"}
         </div>

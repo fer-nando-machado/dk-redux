@@ -33,7 +33,7 @@ const slice = createSlice({
       return action.payload;
     },
     createBarrel: (state, action: PayloadAction<Barrel>) => {
-      if (state.barrels.length == MAX_BARRELS) {
+      if (state.barrels.length === MAX_BARRELS) {
         state.barrels.shift();
       }
       state.barrels.push(action.payload);
