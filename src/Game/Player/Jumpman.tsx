@@ -18,6 +18,7 @@ export type Jumpman = Block & {
   jumpingSpeed: number;
   climbingSpeed: number;
   walkingSpeed: number;
+  invincible: boolean;
 };
 
 const PLAYER: Features = {

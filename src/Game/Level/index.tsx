@@ -88,6 +88,7 @@ const LEVEL_1: Level = {
     walkingSpeed: 0,
     climbingSpeed: 0,
     direction: RIGHT,
+    invincible: false,
   },
   barrelFactory: {
     x: 50,
@@ -120,6 +121,7 @@ const LEVEL_0: Level = {
     walkingSpeed: 0,
     onAir: true,
     direction: RIGHT,
+    invincible: false,
   },
   barrelFactory: {
     x: 475,
@@ -200,9 +202,9 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
       <LadderFactory />
       <PlatformFactory />
       <Goal />
+      <FireFactory />
       <Jumpman />
       <BarrelFactory />
-      <FireFactory />
       <DuckFactory />
     </>
   );

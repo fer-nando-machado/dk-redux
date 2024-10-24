@@ -21,6 +21,7 @@ const initialState: Jumpman = {
   jumpingSpeed: 0,
   walkingSpeed: 0,
   direction: LEFT,
+  invincible: false,
 };
 
 const slice = createSlice({
@@ -38,6 +39,12 @@ const slice = createSlice({
     },
     setWalking: (state, action: PayloadAction<number>) => {
       state.walkingSpeed = action.payload;
+    },
+    setInvincible: (state, action: PayloadAction<boolean>) => {
+      state.invincible = action.payload;
+    },
+    toggleDirection: (state) => {
+      state.direction = flipDirection(state.direction);
     },
   },
 });
@@ -154,6 +161,12 @@ export const moveJumpmanClimb = createAsyncThunk<
   }
 );
 
-export const { setJumpman, setClimbing, setJumping, setWalking } =
-  slice.actions;
+export const {
+  setJumpman,
+  setClimbing,
+  setJumping,
+  setWalking,
+  setInvincible,
+  toggleDirection,
+} = slice.actions;
 export default slice.reducer;

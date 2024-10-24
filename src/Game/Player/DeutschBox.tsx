@@ -7,11 +7,11 @@ import useKeyboard from "../Hooks/useKeyboard";
 import { useIntervalFPS } from "../Hooks/useInterval";
 import { setPlayer } from "../System/RosterSlice";
 import { ROSTER, Features } from "../System/Roster";
-import { moveJumpman } from "./JumpmanSlice";
+import { moveJumpman, setInvincible, toggleDirection } from "./JumpmanSlice";
 import { setTarget, unsetTarget } from "../Level/LadderSlice";
 import { generateRandomId, isDirectionLeft } from "../Level/Block";
-import "./DeutschBox.scss";
 import { checkLadders } from "../Level/Position";
+import "./DeutschBox.scss";
 
 const PLAYER: Features = {
   code: "D",
@@ -23,7 +23,7 @@ ROSTER[PLAYER.code] = PLAYER;
 
 const DeutschBox: React.FC = () => {
   const dispatch: StoreDispatch = useDispatch();
-  const { direction, x, y } = useSelector((state: RootState) => state.jumpman);
+  const jumpman = useSelector((state: RootState) => state.jumpman);
   const { current } = useSelector((state: RootState) => state.roster);
   const { reached } = useSelector((state: RootState) => state.goal);
   const { ladders } = useSelector((state: RootState) => state.ladderFactory);
@@ -41,10 +41,16 @@ const DeutschBox: React.FC = () => {
   };
 
   const onChangeDeutschBox = () => {
-    if (state == 0) {
-      dispatch(setTarget({ x, y }));
-    } else {
+    if (state === 0) {
+      dispatch(setTarget(jumpman));
+    } else if (state === 1) {
       dispatch(unsetTarget());
+      dispatch(toggleDirection());
+    } else if (state === 2) {
+      dispatch(toggleDirection());
+      dispatch(setInvincible(true));
+    } else {
+      dispatch(setInvincible(false));
     }
     setState((c) => (c + 1) % 4);
   };
@@ -73,16 +79,20 @@ const DeutschBox: React.FC = () => {
   useIntervalFPS(() => {
     if (reached || !isDeutschBox) return;
 
-    const multiplier = state == 3 ? 5 : state == 1 ? 1 : 0;
-    const speed = multiplier * (isDirectionLeft(direction) ? -1 : 1);
+    const multiplier = state === 3 ? 3 : state === 1 ? 1 : 0;
+    const speed = multiplier * (isDirectionLeft(jumpman.direction) ? -1 : 1);
 
-    const isOnLadder = checkLadders({ x, y }, ladders);
+    const currentLadder = checkLadders(jumpman, ladders);
     if (speed) {
       dispatch(moveJumpman({ x: speed, y: 0 }));
     }
-    if (isOnLadder?.target) {
+    if (currentLadder?.target && Math.abs(jumpman.x - currentLadder.x) < 5) {
       dispatch(unsetTarget());
-      dispatch(moveJumpman({ x: 0, y: 100 }));
+      dispatch(
+        setTarget({ x: jumpman.x, y: jumpman.y + currentLadder.height })
+      );
+      dispatch(moveJumpman({ x: 0, y: currentLadder.height }));
+      dispatch(toggleDirection());
     }
   });
 
@@ -95,7 +105,7 @@ const DeutschBox: React.FC = () => {
     <div className="DeutschBox" onClick={onClickDeutschBox}>
       <ReactDeutschBox
         name="DeutschBox"
-        feedback={direction}
+        feedback={jumpman.direction}
         onChange={onChangeDeutschBox}
         size={26}
         ref={ref}

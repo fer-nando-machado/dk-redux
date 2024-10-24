@@ -72,7 +72,11 @@ export const moveBarrel = createAsyncThunk<
   const barrel = barrels[index];
 
   const isOnJumpman = checkCollisionRound(barrel, jumpman);
-  if (isOnJumpman && !debug) {
+  if (isOnJumpman && jumpman.invincible) {
+    dispatch(destroyBarrel(barrel.id));
+    dispatch(addPoints({ position: jumpman, value: 100 }));
+    return;
+  } else if (isOnJumpman && !debug) {
     window.dispatchEvent(new CustomEvent("level:reset"));
     return;
   }
