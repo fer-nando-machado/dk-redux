@@ -7,6 +7,7 @@ import {
 } from "./Position";
 import { RootState, StoreDispatch } from "../reduxStore";
 import { isDirectionLeft, LEFT } from "./Block";
+import { destroyBarrel } from "./BarrelSlice";
 import { addPoints } from "../System/StatusSlice";
 import { Fire, FireFactory } from "./Fire";
 
@@ -59,6 +60,7 @@ export const moveFire = createAsyncThunk<
   const jumpman = state.jumpman;
   const gravity = state.options.gravity;
   const platforms = state.platformFactory.platforms;
+  const barrels = state.barrelFactory.barrels;
   const fires = state.fireFactory.fires;
 
   const index = fires.findIndex((f) => f.id === payload);
@@ -70,6 +72,16 @@ export const moveFire = createAsyncThunk<
     window.dispatchEvent(new CustomEvent("level:reset"));
     return;
   }
+
+  barrels.forEach((barrel) => {
+    if (
+      checkCollision(fire, barrel) ||
+      checkCollision(state.fireFactory, barrel)
+    ) {
+      dispatch(destroyBarrel(barrel.id));
+      return;
+    }
+  });
 
   if (jumpman.onAir) {
     const isUnderJumpman = checkCollision(
