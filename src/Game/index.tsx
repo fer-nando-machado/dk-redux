@@ -1,5 +1,6 @@
 import { Provider } from "react-redux";
-import { Store } from "./reduxStore";
+import { PersistGate } from "redux-persist/lib/integration/react";
+import { Store, StorePersistor } from "./reduxStore";
 import Level, { CustomLevel } from "./Level";
 import Status from "./System/Status";
 import Options from "./System/Options";
@@ -13,11 +14,13 @@ const Game: React.FC<Game> = ({ customLevel }) => {
   return (
     <div className="Screen">
       <Provider store={Store}>
-        <div className="Game">
-          <Level {...customLevel} />
-          <Status />
-          <Options />
-        </div>
+        <PersistGate persistor={StorePersistor}>
+          <div className="Game">
+            <Level {...customLevel} />
+            <Status />
+            <Options />
+          </div>
+        </PersistGate>
       </Provider>
     </div>
   );

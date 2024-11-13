@@ -15,7 +15,9 @@ const slice = createSlice({
   initialState,
   reducers: {
     unlockPlayer(state, action: PayloadAction<Player>) {
-      state.players[action.payload.code] = action.payload;
+      if (!state.players[action.payload.code]) {
+        state.players[action.payload.code] = action.payload;
+      }
     },
     setCurrent(state, action: PayloadAction<string>) {
       state.current = action.payload;
@@ -78,12 +80,18 @@ export const setStarters = createAsyncThunk<
     state: RootState;
     dispatch: StoreDispatch;
   }
->("RosterSlice/setStarters", async (payload: string[], { dispatch }) => {
-  payload.forEach((code) => {
-    dispatch(slice.actions.unlockPlayer({ code }));
-  });
-  dispatch(slice.actions.setCurrent(payload[payload.length - 1]));
-});
+>(
+  "RosterSlice/setStarters",
+  async (payload: string[], { getState, dispatch }) => {
+    const { roster }: RootState = getState();
+    payload.forEach((code) => {
+      dispatch(slice.actions.unlockPlayer({ code }));
+    });
+    if (!roster.current) {
+      dispatch(slice.actions.setCurrent(payload[payload.length - 1]));
+    }
+  }
+);
 
 export const { winPlayerCheat } = slice.actions;
 export default slice.reducer;
