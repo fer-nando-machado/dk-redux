@@ -4,8 +4,8 @@ import { StoreDispatch, RootState } from "../../reduxStore";
 import { useIntervalTimed, useIntervalFPS } from "../../Hooks/useInterval";
 import { Block, isDirectionLeft, getRandomDirection } from "../../Level/Block";
 import { getRandomX } from "../../Level/Position";
+import { setTarget, unsetTarget } from "../../Level/LadderSlice";
 import { setPlayer } from "../../System/RosterSlice";
-import { moveJumpman } from "../JumpmanSlice";
 import { createDuck, moveDuck, destroyDuck, setDuckFactory } from "./DuckSlice";
 import { isDuckHunting, hasUnlockedDuckHunting } from "./Dog";
 import MusicHowler from "../../Hooks/useMusicHowler";
@@ -23,6 +23,8 @@ export const MAX_DUCKS = 3;
 const Duck: React.FC<Duck> = (duck) => {
   const dispatch: StoreDispatch = useDispatch();
   const jumpman = useSelector((state: RootState) => state.jumpman);
+  const { ladders } = useSelector((state: RootState) => state.ladderFactory);
+
   const isUnlocked = hasUnlockedDuckHunting();
 
   const [state, setState] = useState(0);
@@ -39,13 +41,25 @@ const Duck: React.FC<Duck> = (duck) => {
   }, [isDead, duck.direction]);
 
   useIntervalFPS(() => {
-    dispatch(
-      moveDuck({
-        ...duck,
-        x,
-        y,
-      })
-    );
+    if (isDead) {
+      const target = ladders.find((l) => l.target);
+      const speed = !target ? 0 : duck.x > target.x ? -10 : 10;
+      dispatch(
+        moveDuck({
+          ...duck,
+          x: speed,
+          y,
+        })
+      );
+    } else {
+      dispatch(
+        moveDuck({
+          ...duck,
+          x,
+          y,
+        })
+      );
+    }
   });
 
   useIntervalTimed(
@@ -60,8 +74,8 @@ const Duck: React.FC<Duck> = (duck) => {
       dispatch(setPlayer("DH"));
     }
     MusicHowler.play("fall");
-    const chaseSpeed = duck.x === jumpman.x ? 0 : duck.x < jumpman.x ? -1 : 1;
-    dispatch(moveJumpman({ x: chaseSpeed, y: 0 }));
+    dispatch(unsetTarget());
+    dispatch(setTarget({ x: duck.x, y: jumpman.y }));
     setState(1);
   };
 

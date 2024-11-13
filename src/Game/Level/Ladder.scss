@@ -7,16 +7,6 @@
     transparent 12px
   );
   outline: 1px solid rgba($color: cyan, $alpha: 0.81);
-
-  &.Target {
-    outline-color: red;
-    background: repeating-linear-gradient(
-      red 0,
-      red 4px,
-      transparent 4px,
-      transparent 12px
-    );
-  }
 }
 
 .Game:has(.Player.Jumpman.D) {
@@ -25,6 +15,18 @@
     background: repeating-linear-gradient(
       #fc0 0,
       #fc0 4px,
+      transparent 4px,
+      transparent 12px
+    );
+  }
+}
+
+.Game:has(.Player.Jumpman.DH) {
+  .Ladder.Target {
+    outline-color: lawngreen;
+    background: repeating-linear-gradient(
+      lawngreen 0,
+      lawngreen 4px,
       transparent 4px,
       transparent 12px
     );
