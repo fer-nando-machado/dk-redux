@@ -6,6 +6,8 @@ import {
   description,
   dependencies,
 } from "../../../package.json";
+import Restart from "./Restart";
+import "./Version.scss";
 
 type GitHubDeployment = {
   ref: string;
@@ -55,23 +57,22 @@ const Version: React.FC = () => {
   }, []);
 
   return (
-    <span onClick={toggleDetails}>
-      <u>{name}</u>
-      <small> v{version} (WIP)</small>
-      <p>{hasDetails ? description : description.slice(0, 111) + ". (…)"}</p>
-      {hasDetails && (
-        <>
-          <u>DEPENDENCIES</u>
-          <pre>{dependenciesTree}</pre>
-          {deployment && (
-            <>
-              <u>DEPLOYMENT</u>
-              <pre>{deployment}</pre>
-            </>
-          )}
-        </>
-      )}
-    </span>
+    <>
+      <span className="Version">
+        <u>{name}</u>
+        <small>v{version}</small>
+      </span>
+      <span onClick={toggleDetails}>
+        <p>{hasDetails ? description : description.slice(0, 111) + ". ..."}</p>
+        {hasDetails && (
+          <>
+            <pre>{dependenciesTree}</pre>
+            {deployment && <pre>{deployment}</pre>}
+            <Restart />
+          </>
+        )}
+      </span>
+    </>
   );
 };
 

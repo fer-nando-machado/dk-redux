@@ -4,9 +4,12 @@ nav {
   flex-direction: column;
   gap: 2vh;
 
-  .Download,
-  .Restart {
+  .Download {
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
     &::after {
       color: white;
       position: absolute;
@@ -14,12 +17,6 @@ nav {
       text-align: center;
       z-index: -1;
     }
-  }
-
-  .Download {
-    display: flex;
-    align-items: center;
-    gap: 15px;
 
     img {
       border-radius: 8px;
@@ -49,16 +46,6 @@ nav {
     &::after {
       display: none;
     }
-  }
-
-  .Restart::after {
-    content: "ONLINE!";
-    border-radius: 18px;
-    top: -12px;
-    right: 0;
-    width: 50%;
-    line-height: 300%;
-    font-size: 6px;
   }
 }
 
@@ -90,8 +77,7 @@ footer {
     .Button {
       background: gray;
     }
-    .Download::after,
-    .Restart::after {
+    .Download::after {
       display: none;
     }
   }
