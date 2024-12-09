@@ -1,14 +1,15 @@
+import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
+import { Song } from "../Hooks/useMusic";
 import useKeyboard from "../Hooks/useKeyboard";
 import { setPlayer, winPlayerCheat } from "./RosterSlice";
 import "./Roster.scss";
-import { Song } from "../Hooks/useMusic";
 
 export type RosterRecord = Record<string, Features>;
 export type Features = {
   code: string;
-  weapon?: JSX.Element;
+  weapon?: ReactElement;
   touch?: boolean;
   help?: string;
   theme?: Song;
