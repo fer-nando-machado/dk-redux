@@ -47,13 +47,6 @@ export const FireFactory: React.FC = () => {
         />
       )}
       <div
-        className={`Fire Factory Block ${fireFactory.direction}`}
-        style={{
-          left: fireFactory.x,
-          bottom: fireFactory.y,
-        }}
-      />
-      <div
         className={`Drum Block ${fireFactory.direction}`}
         style={{
           left: fireFactory.x,
