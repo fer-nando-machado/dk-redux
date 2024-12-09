@@ -74,10 +74,7 @@ export const moveFire = createAsyncThunk<
   }
 
   barrels.forEach((barrel) => {
-    if (
-      checkCollision(fire, barrel) ||
-      checkCollision(state.fireFactory, barrel)
-    ) {
+    if (checkCollision(fire, barrel)) {
       dispatch(destroyBarrel(barrel.id));
       return;
     }

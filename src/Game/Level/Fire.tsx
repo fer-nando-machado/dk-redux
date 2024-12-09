@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, RootState } from "../reduxStore";
-import { useIntervalFPS, useIntervalTimed } from "../Hooks/useInterval";
-import { createFire, moveFire } from "./FireSlice";
+import { useIntervalFPS } from "../Hooks/useInterval";
+import { moveFire } from "./FireSlice";
 import { Block } from "./Block";
 import "./Fire.scss";
 
@@ -29,13 +29,8 @@ const Fire: React.FC<Fire> = (fire) => {
 };
 
 export const FireFactory: React.FC = () => {
-  const dispatch: StoreDispatch = useDispatch();
   const fireFactory = useSelector((state: RootState) => state.fireFactory);
   const isOnFire = fireFactory.fires.length > 0;
-
-  useIntervalTimed(() => {
-    dispatch(createFire());
-  }, 7777);
 
   return (
     <>

@@ -11,6 +11,7 @@ import {
 import { RootState, StoreDispatch } from "../reduxStore";
 import { flipDirection, isDirectionLeft, LEFT } from "./Block";
 import { getRandomLadderIds } from "./Ladder";
+import { createFire } from "./FireSlice";
 import { addPoints } from "../System/StatusSlice";
 
 const MAX_BARRELS = 5;
@@ -66,6 +67,7 @@ export const moveBarrel = createAsyncThunk<
   const platforms = state.platformFactory.platforms;
   const barrels = state.barrelFactory.barrels;
   const ladders = state.ladderFactory.ladders;
+  const fireFactory = state.fireFactory;
 
   const index = barrels.findIndex((b) => b.id === payload);
   if (index === -1) return;
@@ -78,6 +80,12 @@ export const moveBarrel = createAsyncThunk<
     return;
   } else if (isOnJumpman && !debug) {
     window.dispatchEvent(new CustomEvent("level:reset"));
+    return;
+  }
+  const isOnOilCan = checkCollision(barrel, fireFactory);
+  if (isOnOilCan) {
+    dispatch(destroyBarrel(barrel.id));
+    dispatch(createFire());
     return;
   }
 
@@ -131,6 +139,7 @@ export const moveBarrel = createAsyncThunk<
   }
 
   if (index === 0) {
+    // water
     update = {
       ...update,
       path: addPositionWithinTolerance(update.path, {
