@@ -22,7 +22,7 @@ import { setFireFactory } from "./FireSlice";
 import { DuckFactory } from "../Player/Hunt/Duck";
 import { setDuckFactory } from "../Player/Hunt/DuckSlice";
 
-import { resetOptions, setMaker, togglePaused } from "../System/OptionsSlice";
+import { resetOptions, setMaker } from "../System/OptionsSlice";
 import { setStarters } from "../System/RosterSlice";
 import { resetScore } from "../System/StatusSlice";
 
@@ -191,10 +191,8 @@ const Level: React.FC<CustomLevel> = (customLevel) => {
   }, []);
 
   const handleReset = () => {
-    dispatch(togglePaused());
     dispatch(resetOptions());
     setLevel({ ...LEVEL_1 });
-    dispatch(togglePaused());
   };
 
   return (

@@ -32,7 +32,7 @@ const persistableReducer = persistReducer(
   {
     key: "root",
     storage,
-    whitelist: ["options", "roster"],
+    whitelist: ["roster", "music", "options"],
   },
   combinedReducer
 );
