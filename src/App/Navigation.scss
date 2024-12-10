@@ -1,14 +1,9 @@
 nav {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 2vh;
-
   .Download {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 16px;
 
     &::after {
       color: white;
@@ -38,11 +33,10 @@ nav {
     }
   }
 
-  &.Offline .Download,
   .Download.Installed {
     font-size: 50%;
     color: brown;
-    animation: install 2s forwards;
+    animation: installed 1s forwards;
     &::after {
       display: none;
     }
@@ -51,7 +45,7 @@ nav {
 
 footer {
   display: flex;
-  gap: 2vh;
+  gap: 16px;
 }
 
 nav,
@@ -96,14 +90,13 @@ footer {
   }
 }
 
-@keyframes install {
+@keyframes installed {
   from {
     opacity: 1;
     height: 24px;
   }
   to {
     opacity: 0;
-    height: 0;
-    margin: -8px 0;
+    display: none;
   }
 }

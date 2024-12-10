@@ -16,12 +16,17 @@ const Navigation: React.FC = () => {
   const isOnline = useOnline();
   const isMobile = isMobileDevice();
   const [isInstallable, setInstallable] = useState<boolean>(isMobile);
+
   const handleInstallPrompt = () => setInstallable(true);
   const handleAppInstalled = () => setInstallable(false);
 
   useEffect(() => {
     window.addEventListener("appinstalled", handleAppInstalled);
     window.addEventListener("beforeinstallprompt", handleInstallPrompt);
+
+    const hasLocalStorage = Object.entries(localStorage).length;
+    setInstallable(!hasLocalStorage);
+
     return () => {
       window.removeEventListener("appinstalled", handleAppInstalled);
       window.removeEventListener("beforeinstallprompt", handleInstallPrompt);
@@ -38,7 +43,7 @@ const Navigation: React.FC = () => {
         >
           <img src={AppIcon} alt="DK-Redux App Icon" />
           <span>
-            {isInstallable && isOnline
+            {isInstallable
               ? isMobile
                 ? "Add to Home Screen"
                 : "Install App"
