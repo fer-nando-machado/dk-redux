@@ -21,12 +21,14 @@ const Navigation: React.FC = () => {
   const handleAppInstalled = () => setInstallable(false);
 
   useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .getRegistrations()
+        .then((serviceWorkers) => setInstallable(!serviceWorkers.length));
+    }
+
     window.addEventListener("appinstalled", handleAppInstalled);
     window.addEventListener("beforeinstallprompt", handleInstallPrompt);
-
-    const hasLocalStorage = Object.entries(localStorage).length;
-    setInstallable(!hasLocalStorage);
-
     return () => {
       window.removeEventListener("appinstalled", handleAppInstalled);
       window.removeEventListener("beforeinstallprompt", handleInstallPrompt);
