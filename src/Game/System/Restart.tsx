@@ -11,6 +11,7 @@ const handleRestart = () => {
 };
 
 const performRestart = async () => {
+  /*
   if ("serviceWorker" in navigator) {
     document.body.innerHTML += "Unregistering Services...<br/>";
     const registrations = await navigator.serviceWorker.getRegistrations();
@@ -18,7 +19,7 @@ const performRestart = async () => {
       await registration.unregister();
     }
   }
-
+  */
   document.body.innerHTML += "Deleting Cache...<br/>";
   const cacheNames = await caches.keys();
   for (let cacheName of cacheNames) {

@@ -1,9 +1,7 @@
 nav {
   .Download {
     position: relative;
-    display: flex;
     align-items: center;
-    gap: 16px;
 
     &::after {
       color: white;
@@ -31,25 +29,28 @@ nav {
     &.Mobile::after {
       content: "+";
     }
-  }
-
-  .Download.Installed {
-    font-size: 50%;
-    color: brown;
-    animation: installed 1s forwards;
-    &::after {
-      display: none;
+    &.Installed {
+      font-size: 50%;
+      gap: 8px;
+      color: brown;
+      &::after {
+        display: none;
+      }
     }
   }
-}
 
-footer {
-  display: flex;
-  gap: 16px;
+  &:has(.Download.Installed) {
+    animation: installed 2s forwards;
+  }
 }
 
 nav,
+nav .Download,
 footer {
+  display: flex;
+  gap: 16px;
+  white-space: nowrap;
+
   .Button,
   .Download {
     font-size: 12px;
@@ -97,6 +98,7 @@ footer {
   }
   to {
     opacity: 0;
+    margin-top: -16px;
     height: 0;
     display: none;
   }

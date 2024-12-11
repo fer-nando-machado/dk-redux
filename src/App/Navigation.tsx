@@ -15,16 +15,17 @@ const isMobileDevice = () => {
 const Navigation: React.FC = () => {
   const isOnline = useOnline();
   const isMobile = isMobileDevice();
-  const [isInstallable, setInstallable] = useState<boolean>(isMobile);
 
+  const [isInstallable, setInstallable] = useState<boolean>(true);
   const handleInstallPrompt = () => setInstallable(true);
   const handleAppInstalled = () => setInstallable(false);
 
   useEffect(() => {
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .getRegistrations()
-        .then((serviceWorkers) => setInstallable(!serviceWorkers.length));
+      navigator.serviceWorker.ready.then((sw) => {
+        const activated = sw.active?.state === "activated";
+        setInstallable(!activated);
+      });
     }
 
     window.addEventListener("appinstalled", handleAppInstalled);
